@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WONGBAGUS PREDICTION – Aplikasi Togel Terlengkap</title>
+  <meta name="description" content="WONGBAGUS PREDICTION – Paito Warna, Prediksi, Rekap, Rumus Togel terlengkap.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #f59e0b;
+      --gold-light: #fcd34d;
+      --gold-dark: #b45309;
+      --red: #dc2626;
+      --red-dark: #991b1b;
+      --blue: #2563eb;
+      --bg: #07070e;
+      --bg2: #0f0f1a;
+      --bg3: #15152a;
+      --card: #111128;
+      --border: rgba(245,158,11,0.15);
+      --text: #e2e2f0;
+      --muted: #6b6b8a;
+      --green: #10b981;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* BG EFFECT */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -200px; left: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(245,158,11,0.06) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: pulse-bg 8s ease-in-out infinite alternate;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(220,38,38,0.05) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes pulse-bg {
+      from { transform: scale(1); opacity: 0.7; }
+      to { transform: scale(1.3); opacity: 1; }
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(7,7,14,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 16px;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .logo-icon {
+      width: 38px; height: 38px;
+      background: linear-gradient(135deg, var(--gold), var(--red));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      color: #fff;
+      letter-spacing: 0;
+      flex-shrink: 0;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.35);
+    }
+    .logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(16px, 3.5vw, 22px);
+      letter-spacing: 1.5px;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .logo-sub {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(9px, 2vw, 11px);
+      letter-spacing: 2px;
+      color: var(--muted);
+      -webkit-text-fill-color: var(--muted);
+      line-height: 1;
+      margin-top: 1px;
+    }
+    .header-search {
+      flex: 1;
+      position: relative;
+      max-width: 340px;
+    }
+    .header-search input {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 16px 8px 38px;
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .header-search input:focus { border-color: var(--gold); }
+    .header-search input::placeholder { color: var(--muted); }
+    .header-search svg {
+      position: absolute; left: 12px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+
+    /* HERO */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 38px 16px 24px;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245,158,11,0.1);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 50px;
+      padding: 5px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero-badge span {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(34px, 9vw, 72px);
+      letter-spacing: 3px;
+      line-height: 0.95;
+      background: linear-gradient(180deg, #fff 30%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    .hero p {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* WRAPPER */
+    .main-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 12px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* QUICK FEATURES STORY-STYLE */
+    .quick-features {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 8px 4px 16px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .quick-features::-webkit-scrollbar { display: none; }
+    .qf-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      flex-shrink: 0;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .qf-ring {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--red));
+      padding: 2.5px;
+      transition: transform 0.2s;
+    }
+    .qf-item:hover .qf-ring { transform: scale(1.08); }
+    .qf-inner {
+      width: 100%; height: 100%;
+      background: var(--bg2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .qf-inner svg { width: 24px; height: 24px; stroke: var(--gold); fill: none; stroke-width: 1.8; }
+    .qf-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      max-width: 60px;
+      line-height: 1.3;
+    }
+    .qf-hot { position: relative; }
+    .qf-hot .qf-ring { background: linear-gradient(135deg, #ff4e50, #f9d423); }
+    .qf-hot-badge {
+      position: absolute;
+      top: -2px; right: -4px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 8px;
+      font-weight: 900;
+      padding: 1px 5px;
+      border-radius: 50px;
+      letter-spacing: 0.5px;
+    }
+
+    /* SECTION TITLE */
+    .sec-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0 12px;
+    }
+    .sec-title h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(18px, 5vw, 26px);
+      letter-spacing: 1.5px;
+      color: var(--gold-light);
+    }
+    .sec-title .line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+    .sec-badge {
+      background: rgba(245,158,11,0.12);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 2px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    /* SEARCH MARKET */
+    .market-search-wrap {
+      position: relative;
+      margin-bottom: 14px;
+    }
+    .market-search-wrap input {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 11px 20px 11px 44px;
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .market-search-wrap input:focus { border-color: var(--gold); }
+    .market-search-wrap input::placeholder { color: var(--muted); }
+    .market-search-wrap svg {
+      position: absolute; left: 15px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      width: 18px; height: 18px;
+    }
+
+    /* MARKET TABLE */
+    .market-table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    thead { background: rgba(245,158,11,0.06); }
+    thead th {
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid var(--border);
+    }
+    thead th:first-child { text-align: left; }
+    thead th:not(:first-child) { text-align: center; }
+    tbody tr {
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      transition: background 0.15s;
+    }
+    tbody tr:hover { background: rgba(245,158,11,0.04); }
+    tbody tr:last-child { border-bottom: none; }
+    tbody td { padding: 10px 14px; font-size: 13px; }
+    tbody td:first-child { text-align: left; }
+    tbody td:not(:first-child) { text-align: center; }
+
+    /* MARKET DROPDOWN */
+    .market-dropdown-wrap { position: relative; display: inline-block; }
+    .mkt-btn {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.15s;
+      white-space: nowrap;
+    }
+    .mkt-btn:hover { background: var(--red-dark); }
+    .mkt-btn svg { width: 10px; height: 10px; fill: #fff; transition: transform 0.2s; }
+    .mkt-btn.open svg { transform: rotate(180deg); }
+    .mkt-dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      z-index: 100;
+      background: #1a1a30;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      min-width: 220px;
+      padding: 6px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    }
+    .mkt-dropdown.open { display: block; }
+    .mkt-dropdown a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 600;
+      transition: background 0.1s, color 0.1s;
+    }
+    .mkt-dropdown a:hover { background: rgba(245,158,11,0.12); color: var(--gold); }
+    .mkt-dropdown a svg { width: 14px; height: 14px; stroke: var(--gold); flex-shrink: 0; }
+    .mkt-dropdown .dd-div {
+      height: 1px;
+      background: var(--border);
+      margin: 4px 6px;
+    }
+
+    /* RESULT BADGES */
+    .cek-result-btn {
+      display: inline-block;
+      background: rgba(37,99,235,0.15);
+      border: 1px solid rgba(37,99,235,0.35);
+      color: #60a5fa;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+    .cek-result-btn:hover {
+      background: rgba(37,99,235,0.3);
+      color: #93c5fd;
+    }
+    .live-time {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .hidden-row { display: none !important; }
+
+    /* TOOLS GRID */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+    }
+    .tool-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 8px 10px;
+      text-decoration: none;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
+      cursor: pointer;
+      text-align: center;
+    }
+    .tool-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold);
+      background: rgba(245,158,11,0.06);
+    }
+    .tool-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .tool-icon svg { width: 22px; height: 22px; fill: none; stroke: #fff; stroke-width: 2; }
+    .tool-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .tool-hot {
+      display: inline-block;
+      background: #ef4444;
+      color: #fff;
+      font-size: 8px;
+      font-weight: 900;
+      padding: 1px 5px;
+      border-radius: 50px;
+      margin-top: -4px;
+    }
+
+    /* TABS */
+    .tab-nav {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+      margin-bottom: 16px;
+    }
+    .tab-nav::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex-shrink: 0;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 7px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: rgba(245,158,11,0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* PASARAN UTAMA CARDS */
+    .pasaran-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+    }
+    .pasaran-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .pasaran-card:hover { transform: translateY(-3px); border-color: var(--gold); }
+    .pasaran-header {
+      padding: 12px 12px 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pasaran-flag {
+      font-size: 22px;
+      line-height: 1;
+    }
+    .pasaran-name {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .pasaran-time {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .pasaran-features {
+      padding: 0 8px 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .feat-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--bg3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .feat-btn:hover { background: rgba(245,158,11,0.12); color: var(--gold); border-color: var(--border); }
+    .feat-btn.highlight { background: rgba(220,38,38,0.12); border-color: rgba(220,38,38,0.2); color: #f87171; }
+    .feat-btn.highlight:hover { background: rgba(220,38,38,0.2); color: #fca5a5; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 24px 16px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    footer strong {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 14px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .header-inner { gap: 8px; }
+      .logo-sub { display: none; }
+      .header-search { max-width: 180px; }
+      .live-col { display: none; }
+      .tools-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; }
+      .pasaran-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    }
+
+    /* SCROLL TOP BTN */
+    #scrollTop {
+      position: fixed;
+      bottom: 20px; right: 16px;
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 500;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.4);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    #scrollTop.visible { opacity: 1; transform: translateY(0); }
+    #scrollTop svg { width: 18px; height: 18px; stroke: #000; fill: none; stroke-width: 3; }
+
+    /* ANNOUNCE TICKER */
+    .ticker-wrap {
+      background: rgba(245,158,11,0.08);
+      border-bottom: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      padding: 7px 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .ticker-inner {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker-scroll 30s linear infinite;
+      gap: 40px;
+    }
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .ticker-item {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ticker-item span { color: var(--muted); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap">
+      <div class="logo-icon">WB</div>
+      <div>
+        <div class="logo-text">WONGBAGUS PREDICTION</div>
+        <div class="logo-sub">APLIKASI TOGEL TERLENGKAP</div>
+      </div>
+    </div>
+    <div class="header-search">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="search" id="headerSearch" placeholder="Cari pasaran..." autocomplete="off">
+    </div>
+
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner">
+    <div class="ticker-item">🎯 PREDIKSI JITU <span>Paito Warna | Bola Merah | Pola Dasar | Statistik</span></div>
+    <div class="ticker-item">⚡ SCAN RUMUS <span>Temukan pola terbaik otomatis</span></div>
+    <div class="ticker-item">🧠 SMART PAITO <span>Analisis cerdas multi pasaran</span></div>
+    <div class="ticker-item">🏆 WONGBAGUS PREDICTION <span>Paito · Prediksi · Rumus · Rekap</span></div>
+    <div class="ticker-item">📊 REKAP 2D 3D 4D <span>Lengkap semua pasaran</span></div>
+    <!-- duplicate for loop -->
+    <div class="ticker-item">🎯 PREDIKSI JITU <span>Paito Warna | Bola Merah | Pola Dasar | Statistik</span></div>
+    <div class="ticker-item">⚡ SCAN RUMUS <span>Temukan pola terbaik otomatis</span></div>
+    <div class="ticker-item">🧠 SMART PAITO <span>Analisis cerdas multi pasaran</span></div>
+    <div class="ticker-item">🏆 WONGBAGUS PREDICTION <span>Paito · Prediksi · Rumus · Rekap</span></div>
+    <div class="ticker-item">📊 REKAP 2D 3D 4D <span>Lengkap semua pasaran</span></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge"><span></span> LIVE UPDATE SETIAP HARI</div>
+  <h1>WONGBAGUS<br>PREDICTION</h1>
+  <p>Paito Warna · Prediksi · Rumus · Rekap Angka<br>Semua pasaran togel dalam satu genggaman</p>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap">
+
+  <!-- QUICK FEATURES -->
+  <div class="quick-features">
+    <a href="https://159.65.133.131/paito-warna/" class="qf-item" target="_blank" rel="noopener">
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 0 1 0-18c4.97 0 9 3.582 9 8 0 1.06-.474 2.078-1.318 2.828-.844.75-1.989 1.172-3.182 1.172h-2.5a2 2 0 0 0-1 3.75A1.3 1.3 0 0 1 12 21"/><circle cx="8.5" cy="10.5" r="1"/><circle cx="12.5" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>
+      </div></div>
+      <span class="qf-label">Paito Warna</span>
+    </a>
+    <a href="https://159.65.133.131/paito-harian/" class="qf-item" target="_blank" rel="noopener">
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="4" y1="11" x2="20" y2="11"/><line x1="10" y1="16" x2="14" y2="16"/></svg>
+      </div></div>
+      <span class="qf-label">Paito Harian</span>
+    </a>
+    <a href="https://159.65.133.131/data-pengeluaran-togel/" class="qf-item" target="_blank" rel="noopener">
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg>
+      </div></div>
+      <span class="qf-label">Data Paito</span>
+    </a>
+    <a href="https://159.65.133.131/bola-merah/" class="qf-item" target="_blank" rel="noopener">
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="8" r="2"/><circle cx="8.5" cy="14" r="2"/><circle cx="15.5" cy="14" r="2"/></svg>
+      </div></div>
+      <span class="qf-label">Bola Merah</span>
+    </a>
+    <a href="https://159.65.133.131/prediksi/" class="qf-item" target="_blank" rel="noopener">
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+      </div></div>
+      <span class="qf-label">Prediksi</span>
+    </a>
+    <a href="https://159.65.133.131/scanner-angkanet-pro/" class="qf-item qf-hot" target="_blank" rel="noopener">
+      <span class="qf-hot-badge">HOT</span>
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div></div>
+      <span class="qf-label">Scan Rumus</span>
+    </a>
+    <a href="https://159.65.133.131/smart-paito-warna-engine/" class="qf-item qf-hot" target="_blank" rel="noopener">
+      <span class="qf-hot-badge">HOT</span>
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div></div>
+      <span class="qf-label">Smart Paito</span>
+    </a>
+    <a href="https://159.65.133.131/bank-rumus/" class="qf-item" target="_blank" rel="noopener">
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div></div>
+      <span class="qf-label">Bank Rumus</span>
+    </a>
+    <a href="https://159.65.133.131/cari-mimpi/" class="qf-item" target="_blank" rel="noopener">
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div></div>
+      <span class="qf-label">Cari Mimpi</span>
+    </a>
+    <a href="https://159.65.133.131/kalender-togel/" class="qf-item" target="_blank" rel="noopener">
+      <div class="qf-ring"><div class="qf-inner">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div></div>
+      <span class="qf-label">Kalender Togel</span>
+    </a>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('market')">🎰 Semua Pasaran</button>
+    <button class="tab-btn" onclick="switchTab('pasaran')">⭐ Pasaran Utama</button>
+    <button class="tab-btn" onclick="switchTab('tools')">🛠 Tools & Aplikasi</button>
+    <button class="tab-btn" onclick="switchTab('rekap')">📊 Rekap Angka</button>
+    <button class="tab-btn" onclick="switchTab('rumus')">📐 Rumus & Pola</button>
+  </div>
+
+  <!-- TAB: SEMUA PASARAN -->
+  <div class="tab-pane active" id="tab-market">
+    <div class="market-search-wrap">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="search" id="marketSearch" placeholder="Cari pasaran togel... (contoh: Sydney, HK, SGP)" autocomplete="off">
+    </div>
+    <div class="market-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left;">Pasaran</th>
+            <th class="live-col">Live Draw</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody id="marketTableBody">
+          <!-- markets injected by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAB: PASARAN UTAMA -->
+  <div class="tab-pane" id="tab-pasaran">
+    <div class="sec-title">
+      <h2>Pasaran Utama</h2>
+      <div class="line"></div>
+      <div class="sec-badge">8 Pasaran</div>
+    </div>
+    <div class="pasaran-grid" id="pasaranGrid">
+      <!-- injected by JS -->
+    </div>
+  </div>
+
+  <!-- TAB: TOOLS & APLIKASI -->
+  <div class="tab-pane" id="tab-tools">
+    <div class="sec-title"><h2>Aplikasi & Tools Utama</h2><div class="line"></div></div>
+    <div class="tools-grid">
+      <a href="https://159.65.133.131/scanner-angkanet-pro/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#ef4444,#b91c1c)">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <span class="tool-name">Scan Rumus</span><span class="tool-hot">HOT</span>
+      </a>
+      <a href="https://159.65.133.131/smart-paito-warna-engine/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#FF416C,#FF4B2B)">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <span class="tool-name">Smart Paito</span><span class="tool-hot">HOT</span>
+      </a>
+      <a href="https://159.65.133.131/tools-angkanet/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">
+          <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <span class="tool-name">Tools Lengkap</span>
+      </a>
+      <a href="https://159.65.133.131/prediksi/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+        </div>
+        <span class="tool-name">Prediksi</span>
+      </a>
+      <a href="https://159.65.133.131/data-pengeluaran-togel/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#06b6d4,#0e7490)">
+          <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="10" y1="4" x2="10" y2="20"/></svg>
+        </div>
+        <span class="tool-name">Data Togel</span>
+      </a>
+      <a href="https://159.65.133.131/bola-merah/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f97316,#c2410c)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="8" r="2"/><circle cx="8.5" cy="14" r="2"/><circle cx="15.5" cy="14" r="2"/></svg>
+        </div>
+        <span class="tool-name">Bola Merah</span>
+      </a>
+      <a href="https://159.65.133.131/paito-warna/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#10b981,#047857)">
+          <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 0 1 0-18c4.97 0 9 3.582 9 8 0 1.06-.474 2.078-1.318 2.828-.844.75-1.989 1.172-3.182 1.172h-2.5a2 2 0 0 0-1 3.75A1.3 1.3 0 0 1 12 21"/></svg>
+        </div>
+        <span class="tool-name">Paito Warna</span>
+      </a>
+      <a href="https://159.65.133.131/paito-harian/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#10b981,#047857)">
+          <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="16" rx="2"/><line x1="16" y1="3" x2="16" y2="7"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="4" y1="11" x2="20" y2="11"/></svg>
+        </div>
+        <span class="tool-name">Paito Harian</span>
+      </a>
+      <a href="https://159.65.133.131/cari-2d/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8E2DE2,#4A00E0)">
+          <svg viewBox="0 0 24 24"><path d="M14 3v4a1 1 0 001 1h4"/><path d="M12 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v4.5"/><circle cx="16.5" cy="17.5" r="2.5"/><line x1="18.5" y1="19.5" x2="21" y2="22"/></svg>
+        </div>
+        <span class="tool-name">Cari 2D</span>
+      </a>
+      <a href="https://159.65.133.131/cari-mimpi/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8E2DE2,#4A00E0)">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        </div>
+        <span class="tool-name">Cari Mimpi</span>
+      </a>
+      <a href="https://159.65.133.131/kalender-togel/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8E2DE2,#4A00E0)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <span class="tool-name">Kalender Togel</span>
+      </a>
+      <a href="https://159.65.133.131/buku-mimpi-lengkap/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <span class="tool-name">Buku Mimpi</span>
+      </a>
+      <a href="https://159.65.133.131/kolaborasi-ln/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8E2DE2,#4A00E0)">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <span class="tool-name">Kolaborasi LN</span>
+      </a>
+      <a href="https://159.65.133.131/generator-ln/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f12711,#f5af19)">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <span class="tool-name">Generator LN</span>
+      </a>
+      <a href="https://159.65.133.131/kalkulator-invest/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f12711,#f5af19)">
+          <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        </div>
+        <span class="tool-name">Kalkulator Invest</span>
+      </a>
+      <a href="https://159.65.133.131/bank-rumus/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#1e40af)">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <span class="tool-name">Bank Rumus</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- TAB: REKAP ANGKA -->
+  <div class="tab-pane" id="tab-rekap">
+    <div class="sec-title"><h2>Rekap Angka</h2><div class="line"></div></div>
+    <div class="tools-grid">
+      <a href="https://159.65.133.131/rekap-2d/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#00b09b,#96c93d)">
+          <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </div>
+        <span class="tool-name">Rekap 2D</span>
+      </a>
+      <a href="https://159.65.133.131/rekap-3d/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#00b09b,#96c93d)">
+          <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </div>
+        <span class="tool-name">Rekap 3D</span>
+      </a>
+      <a href="https://159.65.133.131/rekap-4d/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#00b09b,#96c93d)">
+          <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </div>
+        <span class="tool-name">Rekap 4D</span>
+      </a>
+      <a href="https://159.65.133.131/rekap-ct/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#00b09b,#96c93d)">
+          <svg viewBox="0 0 24 24"><path d="M4 10a2 2 0 104 0 2 2 0 00-4 0"/><line x1="6" y1="4" x2="6" y2="8"/><line x1="6" y1="12" x2="6" y2="20"/><path d="M10 16a2 2 0 104 0 2 2 0 00-4 0"/><line x1="12" y1="4" x2="12" y2="14"/><line x1="12" y1="18" x2="12" y2="20"/><path d="M16 7a2 2 0 104 0 2 2 0 00-4 0"/><line x1="18" y1="4" x2="18" y2="5"/><line x1="18" y1="9" x2="18" y2="20"/></svg>
+        </div>
+        <span class="tool-name">Rekap CT</span>
+      </a>
+      <a href="https://159.65.133.131/rekap-kumat/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#00b09b,#96c93d)">
+          <svg viewBox="0 0 24 24"><path d="M4 10a2 2 0 104 0 2 2 0 00-4 0"/><line x1="6" y1="4" x2="6" y2="8"/><line x1="6" y1="12" x2="6" y2="20"/><path d="M10 16a2 2 0 104 0 2 2 0 00-4 0"/><line x1="12" y1="4" x2="12" y2="14"/><line x1="12" y1="18" x2="12" y2="20"/></svg>
+        </div>
+        <span class="tool-name">Rekap Kumat</span>
+      </a>
+      <a href="https://159.65.133.131/rekap-angka-lengkap/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#00b09b,#96c93d)">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
+        </div>
+        <span class="tool-name">Rekap Lengkap</span>
+      </a>
+      <a href="https://159.65.133.131/paito-warna-hongkong-pools/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#e52d27,#b31217)">
+          <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 010-18c4.97 0 9 3.582 9 8 0 1.06-.474 2.078-1.318 2.828-.844.75-1.989 1.172-3.182 1.172h-2.5a2 2 0 00-1 3.75A1.3 1.3 0 0112 21"/></svg>
+        </div>
+        <span class="tool-name">Paito HK</span>
+      </a>
+      <a href="https://159.65.133.131/paito-warna-singapore/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#e52d27,#b31217)">
+          <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 010-18c4.97 0 9 3.582 9 8 0 1.06-.474 2.078-1.318 2.828-.844.75-1.989 1.172-3.182 1.172h-2.5a2 2 0 00-1 3.75A1.3 1.3 0 0112 21"/></svg>
+        </div>
+        <span class="tool-name">Paito SGP</span>
+      </a>
+      <a href="https://159.65.133.131/paito-warna-sydney-pools/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#e52d27,#b31217)">
+          <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 010-18c4.97 0 9 3.582 9 8 0 1.06-.474 2.078-1.318 2.828-.844.75-1.989 1.172-3.182 1.172h-2.5a2 2 0 00-1 3.75A1.3 1.3 0 0112 21"/></svg>
+        </div>
+        <span class="tool-name">Paito SDY</span>
+      </a>
+      <a href="https://159.65.133.131/statistik-angka-togel-singapore/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">
+          <svg viewBox="0 0 24 24"><path d="M4 19l16 0"/><path d="M4 15l4-6 4 2 4-5 4 4"/></svg>
+        </div>
+        <span class="tool-name">Statistik SGP</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- TAB: RUMUS & POLA -->
+  <div class="tab-pane" id="tab-rumus">
+    <div class="sec-title"><h2>Rumus & Pola</h2><div class="line"></div></div>
+    <div class="tools-grid">
+      <a href="https://159.65.133.131/bank-rumus/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#1e40af)">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <span class="tool-name">Bank Rumus</span>
+      </a>
+      <a href="https://159.65.133.131/bbfs/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#1e40af)">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <span class="tool-name">BBFS</span>
+      </a>
+      <a href="https://159.65.133.131/rumus-lengkap/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        </div>
+        <span class="tool-name">Rumus Harian</span>
+      </a>
+      <a href="https://159.65.133.131/rumus-otomatis/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)">
+          <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <span class="tool-name">Rumus Otomatis</span>
+      </a>
+      <a href="https://159.65.133.131/rumus-manual/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f12711,#f5af19)">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <span class="tool-name">Rumus Manual</span>
+      </a>
+      <a href="https://159.65.133.131/pola-dasar-singapore/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#e52d27,#b31217)">
+          <svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
+        </div>
+        <span class="tool-name">Pola Dasar SGP</span>
+      </a>
+      <a href="https://159.65.133.131/pola-dasar-hongkong/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#e52d27,#b31217)">
+          <svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
+        </div>
+        <span class="tool-name">Pola Dasar HK</span>
+      </a>
+      <a href="https://159.65.133.131/pola-dasar-sydney-pools/" class="tool-item" target="_blank" rel="noopener">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#e52d27,#b31217)">
+          <svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3"/><path d="M12 12l8-4.5M12 12v9M12 12L4 7.5"/></svg>
+        </div>
+        <span class="tool-name">Pola Dasar SDY</span>
+      </a>
+    </div>
+  </div>
+
+</div><!-- /main-wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:6px;"><strong>WONGBAGUS PREDICTION</strong></p>
+  <p style="margin-top:6px;font-size:11px;">Data togel untuk keperluan analisa statistik</p>
+</footer>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+  const BASE = 'https://159.65.133.131';
+
+  const FEATURES = [
+    { label:'Paito Warna', path: m => `/paito-warna-${m}`, cls:'', icon:'palette' },
+    { label:'Paito Harian', path: m => `/paito-harian-${m}`, cls:'', icon:'calendar' },
+    { label:'Data Paito', path: m => `/data-pengeluaran-togel-${m}`, cls:'', icon:'grid' },
+    { label:'Bola Merah', path: m => `/bola-merah-${m}`, cls:'highlight', icon:'target' },
+    { label:'Pola Dasar', path: m => `/pola-dasar-${m}`, cls:'', icon:'hex' },
+    { label:'Statistik', path: m => `/statistik-angka-togel-${m}`, cls:'', icon:'chart' },
+    { label:'Prediksi', path: m => `/prediksi-${m}`, cls:'highlight', icon:'bullseye' },
+  ];
+
+  const SVG = {
+    palette: `<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21a9 9 0 0 1 0-18c4.97 0 9 3.582 9 8"/></svg>`,
+    calendar: `<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`,
+    grid: `<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>`,
+    target: `<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="8" r="2"/><circle cx="8.5" cy="14" r="2"/><circle cx="15.5" cy="14" r="2"/></svg>`,
+    hex: `<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/></svg>`,
+    chart: `<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19l16 0"/><path d="M4 15l4-6 4 2 4-5 4 4"/></svg>`,
+    bullseye: `<svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>`,
+    dd: `<svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>`,
+  };
+
+  const MARKETS = [
+    { name:'Hongkong Pools',    slug:'hongkong-pools',    emoji:'🇭🇰', live:'23:00 WIB', mainPath:'/paito-warna-hongkong-pools/' },
+    { name:'Singapore Pools',   slug:'singapore',         emoji:'🇸🇬', live:'17:45 WIB', mainPath:'/paito-warna-singapore/' },
+    { name:'Sydneypools',       slug:'sydney-pools',      emoji:'🇦🇺', live:'13:45 WIB', mainPath:'/paito-warna-sydney-pools/' },
+    { name:'Sydney Lotto',      slug:'sdlotto',           emoji:'🦘',  live:'13:45 WIB', mainPath:'/paito-warna-sdlotto/' },
+    { name:'Chinapools',        slug:'chinapools',        emoji:'🇨🇳', live:'13:55 WIB', mainPath:'/paito-warna-chinapools/' },
+    { name:'Magnum Cambodia',   slug:'magnum-cambodia',   emoji:'🇰🇭', live:'11:50 WIB', mainPath:'/paito-warna-magnum-cambodia/' },
+    { name:'Bullseye',          slug:'bullseye',          emoji:'🎯',  live:'13:10 WIB', mainPath:'/paito-warna-bullseye/' },
+    { name:'North Carolina Day',slug:'north-carolina-day',emoji:'🇺🇸', live:'03:00 WIB', mainPath:'/paito-warna-north-carolina-day/' },
+    { name:'Macau Pools',       slug:'macau',             emoji:'🎰',  live:'22:00 WIB', mainPath:'/paito-warna-macau/' },
+    { name:'Taiwan Pools',      slug:'taiwan',            emoji:'🇹🇼', live:'22:30 WIB', mainPath:'/paito-warna-taiwan/' },
+    { name:'Japan Pools',       slug:'japan',             emoji:'🇯🇵', live:'17:00 WIB', mainPath:'/paito-warna-japan/' },
+    { name:'Korea Pools',       slug:'korea',             emoji:'🇰🇷', live:'18:00 WIB', mainPath:'/paito-warna-korea/' },
+  ];
+
+  function buildDropdown(slug) {
+    const items = FEATURES.map(f => {
+      const url = BASE + f.path(slug) + '/';
+      return `<a href="${url}" target="_blank" rel="noopener">${SVG[f.icon]} ${f.label}</a>`;
+    }).join('');
+    return `
+      <div class="mkt-dropdown" id="dd-${slug}">
+        ${items}
+
+      </div>`;
+  }
+
+  function buildMarketRow(m) {
+    const btnId = 'btn-' + m.slug;
+    return `
+      <tr data-name="${m.name.toLowerCase()}">
+        <td>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <div class="market-dropdown-wrap">
+              <button class="mkt-btn" id="${btnId}" onclick="toggleDD('${m.slug}','${btnId}')">
+                ${m.emoji} ${m.name} ${SVG.dd}
+              </button>
+              ${buildDropdown(m.slug)}
+            </div>
+          </div>
+        </td>
+        <td class="live-col">
+          <div class="live-time">${m.live}</div>
+        </td>
+        <td>
+          <a href="${BASE}${m.mainPath}" target="_blank" rel="noopener" class="cek-result-btn">Cek Result →</a>
+        </td>
+      </tr>`;
+  }
+
+  function buildPasaranCard(m) {
+    const feats = FEATURES.map(f => {
+      const url = BASE + f.path(m.slug) + '/';
+      return `<a href="${url}" target="_blank" rel="noopener" class="feat-btn ${f.cls}">${f.label}</a>`;
+    }).join('');
+    return `
+      <div class="pasaran-card">
+        <div class="pasaran-header">
+          <span class="pasaran-flag">${m.emoji}</span>
+          <div>
+            <div class="pasaran-name">${m.name}</div>
+            <div class="pasaran-time">Live: ${m.live}</div>
+          </div>
+        </div>
+        <div class="pasaran-features">${feats}</div>
+      </div>`;
+  }
+
+  // INJECT MARKETS
+  const tbody = document.getElementById('marketTableBody');
+  tbody.innerHTML = MARKETS.map(buildMarketRow).join('');
+
+  const pasaranGrid = document.getElementById('pasaranGrid');
+  pasaranGrid.innerHTML = MARKETS.slice(0,8).map(buildPasaranCard).join('');
+
+  // DROPDOWN TOGGLE
+  let openSlug = null;
+  function toggleDD(slug, btnId) {
+    const dd = document.getElementById('dd-' + slug);
+    const btn = document.getElementById(btnId);
+    if (openSlug && openSlug !== slug) {
+      document.getElementById('dd-' + openSlug).classList.remove('open');
+      const prevBtn = document.querySelector('.mkt-btn.open');
+      if (prevBtn) prevBtn.classList.remove('open');
+    }
+    dd.classList.toggle('open');
+    btn.classList.toggle('open');
+    openSlug = dd.classList.contains('open') ? slug : null;
+  }
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.market-dropdown-wrap') && openSlug) {
+      document.getElementById('dd-' + openSlug).classList.remove('open');
+      const btn = document.querySelector('.mkt-btn.open');
+      if (btn) btn.classList.remove('open');
+      openSlug = null;
+    }
+  });
+
+  // MARKET SEARCH
+  document.getElementById('marketSearch').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('#marketTableBody tr').forEach(tr => {
+      tr.classList.toggle('hidden-row', !tr.dataset.name.includes(q));
+    });
+  });
+
+  // HEADER SEARCH → redirect to market tab and filter
+  document.getElementById('headerSearch').addEventListener('input', function() {
+    const q = this.value.toLowerCase();
+    if (q) {
+      switchTab('market');
+      document.getElementById('marketSearch').value = this.value;
+      document.querySelectorAll('#marketTableBody tr').forEach(tr => {
+        tr.classList.toggle('hidden-row', !tr.dataset.name.includes(q));
+      });
+    }
+  });
+
+  // TABS
+  function switchTab(name) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    const btns = document.querySelectorAll('.tab-btn');
+    const map = {market:0, pasaran:1, tools:2, rekap:3, rumus:4};
+    if (btns[map[name]]) btns[map[name]].classList.add('active');
+  }
+
+  // SCROLL TOP
+  const scrollTopBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+  });
+</script>
+</body>
+</html>
