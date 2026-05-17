@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HK Pools – WONGBAGUS PREDICTION</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#f59e0b;--gold-l:#fcd34d;--gold-d:#b45309;
+  --red:#dc2626;--bg:#07070e;--bg2:#0f0f1a;--bg3:#15152a;
+  --card:#111128;--border:rgba(245,158,11,0.15);
+  --text:#e2e2f0;--muted:#6b6b8a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:999;background:rgba(7,7,14,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 14px}
+.hdr{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:10px}
+.logo-ic{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--red));border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:17px;color:#fff;flex-shrink:0;box-shadow:0 3px 14px rgba(245,158,11,.4)}
+.logo-tx{font-family:'Bebas Neue',sans-serif;font-size:clamp(13px,3.5vw,20px);letter-spacing:1.2px;background:linear-gradient(90deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-sub{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--muted);-webkit-text-fill-color:var(--muted)}
+.hdr-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.live-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:50px;padding:4px 10px;font-size:11px;font-weight:700;color:#34d399}
+.live-dot{width:6px;height:6px;background:#10b981;border-radius:50%;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.home-btn{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 10px;color:var(--muted);font-size:11px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:4px}
+.home-btn:hover{color:var(--gold);border-color:var(--gold)}
+
+/* HERO */
+.hero{text-align:center;padding:22px 14px 14px;background:linear-gradient(180deg,rgba(245,158,11,0.04) 0%,transparent 100%)}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,8vw,56px);letter-spacing:2px;background:linear-gradient(180deg,#fff 30%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:.95}
+.hero-sub{font-size:12px;color:var(--muted);margin-top:6px}
+.last-update{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* RESULT HARI INI */
+.today-wrap{max-width:900px;margin:12px auto;padding:0 12px}
+.today-card{background:linear-gradient(135deg,rgba(245,158,11,0.08),rgba(220,38,38,0.06));border:1px solid rgba(245,158,11,0.25);border-radius:18px;padding:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.today-label{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.today-date{font-size:13px;color:var(--text);font-weight:700}
+.today-digits{display:flex;gap:8px;margin-left:auto}
+.digit-box{width:54px;height:64px;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:32px;font-weight:900;color:#fff;position:relative;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.digit-label{font-size:9px;font-weight:800;letter-spacing:1px;color:rgba(255,255,255,.7);position:absolute;bottom:5px;font-family:'Nunito',sans-serif}
+.d-as{background:linear-gradient(135deg,#dc2626,#991b1b)}
+.d-kop{background:linear-gradient(135deg,#2563eb,#1e40af)}
+.d-kep{background:linear-gradient(135deg,#059669,#065f46)}
+.d-ek{background:linear-gradient(135deg,#d97706,#92400e)}
+.today-meta{display:flex;flex-direction:column;gap:4px}
+.meta-row{display:flex;gap:16px;flex-wrap:wrap}
+.meta-item{font-size:12px;color:var(--muted)}
+.meta-item strong{color:var(--text);font-weight:800}
+
+/* TABS */
+.tabs-wrap{max-width:900px;margin:0 auto;padding:0 12px}
+.tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:12px 0 0}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;background:var(--bg3);border:1px solid var(--border);border-radius:50px;padding:7px 14px;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s;border-bottom:none}
+.tab.active,.tab:hover{background:rgba(245,158,11,.15);border-color:var(--gold);color:var(--gold)}
+.tab-content{display:none;margin-top:14px}
+.tab-content.active{display:block}
+
+/* TABLE */
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:340px}
+thead{background:rgba(245,158,11,.06)}
+thead th{padding:9px 10px;font-size:10.5px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border);white-space:nowrap}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.04);transition:background .12s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:rgba(245,158,11,.04)}
+tbody td{padding:8px 10px;font-size:12.5px;text-align:center}
+tbody td:first-child{text-align:left}
+.day-badge{display:inline-block;background:var(--bg3);border-radius:5px;padding:1px 6px;font-size:10px;font-weight:800;color:var(--muted)}
+.r4d{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--gold-l)}
+
+/* PAITO WARNA */
+.paito-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:3px}
+.paito-row{display:contents}
+.paito-cell{height:34px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;cursor:default}
+.paito-date-col{grid-column:1/-1;display:flex;align-items:center;gap:8px;padding:6px 2px 2px;font-size:10px;color:var(--muted);font-weight:700}
+
+/* BOLA MERAH */
+.bola-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.bola-item{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:10px 6px;text-align:center}
+.bola-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--text)}
+.bola-count{font-size:10px;color:var(--muted);font-weight:700;margin-top:2px}
+.bola-bar{height:4px;border-radius:2px;margin-top:6px;background:var(--bg2)}
+.bola-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--red))}
+
+/* REKAP */
+.rekap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}
+.rekap-cell{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:8px 4px;text-align:center}
+.rekap-num{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--gold-l)}
+.rekap-cnt{font-size:10px;color:var(--muted);font-weight:700}
+.rekap-bar{height:3px;border-radius:2px;margin-top:4px;background:var(--bg2)}
+.rekap-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--red))}
+
+/* STATISTIK */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px}
+.stat-title{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.stat-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.stat-label{font-size:11.5px;color:var(--muted);width:80px;flex-shrink:0}
+.stat-bar-wrap{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),var(--red))}
+.stat-val{font-size:12px;font-weight:800;color:var(--text);width:28px;text-align:right;flex-shrink:0}
+
+/* PREDIKSI */
+.pred-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px}
+.pred-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--gold-l);margin-bottom:10px}
+.pred-nums{display:flex;flex-wrap:wrap;gap:8px}
+.pred-num{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;font-weight:900}
+.pred-note{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.6}
+
+/* POLA DASAR */
+.pola-table{width:100%}
+.pola-table td{padding:7px 10px;font-size:12px}
+.pola-badge{display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:700}
+.pb-genap{background:rgba(37,99,235,.15);color:#60a5fa}
+.pb-ganjil{background:rgba(220,38,38,.15);color:#f87171}
+.pb-besar{background:rgba(245,158,11,.15);color:var(--gold)}
+.pb-kecil{background:rgba(16,185,129,.15);color:#34d399}
+
+/* FOOTER */
+footer{text-align:center;padding:20px;border-top:1px solid var(--border);color:var(--muted);font-size:11px;margin-top:20px}
+footer strong{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;background:linear-gradient(90deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* SCROLL TOP */
+#scrollTop{position:fixed;bottom:20px;right:14px;width:40px;height:40px;background:linear-gradient(135deg,var(--gold),var(--gold-d));border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:500;box-shadow:0 4px 18px rgba(245,158,11,.4);opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s}
+#scrollTop.visible{opacity:1;transform:translateY(0)}
+#scrollTop svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:3}
+
+/* LOADING */
+.loading{text-align:center;padding:40px;color:var(--muted);font-size:14px}
+.loading-spin{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* RESPONSIVE */
+@media(max-width:480px){
+  .bola-grid{grid-template-columns:repeat(4,1fr)}
+  .stat-grid{grid-template-columns:1fr}
+  .today-digits{gap:5px}
+  .digit-box{width:46px;height:56px;font-size:26px}
+}
+
+/* COLORS */
+.c0{background:#6b21a8} .c1{background:#dc2626} .c2{background:#2563eb}
+.c3{background:#059669} .c4{background:#d97706} .c5{background:#db2777}
+.c6{background:#0891b2} .c7{background:#65a30d} .c8{background:#9333ea}
+.c9{background:#ea580c}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="hdr">
+    <div class="logo-ic">WB</div>
+    <div>
+      <div class="logo-tx">WONGBAGUS PREDICTION</div>
+      <div class="logo-sub">HONGKONG POOLS</div>
+    </div>
+    <div class="hdr-right">
+      <div class="live-badge"><span class="live-dot"></span>LIVE</div>
+      <a href="index.html" class="home-btn">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Home
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>HK POOLS</h1>
+  <div class="hero-sub">🇭🇰 Hongkong Pools · Live Draw 23:00 WIB</div>
+  <div class="last-update" id="lastUpdate">Memuat data...</div>
+</div>
+
+<!-- RESULT HARI INI -->
+<div class="today-wrap">
+  <div class="today-card" id="todayCard">
+    <div class="loading"><div class="loading-spin"></div>Memuat result...</div>
+  </div>
+</div>
+
+<!-- TABS & CONTENT -->
+<div class="tabs-wrap">
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('data')">📋 Data Keluaran</div>
+    <div class="tab" onclick="showTab('paito')">🎨 Paito Warna</div>
+    <div class="tab" onclick="showTab('bola')">🔴 Bola Merah</div>
+    <div class="tab" onclick="showTab('rekap2d')">Rekap 2D</div>
+    <div class="tab" onclick="showTab('rekap3d')">Rekap 3D</div>
+    <div class="tab" onclick="showTab('rekap4d')">Rekap 4D</div>
+    <div class="tab" onclick="showTab('stat')">📊 Statistik</div>
+    <div class="tab" onclick="showTab('pola')">📐 Pola Dasar</div>
+    <div class="tab" onclick="showTab('prediksi')">🎯 Prediksi</div>
+    <div class="tab" onclick="showTab('biji')">🔢 Biji & Filter</div>
+  </div>
+
+  <!-- DATA KELUARAN -->
+  <div class="tab-content active" id="tab-data">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>Tanggal</th><th>Hari</th>
+          <th>4D</th><th>3D</th><th>2D</th>
+          <th>AS</th><th>KOP</th><th>KEP</th><th>EK</th>
+        </tr></thead>
+        <tbody id="tbl-data"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PAITO WARNA -->
+  <div class="tab-content" id="tab-paito">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:12px">
+      <div style="display:grid;grid-template-columns:auto repeat(31,1fr);gap:2px;overflow-x:auto">
+        <div id="paito-container"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOLA MERAH -->
+  <div class="tab-content" id="tab-bola">
+    <div style="margin-bottom:10px;font-size:12px;color:var(--muted)">Angka yang paling sering keluar (berdasarkan semua posisi)</div>
+    <div class="bola-grid" id="bola-grid"></div>
+  </div>
+
+  <!-- REKAP 2D -->
+  <div class="tab-content" id="tab-rekap2d">
+    <div style="margin-bottom:10px;font-size:12px;color:var(--muted)">Frekuensi keluaran 2D (Kepala + Ekor)</div>
+    <div class="rekap-grid" id="rekap2d-grid"></div>
+  </div>
+
+  <!-- REKAP 3D -->
+  <div class="tab-content" id="tab-rekap3d">
+    <div style="margin-bottom:10px;font-size:12px;color:var(--muted)">Frekuensi keluaran 3D (KOP + KEP + EK)</div>
+    <div class="rekap-grid" id="rekap3d-grid"></div>
+  </div>
+
+  <!-- REKAP 4D -->
+  <div class="tab-content" id="tab-rekap4d">
+    <div style="margin-bottom:10px;font-size:12px;color:var(--muted)">Top 40 Angka 4D yang paling sering keluar</div>
+    <div class="rekap-grid" id="rekap4d-grid"></div>
+  </div>
+
+  <!-- STATISTIK -->
+  <div class="tab-content" id="tab-stat">
+    <div class="stat-grid" id="stat-container"></div>
+  </div>
+
+  <!-- POLA DASAR -->
+  <div class="tab-content" id="tab-pola">
+    <div class="tbl-wrap">
+      <table class="pola-table">
+        <thead><tr>
+          <th>Tanggal</th><th>Hari</th><th>Result</th>
+          <th>Genap/Ganjil</th><th>Besar/Kecil</th>
+          <th>Jumlah</th><th>Tengah/Tepi</th>
+        </tr></thead>
+        <tbody id="tbl-pola"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PREDIKSI -->
+  <div class="tab-content" id="tab-prediksi">
+    <div id="prediksi-container"></div>
+  </div>
+
+  <!-- BIJI & FILTER -->
+  <div class="tab-content" id="tab-biji">
+    <div id="biji-container"></div>
+  </div>
+
+</div><!-- /tabs-wrap -->
+
+<footer>
+  <p style="margin-bottom:4px"><strong>WONGBAGUS PREDICTION</strong></p>
+  <p>HK Pools · Data diperbarui otomatis setiap hari</p>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+const COLOR = ['#6b21a8','#dc2626','#2563eb','#059669','#d97706','#db2777','#0891b2','#65a30d','#9333ea','#ea580c'];
+const DAYS = {SEN:'Senin',SEL:'Selasa',RAB:'Rabu',KAM:'Kamis',JUM:'Jumat',SAB:'Sabtu',MIN:'Minggu'};
+
+let DATA = [];
+
+// ========== LOAD DATA ==========
+async function loadData() {
+  try {
+    const r = await fetch('hk.json?v=' + Date.now());
+    const json = await r.json();
+    DATA = json.results || [];
+    document.getElementById('lastUpdate').textContent = '🕐 Update: ' + (json.lastUpdate || '-');
+    renderAll();
+  } catch(e) {
+    document.getElementById('lastUpdate').textContent = '⚠ Gagal memuat data';
+    document.getElementById('todayCard').innerHTML = '<div style="color:var(--muted);font-size:13px;padding:10px">Gagal memuat data. Pastikan file data/hk.json ada.</div>';
+  }
+}
+
+function renderAll() {
+  renderToday();
+  renderData();
+  renderPaito();
+  renderBola();
+  renderRekap2D();
+  renderRekap3D();
+  renderRekap4D();
+  renderStatistik();
+  renderPola();
+  renderPrediksi();
+  renderBiji();
+}
+
+// ========== TODAY ==========
+function renderToday() {
+  if (!DATA.length) return;
+  const d = DATA[0];
+  const prev = DATA[1];
+  const trend = prev ? (parseInt(d.result) > parseInt(prev.result) ? '▲' : '▼') : '';
+
+  document.getElementById('todayCard').innerHTML = `
+    <div class="today-meta">
+      <div class="today-label">Result Terbaru</div>
+      <div class="today-date">📅 ${d.date} · ${DAYS[d.day]||d.day}</div>
+      <div class="meta-row" style="margin-top:8px">
+        <div class="meta-item">Jumlah: <strong>${[d.as,d.kop,d.kepala,d.ekor].map(Number).reduce((a,b)=>a+b,0)}</strong></div>
+        <div class="meta-item">Genap/Ganjil: <strong>${Number(d.ekor)%2===0?'Genap':'Ganjil'}</strong></div>
+        <div class="meta-item">Besar/Kecil: <strong>${Number(d.ekor)>=5?'Besar':'Kecil'}</strong></div>
+      </div>
+      <div class="meta-row">
+        <div class="meta-item">3D: <strong>${d.kop}${d.kepala}${d.ekor}</strong></div>
+        <div class="meta-item">2D: <strong>${d.kepala}${d.ekor}</strong></div>
+        <div class="meta-item">Ekor: <strong>${d.ekor}</strong></div>
+      </div>
+    </div>
+    <div class="today-digits">
+      <div class="digit-box d-as"><span>${d.as}</span><span class="digit-label">AS</span></div>
+      <div class="digit-box d-kop"><span>${d.kop}</span><span class="digit-label">KOP</span></div>
+      <div class="digit-box d-kep"><span>${d.kepala}</span><span class="digit-label">KEP</span></div>
+      <div class="digit-box d-ek"><span>${d.ekor}</span><span class="digit-label">EK</span></div>
+    </div>`;
+}
+
+// ========== DATA KELUARAN ==========
+function renderData() {
+  const tbody = document.getElementById('tbl-data');
+  tbody.innerHTML = DATA.map(d => {
+    const r3 = d.kop+d.kepala+d.ekor;
+    const r2 = d.kepala+d.ekor;
+    return `<tr>
+      <td>${d.date}</td>
+      <td><span class="day-badge">${d.day}</span></td>
+      <td class="r4d">${d.result}</td>
+      <td>${r3}</td><td>${r2}</td>
+      <td style="color:${COLOR[d.as]};font-weight:800">${d.as}</td>
+      <td style="color:${COLOR[d.kop]};font-weight:800">${d.kop}</td>
+      <td style="color:${COLOR[d.kepala]};font-weight:800">${d.kepala}</td>
+      <td style="color:${COLOR[d.ekor]};font-weight:800">${d.ekor}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ========== PAITO WARNA ==========
+function renderPaito() {
+  const container = document.getElementById('paito-container');
+  // Show last 30 results in reverse (oldest → newest left→right)
+  const slice = DATA.slice(0, 30).reverse();
+
+  // Header row: dates
+  let html = `<div style="display:grid;grid-template-columns:50px repeat(${slice.length},1fr);gap:2px;min-width:${50+slice.length*36}px">`;
+
+  // Position labels column
+  const positions = ['AS','KOP','KEP','EK'];
+  const posColors = ['#dc2626','#2563eb','#059669','#d97706'];
+
+  // Date row
+  html += `<div style="background:var(--bg3);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--muted);font-weight:700;height:28px">POS</div>`;
+  slice.forEach(d => {
+    const dd = d.date.slice(8,10) + '/' + d.date.slice(5,7);
+    html += `<div style="background:var(--bg3);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;height:28px;font-size:8px;color:var(--muted);font-weight:700">
+      <span>${dd}</span><span style="font-size:7px">${d.day}</span>
+    </div>`;
+  });
+
+  // Data rows per position
+  const keys = ['as','kop','kepala','ekor'];
+  positions.forEach((pos, pi) => {
+    html += `<div style="background:${posColors[pi]}22;border:1px solid ${posColors[pi]}44;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:9px;color:${posColors[pi]};font-weight:800;height:34px">${pos}</div>`;
+    slice.forEach(d => {
+      const num = d[keys[pi]];
+      html += `<div class="paito-cell c${num}" title="${d.date}: ${pos}=${num}">${num}</div>`;
+    });
+  });
+
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// ========== BOLA MERAH ==========
+function renderBola() {
+  const freq = {};
+  for (let i = 0; i <= 9; i++) freq[i] = 0;
+  DATA.forEach(d => {
+    [d.as,d.kop,d.kepala,d.ekor].forEach(n => { freq[Number(n)]++; });
+  });
+  const sorted = Object.entries(freq).sort((a,b) => b[1]-a[1]);
+  const maxVal = sorted[0][1];
+
+  document.getElementById('bola-grid').innerHTML = sorted.map(([num, cnt]) => `
+    <div class="bola-item">
+      <div class="bola-num" style="color:${COLOR[num]}">${num}</div>
+      <div class="bola-count">${cnt}x keluar</div>
+      <div class="bola-bar"><div class="bola-fill" style="width:${Math.round(cnt/maxVal*100)}%"></div></div>
+    </div>`).join('');
+}
+
+// ========== REKAP 2D ==========
+function renderRekap2D() {
+  const freq = {};
+  DATA.forEach(d => {
+    const k = d.kepala + d.ekor;
+    freq[k] = (freq[k]||0) + 1;
+  });
+  renderRekap('rekap2d-grid', freq, 100);
+}
+
+// ========== REKAP 3D ==========
+function renderRekap3D() {
+  const freq = {};
+  DATA.forEach(d => {
+    const k = d.kop + d.kepala + d.ekor;
+    freq[k] = (freq[k]||0) + 1;
+  });
+  renderRekap('rekap3d-grid', freq, 50);
+}
+
+// ========== REKAP 4D ==========
+function renderRekap4D() {
+  const freq = {};
+  DATA.forEach(d => {
+    freq[d.result] = (freq[d.result]||0) + 1;
+  });
+  renderRekap('rekap4d-grid', freq, 40);
+}
+
+function renderRekap(id, freq, maxItems) {
+  const sorted = Object.entries(freq).sort((a,b) => b[1]-a[1]).slice(0, maxItems);
+  const maxVal = sorted[0]?.[1] || 1;
+  document.getElementById(id).innerHTML = sorted.map(([num, cnt]) => `
+    <div class="rekap-cell">
+      <div class="rekap-num">${num}</div>
+      <div class="rekap-cnt">${cnt}x</div>
+      <div class="rekap-bar"><div class="rekap-fill" style="width:${Math.round(cnt/maxVal*100)}%"></div></div>
+    </div>`).join('');
+}
+
+// ========== STATISTIK ==========
+function renderStatistik() {
+  if (!DATA.length) return;
+
+  // Frekuensi per posisi
+  const pos = [{},{},{},{}]; // AS, KOP, KEP, EK
+  const keys = ['as','kop','kepala','ekor'];
+  for (let i=0;i<=9;i++) pos.forEach(p => p[i]=0);
+  DATA.forEach(d => {
+    keys.forEach((k,i) => { pos[i][Number(d[k])]++; });
+  });
+
+  const total = DATA.length;
+  const posNames = ['AS (Ribuan)','KOP (Ratusan)','KEP (Puluhan)','EK (Satuan)'];
+  const posColors = ['#dc2626','#2563eb','#059669','#d97706'];
+
+  document.getElementById('stat-container').innerHTML = posNames.map((name, pi) => {
+    const sorted = Object.entries(pos[pi]).sort((a,b)=>b[1]-a[1]);
+    const maxV = sorted[0][1];
+    return `<div class="stat-card">
+      <div class="stat-title" style="color:${posColors[pi]}">${name}</div>
+      ${sorted.map(([num,cnt]) => `
+        <div class="stat-row">
+          <div class="stat-label" style="color:${COLOR[num]};font-weight:800">Angka ${num}</div>
+          <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:${Math.round(cnt/maxV*100)}%;background:${posColors[pi]}"></div></div>
+          <div class="stat-val">${cnt}</div>
+        </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
+// ========== POLA DASAR ==========
+function renderPola() {
+  document.getElementById('tbl-pola').innerHTML = DATA.slice(0,30).map(d => {
+    const nums = [d.as,d.kop,d.kepala,d.ekor].map(Number);
+    const sum = nums.reduce((a,b)=>a+b,0);
+    const ek = nums[3];
+    const geGan = ek%2===0 ? '<span class="pola-badge pb-genap">Genap</span>' : '<span class="pola-badge pb-ganjil">Ganjil</span>';
+    const besKec = ek>=5 ? '<span class="pola-badge pb-besar">Besar</span>' : '<span class="pola-badge pb-kecil">Kecil</span>';
+    const tengah = (ek>=3&&ek<=7) ? '<span class="pola-badge pb-genap">Tengah</span>' : '<span class="pola-badge pb-ganjil">Tepi</span>';
+    return `<tr>
+      <td>${d.date}</td>
+      <td><span class="day-badge">${d.day}</span></td>
+      <td><strong style="color:var(--gold-l);font-family:'Bebas Neue',sans-serif;font-size:16px">${d.result}</strong></td>
+      <td>${geGan}</td><td>${besKec}</td>
+      <td style="font-weight:800">${sum}</td>
+      <td>${tengah}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ========== PREDIKSI ==========
+function renderPrediksi() {
+  if (DATA.length < 5) return;
+
+  // Hitung frekuensi ekor
+  const ekorFreq = {};
+  const kepalaFreq = {};
+  for(let i=0;i<=9;i++){ekorFreq[i]=0;kepalaFreq[i]=0;}
+  DATA.slice(0,14).forEach(d=>{
+    ekorFreq[Number(d.ekor)]++;
+    kepalaFreq[Number(d.kepala)]++;
+  });
+
+  // Top ekor & kepala
+  const topEkor = Object.entries(ekorFreq).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([n])=>Number(n));
+  const topKepala = Object.entries(kepalaFreq).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([n])=>Number(n));
+
+  // Angka yang belum keluar lama (ekor)
+  const lastEkor = DATA.slice(0,30).map(d=>Number(d.ekor));
+  const missing = [];
+  for(let i=0;i<=9;i++) if(!lastEkor.slice(0,10).includes(i)) missing.push(i);
+
+  // 2D prediksi = kombinasi top kepala & top ekor
+  const pred2d = [];
+  topKepala.slice(0,3).forEach(k => topEkor.slice(0,3).forEach(e => pred2d.push(`${k}${e}`)));
+
+  document.getElementById('prediksi-container').innerHTML = `
+    <div class="pred-card">
+      <div class="pred-title">🔴 Ekor Panas (14 Hari Terakhir)</div>
+      <div class="pred-nums">${topEkor.map(n=>`<div class="pred-num" style="background:${COLOR[n]}">${n}</div>`).join('')}</div>
+      <div class="pred-note">Angka ekor yang paling sering keluar dalam 14 hari terakhir. Bisa jadi referensi angka main ekor.</div>
+    </div>
+    <div class="pred-card">
+      <div class="pred-title">🔵 Kepala Panas (14 Hari Terakhir)</div>
+      <div class="pred-nums">${topKepala.map(n=>`<div class="pred-num" style="background:${COLOR[n]}">${n}</div>`).join('')}</div>
+      <div class="pred-note">Angka kepala yang paling sering keluar dalam 14 hari terakhir.</div>
+    </div>
+    ${missing.length ? `<div class="pred-card">
+      <div class="pred-title">⚡ Angka Mati Ekor (10 Hari)</div>
+      <div class="pred-nums">${missing.map(n=>`<div class="pred-num" style="background:var(--bg3);border:2px solid ${COLOR[n]};color:${COLOR[n]}">${n}</div>`).join('')}</div>
+      <div class="pred-note">Angka ekor yang belum muncul dalam 10 hari terakhir. Kemungkinan akan keluar.</div>
+    </div>` : ''}
+    <div class="pred-card">
+      <div class="pred-title">🎯 Prediksi 2D</div>
+      <div class="pred-nums" style="gap:6px">${pred2d.map(n=>`<div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 10px;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold-l)">${n}</div>`).join('')}</div>
+      <div class="pred-note">Kombinasi Kepala × Ekor panas. Gunakan sebagai referensi, bukan jaminan.</div>
+    </div>
+    <div style="background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:12px;padding:12px;font-size:11px;color:var(--muted);line-height:1.6">
+      ⚠ <strong style="color:#f87171">Disclaimer:</strong> Prediksi ini hanya berdasarkan analisa statistik historis. Tidak ada jaminan keakuratan. Gunakan sebagai referensi saja.
+    </div>`;
+}
+
+// ========== TABS ==========
+function showTab(name) {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  const tabs = document.querySelectorAll('.tab');
+  const map = {data:0,paito:1,bola:2,rekap2d:3,rekap3d:4,rekap4d:5,stat:6,pola:7,prediksi:8,biji:9};
+  if(tabs[map[name]]) tabs[map[name]].classList.add('active');
+}
+
+// ========== SCROLL TOP ==========
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+});
+
+// ========== BIJI & FILTER ==========
+const BIJI_DATA = {
+  LEGI: {
+    1:['82','28','37','73','55','46','64','10','01'],
+    2:['74','47','56','65','29','92','20','02','11'],
+    3:['75','57','48','84','39','93','12','21','66'],
+    4:['76','67','58','85','94','49','22','40','04'],
+    5:['86','68','59','95','77','14','41','50','05'],
+    6:['15','51','60','06','78','87','24','42','96','69'],
+    7:['16','61','70','07','34','43','25','52','79','97'],
+    8:['26','62','53','35','89','98','71','17','44','80','08'],
+    9:['18','81','54','45','36','63','72','27','90','09']
+  },
+  PAHING: {
+    1:['01','10','37','73','46','64','82','28'],
+    2:['74','47','65','56','29','92','20','02','11'],
+    3:['75','57','39','93','03','30','66','48','84'],
+    4:['67','76','58','85','94','49','22','04','40'],
+    5:['59','95','68','86','32','23','14','41','50','05'],
+    6:['78','87','33','96','69','06','60','24','42'],
+    7:['88','70','07','61','16','79','97','52','25'],
+    8:['98','89','71','17','53','35','26','62','80','08'],
+    9:['99','18','81','72','27','81','54','45']
+  },
+  PON: {
+    1:['91','19','46','64','10','01','55','28','82','37','73'],
+    2:['29','92','38','83','20','02','11','47','74'],
+    3:['75','57','12','21','93','39','03','30','66','48','84'],
+    4:['67','76','85','58','94','49','04','40'],
+    5:['95','59','68','86','05','50','23','32'],
+    6:['60','06','15','51','33','42','24','78','87'],
+    7:['43','34','79','97','70','07','88','25','52','61','16'],
+    8:['08','80','71','17','35','53','26','62'],
+    9:['45','54','90','09','36','63','27','72']
+  },
+  WAGE: {
+    1:['19','91','46','64','10','01','55','73','37'],
+    2:['02','20','56','65','83','38','11','47','74'],
+    3:['57','75','21','12','93','39','30','03','84','48'],
+    4:['67','76','94','49','04','40','13','31'],
+    5:['14','41','59','95','23','32','05','50'],
+    6:['87','78','60','06','69','96','33','42','24','15','51'],
+    7:['43','34','79','97','70','07','88','25','52','61','16'],
+    8:['80','08','53','35','71','17','89','98'],
+    9:['81','18','09','90','54','45','63','36','27','72']
+  },
+  KLIWON: {
+    1:['01','10','46','64','55','82','28','73','37'],
+    2:['74','47','56','65','02','20','38','83','11'],
+    3:['12','21','93','39','30','03','84','48','66'],
+    4:['67','76','22','94','49','58','85','40','04'],
+    5:['86','68','59','95','41','14','32','23','50','05'],
+    6:['15','51','60','06','42','24','33','96','69'],
+    7:['43','34','70','07','16','61','97','79','25','52'],
+    8:['08','80','89','98','44','17','71'],
+    9:['36','63','54','45','90','09','18','81','27','72']
+  }
+};
+
+const PASARAN_NAMES = ['LEGI','PAHING','PON','WAGE','KLIWON'];
+// Pasaran Jawa cycle: offset dari tanggal referensi
+// Referensi: 17 Mei 2026 = WAGE (index 3)
+const REF_DATE = new Date('2026-05-17');
+const REF_PASARAN = 3; // WAGE
+
+function getPasaran(dateStr) {
+  const d = new Date(dateStr);
+  const diffDays = Math.round((d - REF_DATE) / 86400000);
+  const idx = ((REF_PASARAN + diffDays) % 5 + 5) % 5;
+  return PASARAN_NAMES[idx];
+}
+
+function renderBiji() {
+  if (!DATA.length) return;
+
+  const today = DATA[0].date;
+  const pasaran = getPasaran(today);
+  const biji = BIJI_DATA[pasaran];
+
+  // Kumpulkan semua 2D dari data
+  const all2D = DATA.slice(0, 30).map(d => d.kepala + d.ekor);
+  const all3D = DATA.slice(0, 30).map(d => d.kop + d.kepala + d.ekor);
+  const all4D = DATA.slice(0, 30).map(d => d.result);
+
+  // Cari 2D masuk biji mana
+  const bijiOf = {};
+  Object.entries(biji).forEach(([b, nums]) => {
+    nums.forEach(n => { bijiOf[n] = b; });
+  });
+
+  // 2D terbaru
+  const latest2D = all2D[0];
+  const latestBiji = bijiOf[latest2D] || '?';
+
+  // Poros utama: 2D yang paling sering muncul per biji
+  const bijiCount = {};
+  all2D.forEach(n => {
+    const b = bijiOf[n];
+    if (b) bijiCount[b] = (bijiCount[b]||0)+1;
+  });
+  const topBiji = Object.entries(bijiCount).sort((a,b)=>b[1]-a[1]).slice(0,3);
+
+  // 2D poros dari biji terpanas
+  const poros2D = topBiji.flatMap(([b]) => biji[b] || []);
+
+  // Filter 2D yang masuk biji dan ada di data
+  const valid2D = [...new Set(all2D)].filter(n => bijiOf[n]);
+
+  let html = `
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:12px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:var(--gold);margin-bottom:8px">📅 PASARAN HARI INI</div>
+      <div style="font-size:22px;font-family:'Bebas Neue',sans-serif;color:#fff;letter-spacing:2px">${pasaran}</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px">Tanggal: ${today} · 2D Terbaru: <strong style="color:var(--gold)">${latest2D}</strong> → Biji <strong style="color:var(--gold)">${latestBiji}</strong></div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:12px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:var(--gold);margin-bottom:10px">🔥 BIJI PANAS (30 data terakhir)</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        ${topBiji.map(([b,cnt])=>`
+          <div style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:10px;padding:8px 14px;text-align:center">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--gold)">Biji ${b}</div>
+            <div style="font-size:11px;color:var(--muted)">${cnt}x keluar</div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:12px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:var(--gold);margin-bottom:10px">🎯 POROS UTAMA 2D</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Dari biji panas: ${topBiji.map(([b])=>'Biji '+b).join(', ')}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px">
+        ${[...new Set(poros2D)].map(n=>`
+          <div style="background:${all2D.includes(n)?'rgba(245,158,11,.2)':'var(--bg3)'};border:1px solid ${all2D.includes(n)?'var(--gold)':'var(--border)'};border-radius:8px;padding:5px 10px;font-family:'Bebas Neue',sans-serif;font-size:18px;color:${all2D.includes(n)?'var(--gold-l)':'var(--text)'}">
+            ${n}
+          </div>`).join('')}
+      </div>
+      <div style="font-size:10px;color:var(--muted);margin-top:8px">⬛ Belum keluar &nbsp; 🟡 Sudah pernah keluar (30 data)</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px;margin-bottom:12px">
+      <div style="font-size:11px;font-weight:800;letter-spacing:1px;color:var(--gold);margin-bottom:10px">📋 TABEL BIJI ${pasaran}</div>
+      ${Object.entries(biji).map(([b, nums])=>`
+        <div style="margin-bottom:8px;padding:8px;background:var(--bg3);border-radius:10px">
+          <div style="font-size:11px;font-weight:800;color:var(--gold);margin-bottom:6px">Biji ${b}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:4px">
+            ${nums.map(n=>`
+              <div style="width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;background:${all2D.includes(n)?'rgba(245,158,11,.25)':'var(--bg2)'};color:${all2D.includes(n)?'var(--gold)':'var(--muted)'};border:1px solid ${all2D.includes(n)?'var(--gold)':'transparent'}">${n}</div>
+            `).join('')}
+          </div>
+        </div>`).join('')}
+    </div>
+
+    <div style="background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:12px;padding:12px;font-size:11px;color:var(--muted)">
+      ⚠ Biji hanya referensi analisa statistik, bukan jaminan.
+    </div>`;
+
+  document.getElementById('biji-container').innerHTML = html;
+}
+
+// ========== INIT ==========
+loadData();
+</script>
+</body>
+</html>
