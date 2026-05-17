@@ -1,7 +1,16 @@
 {
   "market": "Hongkong Pools",
-  "lastUpdate": "2026-05-16 23:00 WIB",
+  "lastUpdate": "2026-05-17 23:50 WIB",
   "results": [
+    {
+      "date": "2026-05-17",
+      "day": "MIN",
+      "result": "3545",
+      "as": "3",
+      "kop": "5",
+      "kepala": "4",
+      "ekor": "5"
+    },
     {
       "date": "2026-05-16",
       "day": "SAB",
