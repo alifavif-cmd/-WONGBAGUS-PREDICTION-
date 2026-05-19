@@ -1,0 +1,35 @@
+name: Fetch Togel Results
+
+on:
+  schedule:
+    # Setiap 30 menit (UTC) = WIB -7 jam
+    - cron: '*/30 * * * *'
+  workflow_dispatch:  # Bisa dipicu manual dari GitHub
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run fetch_all.py
+        run: python fetch_all.py
+
+      - name: Commit result.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add result.json
+          git diff --cached --quiet && echo "No changes" || git commit -m "chore: update result.json [$(date +'%H:%M WIB' -d '+7 hours')]"
+          git push
