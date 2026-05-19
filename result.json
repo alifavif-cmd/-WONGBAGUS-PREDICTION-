@@ -1,0 +1,462 @@
+{
+  "sgp": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Singapore"
+  },
+  "sdy": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Sydney Pools"
+  },
+  "sdl": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Sydney Lotto"
+  },
+  "bull": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Bullseye NZ"
+  },
+  "jpn": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Japan"
+  },
+  "hkl": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Hongkong Lotto"
+  },
+  "kam": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Kamboja"
+  },
+  "twn": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Taiwan"
+  },
+  "hk": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Hongkong Pools"
+  },
+  "chn": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "China Pools"
+  },
+  "pcso": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "PCSO"
+  },
+  "mac": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Macau (alias)"
+  },
+  "mac3": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Toto Macau 19"
+  },
+  "mac5": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Toto Macau 00"
+  },
+  "mac1": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Toto Macau 13"
+  },
+  "mac6": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Toto Macau 23"
+  },
+  "mac4": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Toto Macau 22"
+  },
+  "mac2": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Toto Macau 16"
+  },
+  "mrq21": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Morocco 21:00"
+  },
+  "mrq3": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Morocco 03:00"
+  },
+  "mrq18": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Morocco 18:00"
+  },
+  "mrq23": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Morocco 23:59"
+  },
+  "or4": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Oregon 04:00"
+  },
+  "ger": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Germany Plus5"
+  },
+  "or10": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Oregon 10:00"
+  },
+  "ncd": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "NC Day"
+  },
+  "or7": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Oregon 07:00"
+  },
+  "or13": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Oregon 13:00"
+  },
+  "nce": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "NC Evening"
+  },
+  "geom": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Georgia Midday"
+  },
+  "geon": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Georgia Night"
+  },
+  "txmr": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Texas Morning"
+  },
+  "geoe": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Georgia Evening"
+  },
+  "txd": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Texas Day"
+  },
+  "txn": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Texas Night"
+  },
+  "nyd": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "New York Midday"
+  },
+  "txe": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Texas Evening"
+  },
+  "nye": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "New York Evening"
+  },
+  "njm": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "NJ Midday"
+  },
+  "nje": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "NJ Evening"
+  },
+  "fle": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Florida Evening"
+  },
+  "ile": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Illinois Evening"
+  },
+  "ilm": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Illinois Midday"
+  },
+  "flm": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Florida Midday"
+  },
+  "indm": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Indiana Midday"
+  },
+  "kym": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Kentucky Midday"
+  },
+  "inde": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Indiana Evening"
+  },
+  "kye": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Kentucky Evening"
+  },
+  "mde": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Maryland Evening"
+  },
+  "mdm": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Maryland Midday"
+  },
+  "mie": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Michigan Evening"
+  },
+  "mom": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Missouri Midday"
+  },
+  "mim": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Michigan Midday"
+  },
+  "moe": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Missouri Evening"
+  },
+  "wdm": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "WDC Midday"
+  },
+  "ctn": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Connecticut Night"
+  },
+  "wde": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "WDC Evening"
+  },
+  "vad": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Virginia Day"
+  },
+  "ctd": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Connecticut Day"
+  },
+  "van": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Virginia Night"
+  },
+  "tnm": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Tennessee Midday"
+  },
+  "tne": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Tennessee Evening"
+  },
+  "cal": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "California"
+  },
+  "tnmr": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Tennessee Morning"
+  },
+  "wie": {
+    "result": "----",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "22:29 WIB",
+    "name": "Wisconsin Evening"
+  },
+  "_meta": {
+    "updated": "2026-05-19 22:29 WIB",
+    "date": "19/05",
+    "total": 65
+  }
+}
