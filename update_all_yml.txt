@@ -1,0 +1,168 @@
+name: Update All Pasaran (65)
+
+on:
+  schedule:
+    # Semua waktu UTC = WIB - 7 jam, jalankan +20 menit setelah tutup
+
+    # ─── DINI HARI (WIB 00:xx – 03:xx) ───────────────────────────────────────
+    # 🇲🇴 Toto Macau 00 tutup 00:11 WIB = 17:11 UTC → 17:35 UTC
+    - cron: '35 17 * * *'
+
+    # 🇺🇸 Georgia Midday tutup 00:29 WIB = 17:29 UTC → 17:50 UTC
+    - cron: '50 17 * * *'
+
+    # 🇲🇦 Morocco 23:59 tutup 00:30 WIB = 17:30 UTC → 17:55 UTC
+    - cron: '55 17 * * *'
+
+    # 🇺🇸 NJ Midday tutup 00:59 WIB = 17:59 UTC → 18:20 UTC
+    - cron: '20 18 * * *'
+
+    # 🇩🇪 Germany Plus5 tutup 01:10 WIB = 18:10 UTC → 18:35 UTC
+    - cron: '35 18 * * *'
+
+    # 🇺🇸 Indiana/Tennessee Midday tutup 01:20 WIB = 18:20 UTC → 18:45 UTC
+    - cron: '45 18 * * *'
+
+    # 🇺🇸 Kentucky/Texas Day tutup 01:21-01:27 WIB = 18:21-18:27 UTC → 18:50 UTC
+    - cron: '50 18 * * *'
+
+    # 🇺🇸 Florida Midday tutup 01:30 WIB = 18:30 UTC → 18:55 UTC
+    - cron: '55 18 * * *'
+
+    # 🇺🇸 Illinois Midday tutup 01:40 WIB = 18:40 UTC → 19:05 UTC
+    - cron: '5 19 * * *'
+
+    # 🇺🇸 Missouri Midday tutup 01:45 WIB = 18:45 UTC → 19:10 UTC
+    - cron: '10 19 * * *'
+
+    # 🇺🇸 WDC/Connecticut Midday tutup 01:55-01:57 WIB = 18:55-18:57 UTC → 19:20 UTC
+    - cron: '20 19 * * *'
+
+    # 🇺🇸 Virginia Day tutup 02:00 WIB = 19:00 UTC → 19:25 UTC
+    - cron: '25 19 * * *'
+
+    # 🇺🇸 New York Midday tutup 02:30 WIB = 19:30 UTC → 19:55 UTC
+    - cron: '55 19 * * *'
+
+    # 🇲🇦 Morocco 03:00 & NC Day tutup 03:00 WIB = 20:00 UTC → 20:25 UTC
+    - cron: '25 20 * * *'
+
+    # 🇺🇸 Oregon 04:00 WIB = 21:00 UTC → 21:25 UTC
+    - cron: '25 21 * * *'
+
+    # ─── PAGI (WIB 07:xx – 11:xx) ────────────────────────────────────────────
+    # 🇺🇸 Oregon 07:00 / Texas Eve / Georgia Eve tutup 07:00 WIB = 00:00 UTC → 00:25 UTC
+    - cron: '25 0 * * *'
+
+    # 🇺🇸 Tennessee Evening tutup 07:20 WIB = 00:20 UTC → 00:45 UTC
+    - cron: '45 0 * * *'
+
+    # 🇺🇸 Michigan Eve tutup 07:29 WIB = 00:29 UTC → 00:55 UTC
+    - cron: '55 0 * * *'
+
+    # 🇺🇸 Maryland Eve / WDC Eve tutup 07:55-07:57 WIB = 00:55-00:57 UTC → 01:20 UTC
+    - cron: '20 1 * * *'
+
+    # 🇺🇸 California tutup 09:30 WIB = 02:30 UTC → 02:55 UTC
+    - cron: '55 2 * * *'
+
+    # 🇺🇸 Florida Eve tutup 09:45 WIB = 02:45 UTC → 03:10 UTC
+    - cron: '10 3 * * *'
+
+    # 🇺🇸 Missouri Eve tutup 09:59 WIB = 02:59 UTC → 03:25 UTC
+    - cron: '25 3 * * *'
+
+    # 🇺🇸 Oregon 10:00 / Wisconsin / IL Eve / NY Eve tutup ~10:00-10:30 WIB = 03:00-03:30 UTC → 03:55 UTC
+    - cron: '55 3 * * *'
+
+    # 🇺🇸 Kentucky/Virginia Eve tutup 11:00 WIB = 04:00 UTC → 04:25 UTC
+    - cron: '25 4 * * *'
+
+    # 🇰🇭 Kamboja tutup 11:50 WIB = 04:50 UTC → 05:10 UTC
+    - cron: '10 5 * * *'
+
+    # ─── SIANG (WIB 13:xx – 20:xx) ───────────────────────────────────────────
+    # 🇲🇴 Toto Macau 13 / Bullseye / Oregon 13 tutup 13:00-13:10 WIB = 06:00-06:10 UTC → 06:35 UTC
+    - cron: '35 6 * * *'
+
+    # 🇦🇺 Sydney / SDLotto tutup 13:45 WIB = 06:45 UTC → 07:10 UTC (Sen–Sab)
+    - cron: '10 7 * * 1-6'
+
+    # 🇨🇳 China Pools tutup 15:30 WIB = 08:30 UTC → 08:55 UTC
+    - cron: '55 8 * * *'
+
+    # 🇲🇴 Toto Macau 16 tutup 16:10 WIB = 09:10 UTC → 09:35 UTC
+    - cron: '35 9 * * *'
+
+    # 🇯🇵 Japan tutup 17:20 WIB = 10:20 UTC → 10:45 UTC
+    - cron: '45 10 * * *'
+
+    # 🇸🇬 Singapore tutup 17:40 WIB = 10:40 UTC → 11:05 UTC (Sen,Rab,Kam,Sab,Min)
+    - cron: '5 11 * * 0,1,3,4,6'
+
+    # 🇲🇦 Morocco 18:00 tutup 18:00 WIB = 11:00 UTC → 11:25 UTC
+    - cron: '25 11 * * *'
+
+    # 🇲🇴 Toto Macau 19 tutup 19:10 WIB = 12:10 UTC → 12:35 UTC
+    - cron: '35 12 * * *'
+
+    # 🇵🇭 PCSO tutup 20:10 WIB = 13:10 UTC → 13:35 UTC
+    - cron: '35 13 * * *'
+
+    # 🇹🇼 Taiwan tutup 20:45 WIB = 13:45 UTC → 14:10 UTC
+    - cron: '10 14 * * *'
+
+    # 🇲🇦 Morocco 21:00 tutup 21:00 WIB = 14:00 UTC → 14:25 UTC
+    - cron: '25 14 * * *'
+
+    # 🇺🇸 Texas Morning tutup 22:00 WIB = 15:00 UTC → 15:25 UTC
+    - cron: '25 15 * * *'
+
+    # 🇲🇴 Toto Macau 22 tutup 22:10 WIB = 15:10 UTC → 15:35 UTC
+    - cron: '35 15 * * *'
+
+    # 🇺🇸 Tennessee Morning tutup 22:22 WIB = 15:22 UTC → 15:45 UTC
+    - cron: '45 15 * * *'
+
+    # 🇲🇴 Toto Macau 23 tutup 23:10 WIB = 16:10 UTC → 16:35 UTC
+    - cron: '35 16 * * *'
+
+    # 🇭🇰 Hongkong Pools/Lotto tutup 23:00 WIB = 16:00 UTC → 16:25 UTC
+    - cron: '25 16 * * *'
+
+    # 🇺🇸 Maryland/Michigan Midday tutup 23:28-23:30 WIB = 16:28-16:30 UTC → 17:00 UTC
+    - cron: '0 17 * * *'
+
+    # 🇲🇦 Morocco 23:59 tutup midnight WIB = 16:59 UTC → 17:20 UTC
+    - cron: '20 17 * * *'
+
+  workflow_dispatch:  # bisa run manual dari GitHub Actions
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
+
+      - name: Run fetch all pasaran
+        run: python fetch_all.py
+
+      - name: Commit & push jika ada perubahan
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add result.json
+          git diff --staged --quiet || git commit -m "update: 65 pasaran $(date +'%Y-%m-%d %H:%M WIB' -d '+7 hours')"
+          git push
