@@ -1,0 +1,88 @@
+{
+  "hk": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "Hongkong",
+    "jam": "23:00"
+  },
+  "hkl": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "HK Lotto",
+    "jam": "23:00"
+  },
+  "sgp": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "Singapore",
+    "jam": "17:40"
+  },
+  "sdy": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "Sydney Pools",
+    "jam": "13:45"
+  },
+  "sdl": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "Sydney Lotto",
+    "jam": "13:45"
+  },
+  "kam": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "Kamboja",
+    "jam": "11:50"
+  },
+  "bull": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "Bullseye NZ",
+    "jam": "13:10"
+  },
+  "chn": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "China Pools",
+    "jam": "15:30"
+  },
+  "jpn": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "Japan",
+    "jam": "17:20"
+  },
+  "twn": {
+    "result": "????",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "RESET",
+    "name": "Taiwan",
+    "jam": "20:45"
+  },
+  "_meta": {
+    "updated": "RESET - upload ulang biar bersih",
+    "date": "19/05",
+    "source": "manual-reset",
+    "total": 10
+  }
+}
