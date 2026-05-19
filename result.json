@@ -441,22 +441,22 @@
     "name": "Tennessee Morning"
   },
   "cal": {
-    "result": "1819",
-    "tgl": "19/05",
-    "status": "sudah",
-    "updated": "23:47 WIB",
+    "result": "----",
+    "tgl": "20/05",
+    "status": "belum",
+    "updated": "02:06 WIB",
     "name": "California"
   },
   "wie": {
-    "result": "2090",
-    "tgl": "19/05",
-    "status": "sudah",
-    "updated": "23:47 WIB",
+    "result": "----",
+    "tgl": "20/05",
+    "status": "belum",
+    "updated": "02:06 WIB",
     "name": "Wisconsin Evening"
   },
   "_meta": {
-    "updated": "2026-05-19 23:47 WIB",
-    "date": "19/05",
+    "updated": "2026-05-20 02:06 WIB",
+    "date": "20/05",
     "total": 65
   }
 }
