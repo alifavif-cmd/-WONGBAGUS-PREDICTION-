@@ -1,0 +1,462 @@
+{
+  "hk": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Hongkong Pools"
+  },
+  "hkl": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Hongkong Lotto"
+  },
+  "sgp": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Singapore"
+  },
+  "sdy": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Sydney Pools"
+  },
+  "sdl": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Sydney Lotto"
+  },
+  "kam": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Kamboja"
+  },
+  "bull": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Bullseye NZ"
+  },
+  "chn": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "China Pools"
+  },
+  "jpn": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Japan"
+  },
+  "twn": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Taiwan"
+  },
+  "pcso": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "PCSO"
+  },
+  "mac": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Macau (alias)"
+  },
+  "mac1": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Toto Macau 13"
+  },
+  "mac2": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Toto Macau 16"
+  },
+  "mac3": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Toto Macau 19"
+  },
+  "mac4": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Toto Macau 22"
+  },
+  "mac5": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Toto Macau 00"
+  },
+  "mac6": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Toto Macau 23"
+  },
+  "mrq3": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Morocco 03:00"
+  },
+  "mrq18": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Morocco 18:00"
+  },
+  "mrq21": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Morocco 21:00"
+  },
+  "mrq23": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Morocco 23:59"
+  },
+  "ger": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Germany Plus5"
+  },
+  "or4": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Oregon 04:00"
+  },
+  "or7": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Oregon 07:00"
+  },
+  "or10": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Oregon 10:00"
+  },
+  "or13": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Oregon 13:00"
+  },
+  "ncd": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "NC Day"
+  },
+  "nce": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "NC Evening"
+  },
+  "geom": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Georgia Midday"
+  },
+  "geoe": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Georgia Evening"
+  },
+  "geon": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Georgia Night"
+  },
+  "txd": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Texas Day"
+  },
+  "txmr": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Texas Morning"
+  },
+  "txe": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Texas Evening"
+  },
+  "txn": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Texas Night"
+  },
+  "nyd": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "New York Midday"
+  },
+  "nye": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "New York Evening"
+  },
+  "njm": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "NJ Midday"
+  },
+  "nje": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "NJ Evening"
+  },
+  "flm": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Florida Midday"
+  },
+  "fle": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Florida Evening"
+  },
+  "ilm": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Illinois Midday"
+  },
+  "ile": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Illinois Evening"
+  },
+  "indm": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Indiana Midday"
+  },
+  "inde": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Indiana Evening"
+  },
+  "kym": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Kentucky Midday"
+  },
+  "kye": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Kentucky Evening"
+  },
+  "mdm": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Maryland Midday"
+  },
+  "mde": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Maryland Evening"
+  },
+  "mim": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Michigan Midday"
+  },
+  "mie": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Michigan Evening"
+  },
+  "mom": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Missouri Midday"
+  },
+  "moe": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Missouri Evening"
+  },
+  "wdm": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "WDC Midday"
+  },
+  "wde": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "WDC Evening"
+  },
+  "ctd": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Connecticut Day"
+  },
+  "ctn": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Connecticut Night"
+  },
+  "vad": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Virginia Day"
+  },
+  "van": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Virginia Night"
+  },
+  "tnm": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Tennessee Midday"
+  },
+  "tne": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Tennessee Evening"
+  },
+  "tnmr": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Tennessee Morning"
+  },
+  "cal": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "California"
+  },
+  "wie": {
+    "result": "0345",
+    "tgl": "19/05",
+    "status": "sudah",
+    "updated": "21:05 WIB",
+    "name": "Wisconsin Evening"
+  },
+  "_meta": {
+    "updated": "2026-05-19 21:05 WIB",
+    "date": "19/05",
+    "total": 65
+  }
+}
