@@ -1,0 +1,78 @@
+{
+  "hk": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "Hongkong Pools"
+  },
+  "hkl": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "Hongkong Lotto"
+  },
+  "sgp": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "Singapore Pools"
+  },
+  "sdy": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "Sydney Pools"
+  },
+  "sdl": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "Sydney Lotto"
+  },
+  "kam": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "Kamboja"
+  },
+  "bull": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "Bullseye NZ"
+  },
+  "chn": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "China Pools"
+  },
+  "jpn": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "Japan"
+  },
+  "twn": {
+    "result": "6839",
+    "tgl": "19/05",
+    "status": "belum",
+    "updated": "10:43 WIB",
+    "name": "Taiwan"
+  },
+  "_meta": {
+    "updated": "2026-05-19 10:43 WIB",
+    "date": "19/05",
+    "source": "angkanet-scraper-v2",
+    "total": 9
+  }
+}
