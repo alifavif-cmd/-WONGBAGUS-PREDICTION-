@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rekap 2D – WONGBAGUS PREDICTION</title>
+<meta name="description" content="Rekap Angka 2D – Frekuensi keluaran 2D dari 65 pasaran togel. WONGBAGUS PREDICTION.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#f59e0b;--gold-light:#fcd34d;--gold-dark:#b45309;
+  --red:#dc2626;--red-dark:#991b1b;--blue:#2563eb;
+  --bg:#07070e;--bg2:#0f0f1a;--bg3:#15152a;
+  --card:#111128;--border:rgba(245,158,11,0.15);
+  --text:#e2e2f0;--muted:#6b6b8a;--green:#10b981;
+  --cyan:#00d4ff;--purple:#9b5de5;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:-200px;left:-200px;width:600px;height:600px;
+  background:radial-gradient(circle,rgba(245,158,11,.06),transparent 70%);pointer-events:none;z-index:0;}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:999;background:rgba(7,7,14,.95);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 16px;}
+.header-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+.logo-wrap{display:flex;align-items:center;gap:10px;flex-shrink:0;text-decoration:none;}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--red));
+  border-radius:9px;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;flex-shrink:0;
+  box-shadow:0 4px 16px rgba(245,158,11,.3);}
+.logo-text-wrap{line-height:1;}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1.5px;
+  background:linear-gradient(90deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-sub{font-size:10px;letter-spacing:1.5px;color:var(--muted);margin-top:1px;}
+.back-btn{margin-left:auto;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);
+  border-radius:50px;padding:5px 14px;font-size:12px;font-weight:700;color:var(--gold);
+  text-decoration:none;transition:all .2s;white-space:nowrap;}
+.back-btn:hover{background:rgba(245,158,11,.2);}
+
+/* PAGE TITLE */
+.page-hero{text-align:center;padding:28px 16px 18px;position:relative;z-index:1;}
+.page-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,7vw,54px);
+  letter-spacing:3px;background:linear-gradient(180deg,#fff 30%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.page-hero p{font-size:12px;color:var(--muted);}
+
+/* STATUS BAR */
+.status-bar{max-width:900px;margin:0 auto 16px;padding:0 16px;position:relative;z-index:1;}
+.status-inner{background:var(--card);border:1px solid var(--border);border-radius:12px;
+  padding:9px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;}
+.status-text{font-size:11px;color:var(--muted);flex:1;}
+.dot-live{display:inline-block;width:7px;height:7px;background:var(--green);
+  border-radius:50%;animation:blink 1.5s infinite;margin-right:4px;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+.btn-refresh{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);
+  border-radius:50px;padding:4px 12px;font-size:11px;font-weight:700;color:var(--gold);
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px;}
+.btn-refresh:hover{background:rgba(245,158,11,.25);}
+.btn-refresh.spinning svg{animation:spin .7s linear infinite;}
+.btn-refresh svg{width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2.5;}
+@keyframes spin{from{transform:rotate(0);}to{transform:rotate(360deg);}}
+
+/* MAIN */
+.main-wrap{max-width:900px;margin:0 auto;padding:0 12px 40px;position:relative;z-index:1;}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center;}
+.filter-bar select,.filter-bar input{
+  background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+  padding:8px 13px;color:var(--text);font-family:'Nunito',sans-serif;font-size:13px;
+  outline:none;transition:border-color .2s;cursor:pointer;}
+.filter-bar select:focus,.filter-bar input:focus{border-color:var(--gold);}
+.filter-bar input{flex:1;min-width:120px;max-width:200px;}
+.filter-label{font-size:11px;font-weight:700;color:var(--muted);white-space:nowrap;}
+
+/* LEGEND */
+.legend{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--muted);}
+.leg-dot{width:12px;height:12px;border-radius:3px;}
+.leg-dot.hot{background:rgba(220,38,38,.7);}
+.leg-dot.warm{background:rgba(245,158,11,.7);}
+.leg-dot.cool{background:rgba(37,99,235,.5);}
+.leg-dot.cold{background:rgba(255,255,255,.1);}
+
+/* SUMMARY CARDS */
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-bottom:18px;}
+.sum-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;text-align:center;}
+.sum-label{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.8px;text-transform:uppercase;margin-bottom:4px;}
+.sum-val{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:1px;color:var(--gold);}
+.sum-sub{font-size:10px;color:var(--muted);margin-top:2px;}
+
+/* VIEW TABS */
+.view-tabs{display:flex;gap:6px;margin-bottom:16px;}
+.view-tab{background:var(--bg3);border:1px solid var(--border);border-radius:50px;
+  padding:6px 16px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s;}
+.view-tab.active{background:rgba(245,158,11,.15);border-color:var(--gold);color:var(--gold);}
+
+/* GRID VIEW */
+#viewGrid{display:block;}
+#viewTable{display:none;}
+
+.rekap-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;}
+@media(max-width:480px){.rekap-grid{grid-template-columns:repeat(5,1fr);}}
+
+.digit-cell{
+  border-radius:8px;padding:6px 2px;text-align:center;cursor:default;
+  transition:transform .15s;border:1.5px solid transparent;position:relative;}
+.digit-cell:hover{transform:scale(1.08);z-index:2;}
+.digit-cell.hot{background:rgba(220,38,38,.25);border-color:rgba(220,38,38,.5);}
+.digit-cell.warm{background:rgba(245,158,11,.18);border-color:rgba(245,158,11,.35);}
+.digit-cell.cool{background:rgba(37,99,235,.18);border-color:rgba(37,99,235,.3);}
+.digit-cell.cold{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08);}
+.digit-num{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;}
+.digit-cell.hot .digit-num{color:#fca5a5;}
+.digit-cell.warm .digit-num{color:var(--gold);}
+.digit-cell.cool .digit-num{color:#93c5fd;}
+.digit-cell.cold .digit-num{color:var(--muted);}
+.digit-freq{font-size:9px;font-weight:800;color:var(--muted);margin-top:1px;}
+.digit-bar{width:100%;height:3px;border-radius:2px;margin-top:3px;background:rgba(255,255,255,.05);}
+.digit-bar-fill{height:100%;border-radius:2px;transition:width .4s ease;}
+.digit-cell.hot .digit-bar-fill{background:#ef4444;}
+.digit-cell.warm .digit-bar-fill{background:var(--gold);}
+.digit-cell.cool .digit-bar-fill{background:#3b82f6;}
+.digit-cell.cold .digit-bar-fill{background:#374151;}
+
+/* TABLE VIEW */
+.rekap-table-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+table{width:100%;border-collapse:collapse;}
+thead{background:rgba(245,158,11,.06);}
+thead th{padding:9px 12px;font-size:11px;font-weight:800;letter-spacing:1px;
+  text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border);text-align:left;}
+thead th:not(:first-child){text-align:center;}
+tbody tr{border-bottom:1px solid rgba(255,255,255,.04);transition:background .15s;}
+tbody tr:hover{background:rgba(245,158,11,.04);}
+tbody tr:last-child{border-bottom:none;}
+tbody td{padding:8px 12px;font-size:13px;}
+tbody td:not(:first-child){text-align:center;}
+.rank-badge{display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:6px;font-size:10px;font-weight:800;}
+.rank-1{background:rgba(245,158,11,.3);color:var(--gold);}
+.rank-2{background:rgba(156,163,175,.15);color:#9ca3af;}
+.rank-3{background:rgba(180,83,9,.2);color:#b45309;}
+.rank-n{background:rgba(255,255,255,.05);color:var(--muted);}
+.td-2d{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;}
+.td-bar{width:80px;height:6px;border-radius:3px;background:rgba(255,255,255,.06);display:inline-block;vertical-align:middle;}
+.td-bar-fill{height:100%;border-radius:3px;}
+
+/* TOP ANGKA */
+.top-section{margin-bottom:18px;}
+.sec-title{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.sec-title h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(16px,4vw,22px);
+  letter-spacing:1.5px;color:var(--gold-light);}
+.sec-line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+
+.top-row{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;}
+.top-row::-webkit-scrollbar{display:none;}
+.top-card{flex-shrink:0;background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:12px 14px;text-align:center;min-width:70px;}
+.top-card.rank1{border-color:rgba(245,158,11,.5);background:rgba(245,158,11,.06);}
+.top-card.rank2{border-color:rgba(156,163,175,.2);}
+.top-card.rank3{border-color:rgba(180,83,9,.3);}
+.top-rank{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:1px;margin-bottom:3px;}
+.top-num{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;color:var(--gold);}
+.top-freq{font-size:10px;color:var(--muted);margin-top:1px;}
+.top-card.rank1 .top-num{color:var(--gold);text-shadow:0 0 12px rgba(245,158,11,.4);}
+
+/* PASARAN SELECT */
+.pasaran-filter{background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+  padding:8px 13px;color:var(--text);font-family:'Nunito',sans-serif;font-size:13px;
+  outline:none;cursor:pointer;width:100%;margin-bottom:12px;}
+.pasaran-filter:focus{border-color:var(--gold);}
+
+/* SCROLL TOP */
+#scrollTop{position:fixed;bottom:20px;right:16px;width:40px;height:40px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-dark));border:none;border-radius:50%;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:500;
+  box-shadow:0 4px 16px rgba(245,158,11,.4);opacity:0;transform:translateY(20px);transition:opacity .3s,transform .3s;}
+#scrollTop.visible{opacity:1;transform:translateY(0);}
+#scrollTop svg{width:16px;height:16px;stroke:#000;fill:none;stroke-width:3;}
+
+/* FOOTER */
+footer{text-align:center;padding:20px 16px;border-top:1px solid var(--border);
+  color:var(--muted);font-size:11px;position:relative;z-index:1;}
+footer strong{font-family:'Bebas Neue',sans-serif;letter-spacing:1px;
+  background:linear-gradient(90deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:13px;}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-icon">WB</div>
+      <div class="logo-text-wrap">
+        <div class="logo-text">WONGBAGUS</div>
+        <div class="logo-sub">PREDICTION</div>
+      </div>
+    </a>
+    <a href="index.html" class="back-btn">← Beranda</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <h1>📊 REKAP 2D</h1>
+  <p>Frekuensi keluaran angka 2D dari semua pasaran · Data dari result.json</p>
+</div>
+
+<!-- STATUS BAR -->
+<div class="status-bar">
+  <div class="status-inner">
+    <div class="status-text" id="statusText">⏳ Memuat data result.json...</div>
+    <button class="btn-refresh" id="btnRefresh" onclick="doRefresh()">
+      <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+      Refresh
+    </button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- PASARAN FILTER -->
+  <select class="pasaran-filter" id="pasaranFilter" onchange="renderAll()">
+    <option value="all">🌐 Semua Pasaran (65)</option>
+    <option value="asia">🌏 Asia (HK, SGP, SDY, KAM, CHN, JPN, TWN, PCSO, BULL, SDL)</option>
+    <option value="macau">🇲🇴 Macau (MAC 13/16/19/22/23/00)</option>
+    <option value="morocco">🇲🇦 Morocco Quatro</option>
+    <option value="us">🇺🇸 US States</option>
+    <option value="hk">🇭🇰 HK saja</option>
+    <option value="sgp">🇸🇬 SGP saja</option>
+    <option value="sdy">🇦🇺 SDY saja</option>
+  </select>
+
+  <!-- SUMMARY -->
+  <div class="summary-grid" id="summaryGrid">
+    <div class="sum-card"><div class="sum-label">Total Data</div><div class="sum-val" id="sumTotal">—</div><div class="sum-sub">result hari ini</div></div>
+    <div class="sum-card"><div class="sum-label">Terpanas</div><div class="sum-val" id="sumHot">—</div><div class="sum-sub" id="sumHotFreq">0x keluar</div></div>
+    <div class="sum-card"><div class="sum-label">Terdingin</div><div class="sum-val" id="sumCold">—</div><div class="sum-sub" id="sumColdFreq">0x keluar</div></div>
+    <div class="sum-card"><div class="sum-label">Rata-rata</div><div class="sum-val" id="sumAvg">—</div><div class="sum-sub">frekuensi/angka</div></div>
+  </div>
+
+  <!-- TOP 10 -->
+  <div class="top-section">
+    <div class="sec-title"><h2>🔥 TOP 10 TERPANAS</h2><div class="sec-line"></div></div>
+    <div class="top-row" id="topRow"></div>
+  </div>
+
+  <!-- VIEW TOGGLE -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+    <div class="view-tabs">
+      <button class="view-tab active" onclick="switchView('grid',this)">⊞ Grid</button>
+      <button class="view-tab" onclick="switchView('table',this)">☰ Tabel</button>
+    </div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot hot"></div>Panas</div>
+      <div class="leg-item"><div class="leg-dot warm"></div>Hangat</div>
+      <div class="leg-item"><div class="leg-dot cool"></div>Dingin</div>
+      <div class="leg-item"><div class="leg-dot cold"></div>Mati</div>
+    </div>
+  </div>
+
+  <!-- GRID VIEW -->
+  <div id="viewGrid">
+    <div class="rekap-grid" id="rekapGrid"></div>
+  </div>
+
+  <!-- TABLE VIEW -->
+  <div id="viewTable">
+    <div class="rekap-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>2D</th>
+            <th>Frekuensi</th>
+            <th>Status</th>
+            <th>Bar</th>
+          </tr>
+        </thead>
+        <tbody id="rekapTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p><strong>WONGBAGUS PREDICTION</strong></p>
+  <p style="margin-top:4px;">Rekap 2D · 65 Pasaran · Data dari result.json</p>
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const RESULT_URLS=[
+  './result.json',
+  'https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json',
+  'https://raw.githubusercontent.com/alifavif-cmd/-WONGBAGUS-PREDICTION-/main/result.json',
+];
+
+// 65 market IDs
+const ALL_IDS=['hk','hkl','sgp','sdy','sdl','kam','bull','chn','jpn','twn','pcso',
+  'mac1','mac2','mac3','mac4','mac5','mac6',
+  'mrq3','mrq18','mrq21','mrq23',
+  'ger','or4','or7','or10','or13',
+  'ncd','nce','geom','geoe','geon','txd','txmr','txe','txn',
+  'nyd','nye','njm','nje','flm','fle','ilm','ile',
+  'indm','inde','kym','kye','mdm','mde','mim','mie',
+  'mom','moe','wdm','wde','ctd','ctn','vad','van',
+  'tnm','tne','tnmr','cal','wie','wim'];
+
+const ASIA_IDS=['hk','hkl','sgp','sdy','sdl','kam','bull','chn','jpn','twn','pcso'];
+const MACAU_IDS=['mac1','mac2','mac3','mac4','mac5','mac6'];
+const MOROCCO_IDS=['mrq3','mrq18','mrq21','mrq23'];
+const US_IDS=['ger','or4','or7','or10','or13','ncd','nce','geom','geoe','geon',
+  'txd','txmr','txe','txn','nyd','nye','njm','nje','flm','fle',
+  'ilm','ile','indm','inde','kym','kye','mdm','mde','mim','mie',
+  'mom','moe','wdm','wde','ctd','ctn','vad','van','tnm','tne','tnmr','cal','wie','wim'];
+
+let rawData=null;
+let freq2D=new Array(100).fill(0); // index = angka 00-99
+let currentView='grid';
+
+// ============================================================
+// FETCH
+// ============================================================
+async function fetchData(){
+  for(const url of RESULT_URLS){
+    try{
+      const res=await Promise.race([
+        fetch(url+'?t='+Date.now(),{cache:'no-cache'}),
+        new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),8000))
+      ]);
+      if(!res.ok)continue;
+      const json=await res.json();
+      if(json&&Object.keys(json).length>3){rawData=json;return true;}
+    }catch(e){}
+  }
+  return false;
+}
+
+function getFilteredIDs(){
+  const v=document.getElementById('pasaranFilter').value;
+  if(v==='all')return ALL_IDS;
+  if(v==='asia')return ASIA_IDS;
+  if(v==='macau')return MACAU_IDS;
+  if(v==='morocco')return MOROCCO_IDS;
+  if(v==='us')return US_IDS;
+  if(v==='hk')return['hk'];
+  if(v==='sgp')return['sgp'];
+  if(v==='sdy')return['sdy'];
+  return ALL_IDS;
+}
+
+function calcFreq(){
+  const ids=getFilteredIDs();
+  freq2D=new Array(100).fill(0);
+  if(!rawData)return;
+  let count=0;
+  for(const id of ids){
+    const entry=rawData[id];
+    if(!entry)continue;
+    const r=String(entry.result||'');
+    if(!/^\d{4}$/.test(r))continue;
+    const td=parseInt(r.slice(2)); // kepala+ekor = index 2-3
+    if(td>=0&&td<=99){freq2D[td]++;count++;}
+  }
+  return count;
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function getClass(freq,max){
+  if(max===0)return'cold';
+  const ratio=freq/max;
+  if(ratio>=0.6)return'hot';
+  if(ratio>=0.35)return'warm';
+  if(ratio>=0.1)return'cool';
+  return'cold';
+}
+
+function pad2(n){return String(n).padStart(2,'0');}
+
+function renderAll(){
+  if(!rawData){return;}
+  const total=calcFreq();
+  const max=Math.max(...freq2D);
+  const sorted=[...freq2D.entries()].sort((a,b)=>b[1]-a[1]);
+  const nonZero=sorted.filter(x=>x[1]>0);
+  const avg=nonZero.length?Math.round(freq2D.reduce((a,b)=>a+b,0)/nonZero.length*10)/10:0;
+
+  // Summary
+  document.getElementById('sumTotal').textContent=total;
+  if(nonZero.length){
+    document.getElementById('sumHot').textContent=pad2(sorted[0][0]);
+    document.getElementById('sumHotFreq').textContent=sorted[0][1]+'x keluar';
+    document.getElementById('sumCold').textContent=pad2(sorted[sorted.length-1][0]);
+    document.getElementById('sumColdFreq').textContent=sorted[sorted.length-1][1]+'x keluar';
+  }
+  document.getElementById('sumAvg').textContent=avg;
+
+  // Top 10
+  const top10=sorted.slice(0,10);
+  const rankLabels=['🥇','🥈','🥉','4','5','6','7','8','9','10'];
+  document.getElementById('topRow').innerHTML=top10.map((x,i)=>`
+    <div class="top-card ${i===0?'rank1':i===1?'rank2':i===2?'rank3':''}">
+      <div class="top-rank">${rankLabels[i]}</div>
+      <div class="top-num">${pad2(x[0])}</div>
+      <div class="top-freq">${x[1]}x</div>
+    </div>`).join('');
+
+  // Grid
+  document.getElementById('rekapGrid').innerHTML=[...Array(100)].map((_,i)=>{
+    const fr=freq2D[i];
+    const cls=getClass(fr,max);
+    const pct=max>0?Math.round(fr/max*100):0;
+    return`<div class="digit-cell ${cls}" title="${pad2(i)}: ${fr}x keluar">
+      <div class="digit-num">${pad2(i)}</div>
+      <div class="digit-freq">${fr}x</div>
+      <div class="digit-bar"><div class="digit-bar-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+
+  // Table
+  document.getElementById('rekapTableBody').innerHTML=sorted.map((x,i)=>{
+    const cls=getClass(x[1],max);
+    const pct=max>0?Math.round(x[1]/max*100):0;
+    const clr=cls==='hot'?'#ef4444':cls==='warm'?'#f59e0b':cls==='cool'?'#3b82f6':'#374151';
+    const rk=i<3?`rank-${i+1}`:'rank-n';
+    const status=cls==='hot'?'🔥 Panas':cls==='warm'?'⚡ Hangat':cls==='cool'?'❄ Dingin':'💀 Mati';
+    return`<tr>
+      <td><span class="rank-badge ${rk}">${i+1}</span></td>
+      <td class="td-2d" style="color:${clr}">${pad2(x[0])}</td>
+      <td><strong>${x[1]}</strong>x</td>
+      <td style="font-size:11px;font-weight:700;">${status}</td>
+      <td><span class="td-bar"><span class="td-bar-fill" style="width:${pct}%;background:${clr};display:block;height:100%;border-radius:3px;"></span></span></td>
+    </tr>`;
+  }).join('');
+}
+
+function switchView(v,btn){
+  currentView=v;
+  document.getElementById('viewGrid').style.display=v==='grid'?'block':'none';
+  document.getElementById('viewTable').style.display=v==='table'?'block':'none';
+  document.querySelectorAll('.view-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+function setStatus(html){document.getElementById('statusText').innerHTML=html;}
+
+async function doRefresh(){
+  const btn=document.getElementById('btnRefresh');
+  btn.disabled=true;btn.classList.add('spinning');
+  setStatus('⏳ Memuat data...');
+  const ok=await fetchData();
+  btn.disabled=false;btn.classList.remove('spinning');
+  if(ok){
+    const meta=rawData._meta;
+    const updated=meta?meta.updated:'—';
+    setStatus(`<span class="dot-live"></span> Data OK · Last update: <strong>${updated}</strong>`);
+    renderAll();
+  } else {
+    setStatus('⚠ Gagal memuat data. Periksa koneksi/result.json.');
+  }
+}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+});
+
+doRefresh();
+</script>
+</body>
+</html>

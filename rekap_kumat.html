@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kunci Mati – WONGBAGUS PREDICTION</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#f59e0b;--gold-light:#fcd34d;--red:#dc2626;
+  --bg:#07070e;--bg3:#15152a;--card:#111128;
+  --border:rgba(245,158,11,.15);--text:#e2e2f0;--muted:#6b6b8a;
+  --green:#10b981;--cyan:#00d4ff;--purple:#9b5de5;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;top:-200px;right:-200px;width:600px;height:600px;
+  background:radial-gradient(circle,rgba(220,38,38,.05) 0%,transparent 70%);
+  pointer-events:none;z-index:0;animation:pb 8s ease-in-out infinite alternate;}
+@keyframes pb{from{transform:scale(1);}to{transform:scale(1.3);}}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+header{position:sticky;top:0;z-index:999;background:rgba(7,7,14,.95);
+  backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 14px;}
+.hdr{display:flex;align-items:center;gap:10px;max-width:960px;margin:0 auto;}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--red));
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;flex-shrink:0;
+  box-shadow:0 4px 16px rgba(245,158,11,.35);}
+.logo-text{font-family:'Bebas Neue',sans-serif;font-size:clamp(14px,3.5vw,19px);
+  letter-spacing:1.5px;background:linear-gradient(90deg,var(--gold-light),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.logo-sub{font-size:9px;letter-spacing:2px;color:var(--muted);-webkit-text-fill-color:var(--muted);line-height:1;margin-top:2px;font-weight:700;}
+.hdr-back{margin-left:auto;background:rgba(245,158,11,.1);border:1px solid var(--border);
+  border-radius:8px;padding:5px 12px;font-size:11px;font-weight:700;color:var(--gold);
+  cursor:pointer;text-decoration:none;transition:all .2s;white-space:nowrap;}
+
+.wrap{max-width:960px;margin:0 auto;padding:14px 12px 50px;position:relative;z-index:1;}
+.page-title{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.page-title h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,6vw,34px);letter-spacing:2px;color:var(--gold-light);}
+.page-title .line{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
+
+.info-box{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.18);
+  border-radius:12px;padding:11px 14px;margin-bottom:14px;font-size:12px;color:#fca5a5;line-height:1.7;}
+.info-box strong{color:#f87171;}
+
+.ctrl-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:14px;}
+.ctrl-row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;}
+.ctrl-group{display:flex;flex-direction:column;gap:5px;flex:1;min-width:130px;}
+.ctrl-label{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+select{background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+  padding:10px 12px;color:var(--text);font-family:'Nunito',sans-serif;
+  font-size:13px;font-weight:700;outline:none;cursor:pointer;width:100%;transition:border-color .2s;}
+select:focus{border-color:var(--gold);}
+
+.period-row{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap;}
+.period-btn{background:var(--bg3);border:1px solid var(--border);border-radius:50px;
+  padding:5px 13px;font-size:11px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .15s;white-space:nowrap;}
+.period-btn.active{background:rgba(245,158,11,.15);border-color:var(--gold);color:var(--gold);}
+
+.status-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;
+  background:rgba(245,158,11,.05);border:1px solid var(--border);border-radius:10px;
+  margin-bottom:14px;font-size:11px;color:var(--muted);flex-wrap:wrap;}
+.dot-live{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 1.5s infinite;flex-shrink:0;}
+.dot-load{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:blink .6s infinite;flex-shrink:0;}
+.status-badge{font-size:10px;font-weight:700;padding:2px 9px;border-radius:50px;margin-left:auto;white-space:nowrap;}
+.badge-ok{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:#34d399;}
+.badge-warn{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:var(--gold);}
+
+.btn-refresh{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);
+  border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;color:var(--gold);
+  cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;white-space:nowrap;align-self:flex-end;}
+.btn-refresh svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.5;}
+.btn-refresh.spin svg{animation:spin .7s linear infinite;}
+
+.today-box{background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.25);
+  border-radius:12px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.today-lbl{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.t-digit-row{display:flex;gap:4px;}
+.t-digit{width:34px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:22px;background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);}
+.t-digit.hl{background:rgba(245,158,11,.25);border:2px solid rgba(245,158,11,.5);color:var(--gold);}
+
+/* ── GAP GRID ── */
+.section{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:14px;animation:fadeIn .3s ease;}
+.sec-hdr{background:rgba(220,38,38,.07);border-bottom:1px solid var(--border);
+  padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:#fca5a5;}
+.sec-meta{font-size:10px;color:var(--muted);font-weight:700;}
+
+.grid-wrap{padding:10px;overflow-x:auto;}
+.gap-grid{width:100%;border-collapse:collapse;}
+.gap-grid th{font-size:9px;font-weight:800;color:var(--muted);letter-spacing:1px;
+  text-align:center;padding:4px 2px;border-bottom:1px solid var(--border);}
+.gap-grid td{padding:2px;}
+.gcell{width:100%;aspect-ratio:1;border-radius:6px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;cursor:default;transition:transform .1s;
+  min-width:28px;min-height:28px;}
+.gcell:hover{transform:scale(1.18);z-index:2;box-shadow:0 4px 18px rgba(0,0,0,.5);}
+.gcell-num{font-family:'Bebas Neue',sans-serif;font-size:11px;line-height:1;}
+.gcell-gap{font-size:8px;font-weight:800;line-height:1;margin-top:1px;}
+
+/* Gap heat: 0=fresh(green) → mati(red/purple) */
+.gap-fresh{background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.35);color:#6ee7b7;}
+.gap-low  {background:rgba(37,99,235,.2);border:1px solid rgba(37,99,235,.3);color:#93c5fd;}
+.gap-mid  {background:rgba(234,179,8,.22);border:1px solid rgba(234,179,8,.4);color:#fde68a;}
+.gap-high {background:rgba(249,115,22,.28);border:1px solid rgba(249,115,22,.45);color:#fdba74;}
+.gap-hot  {background:rgba(220,38,38,.3);border:1.5px solid rgba(220,38,38,.55);color:#fca5a5;}
+.gap-mati {background:rgba(155,93,229,.32);border:2px solid rgba(155,93,229,.55);color:#c4b5fd;font-weight:800;}
+
+/* LEGEND */
+.legend-row{display:flex;gap:8px;padding:8px 12px 10px;flex-wrap:wrap;}
+.leg{display:flex;align-items:center;gap:4px;font-size:9px;color:var(--muted);font-weight:700;}
+.leg-dot{width:12px;height:12px;border-radius:3px;}
+
+/* TOP MATI LIST */
+.list-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+@media(max-width:480px){.list-grid{grid-template-columns:1fr;}}
+.list-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;animation:fadeIn .35s ease;}
+.list-hdr{background:rgba(220,38,38,.07);border-bottom:1px solid var(--border);
+  padding:10px 14px;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;color:#fca5a5;}
+.list-hdr.fresh{background:rgba(16,185,129,.07);color:#34d399;}
+.list-body{padding:8px;}
+.list-item{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:8px;transition:background .1s;}
+.list-item:hover{background:rgba(255,255,255,.03);}
+.li-rank{font-family:'Bebas Neue',sans-serif;font-size:12px;color:var(--muted);width:18px;text-align:center;flex-shrink:0;}
+.li-rank.top3{color:var(--red);}
+.li-num{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;min-width:36px;text-align:center;flex-shrink:0;}
+.li-num.mati{color:#c4b5fd;}
+.li-num.fresh{color:#6ee7b7;}
+.li-bar-wrap{flex:1;background:rgba(255,255,255,.05);border-radius:4px;height:6px;overflow:hidden;}
+.li-bar{height:100%;border-radius:4px;}
+.bar-mati{background:linear-gradient(90deg,var(--purple),rgba(155,93,229,.4));}
+.bar-fresh{background:linear-gradient(90deg,var(--green),rgba(16,185,129,.4));}
+.li-gap{font-size:10px;font-weight:800;color:var(--muted);min-width:40px;text-align:right;flex-shrink:0;}
+
+/* KEPALA TABLE */
+.kep-table{width:100%;border-collapse:collapse;font-size:12px;}
+.kep-table th{padding:7px 10px;font-size:9px;font-weight:800;color:var(--muted);
+  letter-spacing:1px;text-align:center;border-bottom:1px solid var(--border);}
+.kep-table th:first-child{text-align:left;}
+.kep-table td{padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.03);text-align:center;}
+.kep-table td:first-child{text-align:left;font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--gold);}
+.kep-table tr:last-child td{border-bottom:none;}
+.chip{display:inline-block;border-radius:6px;padding:1px 8px;font-family:'Bebas Neue',sans-serif;font-size:14px;margin:1px;}
+.chip-mati{background:rgba(155,93,229,.2);border:1px solid rgba(155,93,229,.4);color:#c4b5fd;}
+.chip-fresh{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#6ee7b7;}
+
+/* POSISI MATI */
+.pos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px;}
+@media(max-width:400px){.pos-grid{grid-template-columns:repeat(2,1fr);}}
+.pos-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;
+  padding:10px 8px;text-align:center;}
+.pos-card-lbl{font-size:9px;font-weight:800;letter-spacing:1px;color:var(--muted);margin-bottom:6px;}
+.pos-digit{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;line-height:1;}
+.pos-gap-lbl{font-size:10px;color:var(--muted);font-weight:700;margin-top:3px;}
+.pos-as{color:#c4b5fd;} .pos-kop{color:var(--cyan);} .pos-kep{color:var(--gold);} .pos-ek{color:#fca5a5;}
+
+footer{text-align:center;padding:24px 14px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:24px;}
+footer strong{color:var(--gold);}
+#scrollTop{position:fixed;bottom:20px;right:16px;z-index:99;background:rgba(245,158,11,.15);
+  border:1px solid rgba(245,158,11,.3);border-radius:50%;width:38px;height:38px;display:none;
+  align-items:center;justify-content:center;cursor:pointer;color:var(--gold);}
+#scrollTop.visible{display:flex;}
+#scrollTop svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;}
+</style>
+</head>
+<body>
+
+<header>
+<div class="hdr">
+  <div class="logo-icon">WB</div>
+  <div>
+    <div class="logo-text">WONGBAGUS PREDICTION</div>
+    <div class="logo-sub">REKAP KUNCI MATI</div>
+  </div>
+  <a href="./index.html" class="hdr-back">← Back</a>
+</div>
+</header>
+
+<div class="wrap">
+  <div class="page-title">
+    <h1>💀 REKAP KUNCI MATI</h1>
+    <div class="line"></div>
+  </div>
+
+  <div class="info-box">
+    <strong>Kunci Mati (KM)</strong> = angka yang <strong>sudah lama tidak keluar</strong> — dihitung dari jarak (gap) terakhir kali muncul.<br>
+    Semakin besar gap → semakin "mati" angka tersebut. Angka dengan gap terbesar = kandidat kunci mati terkuat.<br>
+    Warna <strong style="color:#c4b5fd">ungu</strong> = mati paling lama · <strong style="color:#fca5a5">merah</strong> = lama · <strong style="color:#6ee7b7">hijau</strong> = baru keluar.
+  </div>
+
+  <div class="ctrl-wrap">
+    <div class="ctrl-row">
+      <div class="ctrl-group" style="max-width:300px;">
+        <div class="ctrl-label">Pasaran</div>
+        <select id="selPasaran" onchange="onPasaranChange()"></select>
+      </div>
+      <button class="btn-refresh" id="btnRefresh" onclick="loadData()">
+        <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+        Muat Data
+      </button>
+    </div>
+    <div class="period-row">
+      <div class="period-btn active" onclick="setPeriod(50,this)">50 Data</div>
+      <div class="period-btn" onclick="setPeriod(100,this)">100 Data</div>
+      <div class="period-btn" onclick="setPeriod(200,this)">200 Data</div>
+      <div class="period-btn" onclick="setPeriod(0,this)">Semua</div>
+    </div>
+  </div>
+
+  <div class="status-bar" id="statusBar">
+    <div class="dot-load" id="statusDot"></div>
+    <span id="statusText">Siap — pilih pasaran dan klik Muat Data</span>
+  </div>
+
+  <div class="today-box" id="todayBox" style="display:none;">
+    <div>
+      <div class="today-lbl">Result Hari Ini</div>
+      <div class="t-digit-row" id="todayDigits"></div>
+    </div>
+    <div>
+      <div class="today-lbl">2D Keluar</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--gold)" id="today2d">--</div>
+    </div>
+    <div id="todayName" style="font-size:11px;font-weight:700;color:var(--muted);margin-left:auto;"></div>
+  </div>
+
+  <!-- POSISI MATI -->
+  <div class="section" id="posSection" style="display:none;">
+    <div class="sec-hdr">
+      <span class="sec-title">💀 Kunci Mati Per Posisi (AS/KOP/KEP/EK)</span>
+      <span class="sec-meta" id="posMeta"></span>
+    </div>
+    <div class="pos-grid" id="posGrid"></div>
+  </div>
+
+  <!-- GAP GRID 00-99 -->
+  <div class="section" id="gridSection" style="display:none;">
+    <div class="sec-hdr">
+      <span class="sec-title">🗺️ Peta Gap 2D (00–99)</span>
+      <span class="sec-meta" id="gridMeta"></span>
+    </div>
+    <div class="grid-wrap">
+      <div id="gridContainer"></div>
+    </div>
+    <div class="legend-row">
+      <div class="leg"><div class="leg-dot gap-fresh"></div>Baru (1-3)</div>
+      <div class="leg"><div class="leg-dot gap-low"></div>Kurang (4-8)</div>
+      <div class="leg"><div class="leg-dot gap-mid"></div>Sedang (9-15)</div>
+      <div class="leg"><div class="leg-dot gap-high"></div>Lama (16-25)</div>
+      <div class="leg"><div class="leg-dot gap-hot"></div>Sangat lama (26+)</div>
+      <div class="leg"><div class="leg-dot gap-mati"></div>MATI 💀 (top 10)</div>
+    </div>
+  </div>
+
+  <!-- TOP MATI & TOP FRESH -->
+  <div class="list-grid" id="listGrid" style="display:none;">
+    <div class="list-card">
+      <div class="list-hdr">💀 Top 20 Angka Paling Mati</div>
+      <div class="list-body" id="listMati"></div>
+    </div>
+    <div class="list-card">
+      <div class="list-hdr fresh">✅ Top 15 Angka Paling Fresh</div>
+      <div class="list-body" id="listFresh"></div>
+    </div>
+  </div>
+
+  <!-- KEPALA REKAP -->
+  <div class="section" id="kepSection" style="display:none;">
+    <div class="sec-hdr">
+      <span class="sec-title">📊 Kunci Mati Per Kepala</span>
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="kep-table">
+        <thead>
+          <tr>
+            <th>Kepala</th>
+            <th>Max Gap</th>
+            <th>💀 Ekor Paling Mati</th>
+            <th>✅ Ekor Paling Fresh</th>
+          </tr>
+        </thead>
+        <tbody id="kepBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>WONGBAGUS PREDICTION</strong> · Rekap Kunci Mati · Data via result.json + Angkanet
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+const BASE_AN = 'https://angkanet18.com';
+const RESULT_JSON_URLS = [
+  './result.json',
+  'https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json',
+  'https://raw.githubusercontent.com/alifavif-cmd/-WONGBAGUS-PREDICTION-/main/result.json',
+];
+const CORS_PROXIES = [
+  u=>'https://api.allorigins.win/get?url='+encodeURIComponent(u),
+  u=>'https://corsproxy.io/?'+encodeURIComponent(u),
+  u=>'https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(u),
+];
+const MARKETS=[
+  {id:'hk', flag:'🇭🇰',name:'Hongkong', short:'HK',  time:'23:00',an:'/data-pengeluaran-togel-hongkong-pools/'},
+  {id:'sgp',flag:'🇸🇬',name:'Singapore',short:'SGP', time:'17:40',an:'/data-pengeluaran-togel-singapore/'},
+  {id:'sdy',flag:'🇦🇺',name:'Sydney',   short:'SDY', time:'13:45',an:'/data-pengeluaran-togel-sydney-pools/'},
+  {id:'sdl',flag:'🇦🇺',name:'Syd Lotto',short:'SDL', time:'13:45',an:'/data-pengeluaran-togel-sdlotto/'},
+  {id:'kam',flag:'🇰🇭',name:'Kamboja',  short:'KAM', time:'11:50',an:'/data-pengeluaran-togel-magnum-cambodia/'},
+  {id:'bull',flag:'🇳🇿',name:'Bullseye',short:'BULL',time:'13:10',an:'/data-pengeluaran-togel-bullseye/'},
+  {id:'chn',flag:'🇨🇳',name:'China',    short:'CHN', time:'15:30',an:'/data-pengeluaran-togel-chinapools/'},
+  {id:'jpn',flag:'🇯🇵',name:'Japan',    short:'JPN', time:'17:20',an:'/data-pengeluaran-togel-japan/'},
+  {id:'twn',flag:'🇹🇼',name:'Taiwan',   short:'TWN', time:'20:45',an:'/data-pengeluaran-togel-taiwan/'},
+  {id:'pcso',flag:'🇵🇭',name:'PCSO',    short:'PCSO',time:'20:10',an:'/data-pengeluaran-togel-pcso/'},
+  {id:'mac1',flag:'🇲🇴',name:'Macau 13',short:'M13', time:'13:10',an:'/data-pengeluaran-togel-toto-macau-1/'},
+  {id:'mac2',flag:'🇲🇴',name:'Macau 16',short:'M16', time:'16:10',an:'/data-pengeluaran-togel-toto-macau-2/'},
+  {id:'mac3',flag:'🇲🇴',name:'Macau 19',short:'M19', time:'19:10',an:'/data-pengeluaran-togel-toto-macau-3/'},
+  {id:'mac4',flag:'🇲🇴',name:'Macau 22',short:'M22', time:'22:10',an:'/data-pengeluaran-togel-toto-macau-4/'},
+  {id:'ncd', flag:'🇺🇸',name:'NC Day',  short:'NCD', time:'03:00',an:'/data-pengeluaran-togel-north-carolina-day/'},
+  {id:'or4', flag:'🇺🇸',name:'Oregon04',short:'OR4', time:'04:00',an:'/data-pengeluaran-togel-oregon-04-00-wib/'},
+  {id:'or7', flag:'🇺🇸',name:'Oregon07',short:'OR7', time:'07:00',an:'/data-pengeluaran-togel-oregon-07-00-wib/'},
+];
+
+let currentMarket=null, allResults=[], period=50, todayResult=null, isLoading=false;
+
+(function init(){
+  const sel=document.getElementById('selPasaran');
+  sel.innerHTML=MARKETS.map(m=>`<option value="${m.id}">${m.flag} ${m.name} (${m.short}) · ${m.time}</option>`).join('');
+  currentMarket=MARKETS[0];
+  fetchTodayResult();
+})();
+
+function onPasaranChange(){
+  const id=document.getElementById('selPasaran').value;
+  currentMarket=MARKETS.find(m=>m.id===id);
+  allResults=[];todayResult=null;
+  ['posSection','gridSection','listGrid','kepSection'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('todayBox').style.display='none';
+  setStatus('load','Pasaran diganti — klik Muat Data');
+  fetchTodayResult();
+}
+function setPeriod(n,btn){
+  period=n;
+  document.querySelectorAll('.period-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(allResults.length>0) renderAll();
+}
+function setStatus(type,text){
+  document.getElementById('statusText').textContent=text;
+  document.getElementById('statusDot').className=type==='ok'?'dot-live':'dot-load';
+}
+function setBadge(label,cls){
+  const bar=document.getElementById('statusBar');
+  let b=bar.querySelector('.status-badge');
+  if(!b){b=document.createElement('span');b.className='status-badge';bar.appendChild(b);}
+  b.textContent=label;b.className='status-badge '+cls;
+}
+
+async function fetchTodayResult(){
+  if(!currentMarket)return;
+  for(const url of RESULT_JSON_URLS){
+    try{
+      const r=await Promise.race([fetch(url+'?t='+Date.now(),{cache:'no-cache'}),
+        new Promise((_,rej)=>setTimeout(()=>rej(),8000))]);
+      if(!r.ok)continue;
+      const data=await r.json();
+      const entry=data[currentMarket.id];
+      if(entry&&/^\d{4}$/.test(String(entry.result||''))){
+        todayResult=String(entry.result);
+        showTodayBox();return;
+      }
+    }catch(e){}
+  }
+}
+function showTodayBox(){
+  if(!todayResult)return;
+  const d=todayResult.split('');
+  document.getElementById('todayDigits').innerHTML=d.map((x,i)=>
+    `<div class="t-digit ${i>=2?'hl':''}">${x}</div>`).join('');
+  document.getElementById('today2d').textContent=todayResult.slice(-2);
+  document.getElementById('todayName').textContent=`${currentMarket.flag} ${currentMarket.name}`;
+  document.getElementById('todayBox').style.display='flex';
+}
+
+async function loadData(){
+  if(isLoading)return;
+  isLoading=true;
+  const btn=document.getElementById('btnRefresh');
+  btn.classList.add('spin');btn.disabled=true;
+  setStatus('load',`Mengambil data ${currentMarket.name}...`);
+
+  const url=BASE_AN+currentMarket.an;
+  let html=null;
+  for(const makeProxy of CORS_PROXIES){
+    try{
+      const r=await Promise.race([fetch(makeProxy(url)),new Promise((_,rej)=>setTimeout(()=>rej(),12000))]);
+      if(!r.ok)continue;
+      const data=await r.json();
+      const raw=typeof data==='string'?data:(data.contents||data.data||'');
+      if(raw&&raw.length>500){html=raw;break;}
+    }catch(e){}
+  }
+
+  if(html){
+    const results=parseResults(html);
+    if(results.length>=5){
+      allResults=results;
+      setBadge(`✓ ${results.length} data`,'badge-ok');
+      setStatus('ok',`${currentMarket.name}: ${results.length} data historis`);
+      renderAll();
+    }else{fallbackDemo();}
+  }else{
+    setStatus('warn','CORS proxy gagal — data simulasi');
+    setBadge('Demo','badge-warn');
+    fallbackDemo();
+  }
+  isLoading=false;btn.classList.remove('spin');btn.disabled=false;
+}
+
+function parseResults(html){
+  const all=[];const re=/\b([0-9]{4})\b/g;let m;
+  while((m=re.exec(html))!==null){
+    const n=m[1];
+    if(n.startsWith('19')||n.startsWith('20')||n.startsWith('21'))continue;
+    if(n==='0000')continue;
+    all.push(n);
+  }
+  const seen=new Set();const out=[];
+  for(const r of all){
+    if(!seen.has(r)){seen.add(r);out.push(r);}
+    if(seen.size>300)seen.clear();
+  }
+  return out;
+}
+
+function seededRand(seed){let s=seed;return function(){s=(s*1664525+1013904223)&0xffffffff;return(s>>>0)/0xffffffff;};}
+function hashStr(str){let h=5381;for(let i=0;i<str.length;i++)h=((h<<5)+h)+str.charCodeAt(i);return h>>>0;}
+
+function fallbackDemo(){
+  const seed=hashStr(currentMarket.id+'kumat');
+  const rand=seededRand(seed);
+  const results=[];
+  for(let i=0;i<200;i++)results.push(String(Math.floor(rand()*10000)).padStart(4,'0'));
+  allResults=results;
+  setStatus('warn','Demo mode: 200 data simulasi');
+  renderAll();
+}
+
+// ════════════════════════════════════════════════════════════
+// CORE: hitung GAP tiap angka 2D (berapa lama tidak keluar)
+// gap = posisi terakhir muncul di array (0 = paling baru)
+// kalau belum pernah muncul = panjang array (mati total)
+// ════════════════════════════════════════════════════════════
+function computeGaps(data){
+  // data[0] = result terbaru
+  const lastSeen = new Array(100).fill(-1); // index terakhir kali muncul
+  data.forEach((r,i)=>{
+    const twoD=parseInt(r.slice(-2),10);
+    if(twoD>=0&&twoD<=99&&lastSeen[twoD]===-1) lastSeen[twoD]=i;
+  });
+  // gap = lastSeen+1, kalau -1 (tidak pernah muncul) = data.length+1
+  return lastSeen.map(ls=>ls===-1?data.length+1:ls+1);
+}
+
+// Gap per posisi: gap digit 0-9 di posisi as/kop/kep/ek
+function computePosGaps(data){
+  const gaps=[
+    new Array(10).fill(-1),
+    new Array(10).fill(-1),
+    new Array(10).fill(-1),
+    new Array(10).fill(-1),
+  ];
+  data.forEach((r,i)=>{
+    for(let p=0;p<4;p++){
+      const d=parseInt(r[p],10);
+      if(gaps[p][d]===-1) gaps[p][d]=i;
+    }
+  });
+  const n=data.length;
+  return gaps.map(pg=>pg.map(ls=>ls===-1?n+1:ls+1));
+}
+
+function gapClass(gap, top10Thresh){
+  if(gap<=top10Thresh) return 'gap-mati'; // top 10 terbesar = mati
+  if(gap>=27) return 'gap-hot';
+  if(gap>=16) return 'gap-high';
+  if(gap>=9)  return 'gap-mid';
+  if(gap>=4)  return 'gap-low';
+  return 'gap-fresh';
+}
+
+// ════════════════════════════════════════════════════════════
+function renderAll(){
+  const data = period===0 ? allResults : allResults.slice(0,period);
+  const n = data.length;
+  const gaps = computeGaps(data);
+  const posGaps = computePosGaps(data);
+
+  // Tentukan threshold "mati" = top 10 gap terbesar
+  const sortedGaps = [...gaps].sort((a,b)=>b-a);
+  const top10Thresh = sortedGaps[9] || sortedGaps[0];
+
+  document.getElementById('gridMeta').textContent = `${n} data · gap = jumlah result sejak terakhir keluar`;
+  renderPosSection(posGaps, n);
+  renderGapGrid(gaps, top10Thresh, n);
+  renderLists(gaps, n, top10Thresh);
+  renderKepala(gaps, n);
+
+  ['posSection','gridSection','listGrid','kepSection'].forEach(id=>document.getElementById(id).style.display='block');
+  document.getElementById('listGrid').style.display='grid';
+}
+
+function renderPosSection(posGaps, n){
+  const labels=['AS','KOP','KEP','EK'];
+  const colorClass=['pos-as','pos-kop','pos-kep','pos-ek'];
+  document.getElementById('posMeta').textContent = `${n} data · digit paling mati per posisi`;
+  document.getElementById('posGrid').innerHTML = posGaps.map((pg,pi)=>{
+    const maxGap = Math.max(...pg);
+    const matiDigit = pg.indexOf(maxGap);
+    return `<div class="pos-card">
+      <div class="pos-card-lbl">${labels[pi]}</div>
+      <div class="pos-digit ${colorClass[pi]}">${matiDigit}</div>
+      <div class="pos-gap-lbl">Gap: ${maxGap} hari</div>
+    </div>`;
+  }).join('');
+}
+
+function renderGapGrid(gaps, top10Thresh, n){
+  const todayNum = todayResult ? parseInt(todayResult.slice(-2),10) : -1;
+  let html='<table class="gap-grid"><thead><tr><th></th>';
+  for(let e=0;e<10;e++) html+=`<th style="color:var(--cyan)">${e}</th>`;
+  html+='</tr></thead><tbody>';
+  for(let k=0;k<10;k++){
+    html+=`<tr><th style="font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--gold);padding:2px 6px;">${k}</th>`;
+    for(let e=0;e<10;e++){
+      const num=k*10+e;
+      const gap=gaps[num];
+      // gap-mati jika top 10 terbesar
+      const isTop10=gap>=top10Thresh;
+      const cls=isTop10?'gap-mati':gapClass(gap,top10Thresh);
+      const isToday=num===todayNum;
+      const numStr=String(num).padStart(2,'0');
+      html+=`<td><div class="gcell ${cls}" style="${isToday?'box-shadow:0 0 0 2px var(--gold),0 0 12px rgba(245,158,11,.4)!important;':''}" title="${numStr}: gap ${gap}">
+        <span class="gcell-num">${numStr}</span>
+        <span class="gcell-gap">${gap>n?'∞':gap}</span>
+      </div></td>`;
+    }
+    html+='</tr>';
+  }
+  html+='</tbody></table>';
+  document.getElementById('gridContainer').innerHTML=html;
+}
+
+function renderLists(gaps, n, top10Thresh){
+  const sorted=[...gaps.map((g,i)=>({n:i,g}))];
+  const matiList=[...sorted].sort((a,b)=>b.g-a.g).slice(0,20);
+  const freshList=[...sorted].sort((a,b)=>a.g-b.g).slice(0,15);
+  const maxGap=matiList[0].g||1;
+
+  document.getElementById('listMati').innerHTML=matiList.map((item,idx)=>{
+    const numStr=String(item.n).padStart(2,'0');
+    const pct=Math.round(item.g/maxGap*100);
+    return `<div class="list-item">
+      <span class="li-rank ${idx<3?'top3':''}">${idx+1}</span>
+      <span class="li-num mati">${numStr}</span>
+      <div class="li-bar-wrap"><div class="li-bar bar-mati" style="width:${pct}%"></div></div>
+      <span class="li-gap">${item.g>n?'Belum pernah':item.g+' gap'}</span>
+    </div>`;
+  }).join('');
+
+  document.getElementById('listFresh').innerHTML=freshList.map((item,idx)=>{
+    const numStr=String(item.n).padStart(2,'0');
+    const pct=Math.round((maxGap-item.g+1)/maxGap*100);
+    return `<div class="list-item">
+      <span class="li-rank ${idx<3?'top3':''}">${idx+1}</span>
+      <span class="li-num fresh">${numStr}</span>
+      <div class="li-bar-wrap"><div class="li-bar bar-fresh" style="width:${pct}%"></div></div>
+      <span class="li-gap">Gap ${item.g}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderKepala(gaps, n){
+  let html='';
+  for(let k=0;k<10;k++){
+    const ekorData=[];
+    for(let e=0;e<10;e++) ekorData.push({e,g:gaps[k*10+e]});
+    const maxG=Math.max(...ekorData.map(x=>x.g));
+    const sortedByMati=[...ekorData].sort((a,b)=>b.g-a.g);
+    const sortedByFresh=[...ekorData].sort((a,b)=>a.g-b.g);
+    const top3Mati=sortedByMati.slice(0,3);
+    const top3Fresh=sortedByFresh.slice(0,3);
+    html+=`<tr>
+      <td>${k}X</td>
+      <td style="color:#c4b5fd;font-weight:800">${maxG>n?'∞':maxG}</td>
+      <td>${top3Mati.map(x=>`<span class="chip chip-mati">${k}${x.e}</span>`).join('')}</td>
+      <td>${top3Fresh.map(x=>`<span class="chip chip-fresh">${k}${x.e}</span>`).join('')}</td>
+    </tr>`;
+  }
+  document.getElementById('kepBody').innerHTML=html;
+}
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+});
+</script>
+</body>
+</html>
