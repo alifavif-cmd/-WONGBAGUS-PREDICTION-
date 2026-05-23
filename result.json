@@ -32,8 +32,9 @@
       23
     ],
     "status": "sudah",
-    "updated": "16:18 WIB",
-    "name": "Singapore"
+    "updated": "16:28 WIB",
+    "name": "Singapore",
+    "source": "paito-harian"
   },
   "sdy": {
     "result": "6959",
@@ -768,8 +769,23 @@
     "name": "Wisconsin Evening"
   },
   "_meta": {
-    "updated": "2026-05-23 16:18 WIB",
+    "updated": "2026-05-23 16:28 WIB",
     "date": "23/05",
-    "total": 64
+    "total": 65,
+    "ok": 65,
+    "source": "paito-harian"
+  },
+  "wim": {
+    "result": "2924",
+    "tgl": "23/05",
+    "fetch_date": [
+      2026,
+      5,
+      23
+    ],
+    "status": "sudah",
+    "updated": "16:28 WIB",
+    "name": "Wisconsin Midday",
+    "source": "paito-harian"
   }
 }
