@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Multi Kombinasi — WONGBAGUS PREDICTION</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#f59e0b;--gold-light:#fcd34d;--bg:#07070e;--bg2:#0f0f1a;--bg3:#15152a;--card:#111128;--border:rgba(245,158,11,0.15);--text:#e2e2f0;--muted:#6b6b8a;--green:#10b981;--red:#dc2626;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;min-height:100vh;}
+.topbar{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:99;}
+.topbar-logo{width:36px;height:36px;background:linear-gradient(135deg,#f59e0b,#b45309);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:18px;color:#000;text-decoration:none;}
+.topbar-title{font-family:'Bebas Neue';font-size:18px;letter-spacing:1px;background:linear-gradient(90deg,#fcd34d,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.topbar-back{margin-left:auto;padding:6px 14px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-family:'Nunito';font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;}
+.topbar-back:hover{color:var(--gold);border-color:var(--gold);}
+.container{max-width:600px;margin:0 auto;padding:16px;}
+.page-title{font-family:'Bebas Neue';font-size:26px;letter-spacing:2px;color:var(--gold);margin:16px 0 4px;}
+.page-sub{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px;}
+.card-title{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
+.input-group{display:flex;gap:8px;margin-bottom:12px;}
+input,select{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Nunito';font-size:14px;width:100%;outline:none;}
+input:focus,select:focus{border-color:var(--gold);}
+.btn{padding:11px 18px;border-radius:10px;border:none;cursor:pointer;font-family:'Nunito';font-size:14px;font-weight:800;transition:.2s;}
+.btn-gold{background:linear-gradient(135deg,#f59e0b,#b45309);color:#000;}
+.btn-gold:hover{opacity:.9;}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.result-box{background:var(--bg3);border-radius:12px;padding:14px;margin-top:10px;min-height:60px;font-size:13px;line-height:1.8;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.badge-gold{background:rgba(245,158,11,.15);color:var(--gold);border:1px solid rgba(245,158,11,.3);}
+.badge-green{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3);}
+.badge-red{background:rgba(220,38,38,.15);color:#f87171;border:1px solid rgba(220,38,38,.3);}
+.num-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.num-box{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;cursor:pointer;border:2px solid transparent;transition:.15s;}
+.num-box.selected{border-color:var(--gold);background:rgba(245,158,11,.2);color:var(--gold);}
+.num-box.default{background:var(--bg3);color:var(--text);}
+.num-box.default:hover{border-color:var(--gold);}
+.divider{height:1px;background:var(--border);margin:14px 0;}
+footer{text-align:center;padding:24px 16px;border-top:1px solid var(--border);margin-top:24px;color:var(--muted);font-size:11px;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">WB</a>
+  <span class="topbar-title">WONGBAGUS PREDICTION</span>
+  <a href="index.html" class="topbar-back">← Kembali</a>
+</div>
+<div class="container">
+<div class="page-title">🔀 Multi Kombinasi</div>
+<p class="page-sub">Kombinasi 2D, 3D, 4D dari angka pilihan</p>
+<div class="card">
+  <div class="card-title">Pilih Angka</div>
+  <div class="num-grid" id="numGrid2"></div>
+  <div class="divider"></div>
+  <div style="display:flex;gap:8px;margin-bottom:10px;">
+    <select id="tipeKom" style="flex:1;">
+      <option value="2">2D — 2 angka</option>
+      <option value="3">3D — 3 angka</option>
+      <option value="4" selected>4D — 4 angka</option>
+    </select>
+    <select id="orderKom" style="flex:1;">
+      <option value="perm">Permutasi (urut)</option>
+      <option value="comb">Kombinasi (tidak urut)</option>
+    </select>
+  </div>
+  <div class="input-group">
+    <button class="btn btn-outline" onclick="clearKom()">Reset</button>
+    <button class="btn btn-gold" style="flex:1" onclick="genKom()">🔀 Generate</button>
+  </div>
+</div>
+<div id="hasilKom"></div>
+<script>
+const selK=new Set();
+const gridK=document.getElementById('numGrid2');
+for(let i=0;i<=9;i++){
+  const d=document.createElement('div');
+  d.className='num-box default';d.textContent=i;
+  d.onclick=()=>{if(selK.has(i)){selK.delete(i);d.classList.remove('selected');d.classList.add('default');}
+  else{selK.add(i);d.classList.add('selected');d.classList.remove('default');}};
+  gridK.appendChild(d);
+}
+function fact(n){return n<=1?1:n*fact(n-1);}
+function perm2(arr,r){if(r===1)return arr.map(x=>[x]);const res=[];for(let i=0;i<arr.length;i++){const rest=arr.filter((_,j)=>j!==i);perm2(rest,r-1).forEach(p=>res.push([arr[i],...p]));}return res;}
+function comb2(arr,r){if(r===0)return[[]];if(arr.length<r)return[];const [first,...rest]=arr;return [...comb2(rest,r-1).map(c=>[first,...c]),...comb2(rest,r)];}
+function genKom(){
+  const nums=[...selK].sort();
+  const r=parseInt(document.getElementById('tipeKom').value);
+  if(nums.length<r){alert(`Pilih minimal ${r} angka!`);return;}
+  const ord=document.getElementById('orderKom').value;
+  const hasil=ord==='perm'?perm2(nums,r).map(x=>x.join('')):comb2(nums,r).map(x=>x.join(''));
+  const uniq=[...new Set(hasil)].sort();
+  document.getElementById('hasilKom').innerHTML=`<div class="card">
+    <div class="card-title">${uniq.length} kombinasi ${r}D</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+      ${uniq.map(x=>`<div style="padding:6px 10px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-family:'Bebas Neue';font-size:18px;letter-spacing:2px;color:var(--gold)">${x}</div>`).join('')}
+    </div>
+    <button class="btn btn-outline" style="width:100%;font-size:12px" onclick="copyKom('${uniq.join(' ')}','${r}')">📋 Copy</button>
+  </div>`;
+}
+function clearKom(){selK.clear();document.querySelectorAll('#numGrid2 .num-box').forEach(d=>{d.classList.remove('selected');d.classList.add('default');});document.getElementById('hasilKom').innerHTML='';}
+function copyKom(data,r){
+  const txt=`🔀 KOMBINASI ${r}D — WONGBAGUS PREDICTION
+${data}
+
+https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/`;
+  navigator.clipboard.writeText(txt).then(()=>alert('✅ Tersalin!')).catch(()=>{});
+}
+</script>
+</div>
+<footer><strong>WONGBAGUS PREDICTION</strong><br>
+<a href="index.html" style="color:var(--gold);text-decoration:none;font-size:11px;">← Kembali ke Beranda</a>
+</footer>
+</body></html>
