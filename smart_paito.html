@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Smart Paito Warna — WONGBAGUS PREDICTION</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#f59e0b;--gold-light:#fcd34d;--bg:#07070e;--bg2:#0f0f1a;--bg3:#15152a;--card:#111128;--border:rgba(245,158,11,0.15);--text:#e2e2f0;--muted:#6b6b8a;--green:#10b981;--red:#dc2626;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Nunito',sans-serif;min-height:100vh;}
+.topbar{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--bg2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:99;}
+.topbar-logo{width:36px;height:36px;background:linear-gradient(135deg,#f59e0b,#b45309);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue';font-size:18px;color:#000;text-decoration:none;}
+.topbar-title{font-family:'Bebas Neue';font-size:18px;letter-spacing:1px;background:linear-gradient(90deg,#fcd34d,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.topbar-back{margin-left:auto;padding:6px 14px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-family:'Nunito';font-size:12px;font-weight:700;cursor:pointer;text-decoration:none;}
+.container{max-width:600px;margin:0 auto;padding:16px;}
+.page-title{font-family:'Bebas Neue';font-size:26px;letter-spacing:2px;color:var(--gold);margin:16px 0 4px;}
+.page-sub{font-size:12px;color:var(--muted);margin-bottom:20px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:14px;}
+.card-title{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:12px;}
+label{font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;}
+input,select,textarea{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Nunito';font-size:14px;width:100%;outline:none;margin-bottom:10px;}
+input:focus,select:focus{border-color:var(--gold);}
+.btn{padding:11px 18px;border-radius:10px;border:none;cursor:pointer;font-family:'Nunito';font-size:14px;font-weight:800;transition:.2s;width:100%;}
+.btn-gold{background:linear-gradient(135deg,#f59e0b,#b45309);color:#000;}
+.btn-teal{background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;}
+.btn-outline{background:transparent;border:1px solid var(--border);color:var(--muted);}
+.divider{height:1px;background:var(--border);margin:12px 0;}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;}
+.badge-gold{background:rgba(245,158,11,.15);color:var(--gold);border:1px solid rgba(245,158,11,.3);}
+.badge-green{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3);}
+.badge-teal{background:rgba(13,148,136,.15);color:#2dd4bf;border:1px solid rgba(13,148,136,.3);}
+.badge-red{background:rgba(220,38,38,.15);color:#f87171;border:1px solid rgba(220,38,38,.3);}
+.loading-pulse{animation:pulse 1.2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+/* Paito Grid */
+.paito-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+.paito-table{border-collapse:collapse;width:100%;min-width:360px;}
+.paito-table th{background:rgba(245,158,11,.1);color:var(--gold);font-size:11px;font-weight:800;padding:8px 6px;text-align:center;border-bottom:1px solid var(--border);letter-spacing:.5px;}
+.paito-table td{padding:5px 4px;text-align:center;font-size:13px;font-weight:800;border-bottom:1px solid rgba(255,255,255,.03);}
+.paito-table tr:hover td{background:rgba(245,158,11,.05);}
+.cell-hot{background:rgba(239,68,68,.85);color:#fff;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;}
+.cell-warm{background:rgba(245,158,11,.7);color:#000;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;}
+.cell-mid{background:rgba(16,185,129,.5);color:#fff;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;}
+.cell-cold{background:rgba(99,102,241,.4);color:#fff;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;}
+.cell-dead{background:rgba(107,114,128,.3);color:var(--muted);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;}
+
+/* Heatmap */
+.heatmap-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-top:8px;}
+.hm-cell{border-radius:8px;padding:8px 4px;text-align:center;font-weight:900;font-size:14px;transition:.2s;}
+.hm-label{font-size:9px;font-weight:700;margin-top:2px;opacity:.8;}
+
+/* Pattern cards */
+.pattern-card{background:var(--bg3);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
+.ai-box{background:linear-gradient(135deg,rgba(13,148,136,.1),rgba(15,118,110,.05));border:1px solid rgba(13,148,136,.3);border-radius:14px;padding:16px;margin-top:12px;}
+.ai-box-title{font-size:12px;font-weight:800;color:#2dd4bf;margin-bottom:8px;}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:11px;}
+footer{text-align:center;padding:24px 16px;border-top:1px solid var(--border);margin-top:24px;color:var(--muted);font-size:11px;}
+.no-key-warn{background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.3);border-radius:12px;padding:14px;text-align:center;font-size:13px;color:#f87171;margin-bottom:14px;}
+.result-hint{font-size:11px;color:var(--green);font-weight:700;margin-top:4px;min-height:16px;}
+.btn-autofill{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:var(--green);
+  border-radius:8px;padding:5px 12px;font-family:'Nunito';font-size:12px;font-weight:700;
+  cursor:pointer;transition:.2s;white-space:nowrap;}
+.btn-autofill:hover{background:rgba(16,185,129,.3);}
+.btn-autofill:disabled{opacity:.4;cursor:not-allowed;}
+</style>
+<script src="./wb_data.js"></script>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">WB</a>
+  <span class="topbar-title">WONGBAGUS PREDICTION</span>
+  <a href="index.html" class="topbar-back">← Kembali</a>
+</div>
+
+<div class="container">
+  <div class="page-title">🎨 Smart Paito Warna</div>
+  <p class="page-sub">Visualisasi pola angka dengan heatmap + analisa AI Groq</p>
+
+  <div id="noKeyWarn" class="no-key-warn" style="display:none;">
+    ⚠️ Groq API Key belum diset! <br>
+    <span style="font-size:11px;color:var(--muted);">Buka Settings di halaman utama → input Groq API Key (fitur AI analisa tidak aktif)</span>
+  </div>
+
+  <div class="card">
+    <div class="card-title">⚙️ Konfigurasi</div>
+    <label>Pasaran <span id="dataStatus" style="font-size:10px;color:var(--muted);font-weight:600;"></span></label>
+    <select id="pasaran" onchange="onPasaranChange()">
+      <option value="">⏳ Memuat 65 pasaran...</option>
+    </select>
+    <div class="result-hint" id="resultHint"></div>
+
+    <label style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;">
+      <span>Data Result (1 per baris: YYYY-MM-DD 4digit)</span>
+      <button class="btn-autofill" id="btnAutoFill" onclick="autoFillResult()" disabled>📡 Tambah Result Terkini</button>
+    </label>
+    <textarea id="dataInput" rows="6" placeholder="Contoh:&#10;2026-05-24 9249&#10;2026-05-23 4821&#10;2026-05-22 7760&#10;2026-05-21 3317&#10;2026-05-20 5089&#10;2026-05-19 2145&#10;...minimal 5 data"></textarea>
+
+    <div style="display:flex;gap:8px;">
+      <button class="btn btn-gold" style="flex:1" onclick="generatePaito()">🎨 Buat Paito Warna</button>
+      <button class="btn btn-teal" style="flex:1" onclick="aiAnalyze()">🤖 AI Analisa</button>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="card" style="padding:12px 16px;">
+    <div class="card-title">🎨 Keterangan Warna</div>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;">
+      <div class="legend-item"><div style="width:20px;height:20px;border-radius:4px;background:rgba(239,68,68,.85);"></div><span>Panas (≥4x)</span></div>
+      <div class="legend-item"><div style="width:20px;height:20px;border-radius:4px;background:rgba(245,158,11,.7);"></div><span>Hangat (3x)</span></div>
+      <div class="legend-item"><div style="width:20px;height:20px;border-radius:4px;background:rgba(16,185,129,.5);"></div><span>Normal (2x)</span></div>
+      <div class="legend-item"><div style="width:20px;height:20px;border-radius:4px;background:rgba(99,102,241,.4);"></div><span>Dingin (1x)</span></div>
+      <div class="legend-item"><div style="width:20px;height:20px;border-radius:4px;background:rgba(107,114,128,.3);"></div><span>Mati (0x)</span></div>
+    </div>
+  </div>
+
+  <div id="paitoResult"></div>
+</div>
+
+<footer>
+  <strong>WONGBAGUS PREDICTION</strong><br>
+  <a href="index.html" style="color:var(--gold);text-decoration:none;font-size:11px;">← Kembali ke Beranda</a>
+</footer>
+
+<script>
+function getGroqKey(){return localStorage.getItem('wb_groq_key')||'';}
+window._parsedData=[];
+
+window.addEventListener('DOMContentLoaded',()=>{
+  if(!getGroqKey()) document.getElementById('noKeyWarn').style.display='block';
+});
+
+function parseInput(){
+  const raw=document.getElementById('dataInput').value.trim();
+  if(!raw) return [];
+  return raw.split('\n').map(line=>{
+    const parts=line.trim().split(/\s+/);
+    if(parts.length>=2){
+      return {date:parts[0], angka:parts[parts.length-1].padStart(4,'0')};
+    } else if(parts.length===1 && parts[0].length===4 && !isNaN(parts[0])){
+      return {date:'-', angka:parts[0]};
+    }
+    return null;
+  }).filter(Boolean);
+}
+
+function getColor(freq){
+  if(freq>=4) return 'hot';
+  if(freq===3) return 'warm';
+  if(freq===2) return 'mid';
+  if(freq===1) return 'cold';
+  return 'dead';
+}
+
+function generatePaito(){
+  const data = parseInput();
+  if(data.length<3){alert('Minimal 3 data result!');return;}
+  window._parsedData = data;
+
+  // Count frequency per digit position
+  const freq={AS:{},KOP:{},KEP:{},EK:{}};
+  const allFreq={};
+
+  data.forEach(d=>{
+    const n=d.angka;
+    if(n.length<4) return;
+    ['AS','KOP','KEP','EK'].forEach((pos,i)=>{
+      const dig=n[i];
+      freq[pos][dig]=(freq[pos][dig]||0)+1;
+    });
+    [...n].forEach(dig=>{
+      allFreq[dig]=(allFreq[dig]||0)+1;
+    });
+  });
+
+  // Paito table
+  const tableRows = data.map(d=>{
+    if(d.angka.length<4) return '';
+    const cells=['AS','KOP','KEP','EK'].map((pos,i)=>{
+      const dig=d.angka[i];
+      const f=freq[pos][dig]||0;
+      const cls=`cell-${getColor(f)}`;
+      return `<td><span class="${cls}">${dig}</span></td>`;
+    }).join('');
+    return `<tr><td style="font-size:10px;color:var(--muted);white-space:nowrap">${d.date}</td>${cells}</tr>`;
+  }).join('');
+
+  // Heatmap per digit 0-9
+  const heatmapCells=[...Array(10)].map((_,d)=>{
+    const f=allFreq[d]||0;
+    const maxF=Math.max(...Object.values(allFreq),1);
+    const ratio=f/maxF;
+    const bg=f>=4?'rgba(239,68,68,.85)':f===3?'rgba(245,158,11,.7)':f===2?'rgba(16,185,129,.5)':f===1?'rgba(99,102,241,.4)':'rgba(107,114,128,.2)';
+    return `<div class="hm-cell" style="background:${bg};color:${f>0?'#fff':'var(--muted)'};">
+      <div>${d}</div>
+      <div class="hm-label">${f}×</div>
+    </div>`;
+  }).join('');
+
+  // Position stats
+  const posStats=['AS','KOP','KEP','EK'].map(pos=>{
+    const sorted=Object.entries(freq[pos]).sort((a,b)=>b[1]-a[1]);
+    const top=sorted.slice(0,3).map(([d,f])=>`<span class="badge badge-gold" style="font-size:10px;">${d}(${f}×)</span>`).join(' ');
+    return `<div class="pattern-card">
+      <div style="font-weight:800;font-size:13px;">${pos}</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;">${top}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('paitoResult').innerHTML=`
+  <div class="card">
+    <div class="card-title">🗓️ Paito Warna (${data.length} data)</div>
+    <div class="paito-wrap">
+      <table class="paito-table">
+        <thead><tr><th>Tanggal</th><th>AS</th><th>KOP</th><th>KEP</th><th>EK</th></tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🌡️ Heatmap Digit 0-9</div>
+    <div class="heatmap-grid">${heatmapCells}</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📍 Top Angka Per Posisi</div>
+    ${posStats}
+  </div>
+
+  <div id="aiAnalyzeResult"></div>
+  `;
+}
+
+async function aiAnalyze(){
+  const data=parseInput();
+  if(data.length<3){
+    generatePaito();
+    if(parseInput().length<3) return;
+  }
+
+  const key=getGroqKey();
+  if(!key){
+    document.getElementById('noKeyWarn').style.display='block';
+    alert('⚠️ Set Groq API Key dulu di Settings!');
+    return;
+  }
+
+  if(!window._parsedData.length) generatePaito();
+
+  const resultBox=document.getElementById('aiAnalyzeResult')||document.createElement('div');
+  resultBox.id='aiAnalyzeResult';
+  resultBox.innerHTML=`<div class="card" style="text-align:center;padding:24px;">
+    <div class="loading-pulse" style="font-size:28px;margin-bottom:8px;">🤖</div>
+    <div style="font-weight:800;color:#2dd4bf;">AI sedang analisa paito...</div>
+  </div>`;
+
+  const pasaran=document.getElementById('pasaran').value;
+  const results=data.map(d=>d.angka).join(', ');
+
+  try{
+    const resp=await fetch('https://api.groq.com/openai/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+key},
+      body:JSON.stringify({
+        model:'llama-3.3-70b-versatile',
+        max_tokens:800,
+        temperature:0.3,
+        messages:[{role:'user',content:`Analisa paito warna pasaran ${pasaran} dari data: ${results}
+
+Berikan output JSON saja (tidak ada teks lain):
+{
+  "pola_terdeteksi": ["pola1","pola2","pola3"],
+  "angka_akan_muncul": ["a","b","c","d"],
+  "angka_overdraft": ["x","y"],
+  "trend": "naik/turun/stabil",
+  "rekomendasi_2d": "2 digit",
+  "rekomendasi_kepala": "1 digit",
+  "rekomendasi_ekor": "1 digit",
+  "analisa": "2-3 kalimat analisa pola dari data paito",
+  "tips": "1 tips praktis"
+}`}]
+      })
+    });
+    const json=await resp.json();
+    if(!resp.ok) throw new Error(json.error?.message||'API Error');
+    const raw=json.choices[0].message.content.trim();
+    const p=JSON.parse(raw.replace(/```json|```/g,'').trim());
+
+    resultBox.innerHTML=`<div class="card">
+      <div class="ai-box">
+        <div class="ai-box-title">🤖 AI ANALISA PAITO — ${pasaran}</div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:800;">POLA TERDETEKSI</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;">
+            ${(p.pola_terdeteksi||[]).map(pl=>`<span class="badge badge-teal">${pl}</span>`).join('')}
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+          <div style="background:var(--bg3);border-radius:10px;padding:10px;text-align:center;">
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px;">REKOMENDASI 2D</div>
+            <div style="font-family:'Bebas Neue';font-size:28px;color:var(--gold)">${p.rekomendasi_2d||'--'}</div>
+          </div>
+          <div style="background:var(--bg3);border-radius:10px;padding:10px;text-align:center;">
+            <div style="font-size:10px;color:var(--muted);margin-bottom:4px;">TREND</div>
+            <div style="font-family:'Bebas Neue';font-size:20px;color:#2dd4bf">${p.trend||'-'}</div>
+          </div>
+        </div>
+        <div style="margin-bottom:10px;">
+          <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:6px;">🔮 ANGKA AKAN MUNCUL</div>
+          <div style="display:flex;gap:6px;">
+            ${(p.angka_akan_muncul||[]).map(n=>`<div style="width:34px;height:34px;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:var(--green)">${n}</div>`).join('')}
+          </div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div style="font-size:11px;color:var(--muted);font-weight:800;margin-bottom:6px;">⚠️ ANGKA OVERDRAFT (HINDARI)</div>
+          <div style="display:flex;gap:6px;">
+            ${(p.angka_overdraft||[]).map(n=>`<div style="width:34px;height:34px;background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#f87171">${n}</div>`).join('')}
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div style="font-size:13px;color:var(--text);line-height:1.7;margin-bottom:8px;">${p.analisa||''}</div>
+        <div style="background:rgba(245,158,11,.08);border-radius:8px;padding:10px;font-size:12px;color:var(--gold);">💡 ${p.tips||''}</div>
+      </div>
+    </div>`;
+  }catch(e){
+    resultBox.innerHTML=`<div class="card" style="color:#f87171;text-align:center;">⚠️ AI Error: ${e.message}</div>`;
+  }
+}
+
+// ── WBData: build dropdown 65 pasaran + auto-fill result ─────
+let _wbDataReady = false;
+
+function buildPasaranDropdown() {
+  const sel = document.getElementById('pasaran');
+  sel.innerHTML = '';
+  (WBData.MARKETS || []).forEach(m => {
+    const opt = document.createElement('option');
+    opt.value = m.id;
+    opt.textContent = `${m.flag} ${m.name} (${m.short})`;
+    sel.appendChild(opt);
+  });
+  sel.value = 'hk';
+  _wbDataReady = true;
+  document.getElementById('btnAutoFill').disabled = false;
+  onPasaranChange();
+}
+
+function onPasaranChange() {
+  const id = document.getElementById('pasaran').value;
+  const hint = document.getElementById('resultHint');
+  if (!id || !_wbDataReady) { hint.textContent = ''; return; }
+  const r = WBData.getResult(id);
+  const entry = WBData.get(id);
+  if (r && r !== '----') {
+    const tgl = entry && entry.tgl ? ' · '+entry.tgl : '';
+    hint.textContent = `📡 Result terkini: ${r}${tgl} — klik "Tambah Result Terkini" untuk sisipkan`;
+  } else {
+    hint.textContent = '⏳ Result belum tersedia untuk pasaran ini';
+  }
+}
+
+function autoFillResult() {
+  const id = document.getElementById('pasaran').value;
+  if (!id) return;
+  const r = WBData.getResult(id);
+  const entry = WBData.get(id);
+  if (r && r !== '----') {
+    const tgl = entry && entry.tgl ? entry.tgl : '';
+    // Format tanggal: DD/MM → YYYY-MM-DD
+    let dateStr = new Date().toISOString().slice(0,10);
+    if (tgl && /^\d{2}\/\d{2}$/.test(tgl)) {
+      const [dd,mm] = tgl.split('/');
+      const yr = new Date().getFullYear();
+      dateStr = `${yr}-${mm}-${dd}`;
+    }
+    const newLine = `${dateStr} ${r}`;
+    const cur = document.getElementById('dataInput').value.trim();
+    // Cek duplikat
+    if (cur.includes(r)) { alert(`Result ${r} sudah ada di data!`); return; }
+    document.getElementById('dataInput').value = newLine + (cur ? '\n' + cur : '');
+    onPasaranChange();
+  } else {
+    alert('⚠️ Result belum tersedia untuk pasaran ini.');
+  }
+}
+
+async function initWBData() {
+  const statusEl = document.getElementById('dataStatus');
+  if (WBData.MARKETS && WBData.MARKETS.length) buildPasaranDropdown();
+  if (!WBData.isFresh()) {
+    statusEl.textContent = '⏳ Memuat...';
+    await WBData.refresh();
+    statusEl.textContent = '';
+  } else {
+    statusEl.textContent = '✅ Data tersedia';
+    setTimeout(() => { statusEl.textContent = ''; }, 2000);
+  }
+  if (!_wbDataReady) buildPasaranDropdown();
+  onPasaranChange();
+  WBData.onUpdate(() => onPasaranChange());
+}
+
+initWBData();
+
+</script>
+</body></html>
