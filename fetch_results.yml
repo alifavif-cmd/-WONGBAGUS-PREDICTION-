@@ -1,0 +1,69 @@
+name: Auto Fetch Result Togel
+
+on:
+  schedule:
+    # Setiap 5 menit, 24 jam sehari, 7 hari seminggu
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+    # Bisa juga dijalankan manual dari tab Actions
+
+permissions:
+  contents: write   # ← WAJIB ada, biar bisa push ke repo
+
+jobs:
+  fetch-and-push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+
+    steps:
+      # 1. Checkout repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 2. Setup Python
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'   # ← Cache pip biar lebih cepat
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 urllib3
+
+      # 4. Jalankan fetch_all.py
+      - name: Run fetch_all.py
+        run: python fetch_all.py
+        env:
+          TZ: Asia/Jakarta   # ← Timezone WIB
+
+      # 5. Debug API (sementara — hapus setelah dapat debug_api.txt)
+      - name: Debug API
+        run: python debug_api.py
+        env:
+          TZ: Asia/Jakarta
+
+      # 6. Upload hasil debug
+      - name: Upload debug result
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-api
+          path: debug_api.txt
+
+      # 7. Commit & push result.json kalau ada perubahan
+      - name: Commit and push result.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add result.json
+          # Cek apakah ada perubahan sebelum commit
+          if git diff --cached --quiet; then
+            echo "Tidak ada perubahan di result.json, skip commit."
+          else
+            WAKTU=$(TZ=Asia/Jakarta date +'%Y-%m-%d %H:%M WIB')   # ← Jam WIB beneran
+            git commit -m "auto: update result.json $WAKTU"
+            git push
+          fi
