@@ -1,6 +1,6 @@
 {
   "hk": {
-    "result": "2253",
+    "result": "3754",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -8,17 +8,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Hongkong Pools",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "3754"
       }
     ]
   },
   "hkl": {
-    "result": "2253",
+    "result": "3086",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -26,17 +26,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Hongkong Lotto",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "3086"
       }
     ]
   },
   "sgp": {
-    "result": "2253",
+    "result": "7758",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -44,17 +44,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Singapore",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "7758"
       }
     ]
   },
   "sdy": {
-    "result": "2253",
+    "result": "3660",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -62,17 +62,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Sydney Pools",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "3660"
       }
     ]
   },
   "sdl": {
-    "result": "2253",
+    "result": "0979",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -80,17 +80,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Sydney Lotto",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "0979"
       }
     ]
   },
   "kam": {
-    "result": "2253",
+    "result": "5693",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -98,17 +98,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Kamboja",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "5693"
       }
     ]
   },
   "bull": {
-    "result": "2253",
+    "result": "9049",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -116,17 +116,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Bullseye NZ",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "9049"
       }
     ]
   },
   "chn": {
-    "result": "2253",
+    "result": "3152",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -134,17 +134,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "China Pools",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "3152"
       }
     ]
   },
   "jpn": {
-    "result": "2253",
+    "result": "6849",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -152,17 +152,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Japan",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "6849"
       }
     ]
   },
   "twn": {
-    "result": "2253",
+    "result": "7668",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -170,17 +170,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Taiwan",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "7668"
       }
     ]
   },
   "pcso": {
-    "result": "2253",
+    "result": "3315",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -188,17 +188,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "PCSO",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "3315"
       }
     ]
   },
   "mac1": {
-    "result": "2253",
+    "result": "6178",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -206,17 +206,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Toto Macau 13",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "6178"
       }
     ]
   },
   "mac2": {
-    "result": "2253",
+    "result": "6951",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -224,17 +224,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Toto Macau 16",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "6951"
       }
     ]
   },
   "mac3": {
-    "result": "2253",
+    "result": "5184",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -242,17 +242,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Toto Macau 19",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "5184"
       }
     ]
   },
   "mac4": {
-    "result": "2253",
+    "result": "1312",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -260,17 +260,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Toto Macau 22",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "1312"
       }
     ]
   },
   "mac5": {
-    "result": "2253",
+    "result": "9872",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -278,17 +278,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Toto Macau 00",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "9872"
       }
     ]
   },
   "mac6": {
-    "result": "2253",
+    "result": "7645",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -296,17 +296,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Toto Macau 23",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "7645"
       }
     ]
   },
   "mrq3": {
-    "result": "2253",
+    "result": "9644",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -314,17 +314,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Morocco 03:00",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "9644"
       }
     ]
   },
   "mrq18": {
-    "result": "2253",
+    "result": "6070",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -332,17 +332,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Morocco 18:00",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "6070"
       }
     ]
   },
   "mrq21": {
-    "result": "2253",
+    "result": "4735",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -350,17 +350,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Morocco 21:00",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "4735"
       }
     ]
   },
   "mrq23": {
-    "result": "2253",
+    "result": "2935",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -368,17 +368,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Morocco 23:59",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "2935"
       }
     ]
   },
   "ger": {
-    "result": "2253",
+    "result": "2238",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -386,17 +386,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Germany Plus5",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "2238"
       }
     ]
   },
   "or4": {
-    "result": "2253",
+    "result": "8403",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -404,17 +404,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Oregon 04:00",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "8403"
       }
     ]
   },
   "or7": {
-    "result": "2253",
+    "result": "4937",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -422,17 +422,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Oregon 07:00",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "4937"
       }
     ]
   },
   "or10": {
-    "result": "2253",
+    "result": "3019",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -440,17 +440,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Oregon 10:00",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "3019"
       }
     ]
   },
   "or13": {
-    "result": "2253",
+    "result": "5474",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -458,17 +458,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Oregon 13:00",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "5474"
       }
     ]
   },
   "ncd": {
-    "result": "2253",
+    "result": "4382",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -476,17 +476,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "NC Day",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "4382"
       }
     ]
   },
   "nce": {
-    "result": "2253",
+    "result": "5125",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -494,17 +494,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "NC Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "5125"
       }
     ]
   },
   "geom": {
-    "result": "2253",
+    "result": "8944",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -512,17 +512,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Georgia Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "8944"
       }
     ]
   },
   "geoe": {
-    "result": "2253",
+    "result": "4969",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -530,17 +530,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Georgia Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "4969"
       }
     ]
   },
   "geon": {
-    "result": "2253",
+    "result": "9865",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -548,17 +548,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Georgia Night",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "9865"
       }
     ]
   },
   "txd": {
-    "result": "2253",
+    "result": "6949",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -566,17 +566,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Texas Day",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "6949"
       }
     ]
   },
   "txmr": {
-    "result": "2253",
+    "result": "8204",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -584,17 +584,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Texas Morning",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "8204"
       }
     ]
   },
   "txe": {
-    "result": "2253",
+    "result": "2625",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -602,17 +602,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Texas Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "2625"
       }
     ]
   },
   "txn": {
-    "result": "2253",
+    "result": "6704",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -620,17 +620,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Texas Night",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "6704"
       }
     ]
   },
   "nyd": {
-    "result": "2253",
+    "result": "7749",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -638,17 +638,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "New York Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "7749"
       }
     ]
   },
   "nye": {
-    "result": "2253",
+    "result": "6815",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -656,17 +656,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "New York Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "6815"
       }
     ]
   },
   "njm": {
-    "result": "2253",
+    "result": "5248",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -674,17 +674,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "NJ Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "5248"
       }
     ]
   },
   "nje": {
-    "result": "2253",
+    "result": "4536",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -692,17 +692,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "NJ Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "4536"
       }
     ]
   },
   "flm": {
-    "result": "2253",
+    "result": "7810",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -710,17 +710,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Florida Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "7810"
       }
     ]
   },
   "fle": {
-    "result": "2253",
+    "result": "3951",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -728,17 +728,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Florida Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "3951"
       }
     ]
   },
   "ilm": {
-    "result": "2253",
+    "result": "8938",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -746,17 +746,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Illinois Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "8938"
       }
     ]
   },
   "ile": {
-    "result": "2253",
+    "result": "8421",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -764,17 +764,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Illinois Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "8421"
       }
     ]
   },
   "indm": {
-    "result": "2253",
+    "result": "7232",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -782,17 +782,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Indiana Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "7232"
       }
     ]
   },
   "inde": {
-    "result": "2253",
+    "result": "8702",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -800,17 +800,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Indiana Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "8702"
       }
     ]
   },
   "kym": {
-    "result": "2253",
+    "result": "9090",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -818,17 +818,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Kentucky Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "9090"
       }
     ]
   },
   "kye": {
-    "result": "2253",
+    "result": "6116",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -836,17 +836,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Kentucky Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "6116"
       }
     ]
   },
   "mdm": {
-    "result": "2253",
+    "result": "8297",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -854,17 +854,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Maryland Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "8297"
       }
     ]
   },
   "mde": {
-    "result": "2253",
+    "result": "9937",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -872,17 +872,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Maryland Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "9937"
       }
     ]
   },
   "mim": {
-    "result": "2253",
+    "result": "0754",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -890,17 +890,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Michigan Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "0754"
       }
     ]
   },
   "mie": {
-    "result": "2253",
+    "result": "5851",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -908,17 +908,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Michigan Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "5851"
       }
     ]
   },
   "mom": {
-    "result": "2253",
+    "result": "6700",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -926,17 +926,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Missouri Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "6700"
       }
     ]
   },
   "moe": {
-    "result": "2253",
+    "result": "0804",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -944,17 +944,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Missouri Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "0804"
       }
     ]
   },
   "wdm": {
-    "result": "2253",
+    "result": "9089",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -962,17 +962,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "WDC Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "9089"
       }
     ]
   },
   "wde": {
-    "result": "2253",
+    "result": "4100",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -980,17 +980,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "WDC Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "4100"
       }
     ]
   },
   "ctd": {
-    "result": "2253",
+    "result": "9725",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -998,17 +998,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Connecticut Day",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "9725"
       }
     ]
   },
   "ctn": {
-    "result": "2253",
+    "result": "2298",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -1016,17 +1016,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Connecticut Night",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "2298"
       }
     ]
   },
   "vad": {
-    "result": "2253",
+    "result": "2153",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -1034,17 +1034,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Virginia Day",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "2153"
       }
     ]
   },
   "van": {
-    "result": "2253",
+    "result": "5492",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -1052,17 +1052,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Virginia Night",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "5492"
       }
     ]
   },
   "tnm": {
-    "result": "2253",
+    "result": "1444",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -1070,17 +1070,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Tennessee Midday",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "1444"
       }
     ]
   },
   "tne": {
-    "result": "2253",
+    "result": "4923",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -1088,17 +1088,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Tennessee Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "4923"
       }
     ]
   },
   "tnmr": {
-    "result": "2253",
+    "result": "3372",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -1106,17 +1106,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Tennessee Morning",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "3372"
       }
     ]
   },
   "cal": {
-    "result": "2253",
+    "result": "8808",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -1124,17 +1124,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "California",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "8808"
       }
     ]
   },
   "wie": {
-    "result": "2253",
+    "result": "1337",
     "tgl": "25/05",
     "fetch_date": [
       2026,
@@ -1142,17 +1142,17 @@
       25
     ],
     "status": "sudah",
-    "updated": "17:19 WIB",
+    "updated": "17:27 WIB",
     "name": "Wisconsin Evening",
     "history": [
       {
         "date": "2026-05-25",
-        "result": "2253"
+        "result": "1337"
       }
     ]
   },
   "_meta": {
-    "updated": "2026-05-25 17:19 WIB",
+    "updated": "2026-05-25 17:27 WIB",
     "date": "25/05",
     "today_str": "2026-05-25",
     "total": 64,
