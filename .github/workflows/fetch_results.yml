@@ -2,8 +2,8 @@ name: Auto Fetch Result Togel
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
-  workflow_dispatch:
+    - cron: '*/5 * * * *' # Setiap 5 menit
+  workflow_dispatch: # Bisa dijalankan manual
 
 permissions:
   contents: write
@@ -15,47 +15,44 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
           python-version: '3.11'
           cache: 'pip'
 
       - name: Install dependencies
-        run: pip install requests beautifulsoup4 urllib3
+        run: |
+          pip install --upgrade pip
+          pip install requests beautifulsoup4 urllib3 lxml
 
-      - name: Debug HTML
+      - name: Debug HTML (Optional)
         run: python debug_html_struct.py
-        env:
-          TZ: Asia/Jakarta
+        continue-on-error: true
 
       - name: Run fetch_all.py
         run: python fetch_all.py
-        env:
-          TZ: Asia/Jakarta
 
       - name: Commit and push result.json
         if: always()
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action Bot"
           git add result.json
-          if git diff --cached --quiet; then
-            echo "Tidak ada perubahan, skip commit."
-            exit 0
+          
+          # Cek apakah ada perubahan
+          if ! git diff --cached --quiet; then
+            git commit -m "Update result.json on $(date +'%Y-%m-%d %H:%M:%S') WIB"
+            
+            # Push dengan retry mechanism
+            for i in {1..5}; do
+              git pull --rebase origin main && break || sleep 15
+            done
+            git push origin main
+          else
+            echo "No changes to commit."
           fi
-          WAKTU=$(TZ=Asia/Jakarta date +'%Y-%m-%d %H:%M WIB')
-          git commit -m "auto: update result.json $WAKTU"
-          n=0
-          until [ $n -ge 5 ]; do
-            git push && echo "Push berhasil." && exit 0
-            n=$((n+1))
-            echo "Push gagal, retry $n/5 dalam 15 detik..."
-            sleep 15
-            git pull --rebase origin main 2>/dev/null || true
-          done
-          exit 0
