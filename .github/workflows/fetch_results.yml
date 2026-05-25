@@ -1,40 +1,21 @@
 name: fetch-and-push
-
-on:
-  schedule:
-    - cron: '0 16 * * *'   # Setiap hari jam 23:00 WIB (UTC+7)
-  workflow_dispatch:       # Untuk trigger manual
-
+on: [workflow_dispatch, schedule: [{cron: '0 16 * * *'}]]
 jobs:
-  fetch-and-push:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Setup Python
+      - uses: actions/checkout@v4
+      - name: Set up Python
         uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-
-      - name: Install dependencies
+        with: {python-version: '3.10'}
+      - name: Install deps
         run: pip install requests beautifulsoup4 lxml
-
-      - name: Debug HTML (Optional)
-        run: |
-          echo "Testing connection to angkanet18.com..."
-          curl -s https://angkanet18.com/paito-harian/ | head -n 10
-
-      - name: Run fetch_all.py
-        # ✅ INI YANG PENTING: Gunakan command sederhana
+      - name: Run Script
         run: python fetch_all.py
-
-      - name: Commit and push results
+      - name: Commit Results
         run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --global user.name 'Actions'
+          git config --global user.email 'actions@github.com'
           git add result.json
-          git commit -m "Update results $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes"
-          git push origin main
+          git commit -m "Update" || echo "No changes"
+          git push
