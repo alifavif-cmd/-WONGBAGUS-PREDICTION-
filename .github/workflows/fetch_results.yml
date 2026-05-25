@@ -1,58 +1,42 @@
-name: Auto Fetch Result Togel
+name: fetch-and-push
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # Setiap 5 menit
-  workflow_dispatch: # Bisa dijalankan manual
-
-permissions:
-  contents: write
+    # Jadwal: Setiap hari jam 23:00 WIB (UTC+7)
+    - cron: '0 16 * * *' 
+  workflow_dispatch: # Untuk trigger manual dari UI GitHub
 
 jobs:
   fetch-and-push:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
-          cache: 'pip'
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
-          pip install requests beautifulsoup4 urllib3 lxml
+          pip install requests beautifulsoup4 lxml
 
       - name: Debug HTML (Optional)
-        run: python debug_html_struct.py
-        continue-on-error: true
+        run: |
+          echo "Checking connectivity to angkanet18.com..."
+          curl -s https://angkanet18.com/paito-harian/ | head -n 20
 
       - name: Run fetch_all.py
+        # ✅ DIPERBAIKI: Gunakan command sederhana. GitHub Actions sudah berada di root folder.
         run: python fetch_all.py
 
-      - name: Commit and push result.json
-        if: always()
+      - name: Commit and push results
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action Bot"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add result.json
-          
-          # Cek apakah ada perubahan
-          if ! git diff --cached --quiet; then
-            git commit -m "Update result.json on $(date +'%Y-%m-%d %H:%M:%S') WIB"
-            
-            # Push dengan retry mechanism
-            for i in {1..5}; do
-              git pull --rebase origin main && break || sleep 15
-            done
-            git push origin main
-          else
-            echo "No changes to commit."
-          fi
+          git commit -m "Update results $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git push origin main
