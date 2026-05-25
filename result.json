@@ -1,12 +1,12 @@
 {
-    "Hongkong Pools": {
-        "latest_result": null,
-        "history": [],
-        "last_updated": "2026-05-25 16:08:05"
-    },
-    "Singapore Pools": {
-        "latest_result": null,
-        "history": [],
-        "last_updated": "2026-05-25 16:08:06"
-    }
+  "Hongkong Pools": {
+    "latest_result": null,
+    "history": [],
+    "last_updated": "2026-05-25 16:08:05"
+  },
+  "Singapore Pools": {
+    "latest_result": null,
+    "history": [],
+    "last_updated": "2026-05-25 16:08:06"
+  }
 }
