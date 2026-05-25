@@ -1,32 +1,43 @@
 name: fetch-and-push
 
 on:
-  workflow_dispatch:  # Manual trigger
   schedule:
-    - cron: '0 16 * * *'  # Setiap hari jam 23:00 WIB
+    # Jadwal: Setiap hari jam 23:00 WIB (UTC+7)
+    - cron: '0 16 * * *' 
+  workflow_dispatch: # Untuk trigger manual dari UI GitHub
 
 jobs:
-  run-scraper:
+  fetch-and-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Install libraries
-        run: pip install requests beautifulsoup4 lxml
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 lxml
 
-      - name: Run scraper
+      - name: Debug HTML (Optional)
+        run: |
+          echo "Checking connectivity to angkanet18.com..."
+          curl -s https://angkanet18.com/paito-harian/ | head -n 20
+
+      - name: Run fetch_all.py
+        # INI ADALAH BAGIAN KUNCI YANG ASLI SEBELUM DIEDIT RUSAK
+        # Gunakan command sederhana ini agar tidak terjadi error path ganda
         run: python fetch_all.py
 
-      - name: Commit and push result
+      - name: Commit and push results
         run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add result.json
-          git commit -m "Update result $(date)" || echo "No changes"
-          git push
+          git commit -m "Update results $(date +'%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git push origin main
