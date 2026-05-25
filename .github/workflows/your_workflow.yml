@@ -1,0 +1,34 @@
+name: Web Scraper Pipeline
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Contoh: setiap jam
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15 # Ditingkatkan dari 5 ke 15 menit
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          # Tambahkan lxml untuk performa parsing yang lebih cepat
+          pip install beautifulsoup4 lxml requests
+          # Jika menggunakan regex murni saja, bs4 dan lxml bisa dihapus, 
+          # tapi disarankan tetap pakai lxml+bs4 untuk ketahanan kode.
+
+      - name: Run Scraper
+        run: python main.py
+        env:
+          # Variabel lingkungan jika ada
+          TARGET_URLS: ${{ secrets.TARGET_URLS }}
