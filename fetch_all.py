@@ -3,15 +3,17 @@ import json
 import time
 import os
 from bs4 import BeautifulSoup
+import re
+from datetime import datetime
 
 # Konfigurasi
 OUTPUT_FILE = 'result.json'
-# Daftar pasaran bisa diambil dari konfigurasi atau hardcode sesuai kebutuhan
-# Contoh struktur data pasaran (sesuaikan dengan logika asli Anda)
+
+# Daftar pasaran (sesuaikan URL jika perlu)
 MARKETS = [
-    {"name": "Hongkong Pools", "url": "https://angkanet18.com/data-pengeluaran-togel-hongkong-pools/"},
-    {"name": "Singapore Pools", "url": "https://angkanet18.com/data-pengeluaran-togel-singapore-pools/"},
-    # Tambahkan pasaran lainnya di sini...
+    {"name": "Hongkong Pools", "url": "https://wong168.cc/paito-harian-hongkong/"},
+    {"name": "Singapore Pools", "url": "https://wong168.cc/paito-harian-singapore/"},
+    # Tambahkan pasaran lain di sini
 ]
 
 def fetch_html(url):
@@ -20,126 +22,106 @@ def fetch_html(url):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     }
     try:
-        response = requests.get(url, headers=headers, timeout=30)
+        response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
         return response.text
     except Exception as e:
         print(f"Error fetching {url}: {e}")
         return None
 
-# --- FUNGSI BARU YANG DIGABUNGKAN & DIOPTIMALKAN ---
 def extract_result_and_rows(html_content):
     """
-    Mengambil hasil utama dan semua baris data dalam SATU kali parsing.
-    Menggunakan parser 'lxml' untuk kecepatan maksimal (3-5x lebih cepat dari html.parser).
-    
-    Returns:
-        tuple: (result_data, rows_list)
+    Fungsi perbaikan untuk ekstraksi data dari situs dengan class 'paito-digit'.
     """
     if not html_content:
         return None, []
 
-    # Parsing SATU KALI saja dengan lxml
-    # Pastikan lxml sudah diinstall: pip install lxml
     soup = BeautifulSoup(html_content, 'lxml')
-    
-    result_data = None
-    rows_list = []
+    latest_result = None
+    history = []
 
     try:
-        # --- LOGIKA EKSTRAKSI HASIL UTAMA ---
-        # Sesuaikan selector ini dengan struktur HTML situs target Anda
-        # Contoh: Mencari div dengan class tertentu yang berisi angka terbaru
-        main_result_div = soup.find('div', class_='result-main') # Ganti dengan class/id yang benar
-        if main_result_div:
-            # Ekstrak teks atau atribut tertentu
-            result_data = main_result_div.get_text(strip=True)
+        # --- EKSTRAKSI HASIL TERBARU ---
+        digit_spans = soup.find_all('span', class_='paito-digit')
         
-        # Jika struktur berbeda, coba cari elemen spesifik lainnya
-        if not result_data:
-            # Contoh fallback: cari input field atau span tertentu
-            input_field = soup.find('input', {'id': 'result_value'})
-            if input_field:
-                result_data = input_field.get('value')
+        if digit_spans:
+            raw_text = ''.join([span.get_text(strip=True) for span in digit_spans])
+            clean_number = re.sub(r'[^0-9]', '', raw_text)
+            if len(clean_number) >= 4:
+                latest_result = clean_number[:4]
 
-        # --- LOGIKA EKSTRAKSI SEMUA BARIS (PAITO/HISTORI) ---
-        # Contoh: Mencari tabel dengan id tertentu
-        table = soup.find('table', class_='paito-table') # Ganti dengan class/id yang benar
-        if table:
-            tbody = table.find('tbody') or table
-            trs = tbody.find_all('tr')
-            
-            for tr in trs:
-                # Ekstrak semua kolom (td) dalam baris tersebut
-                cols = [td.get_text(strip=True) for td in tr.find_all('td')]
-                if cols: # Pastikan baris tidak kosong
-                    rows_list.append(cols)
-                    
+        # --- EKSTRAKSI RIWAYAT ---
+        line_divs = soup.find_all('div', class_='paito-line')
+        
+        for line in line_divs:
+            line_digits = line.find_all('span', class_='paito-digit')
+            if line_digits:
+                line_text = ''.join([d.get_text(strip=True) for d in line_digits])
+                line_clean = re.sub(r'[^0-9]', '', line_text)
+                if len(line_clean) == 4 and line_clean != latest_result:
+                    if line_clean not in history:
+                        history.append(line_clean)
+                        
+        history = history[:20]  # Batasi riwayat
+
     except Exception as e:
-        print(f"Error during combined extraction: {e}")
+        print(f"Error during extraction: {e}")
         return None, []
 
-    return result_data, rows_list
+    return latest_result, history
 
+def load_existing_data():
+    """Memuat data lama dari result.json jika ada."""
+    if os.path.exists(OUTPUT_FILE):
+        try:
+            with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            pass
+    return {}
 
-# --- STUB FUNGSI LAMA (Redirect ke fungsi baru) ---
-# Fungsi ini tetap ada agar jika ada bagian kode lain yang belum diupdate
-# tidak langsung crash, tapi akan menggunakan logika baru yang efisien.
-
-def extract_result(html_content):
-    """
-    DEPRECATED: Redirects to extract_result_and_rows.
-    Hanya mengembalikan bagian 'result' dari fungsi gabungan.
-    """
-    result, _ = extract_result_and_rows(html_content)
-    return result
-
-def extract_all_rows(html_content):
-    """
-    DEPRECATED: Redirects to extract_result_and_rows.
-    Hanya mengembalikan bagian 'rows' dari fungsi gabungan.
-    """
-    _, rows = extract_result_and_rows(html_content)
-    return rows
-
+def save_data(data):
+    """Menyimpan data ke result.json."""
+    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+    print(f"Data saved to {OUTPUT_FILE}")
 
 def main():
-    all_results = {}
-    
-    print("Memulai proses scraping...")
+    all_data = load_existing_data()
     
     for market in MARKETS:
         name = market['name']
         url = market['url']
+        print(f"\nProcessing: {name}...")
         
-        print(f"Processing: {name}...")
-        
-        # 1. Fetch HTML
         html = fetch_html(url)
-        
         if html:
-            # 2. Extract Data (Hanya 1x parse per halaman)
-            result, rows = extract_result_and_rows(html)
+            latest, hist = extract_result_and_rows(html)
             
-            all_results[name] = {
-                "latest_result": result,
-                "history": rows,
-                "last_updated": time.strftime("%Y-%m-%d %H:%M:%S")
-            }
-            print(f"Success: {name}")
+            if latest:
+                print(f"   Success: Latest Result = {latest}")
+                
+                # Update struktur data
+                if name not in all_data:
+                    all_data[name] = {"latest_result": None, "history": [], "last_updated": ""}
+                
+                all_data[name]["latest_result"] = latest
+                
+                # Gabungkan history baru dengan lama (hindari duplikat)
+                existing_hist = all_data[name].get("history", [])
+                new_history = [h for h in hist if h not in existing_hist]
+                all_data[name]["history"] = new_history + existing_hist
+                all_data[name]["history"] = all_data[name]["history"][:20] # Batasi total history
+                
+                all_data[name]["last_updated"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                print(f"   Failed: Could not extract result for {name}")
         else:
-            print(f"Failed: {name}")
-            
-        # Jeda singkat agar tidak membebani server target
-        time.sleep(1)
+            print(f"   Failed: Could not fetch HTML for {name}")
+        
+        time.sleep(2)  # Jeda antar request
 
-    # 3. Simpan ke JSON
-    try:
-        with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-            json.dump(all_results, f, ensure_ascii=False, indent=4)
-        print(f"Data berhasil disimpan ke {OUTPUT_FILE}")
-    except Exception as e:
-        print(f"Error saving file: {e}")
+    save_data(all_data)
 
 if __name__ == "__main__":
     main()
