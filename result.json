@@ -1,6 +1,6 @@
 {
   "hk": {
-    "result": "1245",
+    "result": "5897",
     "tgl": "26/05",
     "fetch_date": [
       2026,
@@ -8,12 +8,12 @@
       26
     ],
     "status": "sudah",
-    "updated": "09:42 WIB",
+    "updated": "09:49 WIB",
     "name": "Hongkong Pools",
     "history": [
       {
         "date": "2026-05-26",
-        "result": "1245"
+        "result": "5897"
       }
     ]
   },
@@ -106,7 +106,7 @@
     ]
   },
   "kam": {
-    "result": "1245",
+    "result": "5897",
     "tgl": "26/05",
     "fetch_date": [
       2026,
@@ -114,12 +114,12 @@
       26
     ],
     "status": "sudah",
-    "updated": "09:42 WIB",
+    "updated": "09:49 WIB",
     "name": "Kamboja",
     "history": [
       {
         "date": "2026-05-26",
-        "result": "1245"
+        "result": "5897"
       }
     ]
   },
@@ -154,7 +154,7 @@
       26
     ],
     "status": "sudah",
-    "updated": "09:42 WIB",
+    "updated": "09:49 WIB",
     "name": "China Pools",
     "history": [
       {
@@ -1396,11 +1396,11 @@
     ]
   },
   "_meta": {
-    "updated": "2026-05-26 09:42 WIB",
+    "updated": "2026-05-26 09:49 WIB",
     "date": "26/05",
     "today_str": "2026-05-26",
     "total": 64,
     "history_max": 30,
-    "elapsed_s": 76.5
+    "elapsed_s": 128.8
   }
 }
