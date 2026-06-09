@@ -1,0 +1,2365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>⭐ WONGBAGUS PREDICTION ⭐</title>
+<style>
+/* ── RESET + BASE ── */
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#0d1117;
+  color:#e6edf3;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  min-height:100vh;
+  padding:0;
+}
+
+/* ── HEADER WONGBAGUS ── */
+.wb-header{
+  background:linear-gradient(135deg,#0f172a 0%,#1e293b 60%,#0f172a 100%);
+  border-bottom:3px solid #f59e0b;
+  padding:10px 16px;
+  text-align:center;
+  position:sticky;top:0;z-index:200;
+  box-shadow:0 4px 20px rgba(245,158,11,0.25);
+}
+.wb-header-title{
+  font-size:15px;font-weight:900;
+  color:#f59e0b;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+.wb-header-sub{
+  font-size:9px;color:#6e7681;letter-spacing:3px;text-transform:uppercase;margin-top:1px;
+}
+
+/* ── AUTH GATE ── */
+#auth-gate{
+  display:none;position:fixed;inset:0;
+  background:rgba(10,10,26,0.97);
+  z-index:9999;
+  align-items:center;justify-content:center;
+  flex-direction:column;text-align:center;padding:24px;
+}
+
+/* ── MEMBER BAR ── */
+.mb-bar{
+  background:#161b22;
+  border-bottom:1px solid rgba(245,158,11,0.2);
+  padding:8px 16px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.mb-bar-name{color:#f59e0b;font-weight:700;font-size:13px}
+.mb-bar-plan{color:#6e7681;font-size:10px}
+.mb-bar-logout{
+  padding:5px 12px;border-radius:6px;
+  border:1px solid rgba(248,113,113,0.3);
+  background:rgba(248,113,113,0.1);
+  color:#f87171;font-weight:700;font-size:11px;cursor:pointer;
+}
+.mb-bar-login{
+  padding:6px 14px;border-radius:7px;border:none;
+  background:linear-gradient(135deg,#f59e0b,#ff8c00);
+  color:#000;font-weight:800;font-size:12px;cursor:pointer;
+}
+.mb-bar-daftar{
+  padding:6px 14px;border-radius:7px;
+  border:1px solid rgba(245,158,11,0.3);
+  background:rgba(245,158,11,0.08);
+  color:#f59e0b;font-weight:800;font-size:12px;cursor:pointer;
+}
+
+/* ── TAB NAV ── */
+.tab-nav{
+  display:flex;gap:0;
+  background:#161b22;
+  border-bottom:2px solid rgba(245,158,11,0.2);
+}
+.tab-nav-btn{
+  flex:1;padding:10px 6px;border:none;cursor:pointer;
+  font-weight:700;font-size:12px;
+  background:transparent;color:#6e7681;
+  border-bottom:2px solid transparent;
+  transition:all .15s;
+  letter-spacing:.3px;
+}
+.tab-nav-btn.active{
+  color:#f59e0b;
+  border-bottom-color:#f59e0b;
+  background:rgba(245,158,11,0.06);
+}
+
+/* ── DATA STATUS BAR ── */
+.data-bar{
+  background:#0d2137;
+  border-bottom:1px solid #1a4a6e;
+  padding:7px 14px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+}
+.data-bar-text{font-size:11px;color:#38bdf8;font-family:monospace;font-weight:700}
+.data-bar-btn{
+  padding:4px 12px;border-radius:6px;border:none;
+  background:#22d3ee;color:#000;font-weight:700;font-size:11px;cursor:pointer;
+}
+
+/* ── DATA TOGEL BTN ── */
+.btn-data-togel{
+  width:100%;padding:11px 14px;
+  border:1px solid rgba(245,158,11,0.4);
+  background:linear-gradient(135deg,rgba(245,158,11,0.1),rgba(255,140,0,0.06));
+  color:#f59e0b;font-weight:800;font-size:13px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  letter-spacing:.5px;border-radius:0;
+  border-left:none;border-right:none;
+}
+
+/* ── PAGE CONTENT ── */
+.page-content{padding:0 0 40px}
+
+/* ── CARD ── */
+.an-card{
+  background:#161b22;
+  border:1px solid #30363d;
+  border-radius:10px;
+  padding:16px;
+  margin:12px;
+  box-shadow:0 1px 8px rgba(0,0,0,0.4);
+}
+.an-card-title{
+  font-size:11px;font-weight:800;color:#94a3b8;
+  letter-spacing:.6px;text-transform:uppercase;
+  margin-bottom:12px;
+  padding-bottom:8px;
+  border-bottom:1px solid #21262d;
+}
+
+/* ── FORM FIELDS ANGKANET STYLE ── */
+.field-group{margin-bottom:12px}
+.field-label{
+  font-size:10px;font-weight:800;color:#94a3b8;
+  letter-spacing:.5px;text-transform:uppercase;
+  display:block;margin-bottom:5px;
+}
+.an-input, .an-select{
+  width:100%;
+  background:#161b22;
+  color:#e6edf3;
+  border:1.5px solid #30363d;
+  border-radius:8px;
+  padding:10px 12px;
+  font-size:14px;
+  font-weight:600;
+  outline:none;
+  transition:border-color .15s;
+  appearance:none;
+  -webkit-appearance:none;
+}
+.an-select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b949e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  padding-right:32px;
+}
+.an-input:focus, .an-select:focus{border-color:#f59e0b;box-shadow:0 0 0 3px rgba(245,158,11,0.12);}
+.an-input[type=number]{text-align:center;font-weight:800;font-size:16px}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+/* ── FORMULA ROW ANGKANET STYLE ── */
+.formula-row{
+  background:#0d1117;
+  border:1.5px solid #30363d;
+  border-radius:10px;
+  padding:10px;
+  margin-bottom:6px;
+}
+.formula-row-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1.5fr 1fr;
+  gap:6px;margin-bottom:6px;
+}
+.formula-row-grid2{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:6px;
+}
+.formula-sel{
+  background:#161b22;
+  color:#1e40af;
+  border:2px solid #1d4ed8;
+  border-radius:8px;
+  padding:9px 4px;
+  font-size:12px;font-weight:800;
+  outline:none;
+  appearance:none;-webkit-appearance:none;
+  text-align:center;
+  cursor:pointer;
+  min-height:42px;
+  width:100%;
+}
+.formula-sel:focus{border-color:#f59e0b;box-shadow:0 0 0 2px rgba(245,158,11,0.15)}
+.formula-sel-mod{
+  background:#161b22;
+  color:#8b949e;
+  border:1.5px solid #30363d;
+  border-radius:8px;
+  padding:9px 2px;
+  font-size:11px;
+  outline:none;
+  appearance:none;-webkit-appearance:none;
+  text-align:center;cursor:pointer;
+  min-height:42px;
+  width:100%;
+}
+.formula-sel-mod:focus{border-color:#f59e0b}
+.formula-sel-op{
+  background:#1c1505;
+  color:#f59e0b;
+  border:2px solid #78350f;
+  border-radius:8px;
+  padding:9px 2px;
+  font-size:15px;font-weight:900;
+  outline:none;
+  appearance:none;-webkit-appearance:none;
+  text-align:center;cursor:pointer;
+  min-height:42px;
+  width:100%;
+}
+
+/* ── BUTTONS ANGKANET ── */
+.btn-an-prev{
+  flex:1;padding:12px;border-radius:8px;border:none;
+  background:#22d3ee;color:#000;
+  font-weight:800;font-size:13px;cursor:pointer;
+}
+.btn-an-next{
+  flex:1;padding:12px;border-radius:8px;border:none;
+  background:#3b82f6;color:#fff;
+  font-weight:800;font-size:13px;cursor:pointer;
+}
+.btn-an-copy{
+  flex:1;padding:12px;border-radius:8px;border:none;
+  background:#f59e0b;color:#000;
+  font-weight:800;font-size:13px;cursor:pointer;
+}
+.btn-an-scan{
+  width:100%;padding:13px;border-radius:8px;border:none;
+  background:#22d3ee;color:#000;
+  font-weight:900;font-size:15px;cursor:pointer;
+  letter-spacing:.5px;margin-bottom:8px;
+}
+.btn-an-stop{
+  width:100%;padding:12px;border-radius:8px;border:none;
+  background:#ef4444;color:#fff;
+  font-weight:800;font-size:13px;cursor:pointer;margin-bottom:8px;
+}
+.btn-an-save{
+  padding:7px 14px;border-radius:7px;border:none;
+  background:#10b981;color:#fff;
+  font-weight:700;font-size:11px;cursor:pointer;
+}
+.btn-an-import{
+  padding:10px 16px;border-radius:8px;border:none;
+  background:#22d3ee;color:#000;
+  font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap;
+}
+
+/* ── BATCH BUTTONS ── */
+.batch-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:8px;}
+.btn-batch{
+  padding:8px 2px;border-radius:7px;
+  border:1.5px solid #30363d;
+  background:#0d1117;color:#22d3ee;
+  font-weight:800;font-size:11px;cursor:pointer;text-align:center;
+}
+
+/* ── CONSOLE ── */
+.an-console{
+  background:#0f172a;border-radius:8px;
+  padding:10px 14px;
+  font-family:'Courier New',monospace;font-size:11px;
+  color:#22d3ee;min-height:36px;margin:0 12px 10px;
+}
+.progress-bar{height:3px;background:#21262d;margin:0 12px 10px;border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:#22d3ee;border-radius:2px;transition:width .3s}
+
+/* ── HASIL SCAN TABLE ── */
+.result-wrap{margin:0 12px 12px}
+.result-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.result-tbl th{
+  color:#94a3b8;font-size:10px;font-weight:800;
+  padding:8px 6px;text-align:left;
+  border-bottom:2px solid #21262d;text-transform:uppercase;
+  letter-spacing:.4px;
+}
+.result-tbl td{padding:8px 6px;border-bottom:1px solid #161b22;vertical-align:middle}
+.formula-link{color:#60a5fa;font-family:monospace;cursor:pointer;font-weight:700}
+.formula-link:hover{text-decoration:underline}
+.pred-num{color:#f59e0b;font-weight:900;font-size:15px;font-family:monospace;letter-spacing:1px}
+.tag-jenis{font-size:9px;color:#94a3b8;font-weight:700;text-transform:uppercase}
+
+/* ── TREK MODAL ── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,0.6);z-index:1000;
+  overflow-y:auto;padding:16px;
+}
+.modal-overlay.open{display:flex;align-items:flex-start;justify-content:center}
+.modal-box{
+  background:#161b22;border-radius:14px;
+  padding:16px;width:100%;max-width:420px;margin:auto;
+}
+.modal-title{color:#e6edf3;font-weight:800;font-size:14px;margin-bottom:10px}
+.trek-line{
+  display:flex;gap:8px;align-items:center;
+  padding:5px 2px;border-bottom:1px solid #21262d;font-size:13px;
+}
+.trek-period{color:#94a3b8;font-family:monospace;min-width:50px}
+.trek-pred{font-family:monospace;font-weight:700;min-width:70px;letter-spacing:2px}
+.trek-status{margin-left:auto;font-size:11px;font-weight:700}
+.badge-hit{background:rgba(16,185,129,.15);color:#10b981;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700}
+.badge-patah{background:rgba(239,68,68,.15);color:#ef4444;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700}
+.modal-scroll{max-height:55vh;overflow-y:auto}
+.btn-close-modal{
+  padding:7px 14px;border-radius:8px;
+  border:1.5px solid #30363d;background:#161b22;
+  color:#6e7681;font-size:12px;cursor:pointer;font-weight:600;
+}
+
+/* ── LANJUTAN PANEL ── */
+.lanjutan-panel{
+  background:#0d1117;border:1px solid #30363d;border-radius:8px;
+  padding:12px;margin-top:8px;display:none;
+}
+.btn-lanjutan{
+  width:100%;padding:9px;border-radius:8px;
+  border:1.5px solid #30363d;background:#0d1117;
+  color:#22d3ee;font-weight:700;font-size:12px;
+  cursor:pointer;text-align:left;margin-top:6px;
+}
+.chk-label{
+  font-size:11px;color:#8b949e;
+  display:flex;align-items:center;gap:3px;cursor:pointer;
+}
+.shortcut-grid{display:flex;gap:6px;margin-bottom:8px}
+.btn-shortcut{
+  flex:1;padding:7px 4px;border-radius:6px;border:none;
+  font-weight:700;font-size:11px;cursor:pointer;
+}
+.btn-shortcut.fast{background:#052e16;color:#4ade80}
+.btn-shortcut.normal{background:#0c1a3a;color:#60a5fa}
+.btn-shortcut.deep{background:#1e0a3c;color:#a78bfa}
+.btn-shortcut.reset{background:#2d0a0a;color:#f87171}
+
+/* ── BANK RUMUS ── */
+.bank-import-bar{display:flex;gap:6px;padding:12px;border-bottom:1px solid #21262d}
+.bank-import-bar input{
+  flex:1;background:#0d1117;color:#e6edf3;
+  border:1.5px solid #30363d;border-radius:8px;
+  padding:9px 12px;font-size:12px;font-family:monospace;outline:none;
+}
+.bank-import-bar input:focus{border-color:#f59e0b}
+.bank-import-form{
+  background:#0d1117;border-bottom:1px solid #30363d;
+  padding:12px;display:none;
+}
+.bank-filter-wrap{padding:8px 12px;border-bottom:1px solid #21262d}
+.bank-filter-wrap select{
+  width:100%;background:#0d1117;color:#e6edf3;
+  border:1.5px solid #30363d;border-radius:8px;
+  padding:9px 12px;font-size:12px;outline:none;
+}
+.bank-tbl-wrap{margin:0 12px 8px;background:#161b22;border:1px solid #30363d;border-radius:10px;overflow:hidden}
+.bank-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.bank-tbl th{
+  color:#94a3b8;font-size:10px;font-weight:800;padding:9px 6px;
+  text-align:left;border-bottom:1.5px solid #21262d;text-transform:uppercase;
+}
+.bank-tbl td{padding:8px 6px;border-bottom:1px solid #161b22;vertical-align:middle}
+.bank-tbl tr:last-child td{border-bottom:none}
+.bank-row-sel{background:rgba(245,158,11,0.05)}
+input.rchk{accent-color:#f59e0b;width:15px;height:15px;cursor:pointer}
+.bank-pas{color:#60a5fa;font-weight:800;font-size:12px;line-height:1.2}
+.bank-jen{color:#94a3b8;font-size:9px;font-weight:700}
+.bank-hari-badge{
+  background:#161b22;border:1px solid #30363d;color:#8b949e;
+  border-radius:5px;padding:3px 8px;font-size:11px;
+}
+.bank-angka{font-weight:900;font-size:14px;font-family:monospace;letter-spacing:1px;color:#f59e0b}
+.bank-put{color:#94a3b8;font-size:12px;font-weight:700}
+.bank-ok{
+  background:rgba(16,185,129,.12);color:#10b981;
+  border:1px solid rgba(16,185,129,.3);border-radius:6px;
+  padding:3px 8px;font-size:11px;font-weight:800;display:inline-block;
+}
+.bank-patah{
+  background:rgba(239,68,68,.12);color:#ef4444;
+  border:1px solid rgba(239,68,68,.3);border-radius:6px;
+  padding:3px 8px;font-size:11px;font-weight:800;display:inline-block;
+}
+.bank-actions{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px 12px}
+.bact{
+  padding:9px 14px;border-radius:8px;font-weight:800;font-size:11px;
+  cursor:pointer;display:inline-flex;align-items:center;gap:4px;
+  border:none;transition:opacity .15s;letter-spacing:.3px;
+}
+.bact:disabled{opacity:.3;cursor:not-allowed}
+.bact-hapus{background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.25)!important}
+.bact-update{background:rgba(16,185,129,.1);color:#10b981;border:1px solid rgba(16,185,129,.25)!important}
+.bact-trek{background:rgba(30,64,175,.08);color:#60a5fa;border:1px solid rgba(30,64,175,.2)!important}
+.bact-rekap{background:#22d3ee;color:#000}
+.bank-trek-line{display:flex;align-items:center;gap:6px;padding:5px 2px;border-bottom:1px solid #21262d;font-size:12px;font-family:monospace}
+.btrk-r{color:#94a3b8;min-width:48px;font-size:11px}
+.btrk-p{font-weight:800;min-width:55px;letter-spacing:2px}
+.btrk-lbl{color:#94a3b8;font-size:11px}
+.btrk-s{margin-left:auto}
+.rek-block{background:#0d1117;border-radius:8px;padding:10px;margin-bottom:8px;font-family:monospace;font-size:12px;line-height:1.9}
+.rek-lbl{font-size:10px;font-weight:800;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px}
+.bank-empty{text-align:center;padding:28px 16px;color:#94a3b8;font-size:12px}
+
+/* ── MANUAL TAB ── */
+.mn-paste-bar{display:flex;gap:6px;padding:12px;border-bottom:1px solid #21262d}
+.mn-paste-bar input{
+  flex:1;background:#0d1117;color:#e6edf3;
+  border:1.5px solid #30363d;border-radius:8px;
+  padding:9px 12px;font-size:12px;font-family:monospace;outline:none;
+}
+.mn-paste-bar input:focus{border-color:#f59e0b}
+.btn-mn-load{
+  padding:9px 16px;border-radius:8px;border:none;
+  background:#22d3ee;color:#000;font-weight:800;font-size:12px;cursor:pointer;
+}
+.btn-mn-reset{
+  padding:9px 14px;border-radius:8px;border:none;
+  background:#161b22;color:#ef4444;
+  border:1px solid rgba(239,68,68,.3);font-weight:800;font-size:12px;cursor:pointer;
+}
+.mn-trek-result{
+  background:#161b22;border-top:1px solid #30363d;padding:16px;
+}
+.mn-trek-header{font-size:10px;font-weight:800;color:#94a3b8;letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.mn-trek-key{font-size:12px;font-weight:800;color:#22d3ee;font-family:monospace;margin-bottom:10px}
+.mn-preview-box{
+  background:#0c1a2e;border:1.5px solid #1d4ed8;border-radius:8px;
+  padding:10px 14px;font-family:monospace;font-size:14px;
+  color:#38bdf8;font-weight:800;text-align:center;
+  margin-bottom:10px;letter-spacing:2px;
+}
+.btn-mn-hitung{
+  flex:1;padding:11px;border-radius:8px;border:none;
+  background:#22d3ee;color:#000;font-weight:800;font-size:13px;cursor:pointer;
+}
+.btn-mn-simpan{
+  flex:1;padding:11px;border-radius:8px;border:none;
+  background:#10b981;color:#fff;font-weight:800;font-size:13px;cursor:pointer;
+}
+
+/* ── SHORTCUTS SCAN ── */
+.shortcut-row{display:flex;gap:6px;margin-bottom:10px}
+
+/* ── RADIO STYLE ── */
+.radio-group{display:flex;gap:16px}
+.radio-label{font-size:12px;color:#8b949e;display:flex;align-items:center;gap:5px;cursor:pointer}
+
+/* ── DARK MODE GLOBAL OVERRIDES ── */
+:root {
+  color-scheme: dark;
+}
+body {
+  background:#0d1117 !important;
+  color:#e6edf3 !important;
+}
+/* Inputs & selects */
+input, select, textarea {
+  background:#0d1117 !important;
+  color:#e6edf3 !important;
+  border-color:#30363d !important;
+  color-scheme: dark;
+}
+input::placeholder { color:#6e7681 !important; }
+/* Scrollbar */
+::-webkit-scrollbar { width:6px; height:6px; }
+::-webkit-scrollbar-track { background:#0d1117; }
+::-webkit-scrollbar-thumb { background:#30363d; border-radius:3px; }
+::-webkit-scrollbar-thumb:hover { background:#484f58; }
+/* Modal overlay */
+.modal-overlay { background:rgba(0,0,0,0.8) !important; }
+/* an-card border bottom */
+.an-card-title { border-bottom-color:#21262d !important; }
+/* result table stripe on hover */
+.result-tbl tr:hover td { background:rgba(245,158,11,0.04); }
+.bank-tbl tr:hover td { background:rgba(245,158,11,0.04); }
+/* bank-row-sel */
+.bank-row-sel { background:rgba(245,158,11,0.08) !important; }
+/* trek-line hover */
+.trek-line:hover { background:rgba(255,255,255,0.03); }
+/* Data bar button */
+.data-bar-btn { background:#0284c7 !important; color:#fff !important; }
+/* btn-batch border */
+.btn-batch { border-color:#30363d !important; background:#0d1117 !important; }
+/* mn-trek-header */
+.mn-trek-header { color:#6e7681 !important; }
+/* mn-trek-key stays cyan */
+.mn-trek-key { color:#22d3ee !important; }
+/* bact-trek */
+.bact-trek { color:#60a5fa !important; border-color:rgba(96,165,250,.25) !important; background:rgba(96,165,250,.08) !important; }
+/* Checkbox */
+input[type=checkbox] { accent-color:#f59e0b; }
+/* formula-row */
+.formula-row { background:#0d1117 !important; border-color:#30363d !important; }
+/* bank-empty */
+.bank-empty { color:#6e7681 !important; }
+/* chk-label */
+.chk-label { color:#8b949e !important; }
+/* tag-jenis */
+.tag-jenis { color:#6e7681 !important; }
+
+
+/* ════════════════════════════════════════
+   VISUAL & ESTETIKA UPGRADE
+   ════════════════════════════════════════ */
+
+/* ── FONT import ── */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap');
+
+/* ── Animated gradient background ── */
+body {
+  background: #0d1117 !important;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(245,158,11,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 110%, rgba(34,211,238,0.05) 0%, transparent 60%) !important;
+}
+
+/* ── Header glow upgrade ── */
+.wb-header {
+  background: linear-gradient(135deg,#0a0f1e 0%,#0f172a 50%,#0a0f1e 100%) !important;
+  border-bottom: 2px solid transparent !important;
+  background-clip: padding-box !important;
+  box-shadow: 0 0 0 1px rgba(245,158,11,0.35), 0 4px 32px rgba(245,158,11,0.18) !important;
+  position: relative;
+}
+.wb-header::after {
+  content:'';
+  position:absolute;
+  bottom:-2px; left:0; right:0; height:2px;
+  background: linear-gradient(90deg, transparent, #f59e0b, #ffd700, #f59e0b, transparent);
+  animation: headerShimmer 3s ease-in-out infinite;
+}
+@keyframes headerShimmer {
+  0%,100%  { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+.wb-header-title {
+  background: linear-gradient(90deg, #f59e0b, #ffd700, #f59e0b);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: goldShine 4s linear infinite;
+  font-size: 16px !important;
+  letter-spacing: 3px !important;
+}
+@keyframes goldShine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Card glassmorphism upgrade ── */
+.an-card {
+  background: linear-gradient(135deg, rgba(22,27,34,0.95) 0%, rgba(13,17,23,0.98) 100%) !important;
+  border: 1px solid rgba(245,158,11,0.12) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 4px 24px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.05) !important;
+  border-radius: 14px !important;
+  backdrop-filter: blur(10px);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.an-card:hover {
+  border-color: rgba(245,158,11,0.22) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 8px 32px rgba(0,0,0,0.5),
+    0 0 20px rgba(245,158,11,0.04),
+    inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+/* ── Card title gradient accent ── */
+.an-card-title {
+  background: linear-gradient(90deg, rgba(245,158,11,0.15), transparent);
+  margin: -16px -16px 12px !important;
+  padding: 10px 16px !important;
+  border-radius: 14px 14px 0 0 !important;
+  border-bottom: 1px solid rgba(245,158,11,0.1) !important;
+  color: #f59e0b !important;
+  font-size: 10px !important;
+}
+
+/* ── Tab nav upgrade ── */
+.tab-nav {
+  background: rgba(13,17,23,0.95) !important;
+  border-bottom: 1px solid rgba(245,158,11,0.1) !important;
+  backdrop-filter: blur(8px);
+  position: sticky; top: 56px; z-index: 100;
+}
+.tab-nav-btn {
+  position: relative;
+  color: #484f58 !important;
+  font-size: 11px !important;
+  transition: color 0.2s ease !important;
+}
+.tab-nav-btn.active {
+  color: #f59e0b !important;
+}
+.tab-nav-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 15%; right: 15%; height: 2px;
+  background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+  border-radius: 2px;
+  animation: tabUnderline 0.25s ease;
+}
+@keyframes tabUnderline {
+  from { opacity:0; transform: scaleX(0.3); }
+  to   { opacity:1; transform: scaleX(1); }
+}
+
+/* ── Tab content fade-in ── */
+#tab-scanner, #tab-manual {
+  animation: fadeInUp 0.25s ease;
+}
+/* tab-bank TIDAK pakai animation transform — agar position:fixed modal child bekerja benar */
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* ── Member bar upgrade ── */
+.mb-bar {
+  background: rgba(13,17,23,0.98) !important;
+  border-bottom: 1px solid rgba(245,158,11,0.08) !important;
+}
+
+/* ── Data bar upgrade ── */
+.data-bar {
+  background: linear-gradient(90deg, rgba(2,132,199,0.08), rgba(34,211,238,0.04)) !important;
+  border-bottom: 1px solid rgba(34,211,238,0.12) !important;
+}
+.data-bar-text { color: #38bdf8 !important; }
+
+/* ── Buttons glow on hover ── */
+.btn-an-scan {
+  background: linear-gradient(135deg, #22d3ee, #0ea5e9) !important;
+  box-shadow: 0 4px 15px rgba(34,211,238,0.25) !important;
+  transition: all 0.2s ease !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.5px !important;
+}
+.btn-an-scan:hover {
+  box-shadow: 0 6px 24px rgba(34,211,238,0.4) !important;
+  transform: translateY(-1px);
+}
+.btn-an-scan:active { transform: translateY(0); }
+
+.btn-an-stop {
+  box-shadow: 0 4px 15px rgba(239,68,68,0.2) !important;
+  transition: all 0.2s ease !important;
+}
+.btn-an-stop:hover { box-shadow: 0 6px 20px rgba(239,68,68,0.35) !important; }
+
+.mb-bar-login, .btn-data-togel {
+  transition: all 0.2s ease !important;
+}
+.mb-bar-login:hover {
+  box-shadow: 0 4px 16px rgba(245,158,11,0.35) !important;
+  transform: translateY(-1px);
+}
+
+/* ── Data togel btn ── */
+.btn-data-togel {
+  background: linear-gradient(90deg, rgba(245,158,11,0.08), rgba(255,140,0,0.04), rgba(245,158,11,0.08)) !important;
+  border-top: none !important;
+  border-bottom: 1px solid rgba(245,158,11,0.15) !important;
+  transition: background 0.3s ease, box-shadow 0.2s ease !important;
+}
+.btn-data-togel:hover {
+  background: linear-gradient(90deg, rgba(245,158,11,0.14), rgba(255,140,0,0.08), rgba(245,158,11,0.14)) !important;
+  box-shadow: inset 0 0 30px rgba(245,158,11,0.04);
+}
+
+/* ── Prediksi number glow ── */
+.pred-num {
+  color: #f59e0b !important;
+  text-shadow: 0 0 12px rgba(245,158,11,0.5) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 16px !important;
+}
+
+/* ── HIT / PATAH badge glow ── */
+.badge-hit {
+  background: rgba(16,185,129,0.12) !important;
+  color: #10b981 !important;
+  border: 1px solid rgba(16,185,129,0.3) !important;
+  box-shadow: 0 0 8px rgba(16,185,129,0.2) !important;
+  border-radius: 5px !important;
+  padding: 2px 7px !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+}
+.badge-patah {
+  background: rgba(239,68,68,0.1) !important;
+  color: #f87171 !important;
+  border: 1px solid rgba(239,68,68,0.25) !important;
+  box-shadow: 0 0 8px rgba(239,68,68,0.15) !important;
+  border-radius: 5px !important;
+  padding: 2px 7px !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+}
+
+/* ── bank-ok / bank-patah glow ── */
+.bank-ok {
+  box-shadow: 0 0 8px rgba(16,185,129,0.2) !important;
+}
+.bank-patah {
+  box-shadow: 0 0 8px rgba(239,68,68,0.15) !important;
+}
+
+/* ── Result tabel upgrade ── */
+.result-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(245,158,11,0.08);
+  margin: 0 12px 12px !important;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+}
+.result-tbl th {
+  background: linear-gradient(90deg, rgba(245,158,11,0.06), rgba(245,158,11,0.02)) !important;
+  color: #f59e0b !important;
+  font-size: 9px !important;
+  letter-spacing: 0.8px !important;
+  padding: 10px 8px !important;
+}
+.result-tbl td {
+  padding: 9px 8px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.03) !important;
+}
+.result-tbl tr:hover td {
+  background: rgba(245,158,11,0.04) !important;
+}
+
+/* ── Formula link ── */
+.formula-link {
+  color: #60a5fa !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 11px !important;
+}
+.formula-link:hover { color: #93c5fd !important; text-shadow: 0 0 8px rgba(96,165,250,0.3); }
+
+/* ── Glassmorphism modal ── */
+.modal-box {
+  background: linear-gradient(135deg, rgba(22,27,34,0.97) 0%, rgba(13,17,23,0.99) 100%) !important;
+  border: 1px solid rgba(245,158,11,0.15) !important;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 24px 64px rgba(0,0,0,0.7),
+    0 0 40px rgba(245,158,11,0.05) !important;
+  border-radius: 18px !important;
+  backdrop-filter: blur(20px);
+  animation: modalPop 0.22s cubic-bezier(0.34,1.56,0.64,1);
+}
+@keyframes modalPop {
+  from { opacity:0; transform: scale(0.93) translateY(12px); }
+  to   { opacity:1; transform: scale(1) translateY(0); }
+}
+.modal-overlay {
+  background: rgba(0,0,0,0.75) !important;
+  backdrop-filter: blur(4px);
+}
+.modal-title {
+  color: #f59e0b !important;
+  font-size: 13px !important;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(245,158,11,0.1);
+  margin-bottom: 14px !important;
+}
+
+/* ── Trek line ── */
+.trek-line {
+  transition: background 0.15s ease;
+  border-radius: 4px;
+}
+.trek-line:hover { background: rgba(245,158,11,0.03) !important; }
+.trek-pred {
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: 3px !important;
+}
+.trek-period {
+  font-family: 'JetBrains Mono', monospace !important;
+}
+
+/* ── Bank tbl upgrade ── */
+.bank-tbl-wrap {
+  border: 1px solid rgba(245,158,11,0.1) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+  border-radius: 12px !important;
+}
+.bank-tbl th {
+  background: linear-gradient(90deg, rgba(245,158,11,0.06), rgba(245,158,11,0.02)) !important;
+  color: #f59e0b !important;
+}
+.bank-tbl tr:hover td {
+  background: rgba(245,158,11,0.04) !important;
+}
+.bank-angka {
+  font-family: 'JetBrains Mono', monospace !important;
+  text-shadow: 0 0 10px rgba(245,158,11,0.35) !important;
+}
+
+/* ── Batch buttons upgrade ── */
+.btn-batch {
+  border: 1px solid rgba(34,211,238,0.2) !important;
+  background: rgba(34,211,238,0.04) !important;
+  color: #22d3ee !important;
+  transition: all 0.15s ease !important;
+  border-radius: 8px !important;
+}
+.btn-batch:hover {
+  background: rgba(34,211,238,0.1) !important;
+  border-color: rgba(34,211,238,0.4) !important;
+  box-shadow: 0 0 12px rgba(34,211,238,0.15) !important;
+  transform: translateY(-1px);
+}
+.btn-batch:active { transform: translateY(0); }
+
+/* ── Console upgrade ── */
+.an-console {
+  background: linear-gradient(135deg, #080c14, #0a0f1a) !important;
+  border: 1px solid rgba(34,211,238,0.15) !important;
+  box-shadow: inset 0 1px 0 rgba(34,211,238,0.05), 0 0 20px rgba(34,211,238,0.04) !important;
+  border-radius: 10px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  color: #22d3ee !important;
+}
+
+/* ── Progress bar upgrade ── */
+.progress-bar {
+  background: rgba(255,255,255,0.05) !important;
+  border-radius: 4px !important;
+  height: 4px !important;
+}
+.progress-fill {
+  background: linear-gradient(90deg, #22d3ee, #0ea5e9, #22d3ee) !important;
+  background-size: 200% auto !important;
+  animation: progressShine 1.5s linear infinite !important;
+  box-shadow: 0 0 8px rgba(34,211,238,0.4) !important;
+  border-radius: 4px !important;
+}
+@keyframes progressShine {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── Input focus glow ── */
+.an-input:focus, .an-select:focus {
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.1), 0 0 12px rgba(245,158,11,0.08) !important;
+}
+
+/* ── Rek block upgrade ── */
+.rek-block {
+  background: rgba(13,17,23,0.8) !important;
+  border: 1px solid rgba(255,255,255,0.05) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03) !important;
+}
+
+/* ── Scan formula row upgrade ── */
+.formula-row {
+  background: linear-gradient(135deg, rgba(13,17,23,0.9), rgba(8,12,20,0.95)) !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+.formula-row:hover {
+  border-color: rgba(245,158,11,0.15) !important;
+  box-shadow: 0 0 16px rgba(245,158,11,0.04) !important;
+}
+
+/* ── Shortcut buttons ── */
+.btn-shortcut.fast   { background: rgba(5,46,22,0.8) !important; color: #4ade80 !important; border: 1px solid rgba(74,222,128,0.2); }
+.btn-shortcut.normal { background: rgba(12,26,58,0.8) !important; color: #60a5fa !important; border: 1px solid rgba(96,165,250,0.2); }
+.btn-shortcut.deep   { background: rgba(30,10,60,0.8) !important; color: #a78bfa !important; border: 1px solid rgba(167,139,250,0.2); }
+.btn-shortcut.reset  { background: rgba(45,10,10,0.8) !important; color: #f87171 !important; border: 1px solid rgba(248,113,113,0.2); }
+.btn-shortcut { transition: all 0.15s ease !important; }
+.btn-shortcut:hover  { filter: brightness(1.2); transform: translateY(-1px); }
+
+/* ── bact buttons ── */
+.bact { transition: all 0.15s ease !important; }
+.bact:hover { transform: translateY(-1px); filter: brightness(1.1); }
+.bact-rekap {
+  background: linear-gradient(135deg, #22d3ee, #0ea5e9) !important;
+  box-shadow: 0 2px 10px rgba(34,211,238,0.25) !important;
+  color: #000 !important;
+}
+
+/* ── mn-preview-box glow ── */
+.mn-preview-box {
+  box-shadow: 0 0 20px rgba(14,165,233,0.15), inset 0 0 20px rgba(14,165,233,0.04) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  letter-spacing: 4px !important;
+}
+
+/* ── Scrollbar upgrade ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(245,158,11,0.25); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(245,158,11,0.45); }
+
+/* ── Selection color ── */
+::selection { background: rgba(245,158,11,0.25); color: #fcd34d; }
+
+/* ── Toast notification upgrade (override JS-generated) ── */
+.wb-toast {
+  position: fixed;
+  bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: linear-gradient(135deg, rgba(22,27,34,0.97), rgba(13,17,23,0.99));
+  border: 1px solid rgba(245,158,11,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(245,158,11,0.1);
+  color: #f59e0b;
+  font-weight: 800; font-size: 13px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  z-index: 9999;
+  backdrop-filter: blur(12px);
+  animation: toastIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  white-space: nowrap;
+}
+.wb-toast.success { border-color: rgba(16,185,129,0.4); color: #10b981; box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(16,185,129,0.12); }
+.wb-toast.error   { border-color: rgba(239,68,68,0.4);  color: #f87171; box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(239,68,68,0.12); }
+.wb-toast.info    { border-color: rgba(34,211,238,0.4); color: #22d3ee; box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 20px rgba(34,211,238,0.12); }
+@keyframes toastIn {
+  from { opacity:0; transform: translateX(-50%) translateY(16px) scale(0.9); }
+  to   { opacity:1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+@keyframes toastOut {
+  from { opacity:1; transform: translateX(-50%) translateY(0) scale(1); }
+  to   { opacity:0; transform: translateX(-50%) translateY(10px) scale(0.95); }
+}
+
+/* ── Bank hari badge ── */
+.bank-hari-badge {
+  background: rgba(34,211,238,0.08) !important;
+  border: 1px solid rgba(34,211,238,0.2) !important;
+  color: #22d3ee !important;
+  font-weight: 700 !important;
+}
+
+/* ── Ripple effect on buttons ── */
+.btn-ripple {
+  position: relative; overflow: hidden;
+}
+.btn-ripple::after {
+  content: '';
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  width: 0; height: 0;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+}
+.btn-ripple:active::after {
+  width: 200px; height: 200px; opacity: 0;
+}
+
+/* ── Skeleton loading ── */
+@keyframes skeletonPulse {
+  0%,100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #1a2030, #222d40, #1a2030);
+  background-size: 200% auto;
+  animation: skeletonPulse 1.5s ease infinite;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+</style>
+</head>
+<body>
+<div id="_wb_err_box" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#7f1d1d;color:#fca5a5;font-family:monospace;font-size:11px;padding:8px 12px;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow-y:auto;border-top:2px solid #ef4444"></div>
+
+
+<!-- AUTH GATE: Dihapus (no login required) -->
+
+<script>
+// ── GLOBAL ERROR CATCHER (debug) ──
+window.onerror = function(msg, src, line, col, err) {
+  const box = document.getElementById('_wb_err_box');
+  if(box) {
+    box.style.display = 'block';
+    box.textContent += '\n❌ ' + msg + ' [L' + line + ']';
+  }
+  return false;
+};
+window.addEventListener('unhandledrejection', function(e) {
+  const box = document.getElementById('_wb_err_box');
+  if(box) {
+    box.style.display = 'block';
+    box.textContent += '\n⚠ Promise: ' + (e.reason||'unknown');
+  }
+});
+
+// Auth: dihapus - semua fitur gratis
+function requireLogin(){ return true; }
+function mbLogout(){}
+</script>
+
+<!-- ══ TAB NAV ══ -->
+<div class="tab-nav">
+  <button id="tab-btn-scanner" class="tab-nav-btn active" onclick="switchTab('scanner')">📡 Scanner</button>
+  <button id="tab-btn-cepat" class="tab-nav-btn" onclick="switchTab('cepat')">⚡ Cepat</button>
+  <button id="tab-btn-bank" class="tab-nav-btn" onclick="switchTab('bank')">💾 Bank</button>
+  <button id="tab-btn-manual" class="tab-nav-btn" onclick="switchTab('manual')">🔑 Manual</button>
+</div>
+
+<!-- ══ DATA TOGEL BTN ══ -->
+<button class="btn-data-togel" onclick="window.location.href='wongbagus-pasaran.html'">
+  📊 DATA TOGEL &amp; PAITO
+  <span style="font-size:10px;color:#94a3b8;font-weight:600">64 Pasaran</span>
+</button>
+
+<!-- ══ DATA STATUS ══ -->
+<div class="data-bar">
+  <span id="data-status-text" class="data-bar-text">📦 Data: loading...</span>
+  <button onclick="doRefreshData()" id="btn-refresh" class="data-bar-btn">🔄 Refresh</button>
+</div>
+
+<div class="page-content">
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB SCANNER
+══════════════════════════════════════════════════════════ -->
+<div id="tab-scanner">
+
+<div class="an-card">
+  <div class="an-card-title">Pengaturan Scan</div>
+
+  <div class="grid2">
+    <div class="field-group">
+      <label class="field-label">Market</label>
+      <select id="sc-pasaran" class="an-select" onchange="updatePasaran()"></select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Hari</label>
+      <select id="sc-hari" class="an-select">
+        <option value="">Harian</option>
+        <option value="0">Minggu</option>
+        <option value="1">Senin</option>
+        <option value="2">Selasa</option>
+        <option value="3">Rabu</option>
+        <option value="4">Kamis</option>
+        <option value="5">Jumat</option>
+        <option value="6">Sabtu</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="field-group">
+      <label class="field-label">Baris</label>
+      <input type="number" id="sc-limit" value="10" min="5" max="150" class="an-input">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Rumus</label>
+      <select id="sc-jenis" class="an-select">
+        <option value="ai_ke">AI</option>
+        <option value="ai_ac">AI 2D Depan</option>
+        <option value="ai_ck">AI 2D Tengah</option>
+        <option value="bbfs_ke" selected>BBFS KE</option>
+        <option value="bbfs_ac">BBFS AC</option>
+        <option value="bbfs_ck">BBFS CK</option>
+        <option value="bbfs_4d">BBFS 4D</option>
+        <option value="pos_e">Posisi Ek</option>
+        <option value="pos_k">Posisi Kp</option>
+        <option value="pos_a">Posisi As</option>
+        <option value="pos_c">Posisi Cp</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="field-group">
+      <label class="field-label">Patah</label>
+      <select id="sc-patah" class="an-select">
+        <option value="0" selected>Patah 0</option>
+        <option value="1">Patah maks 1</option>
+        <option value="2">Patah maks 2</option>
+        <option value="3">Patah maks 3</option>
+        <option value="5">Patah maks 5</option>
+        <option value="99">Bebas</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Referensi</label>
+      <select id="sc-digit-ref" class="an-select" onchange="document.getElementById('sc-digit').value=this.value">
+        <option value="2">2 Digit (Sembunyi)</option>
+        <option value="1">1 Digit</option>
+        <option value="3">3 Digit</option>
+        <option value="4">4 Digit</option>
+        <option value="5">5 Digit</option>
+        <option value="6">6 Digit</option>
+        <option value="7">7 Digit</option>
+        <option value="8">8 Digit</option>
+        <option value="9">9 Digit</option>
+      </select>
+    </div>
+  </div>
+  <!-- hidden sc-digit untuk kompatibilitas JS asli -->
+  <input type="number" id="sc-digit" value="2" min="1" max="9" style="display:none">
+
+  <!-- PENGATURAN LANJUTAN -->
+  <button onclick="toggleLanjutan()" id="btn-lanjutan" class="btn-lanjutan">⚙ Pengaturan Lanjutan ▼</button>
+  <div id="panel-lanjutan" class="lanjutan-panel">
+
+    <div class="field-group">
+      <label class="field-label">Shortcut Scan</label>
+      <div class="shortcut-grid">
+        <button onclick="setScanMode('fast')" class="btn-shortcut fast">⚡ Fast</button>
+        <button onclick="setScanMode('normal')" class="btn-shortcut normal">🔍 Normal</button>
+        <button onclick="setScanMode('deep')" class="btn-shortcut deep">🔬 Deep</button>
+        <button onclick="resetBatch()" id="btn-batch-reset" class="btn-shortcut reset" style="display:none">🔁 Reset</button>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Key (x) — Putaran Referensi</label>
+      <div id="key-checks" style="display:flex;flex-wrap:wrap;gap:6px">
+        <label class="chk-label"><input type="checkbox" class="key-chk" value="1" checked> X1</label>
+        <label class="chk-label"><input type="checkbox" class="key-chk" value="2" checked> X2</label>
+        <label class="chk-label"><input type="checkbox" class="key-chk" value="3" checked> X3</label>
+        <label class="chk-label"><input type="checkbox" class="key-chk" value="4" checked> X4</label>
+        <label class="chk-label"><input type="checkbox" class="key-chk" value="5" checked> X5</label>
+        <label class="chk-label"><input type="checkbox" class="key-chk" value="6" checked> X6</label>
+        <label class="chk-label"><input type="checkbox" class="key-chk" value="7" checked> X7</label>
+        <label class="chk-label"><input type="checkbox" class="key-chk" value="8" checked> X8</label>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Subkey 1</label>
+      <div id="sk1-checks" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Operator</label>
+      <div class="radio-group">
+        <label class="radio-label"><input type="radio" name="op-mode" value="+" id="op-plus"> (+)</label>
+        <label class="radio-label"><input type="radio" name="op-mode" value="-" id="op-minus"> (-)</label>
+        <label class="radio-label"><input type="radio" name="op-mode" value="all" id="op-all" checked> ALL</label>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Subkey 2</label>
+      <div id="sk2-checks" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+
+    <div class="field-group" style="margin-bottom:0">
+      <label class="field-label">Hasil (=)</label>
+      <div id="hasil-checks" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+
+    <div style="display:none">
+      <select id="sc-patah-mode"><option value="total" selected>Total Patah</option><option value="streak">Max Streak</option><option value="current">Streak Terakhir</option></select>
+      <input type="number" id="sc-minhit" value="0">
+      <div id="minhit-warn"></div>
+    </div>
+    <div style="margin-top:10px">
+      <label class="field-label">Target Cari</label>
+      <select id="sc-target" class="an-select">
+        <option value="5">5 Rumus</option>
+        <option value="10" selected>10 Rumus</option>
+        <option value="20">20 Rumus</option>
+        <option value="50">50 Rumus</option>
+      </select>
+    </div>
+  </div>
+</div><!-- end an-card -->
+
+<div style="padding:0 12px">
+  <button class="btn-an-scan" id="btn-scan-all" onclick="startScanAll()">📡 SCAN SEMUA</button>
+  <button class="btn-an-stop" id="btn-stop-all" onclick="stopAllScans()" style="display:none">⏹ STOP</button>
+  <div class="batch-grid">
+    <button class="btn-batch" id="btn-batch-1"  onclick="startBatch(1)">⏳B1</button>
+    <button class="btn-batch" id="btn-batch-2"  onclick="startBatch(2)">⏳B2</button>
+    <button class="btn-batch" id="btn-batch-3"  onclick="startBatch(3)">⏳B3</button>
+    <button class="btn-batch" id="btn-batch-4"  onclick="startBatch(4)">⏳B4</button>
+    <button class="btn-batch" id="btn-batch-5"  onclick="startBatch(5)">⏳B5</button>
+    <button class="btn-batch" id="btn-batch-6"  onclick="startBatch(6)">⏳B6</button>
+    <button class="btn-batch" id="btn-batch-7"  onclick="startBatch(7)">⏳B7</button>
+    <button class="btn-batch" id="btn-batch-8"  onclick="startBatch(8)">⏳B8</button>
+    <button class="btn-batch" id="btn-batch-9"  onclick="startBatch(9)">⏳B9</button>
+    <button class="btn-batch" id="btn-batch-10" onclick="startBatch(10)">⏳B10</button>
+  </div>
+</div>
+
+<div class="an-console" id="sc-console">&gt;_ Siap scan — pilih pasaran, klik SCAN SEMUA atau B1-B10</div>
+<div class="progress-bar"><div class="progress-fill" id="sc-progress" style="width:0%"></div></div>
+
+<!-- HASIL SCAN -->
+<div class="result-wrap" id="result-card" style="display:none">
+  <div class="an-card" style="margin:0">
+    <div class="an-card-title" style="display:flex;align-items:center;justify-content:space-between">
+      <span>Hasil Scan <span id="result-count-badge" style="font-size:10px;color:#22d3ee;font-weight:800;background:rgba(34,211,238,.1);padding:2px 7px;border-radius:5px;margin-left:6px">0</span></span>
+      <button onclick="clearResults()" style="padding:3px 10px;border-radius:6px;border:none;background:rgba(248,113,113,.15);color:#f87171;font-size:10px;font-weight:700;cursor:pointer">🗑 Hapus Hasil</button>
+    </div>
+    <table class="result-tbl">
+      <thead>
+        <tr>
+          <th>Formula</th>
+          <th>Pred</th>
+          <th>PJG</th>
+          <th>HIT</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="result-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TREK MODAL SCANNER -->
+<div class="modal-overlay" id="trek-modal" onclick="if(event.target===this)closeTrek()">
+  <div class="modal-box">
+    <div class="modal-title" id="trek-title">Trek</div>
+    <div style="font-size:11px;color:#94a3b8;margin-bottom:10px;font-family:monospace" id="trek-info"></div>
+    <div class="modal-scroll" id="trek-body"></div>
+    <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+      <button id="sc-trek-save-btn" onclick="scTrekSave()" style="padding:7px 14px;border-radius:8px;border:none;background:#10b981;color:#fff;font-weight:700;font-size:12px;cursor:pointer">💾 Save</button>
+      <button onclick="scTrekCopy()" style="padding:7px 14px;border-radius:8px;border:none;background:#22d3ee;color:#000;font-weight:700;font-size:12px;cursor:pointer">📋 Copy</button>
+      <button class="btn-close-modal" onclick="closeTrek()">✕ Tutup</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- end tab-scanner -->
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB BANK RUMUS
+══════════════════════════════════════════════════════════ -->
+<div id="tab-bank" style="display:none">
+
+  <div class="bank-import-bar">
+    <input type="text" id="bank-inp-code" placeholder="Masukkan kode rumus" />
+    <button class="btn-an-import" onclick="bankShowImport()">⚡ IMPORT</button>
+  </div>
+
+  <div class="bank-import-form" id="bank-import-form">
+    <div class="an-card-title" style="margin:0 0 10px">Detail Import</div>
+    <div class="grid2">
+      <div class="field-group">
+        <label class="field-label">Pasaran</label>
+        <select id="bfrm-pasaran" class="an-select"></select>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Jenis Trek</label>
+        <select id="bfrm-jenis" class="an-select">
+          <option value="ai_ke">AI 2D Belakang (KE)</option>
+          <option value="ai_ac">AI 2D Depan (AC)</option>
+          <option value="ai_ck">AI 2D Tengah (CK)</option>
+          <option value="bbfs_ke">BBFS KE</option>
+          <option value="bbfs_ac">BBFS AC</option>
+          <option value="bbfs_ck">BBFS CK</option>
+          <option value="bbfs_4d">BBFS 4D</option>
+          <option value="pos_e">Posisi Ek</option>
+          <option value="pos_k">Posisi Kp</option>
+          <option value="pos_a">Posisi As</option>
+          <option value="pos_c">Posisi Cp</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="field-group">
+        <label class="field-label">Limit Baris</label>
+        <input type="number" id="bfrm-limit" value="14" min="5" max="50" class="an-input">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Digit Output</label>
+        <input type="number" id="bfrm-digit" value="2" min="2" max="6" class="an-input">
+      </div>
+    </div>
+    <div style="font-size:11px;color:#38bdf8;font-family:monospace;margin-bottom:10px;padding:8px;background:#f0f9ff;border-radius:6px" id="bfrm-preview">Formula: --</div>
+    <div style="display:flex;gap:8px">
+      <button onclick="bankHideImport()" style="flex:1;padding:9px;border-radius:8px;border:1.5px solid #30363d;background:#161b22;color:#6e7681;font-size:12px;font-weight:700;cursor:pointer">✕ Batal</button>
+      <button onclick="bankDoImport()" style="flex:2;padding:9px;border-radius:8px;border:none;background:#22d3ee;color:#000;font-size:12px;font-weight:800;cursor:pointer">✅ Simpan Rumus</button>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px">
+    <span id="bank-info" style="font-size:11px;color:#94a3b8"></span>
+    <span id="bank-count-badge" style="background:#161b22;border:1px solid #30363d;color:#22d3ee;font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px">0 rumus</span>
+  </div>
+
+  <div class="bank-filter-wrap">
+    <select id="bank-filter-pas" class="an-select" onchange="renderBank()">
+      <option value="">-- Pilih Pasaran --</option>
+    </select>
+  </div>
+
+  <div class="bank-tbl-wrap">
+    <table class="bank-tbl">
+      <thead>
+        <tr>
+          <th style="width:34px;text-align:center"><input type="checkbox" class="rchk" id="bank-chk-all" onchange="bankToggleAll(this)"></th>
+          <th>TIPE</th>
+          <th>HARI</th>
+          <th>ANGKA</th>
+          <th>P...</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody id="bank-tbody"></tbody>
+    </table>
+    <div id="bank-empty" class="bank-empty" style="display:none">💾 Belum ada rumus.<br><span style="font-size:11px">Scan lalu Save, atau Import kode rumus</span></div>
+  </div>
+
+  <div class="bank-actions">
+    <button class="bact bact-hapus" id="bact-hapus" onclick="bankHapusSelected()" disabled>🗑 Hapus</button>
+    <button class="bact bact-update" id="bact-update" onclick="bankUpdateSelected()" disabled>🔄 Update</button>
+    <button class="bact bact-trek" id="bact-trek" onclick="bankOpenTrekOrGabungan()" disabled>📋 Trek</button>
+    <button class="bact bact-rekap" id="bact-rekap" onclick="bankOpenRekap()" disabled>📊 Rekap</button>
+    <button class="bact" onclick="clearBank()" style="background:rgba(239,68,68,.15);color:#ef4444;border:1px solid rgba(239,68,68,.3)">🗑 Hapus Semua</button>
+  </div>
+
+</div><!-- end tab-bank -->
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB MANUAL
+══════════════════════════════════════════════════════════ -->
+<div id="tab-manual" style="display:none">
+
+<div class="an-card">
+  <div class="an-card-title">⚙️ Pengaturan Trek</div>
+
+  <div class="grid2">
+    <div class="field-group">
+      <label class="field-label">Pasaran</label>
+      <select id="mn-pasaran" class="an-select"></select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Jenis Trek</label>
+      <select id="mn-jenis" class="an-select">
+        <option value="ai_ke">AI 2D Belakang</option>
+        <option value="ai_ac">AI 2D Depan</option>
+        <option value="ai_ck">AI 2D Tengah</option>
+        <option value="bbfs_ke">BBFS KE</option>
+        <option value="bbfs_ac">BBFS AC</option>
+        <option value="bbfs_ck">BBFS CK</option>
+        <option value="bbfs_4d">BBFS 4D</option>
+        <option value="pos_e">Posisi Ek</option>
+        <option value="pos_k">Posisi Kp</option>
+        <option value="pos_a">Posisi As</option>
+        <option value="pos_c">Posisi Cp</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="field-group">
+      <label class="field-label">📅 Filter Hari</label>
+      <select id="mn-hari" class="an-select" onchange="mnOnHariChange()">
+        <option value="">Harian (Semua)</option>
+        <option value="1">Minggu</option>
+        <option value="2">Senin</option>
+        <option value="3">Selasa</option>
+        <option value="4">Rabu</option>
+        <option value="5">Kamis</option>
+        <option value="6">Jumat</option>
+        <option value="0">Sabtu</option>
+      </select>
+    </div>
+    <div id="mn-hari-info" style="display:flex;align-items:flex-end;padding-bottom:6px">
+      <span id="mn-hari-info-text" style="font-size:10px;color:#94a3b8">Tampil semua hari</span>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="field-group">
+      <label class="field-label">Limit Baris</label>
+      <input type="number" id="mn-limit" value="20" min="5" max="150" class="an-input">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Digit Output</label>
+      <input type="number" id="mn-digit" value="2" min="2" max="8" class="an-input">
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="field-group">
+      <label class="field-label">Mode</label>
+      <select id="mn-calc-mode" class="an-select" onchange="mnOnModeChange()">
+        <option value="otomatis">Otomatis</option>
+        <option value="manual">Manual</option>
+      </select>
+    </div>
+    <div id="mn-mode-info" style="display:flex;align-items:flex-end;padding-bottom:6px">
+      <span style="font-size:10px;color:#94a3b8">Otomatis: trek tampil langsung</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FORMULA SLOT 1 ══ -->
+<div class="an-card" style="margin-top:8px">
+  <!-- Header -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+    <div class="an-card-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0">
+      🔑 FORMULA <span style="color:#f59e0b">1</span>
+    </div>
+    <button onclick="mnResetKodeSlot(1)" class="btn-mn-reset" style="padding:6px 12px;font-size:11px">↺ Reset</button>
+  </div>
+  <!-- INPUT PASTE KODE -->
+  <div style="display:flex;gap:6px;margin-bottom:12px">
+    <input type="text" id="mn-paste-kode-1" placeholder="Paste kode rumus..." 
+      style="flex:1;background:#0d1117;color:#e6edf3;border:2px solid #30363d;border-radius:10px;padding:10px 14px;font-size:13px;font-family:monospace;outline:none;font-weight:700;transition:border-color .15s"
+      oninput="mnAutoLoadSlot(1,this.value)"
+      onpaste="setTimeout(()=>mnAutoLoadSlot(1,document.getElementById('mn-paste-kode-1').value),50)"
+      onfocus="this.style.borderColor='#f59e0b'"
+      onblur="this.style.borderColor='#30363d'">
+    <button onclick="mnLoadKodeSlot(1)" class="btn-mn-load" style="padding:10px 16px;font-size:13px;border-radius:10px">⚡ LOAD</button>
+  </div>
+
+  <label class="field-label" style="margin-bottom:8px;font-size:10px;font-weight:800;letter-spacing:1.5px;color:#94a3b8;text-transform:uppercase">KUNCI FORMULA <span style="color:#475569;font-weight:500;font-size:9px;letter-spacing:.5px">— maks 6 elemen</span></label>
+  <!-- Baris 1: e1 mod1 op1 | e2 mod2 op2 -->
+  <div class="formula-row">
+    <div style="font-size:9px;color:#475569;font-weight:700;letter-spacing:.5px;margin-bottom:5px;text-transform:uppercase">Elemen 1 &amp; 2</div>
+    <div style="display:grid;grid-template-columns:2.2fr 1fr 0.8fr 2.2fr 1fr 0.8fr;gap:5px;align-items:center">
+      <select id="mn-1-e1"   class="formula-sel"></select>
+      <select id="mn-1-mod1" class="formula-sel-mod"></select>
+      <select id="mn-1-op1"  class="formula-sel-op">
+        <option value="+">+</option><option value="-">-</option><option value=".">×</option><option value="none">—</option>
+      </select>
+      <select id="mn-1-e2"   class="formula-sel"></select>
+      <select id="mn-1-mod2" class="formula-sel-mod"></select>
+      <select id="mn-1-op2"  class="formula-sel-op">
+        <option value="none">—</option><option value="+">+</option><option value="-">-</option><option value=".">×</option>
+      </select>
+    </div>
+  </div>
+  <!-- Baris 2: e3 mod3 op3 | e4 mod4 op4 -->
+  <div class="formula-row">
+    <div style="font-size:9px;color:#475569;font-weight:700;letter-spacing:.5px;margin-bottom:5px;text-transform:uppercase">Elemen 3 &amp; 4</div>
+    <div style="display:grid;grid-template-columns:2.2fr 1fr 0.8fr 2.2fr 1fr 0.8fr;gap:5px;align-items:center">
+      <select id="mn-1-e3"   class="formula-sel"></select>
+      <select id="mn-1-mod3" class="formula-sel-mod"></select>
+      <select id="mn-1-op3"  class="formula-sel-op">
+        <option value="none">—</option><option value="+">+</option><option value="-">-</option><option value=".">×</option>
+      </select>
+      <select id="mn-1-e4"   class="formula-sel"></select>
+      <select id="mn-1-mod4" class="formula-sel-mod"></select>
+      <select id="mn-1-op4"  class="formula-sel-op">
+        <option value="none">—</option><option value="+">+</option><option value="-">-</option><option value=".">×</option>
+      </select>
+    </div>
+  </div>
+  <!-- Baris 3: e5 mod5 op5 | e6 mod6 | modh global -->
+  <div class="formula-row" style="margin-bottom:10px">
+    <div style="font-size:9px;color:#475569;font-weight:700;letter-spacing:.5px;margin-bottom:5px;text-transform:uppercase">Elemen 5 &amp; 6 · <span style="color:#78350f">MOD GLOBAL</span></div>
+    <div style="display:grid;grid-template-columns:2.2fr 1fr 0.8fr 2.2fr 1fr 1fr;gap:5px;align-items:center">
+      <select id="mn-1-e5"   class="formula-sel"></select>
+      <select id="mn-1-mod5" class="formula-sel-mod"></select>
+      <select id="mn-1-op5"  class="formula-sel-op">
+        <option value="none">—</option><option value="+">+</option><option value="-">-</option><option value=".">×</option>
+      </select>
+      <select id="mn-1-e6"   class="formula-sel"></select>
+      <select id="mn-1-mod6" class="formula-sel-mod"></select>
+      <select id="mn-1-modh" class="formula-sel-mod" style="color:#f59e0b;border-color:#78350f;font-weight:800;background:#1c1505"></select>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+    <label class="field-label" style="white-space:nowrap;margin:0;font-size:10px;color:#94a3b8;letter-spacing:1px">HASIL (=)</label>
+    <div class="mn-preview-box" id="mn-preview-1" style="flex:1;margin:0;font-size:13px;letter-spacing:2px">--</div>
+  </div>
+
+  <!-- Action buttons -->
+  <div style="display:flex;gap:6px">
+    <button id="mn-btn-hitung-1" onclick="mnShowTrekSlot(1)" class="btn-mn-hitung" style="display:none">🔍 Hitung</button>
+    <button onclick="mnSaveToBankSlot(1)" class="btn-mn-simpan" style="flex:1;padding:13px;font-size:14px;border-radius:10px;letter-spacing:.5px">💾 Simpan ke Bank</button>
+  </div>
+  <!-- Hasil Trek Slot 1 — angkanet style -->
+  <div id="mn-trek-card-1" class="mn-trek-result" style="display:none;margin-top:14px;padding:0;background:transparent;border:none;border-radius:0">
+    <div style="background:#0d1117;border:1.5px solid #30363d;border-radius:10px;overflow:hidden">
+      <!-- Trek Header bar -->
+      <div style="background:#161b22;border-bottom:1px solid #30363d;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <div style="font-size:10px;font-weight:800;color:#94a3b8;letter-spacing:1px;text-transform:uppercase">HASIL TREK</div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:11px;color:#ef4444;font-weight:800">
+            <input type="checkbox" id="mn-data-asli-1" onchange="mnShowTrekSlot(1)" style="accent-color:#ef4444;width:14px;height:14px;cursor:pointer"> data asli
+          </label>
+          <button onclick="mnCopyTrekSlot(1)" style="padding:5px 12px;border-radius:7px;border:none;background:#22d3ee;color:#000;font-weight:800;font-size:11px;cursor:pointer">📋 Copy</button>
+        </div>
+      </div>
+      <!-- Trek meta: pasaran + formula KEY -->
+      <div id="mn-trek-info-1" style="font-size:11px;color:#94a3b8;padding:8px 12px 4px;font-family:monospace"></div>
+      <!-- Trek body -->
+      <div id="mn-tabel-body-1" style="font-family:'Courier New',monospace;font-size:13px;line-height:1.7;color:#cbd5e1;background:#161b22;padding:12px;border-top:1px solid #21262d;white-space:pre-wrap"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden elements for backward compatibility -->
+<div style="display:none">
+  <input type="checkbox" id="mn-data-asli">
+  <div id="mn-trek-card"></div>
+  <div id="mn-trek-info"></div>
+  <div id="mn-tabel-aj-head"></div>
+  <div id="mn-tabel-aj-body"></div>
+  <div id="mn-tabel-aj-foot"></div>
+  <div id="mn-tabel-aj-label"></div>
+  <div id="mn-tabel-aj-key"></div>
+  <div id="mn-tabel-aj-ai"></div>
+  <div id="mn-next-pred"><div id="mn-next-val"></div></div>
+  <div id="mn-preview">--</div>
+  <select id="mn-e1"></select><select id="mn-mod1"></select><select id="mn-op1"><option value="+">+</option></select>
+  <select id="mn-e2"></select><select id="mn-mod2"></select><select id="mn-op2"><option value="none">—</option></select>
+  <select id="mn-e3"></select><select id="mn-mod3"></select><select id="mn-op3"><option value="none">—</option></select>
+  <select id="mn-e4"></select><select id="mn-mod4"></select><select id="mn-op4"><option value="none">—</option></select>
+  <select id="mn-e5"></select><select id="mn-mod5"></select><select id="mn-op5"><option value="none">—</option></select>
+  <select id="mn-e6"></select><select id="mn-mod6"></select><select id="mn-modh"></select>
+  <input type="text" id="mn-paste-kode">
+  <button id="mn-btn-hitung"></button>
+</div>
+
+</div><!-- end tab-manual -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     TAB SCANNER CEPAT (gabungan logika scanner_v2 + trek index_fixed)
+══════════════════════════════════════════════════════════ -->
+<div id="tab-cepat" style="display:none">
+
+<div class="an-card">
+  <div class="an-card-title">⚡ Scanner Cepat · <span id="cp-combo-label" style="color:#10b981">62.720 Token</span> · <span style="color:#f59e0b">PATAH 0 STRICT</span></div>
+  <div class="grid2">
+    <div class="field-group">
+      <label class="field-label">Pasaran</label>
+      <select id="cp-pasaran" class="an-select"></select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Hari Filter</label>
+      <select id="cp-hari" class="an-select">
+        <option value="">Semua hari</option>
+        <option value="0">Minggu</option>
+        <option value="1">Senin</option>
+        <option value="2">Selasa</option>
+        <option value="3">Rabu</option>
+        <option value="4">Kamis</option>
+        <option value="5">Jumat</option>
+        <option value="6">Sabtu</option>
+      </select>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="field-group">
+      <label class="field-label">Target Scan</label>
+      <select id="cp-target" class="an-select">
+        <option value="2be" selected>AI 2D Belakang (K+E)</option>
+        <option value="2de">AI 2D Depan (A+C)</option>
+        <option value="2te">AI 2D Tengah (C+K)</option>
+        <option value="bbfs_ke">BBFS KE</option>
+        <option value="bbfs_ac">BBFS AC</option>
+        <option value="bbfs_ck">BBFS CK</option>
+        <option value="bbfs_4d">BBFS 4D</option>
+        <option value="ke">Posisi Ek (E)</option>
+        <option value="kk">Posisi Kp (K)</option>
+        <option value="ka">Posisi As (A)</option>
+        <option value="kc">Posisi Cp (C)</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">Putaran</label>
+      <input type="number" id="cp-putaran" value="10" min="3" class="an-input">
+    </div>
+  </div>
+  <div class="grid3">
+    <div class="field-group">
+      <label class="field-label">Mode Kunci</label>
+      <select id="cp-mode" class="an-select" onchange="cpUpdateComboLabel()">
+        <option value="normal" selected>Normal (62K)</option>
+        <option value="extended">Extended (+Hist/J)</option>
+      </select>
+    </div>
+    <div class="field-group">
+      <label class="field-label">nDigit Pred</label>
+      <input type="number" id="cp-ndigit" value="4" min="1" max="9" class="an-input">
+    </div>
+    <div class="field-group">
+      <label class="field-label">Top N</label>
+      <input type="number" id="cp-topn" value="10" min="1" class="an-input">
+    </div>
+  </div>
+</div>
+
+<div style="padding:0 12px">
+  <button id="cp-btn-scan" class="btn-an-scan" onclick="cpStartScan()">⚡ SCAN CEPAT</button>
+  <button id="cp-btn-stop" class="btn-an-stop" onclick="cpStopScan()" style="display:none">⏹ STOP</button>
+</div>
+
+<div class="an-console" id="cp-console">&gt;_ Pilih pasaran lalu klik SCAN CEPAT</div>
+<div class="progress-bar"><div class="progress-fill" id="cp-progress" style="width:0%"></div></div>
+
+<!-- Hasil Cepat -->
+<div class="result-wrap" id="cp-result-card" style="display:none">
+  <div class="an-card" style="margin:0">
+    <div class="an-card-title" style="display:flex;align-items:center;justify-content:space-between">
+      <span>Top Rumus Token <span id="cp-count-badge" style="font-size:10px;color:#22d3ee;font-weight:800;background:rgba(34,211,238,.1);padding:2px 7px;border-radius:5px;margin-left:6px">0</span></span>
+    </div>
+    <table class="result-tbl">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Pred</th>
+          <th>HIT</th>
+          <th>Skor</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="cp-result-tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Trek Modal Cepat -->
+<div class="modal-overlay" id="cp-trek-modal" onclick="if(event.target===this)cpCloseTrek()">
+  <div class="modal-box">
+    <div class="modal-title" id="cp-trek-title">Trek Token</div>
+    <div style="font-size:11px;color:#94a3b8;margin-bottom:10px;font-family:monospace" id="cp-trek-info"></div>
+    <div class="modal-scroll" id="cp-trek-body"></div>
+    <div style="margin-top:12px;display:flex;gap:8px;justify-content:flex-end">
+      <button onclick="cpSaveTrek()" style="padding:7px 14px;border-radius:8px;border:none;background:#10b981;color:#fff;font-weight:700;font-size:12px;cursor:pointer">💾 Save ke Bank</button>
+      <button onclick="cpCopyKode()" style="padding:7px 14px;border-radius:8px;border:1px solid rgba(245,158,11,0.3);background:rgba(245,158,11,0.12);color:#f59e0b;font-weight:700;font-size:12px;cursor:pointer">🔑 Copy Kode</button>
+      <button onclick="cpCopyTrek()" style="padding:7px 14px;border-radius:8px;border:none;background:#22d3ee;color:#000;font-weight:700;font-size:12px;cursor:pointer">📋 Copy</button>
+      <button class="btn-close-modal" onclick="cpCloseTrek()">✕ Tutup</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- end tab-cepat -->
+
+</div><!-- end page-content -->
+
+<script>
+// ── PATCH: override setConsole untuk style baru ──
+function setConsole(msg){
+  const el = document.getElementById('sc-console');
+  if(el) el.textContent = '>_ '+msg;
+}
+
+// ── PATCH: sync sc-digit-ref ↔ sc-digit ──
+document.addEventListener('DOMContentLoaded', function(){
+  const ref = document.getElementById('sc-digit-ref');
+  const dig = document.getElementById('sc-digit');
+  if(ref && dig){
+    // Init: set sc-digit sesuai sc-digit-ref saat load
+    dig.value = ref.value;
+    ref.addEventListener('change', function(){ dig.value = this.value; });
+    dig.addEventListener('change', function(){
+      if(ref.querySelector('option[value="'+this.value+'"]')) ref.value = this.value;
+    });
+  }
+});
+
+// ── PATCH: bank status labels agar pakai class baru ──
+
+</script>
+<script>
+/**
+ * wb_data.js -- WongBagus Prediction - Shared Data Module
+ * ========================================================
+ * Dipakai oleh SEMUA halaman: index.html, rekap_2d-1.html,
+ * bola_merah.html, rekap_3d.html, rekap_4d.html, pola_sgp.html,
+ * kalender_togel.html, bank_rumus.html, dll.
+ *
+ * CARA PAKAI (di tiap halaman, sebelum script utama):
+ *   <script src="./wb_data.js"><\/script>
+ *
+ * API publik:
+ *   WBData.getAll()            → { hk:{result,status,updated,name,...}, ..., _meta:{} }
+ *   WBData.get(id)             → entry untuk 1 pasaran, atau null
+ *   WBData.getResult(id)       → string 4-digit / '----' / null
+ *   WBData.onUpdate(callback)  → register listener; dipanggil setiap data berubah
+ *   WBData.offUpdate(callback) → hapus listener
+ *   WBData.isFresh()           → true jika cache < 90 menit
+ *   WBData.metaUpdated()       → string timestamp terakhir update
+ *   WBData.MARKETS             → array definisi 65 pasaran (readonly)
+ *   WBData.KEYWORD_MAP         → array keyword→id mapping
+ *
+ * index.html memanggil WBData._write(rj) setelah dapat data
+ * dari result.json / paito-harian. Halaman lain HANYA membaca.
+ */
+
+(function(global) {
+  'use strict';
+
+  // ── Storage key ─────────────────────────────────────────────
+  const CACHE_KEY   = 'wb_rj_v3';        // sama dg index.html lama
+  const SHARED_KEY  = 'wb_shared_v1';    // kunci baru yg dipakai halaman lain
+  const CACHE_TTL   = 90 * 60 * 1000;   // 90 menit
+
+  // ── Internal state ──────────────────────────────────────────
+  let _data   = null;   // object result.json terakhir
+  let _ts     = 0;      // epoch ms saat data ditulis
+  let _listeners = [];
+
+  // ── 65 PASARAN definisi ─────────────────────────────────────
+  const MARKETS = [
+    // ASIA UTAMA
+    {id:'hk',   flag:'🇭🇰',name:'Hongkong',       short:'HK',    time:'23:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-hongkong-pools/',         wb:'hongkong-pools'},
+    {id:'hkl',  flag:'🇭🇰',name:'HK Lotto',       short:'HKL',   time:'23:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-hklotto/',                 wb:''},
+    {id:'sgp',  flag:'🇸🇬',name:'Singapore',      short:'SGP',   time:'17:40',days:'Sen,Rab,Kam,Sab,Min', an:'/data-pengeluaran-togel-singapore/',       wb:'singapore'},
+    {id:'sdy',  flag:'🇦🇺',name:'Sydney Pools',   short:'SDY',   time:'13:45',days:'Setiap Hari', an:'/data-pengeluaran-togel-sydney-pools/',           wb:'sydney-pools'},
+    {id:'sdl',  flag:'🇦🇺',name:'Sydney Lotto',   short:'SDL',   time:'13:45',days:'Sen-Sab',      an:'/data-pengeluaran-togel-sdlotto/',                wb:'sdlotto'},
+    {id:'kam',  flag:'🇰🇭',name:'Kamboja',        short:'KAM',   time:'11:50',days:'Setiap Hari', an:'/data-pengeluaran-togel-magnum-cambodia/',         wb:'magnum-cambodia'},
+    {id:'bull', flag:'🇳🇿',name:'Bullseye NZ',    short:'BULL',  time:'13:10',days:'Setiap Hari', an:'/data-pengeluaran-togel-bullseye/',                wb:'bullseye'},
+    {id:'chn',  flag:'🇨🇳',name:'China Pools',    short:'CHN',   time:'15:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-chinapools/',              wb:'chinapools'},
+    {id:'jpn',  flag:'🇯🇵',name:'Japan',          short:'JPN',   time:'17:20',days:'Setiap Hari', an:'/data-pengeluaran-togel-japan/',                   wb:'japan'},
+    {id:'twn',  flag:'🇹🇼',name:'Taiwan',         short:'TWN',   time:'20:45',days:'Setiap Hari', an:'/data-pengeluaran-togel-taiwan/',                  wb:'taiwan'},
+    {id:'pcso', flag:'🇵🇭',name:'PCSO',           short:'PCSO',  time:'20:10',days:'Setiap Hari', an:'/data-pengeluaran-togel-pcso/',                    wb:''},
+    // TOTO MACAU
+    {id:'mac1', flag:'🇲🇴',name:'Toto Macau 13',  short:'MAC13', time:'13:10',days:'Setiap Hari', an:'/data-pengeluaran-togel-toto-macau-1/',            wb:''},
+    {id:'mac2', flag:'🇲🇴',name:'Toto Macau 16',  short:'MAC16', time:'16:10',days:'Setiap Hari', an:'/data-pengeluaran-togel-toto-macau-2/',            wb:''},
+    {id:'mac3', flag:'🇲🇴',name:'Toto Macau 19',  short:'MAC19', time:'19:10',days:'Setiap Hari', an:'/data-pengeluaran-togel-toto-macau-3/',            wb:''},
+    {id:'mac4', flag:'🇲🇴',name:'Toto Macau 22',  short:'MAC22', time:'22:10',days:'Setiap Hari', an:'/data-pengeluaran-togel-toto-macau-4/',            wb:''},
+    {id:'mac5', flag:'🇲🇴',name:'Toto Macau 00',  short:'MAC00', time:'00:11',days:'Setiap Hari', an:'/data-pengeluaran-togel-toto-macau-5/',            wb:''},
+    {id:'mac6', flag:'🇲🇴',name:'Toto Macau 23',  short:'MAC23', time:'23:10',days:'Setiap Hari', an:'/data-pengeluaran-togel-toto-macau-6/',            wb:''},
+    // MOROCCO
+    {id:'mrq3',  flag:'🇲🇦',name:'Morocco 03:00', short:'MRQ3',  time:'03:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-morocco-quatro-03-00-wib/', wb:''},
+    {id:'mrq18', flag:'🇲🇦',name:'Morocco 18:00', short:'MRQ18', time:'18:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-morocco-quatro-18-00-wib/', wb:''},
+    {id:'mrq21', flag:'🇲🇦',name:'Morocco 21:00', short:'MRQ21', time:'21:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-morocco-quatro-21-00-wib/', wb:''},
+    {id:'mrq23', flag:'🇲🇦',name:'Morocco 23:59', short:'MRQ23', time:'23:59',days:'Setiap Hari', an:'/data-pengeluaran-togel-morocco-quatro-23-59-wib/', wb:''},
+    // GERMANY
+    {id:'ger',  flag:'🇩🇪',name:'Germany Plus5',  short:'GER',   time:'01:10',days:'Setiap Hari', an:'/data-pengeluaran-togel-germany-plus5/',           wb:''},
+    // OREGON
+    {id:'or4',  flag:'🇺🇸',name:'Oregon 04:00',   short:'OR4',   time:'04:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-oregon-04-00-wib/',        wb:''},
+    {id:'or7',  flag:'🇺🇸',name:'Oregon 07:00',   short:'OR7',   time:'07:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-oregon-07-00-wib/',        wb:''},
+    {id:'or10', flag:'🇺🇸',name:'Oregon 10:00',   short:'OR10',  time:'10:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-oregon-10-00-wib/',        wb:''},
+    {id:'or13', flag:'🇺🇸',name:'Oregon 13:00',   short:'OR13',  time:'13:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-oregon-13-00-wib/',        wb:''},
+    // NORTH CAROLINA
+    {id:'ncd',  flag:'🇺🇸',name:'NC Day',         short:'NCD',   time:'03:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-north-carolina-day/',      wb:'north-carolina-day'},
+    {id:'nce',  flag:'🇺🇸',name:'NC Evening',     short:'NCE',   time:'11:22',days:'Setiap Hari', an:'/data-pengeluaran-togel-north-carolina-evening/',  wb:''},
+    // GEORGIA
+    {id:'geom', flag:'🇺🇸',name:'Georgia Mid',    short:'GEOM',  time:'00:29',days:'Setiap Hari', an:'/data-pengeluaran-togel-georgia-midday/',          wb:''},
+    {id:'geoe', flag:'🇺🇸',name:'Georgia Eve',    short:'GEOE',  time:'07:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-georgia-evening/',         wb:''},
+    {id:'geon', flag:'🇺🇸',name:'Georgia Night',  short:'GEON',  time:'11:34',days:'Setiap Hari', an:'/data-pengeluaran-togel-georgia-night/',           wb:''},
+    // TEXAS
+    {id:'txd',  flag:'🇺🇸',name:'Texas Day',      short:'TXD',   time:'01:27',days:'Setiap Hari', an:'/data-pengeluaran-togel-texas-day/',               wb:''},
+    {id:'txmr', flag:'🇺🇸',name:'Texas Morning',  short:'TXMR',  time:'22:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-texas-morning/',           wb:''},
+    {id:'txe',  flag:'🇺🇸',name:'Texas Evening',  short:'TXE',   time:'09:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-texas-evening/',           wb:''},
+    {id:'txn',  flag:'🇺🇸',name:'Texas Night',    short:'TXN',   time:'14:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-texas-night/',             wb:''},
+    // NEW YORK
+    {id:'nyd',  flag:'🇺🇸',name:'New York Mid',   short:'NYD',   time:'01:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-new-york-midday/',         wb:''},
+    {id:'nye',  flag:'🇺🇸',name:'New York Eve',   short:'NYE',   time:'10:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-new-york-evening/',        wb:''},
+    // NEW JERSEY
+    {id:'njm',  flag:'🇺🇸',name:'NJ Midday',      short:'NJM',   time:'01:57',days:'Setiap Hari', an:'/data-pengeluaran-togel-new-jersey-midday/',       wb:''},
+    {id:'nje',  flag:'🇺🇸',name:'NJ Evening',     short:'NJE',   time:'10:57',days:'Setiap Hari', an:'/data-pengeluaran-togel-new-jersey-evening/',      wb:''},
+    // FLORIDA
+    {id:'flm',  flag:'🇺🇸',name:'Florida Mid',    short:'FLM',   time:'01:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-florida-midday/',          wb:''},
+    {id:'fle',  flag:'🇺🇸',name:'Florida Eve',    short:'FLE',   time:'11:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-florida-evening/',         wb:''},
+    // ILLINOIS
+    {id:'ilm',  flag:'🇺🇸',name:'Illinois Mid',   short:'ILM',   time:'02:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-illinois-midday/',         wb:''},
+    {id:'ile',  flag:'🇺🇸',name:'Illinois Eve',   short:'ILE',   time:'11:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-illinois-evening/',        wb:''},
+    // INDIANA
+    {id:'indm', flag:'🇺🇸',name:'Indiana Mid',    short:'INDM',  time:'02:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-indiana-midday/',          wb:''},
+    {id:'inde', flag:'🇺🇸',name:'Indiana Eve',    short:'INDE',  time:'11:29',days:'Setiap Hari', an:'/data-pengeluaran-togel-indiana-evening/',         wb:''},
+    // KENTUCKY
+    {id:'kym',  flag:'🇺🇸',name:'Kentucky Mid',   short:'KYM',   time:'01:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-kentucky-midday/',         wb:''},
+    {id:'kye',  flag:'🇺🇸',name:'Kentucky Eve',   short:'KYE',   time:'10:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-kentucky-evening/',        wb:''},
+    // MARYLAND
+    {id:'mdm',  flag:'🇺🇸',name:'Maryland Mid',   short:'MDM',   time:'01:55',days:'Setiap Hari', an:'/data-pengeluaran-togel-maryland-midday/',         wb:''},
+    {id:'mde',  flag:'🇺🇸',name:'Maryland Eve',   short:'MDE',   time:'10:57',days:'Setiap Hari', an:'/data-pengeluaran-togel-maryland-evening/',        wb:''},
+    // MICHIGAN
+    {id:'mim',  flag:'🇺🇸',name:'Michigan Mid',   short:'MIM',   time:'01:28',days:'Setiap Hari', an:'/data-pengeluaran-togel-michigan-midday/',         wb:''},
+    {id:'mie',  flag:'🇺🇸',name:'Michigan Eve',   short:'MIE',   time:'10:28',days:'Setiap Hari', an:'/data-pengeluaran-togel-michigan-evening/',        wb:''},
+    // MISSOURI
+    {id:'mom',  flag:'🇺🇸',name:'Missouri Mid',   short:'MOM',   time:'01:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-missouri-midday/',         wb:''},
+    {id:'moe',  flag:'🇺🇸',name:'Missouri Eve',   short:'MOE',   time:'10:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-missouri-evening/',        wb:''},
+    // WASHINGTON DC
+    {id:'wdm',  flag:'🇺🇸',name:'WDC Midday',     short:'WDM',   time:'01:50',days:'Setiap Hari', an:'/data-pengeluaran-togel-washington-dc-midday/',    wb:''},
+    {id:'wde',  flag:'🇺🇸',name:'WDC Evening',    short:'WDE',   time:'10:50',days:'Setiap Hari', an:'/data-pengeluaran-togel-washington-dc-evening/',   wb:''},
+    // CONNECTICUT
+    {id:'ctd',  flag:'🇺🇸',name:'Connecticut Day', short:'CTD',  time:'02:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-connecticut-day/',         wb:''},
+    {id:'ctn',  flag:'🇺🇸',name:'Connecticut Night',short:'CTN', time:'11:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-connecticut-night/',        wb:''},
+    // VIRGINIA
+    {id:'vad',  flag:'🇺🇸',name:'Virginia Day',   short:'VAD',   time:'02:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-virginia-day/',            wb:''},
+    {id:'van',  flag:'🇺🇸',name:'Virginia Night', short:'VAN',   time:'11:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-virginia-night/',           wb:''},
+    // TENNESSEE
+    {id:'tnm',  flag:'🇺🇸',name:'Tennessee Mid',  short:'TNM',   time:'01:29',days:'Setiap Hari', an:'/data-pengeluaran-togel-tennesse-midday/',         wb:''},
+    {id:'tne',  flag:'🇺🇸',name:'Tennessee Eve',  short:'TNE',   time:'10:29',days:'Setiap Hari', an:'/data-pengeluaran-togel-tennesse-evening/',        wb:''},
+    {id:'tnmr', flag:'🇺🇸',name:'Tennessee Morning',short:'TNMR',time:'22:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-tennesse-morning/',        wb:''},
+    // LAINNYA
+    {id:'cal',  flag:'🇺🇸',name:'California',     short:'CAL',   time:'10:00',days:'Setiap Hari', an:'/data-pengeluaran-togel-california/',              wb:''},
+    {id:'wie',  flag:'🇺🇸',name:'Wisconsin Eve',  short:'WIE',   time:'10:30',days:'Setiap Hari', an:'/data-pengeluaran-togel-wisconsin-evening/',       wb:''},
+  ];
+
+  // ── KEYWORD MAP (untuk parse paito-harian) ──────────────────
+  const KEYWORD_MAP = [
+    ['hongkong pool','hk'],['hk pools','hk'],['hk lotto','hkl'],['hklotto','hkl'],
+    ['singapore','sgp'],
+    ['sydney pools','sdy'],['sydney pool','sdy'],['sydney lotto','sdl'],['sdlotto','sdl'],
+    ['magnum cambodia','kam'],['kamboja','kam'],['cambodia','kam'],
+    ['bullseye','bull'],
+    ['china pool','chn'],['chinapool','chn'],
+    ['japan','jpn'],['taiwan','twn'],['pcso','pcso'],
+    ['toto macau 1','mac1'],['macau 13','mac1'],
+    ['toto macau 2','mac2'],['macau 16','mac2'],
+    ['toto macau 3','mac3'],['macau 19','mac3'],
+    ['toto macau 4','mac4'],['macau 22','mac4'],
+    ['toto macau 5','mac5'],['macau 00','mac5'],
+    ['toto macau 6','mac6'],['macau 23','mac6'],
+    ['morocco quatro 03','mrq3'],['morocco 03','mrq3'],
+    ['morocco quatro 18','mrq18'],['morocco 18','mrq18'],
+    ['morocco quatro 21','mrq21'],['morocco 21','mrq21'],
+    ['morocco quatro 23','mrq23'],['morocco 23','mrq23'],
+    ['germany','ger'],
+    ['oregon 04','or4'],['oregon 07','or7'],['oregon 10','or10'],['oregon 13','or13'],
+    ['north carolina day','ncd'],['nc day','ncd'],
+    ['north carolina evening','nce'],['nc evening','nce'],
+    ['georgia midday','geom'],['georgia mid','geom'],
+    ['georgia evening','geoe'],['georgia eve','geoe'],
+    ['georgia night','geon'],
+    ['texas morning','txmr'],['texas day','txd'],['texas evening','txe'],['texas night','txn'],
+    ['new york midday','nyd'],['new york evening','nye'],
+    ['new jersey midday','njm'],['nj midday','njm'],
+    ['new jersey evening','nje'],['nj evening','nje'],
+    ['florida midday','flm'],['florida evening','fle'],
+    ['illinois midday','ilm'],['illinois evening','ile'],
+    ['indiana midday','indm'],['indiana evening','inde'],
+    ['kentucky midday','kym'],['kentucky evening','kye'],
+    ['maryland midday','mdm'],['maryland evening','mde'],
+    ['michigan midday','mim'],['michigan evening','mie'],
+    ['missouri midday','mom'],['missouri evening','moe'],
+    ['washington dc midday','wdm'],['wdc midday','wdm'],
+    ['washington dc evening','wde'],['wdc evening','wde'],
+    ['connecticut day','ctd'],['connecticut night','ctn'],
+    ['virginia day','vad'],['virginia night','van'],
+    ['tennesse midday','tnm'],['tennessee midday','tnm'],
+    ['tennesse evening','tne'],['tennessee evening','tne'],
+    ['tennesse morning','tnmr'],['tennessee morning','tnmr'],
+    ['california','cal'],['wisconsin evening','wie'],
+  ];
+
+  // ── Result.json URLs (fallback cascade) ─────────────────────
+  const RESULT_JSON_URLS = [
+    './result.json',
+    'https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json',
+    'https://raw.githubusercontent.com/alifavif-cmd/-WONGBAGUS-PREDICTION-/main/result.json',
+  ];
+
+  // ── Paito Harian URL ─────────────────────────────────────────
+  const PAITO_HARIAN_URL = 'https://angkanet18.com/paito-harian/';
+
+  // ── CORS proxy list ──────────────────────────────────────────
+  const PROXIES = [
+    u => 'https://api.allorigins.win/get?url=' + encodeURIComponent(u),
+    u => 'https://corsproxy.io/?' + encodeURIComponent(u),
+    u => 'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(u),
+  ];
+
+  // ── Helpers ──────────────────────────────────────────────────
+  const FAKE_PAT = [
+    /^1234$/,/^2345$/,/^3456$/,/^4567$/,/^5678$/,
+    /^6789$/,/^7890$/,/^8901$/,/^9012$/,/^0123$/,/^(\d)\1{3}$/,
+  ];
+
+  function isFake(r) {
+    if (!/^\d{4}$/.test(r)) return true;
+    const n = parseInt(r, 10);
+    if (n >= 1800 && n <= 2099) return true;
+    return FAKE_PAT.some(p => p.test(r));
+  }
+
+  function matchMarket(text) {
+    const tl = text.toLowerCase();
+    for (const [kw, key] of KEYWORD_MAP) { if (tl.includes(kw)) return key; }
+    return null;
+  }
+
+  // ── localStorage helpers ─────────────────────────────────────
+  function _save(rj) {
+    try {
+      const payload = { ts: Date.now(), rj };
+      localStorage.setItem(CACHE_KEY,  JSON.stringify(payload));
+      localStorage.setItem(SHARED_KEY, JSON.stringify(payload));
+    } catch (e) {}
+  }
+
+  function _load() {
+    // Coba SHARED_KEY dulu (lebih fresh), lalu CACHE_KEY lama
+    for (const key of [SHARED_KEY, CACHE_KEY]) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) continue;
+        const { ts, rj } = JSON.parse(raw);
+        if (Date.now() - ts > CACHE_TTL) continue;
+        return { ts, rj };
+      } catch (e) {}
+    }
+    return null;
+  }
+
+  // ── Internal write (dipanggil index.html) ────────────────────
+  function _write(rj) {
+    if (!rj || typeof rj !== 'object') return;
+    _data = rj;
+    _ts   = Date.now();
+    _save(rj);
+    _notifyListeners();
+  }
+
+  // ── Notifikasi listeners ─────────────────────────────────────
+  function _notifyListeners() {
+    for (const cb of _listeners) {
+      try { cb(_data); } catch (e) {}
+    }
+  }
+
+  // ── Fetch result.json ─────────────────────────────────────────
+  async function _fetchResultJson(url) {
+    try {
+      const res = await Promise.race([
+        fetch(url, { cache: 'no-cache' }),
+        new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 10000)),
+      ]);
+      if (!res.ok) return null;
+      return await res.json();
+    } catch (e) { return null; }
+  }
+
+  // ── Fetch via CORS proxy ──────────────────────────────────────
+  async function _proxyFetch(url) {
+    for (const makeProxy of PROXIES) {
+      try {
+        const res = await Promise.race([
+          fetch(makeProxy(url)),
+          new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 10000)),
+        ]);
+        if (!res.ok) continue;
+        const data = await res.json();
+        const html = typeof data === 'string' ? data : (data.contents || data.data || '');
+        if (html && html.length > 100) return html;
+      } catch (e) {}
+    }
+    return null;
+  }
+
+  // ── Parse paito-harian HTML → {id: result4digit} ─────────────
+  function _parsePaitoHarian(html) {
+    const found = {};
+    if (!html || html.length < 500) return found;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+
+    // Strategy 1: container dengan heading
+    const containers = [...doc.querySelectorAll('section,div,article,li')].filter(el => {
+      const cls = (el.className || '').toLowerCase();
+      return /market|pasaran|paito|result|item|card|pool/.test(cls);
+    });
+    for (const sec of containers) {
+      const hEl = sec.querySelector('h1,h2,h3,h4,h5,strong');
+      if (!hEl) continue;
+      const key = matchMarket(hEl.textContent || '');
+      if (!key || found[key]) continue;
+      for (const tag of sec.querySelectorAll('span,td,div,b,p')) {
+        const t = (tag.textContent || '').trim();
+        if (/^\d{4}$/.test(t) && !isFake(t)) { found[key] = t; break; }
+      }
+    }
+
+    // Strategy 2: .paito-row-item grouped by parent
+    if (Object.keys(found).length < 10) {
+      const rowMap = new Map();
+      for (const item of doc.querySelectorAll('.paito-row-item')) {
+        const pid = item.parentElement;
+        if (!rowMap.has(pid)) rowMap.set(pid, { texts: [], result: null });
+        const t = (item.textContent || '').trim();
+        rowMap.get(pid).texts.push(t);
+        if (!rowMap.get(pid).result && /^\d{4}$/.test(t) && !isFake(t))
+          rowMap.get(pid).result = t;
+      }
+      for (const [, info] of rowMap) {
+        if (!info.result) continue;
+        const key = matchMarket(info.texts.join(' '));
+        if (key && !found[key]) found[key] = info.result;
+      }
+    }
+
+    // Strategy 3: scan tr/li
+    if (Object.keys(found).length < 5) {
+      let count = 0;
+      for (const block of doc.querySelectorAll('tr,li')) {
+        if (++count > 3000) break;
+        const t = (block.textContent || '').trim();
+        if (!/^\d{4}$/.test(t) || isFake(t)) continue;
+        const pTxt = block.parentElement ? (block.parentElement.textContent || '') : '';
+        const key = matchMarket(pTxt);
+        if (key && !found[key]) found[key] = t;
+      }
+    }
+    return found;
+  }
+
+  /**
+   * fetchFromPaitoHarian -- halaman lain bisa panggil ini
+   * untuk refresh data tanpa perlu buka index.html.
+   * Fallback: result.json → paito-harian → data lama cache.
+   */
+  async function fetchFromPaitoHarian() {
+    // 1. Coba result.json
+    for (const url of RESULT_JSON_URLS) {
+      const rj = await _fetchResultJson(url + '?t=' + Date.now());
+      if (rj && (rj._meta || Object.keys(rj).length > 5)) {
+        _write(rj);
+        console.log('[WBData] result.json OK:', url);
+        return rj;
+      }
+    }
+
+    // 2. Coba paito-harian
+    console.log('[WBData] Fetching paito-harian...');
+    const html = await _proxyFetch(PAITO_HARIAN_URL);
+    const found = _parsePaitoHarian(html || '');
+    const count = Object.keys(found).length;
+    console.log('[WBData] paito-harian:', count, 'pasaran');
+
+    if (count >= 5) {
+      const now = new Date().toLocaleTimeString('id-ID');
+      const rj = {
+        _meta: { updated: now, date: '', total: MARKETS.length, source: 'paito-harian' },
+      };
+      for (const m of MARKETS) {
+        const r = found[m.id];
+        if (r && /^\d{4}$/.test(r) && !isFake(r)) {
+          rj[m.id] = { result: r, status: 'sudah', updated: now, name: m.name };
+        }
+      }
+      _write(rj);
+      return rj;
+    }
+
+    // 3. Return data cache lama (mungkin stale, tapi lebih baik dari kosong)
+    return _data;
+  }
+
+  // ── Init: muat cache saat script dimuat ─────────────────────
+  (function _init() {
+    const cached = _load();
+    if (cached) {
+      _data = cached.rj;
+      _ts   = cached.ts;
+      console.log('[WBData] Cache loaded, age:', Math.round((Date.now() - _ts) / 60000), 'menit');
+    }
+
+    // Listen untuk update dari tab lain (index.html di tab berbeda)
+    try {
+      window.addEventListener('storage', function(e) {
+        if (e.key !== SHARED_KEY) return;
+        try {
+          const { ts, rj } = JSON.parse(e.newValue);
+          if (ts > _ts) {
+            _data = rj;
+            _ts   = ts;
+            console.log('[WBData] Data updated from another tab');
+            _notifyListeners();
+          }
+        } catch (err) {}
+      });
+    } catch (e) {}
+  })();
+
+  // ── Public API ───────────────────────────────────────────────
+  global.WBData = {
+    /** Semua data result.json terakhir */
+    getAll() { return _data; },
+
+    /** Entry untuk 1 pasaran, atau null */
+    get(id) { return _data ? (_data[id] || null) : null; },
+
+    /** Result 4-digit untuk 1 pasaran, atau '----' / null */
+    getResult(id) {
+      const e = this.get(id);
+      if (!e) return null;
+      const r = String(e.result || '');
+      return /^\d{4}$/.test(r) ? r : '----';
+    },
+
+    /** Register listener dipanggil setiap data berubah */
+    onUpdate(cb) {
+      if (typeof cb === 'function' && !_listeners.includes(cb))
+        _listeners.push(cb);
+    },
+
+    /** Hapus listener */
+    offUpdate(cb) {
+      _listeners = _listeners.filter(x => x !== cb);
+    },
+
+    /** true jika cache ada dan < 90 menit */
+    isFresh() { return !!_data && (Date.now() - _ts < CACHE_TTL); },
+
+    /** Timestamp update terakhir */
+    metaUpdated() { return _data && _data._meta ? _data._meta.updated : ''; },
+
+    /** Fetch baru dari result.json / paito-harian (untuk halaman lain) */
+    async refresh() { return fetchFromPaitoHarian(); },
+
+    /** Internal: dipakai index.html untuk push data segar */
+    _write,
+
+    /** Paksa tandai data sebagai fresh setelah embed data */
+    _markFresh() { _ts = Date.now(); },
+
+    /** Definisi 65 pasaran */
+    MARKETS,
+
+    /** Keyword map untuk parse paito-harian */
+    KEYWORD_MAP,
+
+    /** CORS proxy fetch (kalau halaman lain perlu) */
+    _proxyFetch,
+
+    /** Parse paito-harian HTML */
+    _parsePaitoHarian,
+
+    /** Helper isFake */
+    isFake,
+
+    /** Helper matchMarket */
+    matchMarket,
+
+    // ── BIJI PRIMBON ─────────────────────────────────────────────
+
+    /** Tabel Biji per pasaran Jawa */
+    BIJI_TABLE: {
+      LEGI: {
+        1:['82','28','37','73','55','46','64','10','01'],
+        2:['74','47','56','65','29','92','20','02','11'],
+        3:['75','57','48','84','39','93','12','21','66'],
+        4:['76','67','58','85','94','49','22','40','04'],
+        5:['86','68','59','95','77','14','41','50','05'],
+        6:['15','51','60','06','78','87','24','42','96','69'],
+        7:['16','61','70','07','34','43','25','52','79','97'],
+        8:['26','62','53','35','89','98','71','17','44','80','08'],
+        9:['18','81','54','45','36','63','72','27','90','09'],
+      },
+      PAHING: {
+        1:['01','10','37','73','46','64','82','28'],
+        2:['74','47','65','56','29','92','20','02','11'],
+        3:['75','57','39','93','03','30','66','48','84'],
+        4:['67','76','58','85','94','49','22','04','40'],
+        5:['59','95','68','86','32','23','14','41','50','05'],
+        6:['78','87','33','96','69','06','60','24','42'],
+        7:['88','70','07','61','16','79','97','52','25'],
+        8:['98','89','71','17','53','35','26','62','80','08'],
+        9:['99','18','81','72','27','54','45'],
+      },
+      PON: {
+        1:['91','19','46','64','10','01','55','28','82','37','73'],
+        2:['29','92','38','83','20','02','11','47','74'],
+        3:['75','57','12','21','93','39','03','30','66','48','84'],
+        4:['67','76','85','58','94','49','04','40'],
+        5:['95','59','68','86','05','50','23','32'],
+        6:['60','06','15','51','33','42','24','78','87'],
+        7:['43','34','79','97','70','07','88','25','52','61','16'],
+        8:['08','80','71','17','35','53','26','62'],
+        9:['45','54','90','09','36','63','27','72'],
+      },
+      WAGE: {
+        1:['19','91','46','64','10','01','55','73','37'],
+        2:['02','20','56','65','83','38','11','47','74'],
+        3:['57','75','21','12','93','39','30','03','84','48'],
+        4:['67','76','94','49','04','40','13','31'],
+        5:['14','41','59','95','23','32','05','50'],
+        6:['87','78','60','06','69','96','33','42','24','15','51'],
+        7:['43','34','79','97','70','07','88','25','52','61','16'],
+        8:['80','08','53','35','71','17','89','98'],
+        9:['81','18','09','90','54','45','63','36','27','72'],
+      },
+      KLIWON: {
+        1:['01','10','46','64','55','82','28','73','37'],
+        2:['74','47','56','65','02','20','38','83','11'],
+        3:['12','21','93','39','30','03','84','48','66'],
+        4:['67','76','22','94','49','58','85','40','04'],
+        5:['86','68','59','95','41','14','32','23','50','05'],
+        6:['15','51','60','06','42','24','33','96','69'],
+        7:['43','34','70','07','16','61','97','79','25','52'],
+        8:['08','80','89','98','44','17','71'],
+        9:['36','63','54','45','90','09','18','81','27','72'],
+      },
+    },
+
+    /** Deteksi hari pasaran Jawa dari Date object */
+    getHariPasaran(date) {
+      const d = date || new Date();
+      // Referensi: 1 Januari 2000 = Sabtu Kliwon
+      const ref = new Date(2000, 0, 1);
+      const diff = Math.floor((d - ref) / 86400000);
+      const pasaran = ['KLIWON','LEGI','PAHING','PON','WAGE'];
+      return pasaran[((diff % 5) + 5) % 5];
+    },
+
+    /** Dapat nomor Biji dari 2D result + nama pasaran */
+    getBiji(result2d, pasaran) {
+      const tbl = this.BIJI_TABLE[pasaran];
+      if (!tbl) return null;
+      for (const [biji, nums] of Object.entries(tbl)) {
+        if (nums.includes(result2d)) return parseInt(biji);
+      }
+      return null;
+    },
+
+    /** Dapat semua angka dari Biji tertentu di pasaran tertentu */
+    getBijiAngka(biji, pasaran) {
+      const tbl = this.BIJI_TABLE[pasaran];
+      if (!tbl || !tbl[biji]) return [];
+      return tbl[biji];
+    },
+
+    /** Info lengkap Biji untuk 1 pasaran berdasarkan result & tanggal */
+    getBijiInfo(resultStr, date) {
+      if (!resultStr || resultStr === '----' || resultStr.length < 4) return null;
+      const pasaran = this.getHariPasaran(date || new Date());
+      const r2d = resultStr.slice(2, 4);
+      const biji = this.getBiji(r2d, pasaran);
+      if (!biji) return null;
+      const angka = this.getBijiAngka(biji, pasaran);
+      return { pasaran, biji, r2d, angka };
+    },
+
+    /** Buat teks ringkasan Biji untuk prompt AI */
+    getBijiPrompt(resultStr, date) {
+      const info = this.getBijiInfo(resultStr, date);
+      if (!info) return '';
+      return `Hari ini pasaran Jawa: ${info.pasaran}. Result 2D: ${info.r2d} = Biji ${info.biji}. Angka sekelompok Biji ${info.biji} (${info.pasaran}): ${info.angka.join(', ')}. Gunakan angka Biji ini sebagai DASAR prediksi.`;
+    },
+  };
+
+})(window);
+
+
+// Data diambil dari GitHub via autoFetch()
+// CATATAN: _markFresh dihapus agar autoFetch selalu ambil data terbaru dari GitHub
+
+// ── PENGATURAN LANJUTAN UI ──
+const ALL_MODS_LANJUTAN = ['-','ix','ty','ml','mb','m0','m1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13','m14','m15','m16','m17','m18','m19'];
+
+function buildModChecks(containerId, defaultAll=true) {
+  const el = document.getElementById(containerId);
+  if(!el) return;
+  el.innerHTML = ALL_MODS_LANJUTAN.map(m => 
+    `<label style="font-size:11px;color:var(--white);display:flex;align-items:center;gap:3px">
+      <input type="checkbox" class="${containerId}-chk" value="${m}" ${defaultAll?'checked':''}> ${m==='-'?'(none)':m}
+    </label>`
+  ).join('');
+}
+
+function checkMinhitWarn(){
+  const mh = parseInt(document.getElementById('sc-minhit').value)||0;
+  const lim = parseInt(document.getElementById('sc-limit').value)||15;
+  const warn = document.getElementById('minhit-warn');
+  if(warn) warn.style.display = (mh>=80 && lim<=5) ? 'block' : 'none';
+}
+
+function toggleLanjutan() {
+  const p = document.getElementById('panel-lanjutan');
+  const b = document.getElementById('btn-lanjutan');
+  if(p.style.display==='none'){
+    p.style.display='block';
+    b.textContent='⚙ Pengaturan Lanjutan ▲';
+  } else {
+    p.style.display='none';
+    b.textContent='⚙ Pengaturan Lanjutan ▼';
+  }
+}
+
+function setScanMode(mode) {
+  // Fast: key x1-x3, sk1 ix/ty/ml/mb, op All, sk2 ix/ty/ml/mb, hasil ix/ty/ml/mb/-
+  // Normal: key x1-x5, semua modifier umum
+  // Deep: key x1-x8, semua modifier
+  const keyChks = document.querySelectorAll('.key-chk');
+  const sk1Chks = document.querySelectorAll('.sk1-checks-chk'); // FIX: class selector, bukan ID
+  
+  if(mode==='fast'){
+    keyChks.forEach(c => c.checked = ['1','2','3'].includes(c.value));
+    setModChecks('sk1-checks', ['-','ix','ty','ml','mb']);
+    setModChecks('sk2-checks', ['-','ix','ty','ml','mb']);
+    setModChecks('hasil-checks', ['-','ix','ty','ml','mb']);
+  } else if(mode==='normal'){
+    keyChks.forEach(c => c.checked = ['1','2','3','4','5'].includes(c.value));
+    setModChecks('sk1-checks', ['-','ix','ty','ml','mb','m0','m1','m2','m3','m4','m5']);
+    setModChecks('sk2-checks', ['-','ix','ty','ml','mb','m0','m1','m2','m3','m4','m5']);
+    setModChecks('hasil-checks', ALL_MODS_LANJUTAN);
+  } else {
+    keyChks.forEach(c => c.checked = true);
+    setModChecks('sk1-checks', ALL_MODS_LANJUTAN);
+    setModChecks('sk2-checks', ALL_MODS_LANJUTAN);
+    setModChecks('hasil-checks', ALL_MODS_LANJUTAN);
+  }
+}
+
+function setModChecks(containerId, enabledList) {
+  const chks = document.querySelectorAll(`.${containerId}-chk`);
+  chks.forEach(c => c.checked = enabledList.includes(c.value));
+}
+
+function getChecked(containerId) {
+  return [...document.querySelectorAll(`.${containerId}-chk`)].filter(c=>c.checked).map(c=>c.value);
+}
+
+function initLanjutanUI() {
+  buildModChecks('sk1-checks', true);
+  buildModChecks('sk2-checks', true);
+  buildModChecks('hasil-checks', true);
+  // Default: normal mode
+  setScanMode('normal');
+}
+
+// ── MOD TABLE (sesuai scanangka docs) ──
+// Digit yang tidak ada di tabel = tetap (passthrough)
+const MOD_TABLE_PARTIAL = {
+  ix: {0:5,1:6,2:7,3:8,4:9,5:0,6:1,7:2,8:3,9:4},
+  ty: {0:7,1:4,2:9,3:6,4:1,5:8,6:3,7:0,8:5,9:2},
+  ml: {0:1,1:0,2:5,3:8,4:7,5:2,6:9,7:4,8:3,9:6},
+  mb: {0:8,1:7,2:6,3:9,4:5,5:4,6:2,7:1,8:0,9:3},
+  m0: {0:6,1:5,2:8,3:7,4:9,5:1,6:0,7:3,8:2,9:4},
+  m1: {0:1,1:0,2:9,3:8,4:7,5:6,6:5,7:4,8:3,9:2},
+  m2: {0:2,1:8,2:0,3:9,4:7,5:6,6:5,7:4,8:1,9:3},
+  m3: {0:3,1:2,2:1,3:0,4:9,5:8,6:7,7:6,8:5,9:4},
+  m4: {0:6,1:5,2:3,3:2,4:7,5:1,6:0,7:4,8:9,9:8},
+  m5: {0:5,1:4,2:3,3:2,4:1,5:0,6:9,7:8,8:7,9:6},
+  m6: {0:6,1:8,2:4,3:5,4:2,5:3,6:0,7:9,8:1,9:7},
+  m7: {0:7,1:6,2:5,3:4,4:3,5:2,6:1,7:0,8:9,9:8},
+  m8: {0:8,1:7,2:6,3:5,4:9,5:3,6:2,7:1,8:0,9:4},
+  m9: {0:9,1:8,2:7,3:6,4:5,5:4,6:3,7:2,8:1,9:0},
+  m10:{0:4,1:2,2:1,3:8,4:0,5:6,6:5,7:9,8:3,9:7},
+  m11:{0:1,1:0,2:5,3:4,4:3,5:2,6:8,7:9,8:6,9:7},
+  m12:{0:2,1:7,2:0,3:8,4:6,5:9,6:4,7:1,8:3,9:5},
+  m13:{0:3,1:9,2:7,3:0,4:6,5:8,6:4,7:2,8:5,9:1},
+  m14:{0:6,1:5,2:4,3:7,4:2,5:1,6:0,7:3,8:9,9:8},
+  m15:{0:5,1:6,2:4,3:9,4:2,5:0,6:1,7:8,8:7,9:3},
+  m16:{0:3,1:8,2:7,3:0,4:9,5:6,6:5,7:2,8:1,9:4},
+  m17:{0:9,1:4,2:8,3:6,4:1,5:7,6:3,7:5,8:2,9:0},
+  m18:{0:8,1:9,2:7,3:4,4:3,5:6,6:5,7:2,8:0,9:1},
+  m19:{0:7,1:8,2:3,3:2,4:9,5:6,6:5,7:0,8:1,9:4},
+};
+
+// Build full 10-entry MOD_TABLE: digit tidak ada = passthrough
+const MOD_TABLE = {};
+for(const [key, partial] of Object.entries(MOD_TABLE_PARTIAL)){
+  MOD_TABLE[key] = {};
+  for(let d=0;d<=9;d++){
+    MOD_TABLE[key][d] = 
