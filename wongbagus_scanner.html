@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>⭐ WONGBAGUS SCANNER PRO ⭐</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--bg4:#0d2137;--border:#30363d;--gold:#f59e0b;--gold2:#ff8c00;--cyan:#22d3ee;--green:#10b981;--red:#ef4444;--muted:#8b949e;--text:#e6edf3;--blue:#3b82f6;--purple:#a78bfa}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px}
+.hdr{background:linear-gradient(135deg,#0f172a,#1e293b,#0f172a);border-bottom:3px solid var(--gold);padding:10px 14px;position:sticky;top:0;z-index:200;box-shadow:0 4px 20px rgba(245,158,11,.25);display:flex;align-items:center;justify-content:space-between}
+.hdr-title{font-size:13px;font-weight:900;color:var(--gold);letter-spacing:2px}
+.hdr-sub{font-size:9px;color:var(--muted);letter-spacing:2px}
+.data-bar{background:var(--bg4);border-bottom:1px solid #1a4a6e;padding:5px 12px;display:flex;align-items:center;justify-content:space-between;font-size:11px}
+.dbt{color:var(--cyan);font-family:monospace;font-weight:700}
+.tab-nav{display:flex;background:var(--bg2);border-bottom:2px solid rgba(245,158,11,.25)}
+.tb{flex:1;padding:9px 4px;border:none;cursor:pointer;font-weight:700;font-size:11px;background:transparent;color:var(--muted);border-bottom:2px solid transparent}
+.tb.active{color:var(--gold);border-bottom-color:var(--gold);background:rgba(245,158,11,.06)}
+.tab{display:none}.tab.active{display:block}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:13px;margin:9px}
+.ct{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.lbl{font-size:10px;font-weight:800;color:var(--muted);letter-spacing:.3px;text-transform:uppercase;display:block;margin-bottom:3px}
+.inp,.sel{width:100%;background:var(--bg2);color:var(--text);border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;font-size:13px;font-weight:600;outline:none}
+.sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%238b949e' d='M5 7L0 2h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;-webkit-appearance:none;appearance:none}
+.inp:focus,.sel:focus{border-color:var(--gold)}
+.fld{margin-bottom:9px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.btn{padding:10px 13px;border-radius:8px;border:none;font-weight:800;font-size:12px;cursor:pointer}
+.bg{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000}
+.bc{background:rgba(34,211,238,.15);color:var(--cyan);border:1px solid rgba(34,211,238,.3)}
+.br{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.bgrn{background:rgba(16,185,129,.15);color:var(--green);border:1px solid rgba(16,185,129,.3)}
+.bgh{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--border)}
+.bfw{width:100%}
+.row{display:flex;gap:7px}
+.pw{background:#0a1117;border-radius:4px;height:5px;overflow:hidden;margin-bottom:6px}
+.pb{height:5px;background:linear-gradient(90deg,var(--cyan),var(--gold));width:0%;transition:width .3s;border-radius:4px}
+.con{background:#070d14;border:1px solid #1a2a3a;border-radius:7px;padding:8px 10px;font-family:monospace;font-size:11px;color:var(--cyan);margin-bottom:7px;min-height:28px;word-break:break-all}
+.brow{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+.btb{padding:5px 7px;border-radius:5px;border:1px solid rgba(34,211,238,.3);background:#0a1a2a;color:var(--cyan);font-weight:700;font-size:10px;cursor:pointer;min-width:34px;text-align:center}
+.rt{width:100%;border-collapse:collapse;font-size:11px}
+.rt th{background:#0d1a26;padding:5px 4px;text-align:left;color:var(--muted);font-size:10px;font-weight:700;border-bottom:1px solid var(--border);white-space:nowrap}
+.rt td{padding:5px 4px;border-bottom:1px solid rgba(48,54,61,.4);vertical-align:middle}
+.flnk{color:var(--cyan);font-weight:700;cursor:pointer;font-family:monospace;font-size:11px}
+.flnk:hover{color:var(--gold)}
+.pbdg{display:inline-block;background:rgba(245,158,11,.15);color:var(--gold);font-weight:800;font-family:monospace;font-size:12px;padding:2px 6px;border-radius:4px;letter-spacing:1px;border:1px solid rgba(245,158,11,.3)}
+.tjns{display:inline-block;background:rgba(59,130,246,.1);color:var(--blue);font-size:9px;font-weight:700;padding:1px 4px;border-radius:3px;border:1px solid rgba(59,130,246,.2)}
+/* MODAL */
+.mo{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:500;overflow-y:auto;padding:8px}
+.mo.open{display:block}
+.mb{background:var(--bg2);border:1px solid var(--border);border-radius:12px;max-width:500px;margin:0 auto;overflow:hidden}
+.mh{background:var(--bg3);padding:11px 13px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.mt{font-weight:800;color:var(--gold);font-size:13px;font-family:monospace}
+.mi{padding:9px 13px;background:var(--bg3);border-bottom:1px solid var(--border);font-size:11px;line-height:1.6}
+.tbd{padding:9px 13px;font-family:monospace;font-size:12px;max-height:62vh;overflow-y:auto}
+.tl{display:flex;align-items:center;gap:7px;padding:4px 0;border-bottom:1px solid rgba(48,54,61,.3)}
+.tp{color:var(--muted);min-width:44px;font-size:11px}
+.tpr{flex:1;letter-spacing:2px;font-weight:700}
+.ts{min-width:30px;text-align:center}
+.bh{background:rgba(16,185,129,.2);color:var(--green);padding:1px 5px;border-radius:3px;font-size:10px;font-weight:700}
+.bp{background:rgba(239,68,68,.2);color:var(--red);padding:1px 5px;border-radius:3px;font-size:10px;font-weight:700}
+.bn{background:rgba(245,158,11,.2);color:var(--gold);padding:1px 5px;border-radius:3px;font-size:10px;font-weight:700;animation:pls 1.5s infinite}
+@keyframes pls{0%,100%{opacity:1}50%{opacity:.5}}
+/* TREK DISPLAY */
+.tdsp{background:#070d14;border:1px solid #1a2a3a;border-radius:8px;padding:9px;font-family:monospace;font-size:12px;line-height:1.7;max-height:65vh;overflow-y:auto;white-space:pre-wrap;word-break:break-all}
+/* BUILDER */
+.fnr{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px;margin-bottom:8px}
+.fnt{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.fsl{margin-bottom:6px}
+.fslb{font-size:9px;color:var(--muted);margin-bottom:2px;letter-spacing:.3px}
+.fsr{display:flex;gap:4px;align-items:center}
+.fse{background:var(--bg2);color:#60a5fa;border:2px solid #1d4ed8;border-radius:6px;padding:7px 3px;font-size:11px;font-weight:800;outline:none;-webkit-appearance:none;appearance:none;text-align:center;cursor:pointer;min-height:36px;width:100%;flex:2}
+.fop{background:var(--bg2);color:var(--gold);border:2px solid rgba(245,158,11,.5);border-radius:6px;padding:7px 2px;font-size:13px;font-weight:800;outline:none;-webkit-appearance:none;appearance:none;text-align:center;cursor:pointer;min-height:36px;width:42px;flex-shrink:0}
+.fmd{background:var(--bg2);color:var(--purple);border:2px solid rgba(167,139,250,.4);border-radius:6px;padding:7px 3px;font-size:11px;font-weight:800;outline:none;-webkit-appearance:none;appearance:none;text-align:center;cursor:pointer;min-height:36px;width:100%;flex:1.5}
+.kpv{background:#060d15;border:1px solid rgba(34,211,238,.3);border-radius:7px;padding:7px 10px;font-family:monospace;font-size:13px;font-weight:800;color:var(--cyan);letter-spacing:1px;text-align:center;min-height:34px;word-break:break-all}
+.pi{background:var(--bg3);border:1.5px solid rgba(34,211,238,.3);border-radius:7px;padding:8px 10px;font-family:monospace;font-size:12px;color:var(--cyan);width:100%;outline:none}
+.pi:focus{border-color:var(--cyan)}
+/* LANJUTAN */
+.lp{display:none}.lp.open{display:block}
+.ckg{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.ckl{display:flex;align-items:center;gap:3px;background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:3px 6px;cursor:pointer;font-size:10px;font-weight:700;user-select:none}
+.ckl input{accent-color:var(--cyan);width:11px;height:11px}
+.ckl:has(input:checked){background:rgba(34,211,238,.1);border-color:rgba(34,211,238,.4);color:var(--cyan)}
+.rr{display:flex;gap:6px;flex-wrap:wrap}
+.rl{display:flex;align-items:center;gap:4px;background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:4px 8px;cursor:pointer;font-size:11px;font-weight:700}
+.rl input{accent-color:var(--gold)}
+.rl:has(input:checked){background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.4);color:var(--gold)}
+/* BANK */
+.bkr{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:9px;margin-bottom:7px;display:flex;align-items:flex-start;gap:7px}
+.bkr:hover{border-color:rgba(245,158,11,.3)}
+.bkc{width:15px;height:15px;cursor:pointer;accent-color:var(--gold);flex-shrink:0;margin-top:3px}
+.bkf{color:var(--cyan);font-weight:800;font-family:monospace;font-size:13px;cursor:pointer}
+.bkf:hover{color:var(--gold)}
+.bkp{color:var(--gold);font-weight:900;font-family:monospace;font-size:13px;background:rgba(245,158,11,.1);padding:2px 6px;border-radius:4px;border:1px solid rgba(245,158,11,.2);white-space:nowrap}
+.bkm{font-size:9px;color:var(--muted);line-height:1.5;margin-top:2px}
+.cbdg{display:inline-block;background:var(--gold);color:#000;font-size:9px;font-weight:900;padding:1px 5px;border-radius:10px;min-width:15px;text-align:center}
+.impb{background:var(--bg3);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:11px;margin-bottom:7px;display:none}
+.impb.open{display:block}
+.cov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:600;padding:12px;align-items:center;justify-content:center}
+.cov.open{display:flex}
+.cob{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:13px;width:100%;max-width:460px}
+.cta{width:100%;background:#070d14;color:var(--cyan);border:1px solid var(--border);border-radius:6px;padding:9px;font-family:monospace;font-size:11px;height:250px;resize:vertical;outline:none}
+.rsc{overflow-x:auto;max-height:50vh;overflow-y:auto}
+.bksc{max-height:65vh;overflow-y:auto;padding:0 9px 40px}
+.es{text-align:center;padding:28px 14px;color:var(--muted);font-size:12px}
+.esico{font-size:32px;margin-bottom:6px}
+.exs{display:none}
+.exs.open{display:block}
+.fbr{display:flex;gap:6px;margin-bottom:7px;align-items:center}
+.bacts{display:none;gap:5px;flex-wrap:wrap;margin-bottom:6px}
+.bacts.show{display:flex}
+.bab{padding:5px 9px;border-radius:5px;border:1px solid;font-weight:700;font-size:10px;cursor:pointer;background:transparent}
+.tgl-btn{width:100%;padding:5px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:5px;color:var(--muted);font-size:10px;cursor:pointer;margin-bottom:6px;font-weight:600}
+input[type=range]{width:100%;accent-color:var(--gold)}
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<div class="hdr">
+  <div>
+    <div class="hdr-title">⭐ WONGBAGUS SCANNER PRO ⭐</div>
+    <div class="hdr-sub">RUMUS TOGEL · SCANNER · BANK RUMUS</div>
+  </div>
+  <div style="text-align:right;display:flex;align-items:center;gap:6px">
+    <div id="dot" style="width:8px;height:8px;border-radius:50%;background:#ef4444"></div>
+    <span id="dstxt" style="font-size:10px;color:var(--muted)">...</span>
+  </div>
+</div>
+<!-- DATA BAR -->
+<div class="data-bar">
+  <span class="dbt" id="dbar">⏳ Mengambil data...</span>
+  <button style="padding:4px 10px;border-radius:5px;border:none;background:var(--cyan);color:#000;font-weight:700;font-size:11px;cursor:pointer" onclick="fetchData(true)">↺</button>
+</div>
+<!-- TABS -->
+<div class="tab-nav">
+  <button class="tb active" id="tb-sc" onclick="switchTab('sc')">📡 SCANNER</button>
+  <button class="tb" id="tb-mn" onclick="switchTab('mn')">✏️ MANUAL</button>
+  <button class="tb" id="tb-bk" onclick="switchTab('bk')">💾 BANK <span class="cbdg" id="bkcount">0</span></button>
+</div>
+
+<!-- ===== SCANNER TAB ===== -->
+<div id="tab-sc" class="tab active">
+<div class="card">
+  <div class="ct">⚙️ Setting Scan</div>
+  <div class="fld"><label class="lbl">Pasaran</label><select class="sel" id="sc-pas"></select></div>
+  <div class="g2">
+    <div class="fld"><label class="lbl">Jenis Trek</label>
+      <select class="sel" id="sc-jenis">
+        <optgroup label="── AI ──">
+          <option value="ai_ke">AI 2D Belakang</option>
+          <option value="ai_ac">AI 2D Depan</option>
+          <option value="ai_ck">AI 2D Tengah</option>
+        </optgroup>
+        <optgroup label="── BBFS ──">
+          <option value="bbfs_ke">BBFS KE</option>
+          <option value="bbfs_ac">BBFS AC</option>
+          <option value="bbfs_ck">BBFS CK</option>
+          <option value="bbfs_4d">BBFS 4D</option>
+        </optgroup>
+        <optgroup label="── POSISI ──">
+          <option value="pos_e">Posisi Ekor</option>
+          <option value="pos_k">Posisi Kepala</option>
+          <option value="pos_a">Posisi As</option>
+          <option value="pos_c">Posisi Cop</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="fld"><label class="lbl">Hari Filter</label>
+      <select class="sel" id="sc-hari">
+        <option value="">Harian</option>
+        <option value="0">Minggu</option><option value="1">Senin</option>
+        <option value="2">Selasa</option><option value="3">Rabu</option>
+        <option value="4">Kamis</option><option value="5">Jumat</option>
+        <option value="6">Sabtu</option>
+      </select>
+    </div>
+  </div>
+  <div class="g3">
+    <div class="fld"><label class="lbl">Putaran</label><input type="number" class="inp" id="sc-lmt" value="15" min="5" max="100"></div>
+    <div class="fld"><label class="lbl">Max Patah</label><input type="number" class="inp" id="sc-pat" value="0" min="0" max="10"></div>
+    <div class="fld"><label class="lbl">Digit</label>
+      <select class="sel" id="sc-dgt">
+        <option value="2">2D</option><option value="3">3D</option>
+        <option value="4">4D</option><option value="5">5D</option>
+        <option value="6">6D</option>
+      </select>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="fld"><label class="lbl">Mode Patah</label>
+      <select class="sel" id="sc-pm">
+        <option value="max">Max Beruntun</option>
+        <option value="total">Total Patah</option>
+        <option value="cur">Terakhir</option>
+      </select>
+    </div>
+    <div class="fld"><label class="lbl">Target Rumus</label><input type="number" class="inp" id="sc-tgt" value="10" min="1" max="500"></div>
+  </div>
+  <div class="fld"><label class="lbl">Min Hit % <span id="mhval" style="color:var(--gold)">0%</span></label>
+    <input type="range" id="sc-mh" min="0" max="100" value="0" step="5" oninput="document.getElementById('mhval').textContent=this.value+'%'">
+  </div>
+  <!-- LANJUTAN -->
+  <button class="tgl-btn" onclick="toggleLP()">⚙️ Pengaturan Lanjutan ▼</button>
+  <div id="lp" class="lp">
+    <div class="fld"><label class="lbl">Mode Scan</label>
+      <div class="rr">
+        <label class="rl"><input type="radio" name="sm" value="fast" onclick="setSM('fast')"> Fast</label>
+        <label class="rl"><input type="radio" name="sm" value="normal" onclick="setSM('normal')" checked> Normal</label>
+        <label class="rl"><input type="radio" name="sm" value="deep" onclick="setSM('deep')"> Deep</label>
+      </div>
+    </div>
+    <div class="fld"><label class="lbl">Key Putaran (x)</label>
+      <div class="ckg" id="kchk">
+        <label class="ckl"><input type="checkbox" class="kc" value="1" checked>1</label>
+        <label class="ckl"><input type="checkbox" class="kc" value="2" checked>2</label>
+        <label class="ckl"><input type="checkbox" class="kc" value="3" checked>3</label>
+        <label class="ckl"><input type="checkbox" class="kc" value="4" checked>4</label>
+        <label class="ckl"><input type="checkbox" class="kc" value="5" checked>5</label>
+        <label class="ckl"><input type="checkbox" class="kc" value="6">6</label>
+        <label class="ckl"><input type="checkbox" class="kc" value="7">7</label>
+        <label class="ckl"><input type="checkbox" class="kc" value="8">8</label>
+      </div>
+    </div>
+    <div class="fld"><label class="lbl">Operator</label>
+      <div class="rr">
+        <label class="rl"><input type="radio" name="om" value="all" checked> + − ×</label>
+        <label class="rl"><input type="radio" name="om" value="+"> + Only</label>
+        <label class="rl"><input type="radio" name="om" value="-"> − Only</label>
+      </div>
+    </div>
+    <div class="fld"><label class="lbl">Mod Elemen</label><div class="ckg" id="sk1"></div></div>
+    <div class="fld"><label class="lbl">Mod Elemen 2</label><div class="ckg" id="sk2"></div></div>
+    <div class="fld"><label class="lbl">Mod Hasil</label><div class="ckg" id="hsk"></div></div>
+  </div>
+  <div class="pw"><div class="pb" id="pb"></div></div>
+  <div class="con" id="con">>_ Siap scan. Pilih pasaran dan klik SCAN SEMUA.</div>
+  <!-- BATCH BUTTONS -->
+  <div class="brow" id="brow">
+    <button class="btb" id="bb1" onclick="startBatch(1)">B1</button>
+    <button class="btb" id="bb2" onclick="startBatch(2)">B2</button>
+    <button class="btb" id="bb3" onclick="startBatch(3)">B3</button>
+    <button class="btb" id="bb4" onclick="startBatch(4)">B4</button>
+    <button class="btb" id="bb5" onclick="startBatch(5)">B5</button>
+    <button class="btb" id="bb6" onclick="startBatch(6)">B6</button>
+    <button class="btb" id="bb7" onclick="startBatch(7)">B7</button>
+    <button class="btb" id="bb8" onclick="startBatch(8)">B8</button>
+    <button class="btb" id="bb9" onclick="startBatch(9)">B9</button>
+    <button class="btb" id="bb10" onclick="startBatch(10)">B10</button>
+  </div>
+  <div class="row">
+    <button class="btn bg bfw" id="btn-sc" onclick="startScanAll()">📡 SCAN SEMUA</button>
+    <button class="btn br" id="btn-stop" onclick="stopAll()" style="display:none">⏹</button>
+    <button class="btn bgh" id="btn-clr" onclick="clearRes()" style="display:none;padding:10px 10px">🗑</button>
+  </div>
+</div>
+<!-- HASIL SCAN -->
+<div class="card" id="res-card" style="display:none">
+  <div class="ct"><span>🎯 Hasil <span class="cbdg" id="rescnt">0</span></span>
+    <button class="btn bgh" style="padding:3px 8px;font-size:10px" onclick="clearRes()">🗑</button>
+  </div>
+  <div class="rsc"><table class="rt">
+    <thead><tr><th>Formula / Jenis</th><th>Pred</th><th>Lmt</th><th>Hit</th><th>💾</th></tr></thead>
+    <tbody id="rtb"></tbody>
+  </table></div>
+</div>
+</div><!-- /sc -->
+
+<!-- ===== MANUAL TAB ===== -->
+<div id="tab-mn" class="tab">
+<div class="card">
+  <div class="ct">✏️ Input Manual Trek</div>
+  <div class="g2">
+    <div class="fld"><label class="lbl">Pasaran</label><select class="sel" id="mn-pas"></select></div>
+    <div class="fld"><label class="lbl">Hari</label>
+      <select class="sel" id="mn-hari">
+        <option value="">Harian</option>
+        <option value="0">Minggu</option><option value="1">Senin</option>
+        <option value="2">Selasa</option><option value="3">Rabu</option>
+        <option value="4">Kamis</option><option value="5">Jumat</option>
+        <option value="6">Sabtu</option>
+      </select>
+    </div>
+  </div>
+  <div class="g3">
+    <div class="fld"><label class="lbl">Jenis</label>
+      <select class="sel" id="mn-jenis">
+        <optgroup label="AI"><option value="ai_ke">AI KE</option><option value="ai_ac">AI AC</option><option value="ai_ck">AI CK</option></optgroup>
+        <optgroup label="BBFS"><option value="bbfs_ke">BBFS KE</option><option value="bbfs_ac">BBFS AC</option><option value="bbfs_ck">BBFS CK</option><option value="bbfs_4d">BBFS 4D</option></optgroup>
+        <optgroup label="POSISI"><option value="pos_e">Pos Ekor</option><option value="pos_k">Pos Kepala</option><option value="pos_a">Pos As</option><option value="pos_c">Pos Cop</option></optgroup>
+      </select>
+    </div>
+    <div class="fld"><label class="lbl">Digit</label>
+      <select class="sel" id="mn-dgt">
+        <option value="2">2D</option><option value="3">3D</option><option value="4">4D</option><option value="5">5D</option><option value="6">6D</option>
+      </select>
+    </div>
+    <div class="fld"><label class="lbl">Putaran</label><input type="number" class="inp" id="mn-lmt" value="15" min="5" max="100"></div>
+  </div>
+  <!-- PASTE KODE -->
+  <div class="fld"><label class="lbl">Paste Kode Rumus</label>
+    <div class="row">
+      <input type="text" class="pi" id="mn-pk" placeholder="e.g. A1+E2.ml atau J3D2+K1.ix" oninput="mnAutoLoad(this.value)">
+      <button class="btn bc" style="padding:8px 11px;white-space:nowrap" onclick="mnLoadKode()">Load</button>
+      <button class="btn bgh" style="padding:8px 10px" onclick="mnReset()">↺</button>
+    </div>
+  </div>
+  <!-- KEY PREVIEW -->
+  <div class="fld"><label class="lbl">Formula KEY</label><div class="kpv" id="mn-pv">?</div></div>
+  <!-- FORMULA BUILDER -->
+  <div class="fnr">
+    <div class="fnt">🔑 Builder (sampai 6 Elemen)</div>
+    <!-- SLOT 1 -->
+    <div class="fsl"><div class="fslb">Elemen 1</div>
+      <div class="fsr"><select class="fse" id="e1" onchange="mnUpd();mnAutoTrek()"></select>
+        <select class="fmd" id="m1" onchange="mnUpd();mnAutoTrek()"></select>
+        <select class="fop" id="o1" onchange="mnUpd();mnAutoTrek()">
+          <option value="none">—</option><option value="+" selected>+</option><option value="-">−</option><option value=".">×</option>
+        </select>
+      </div>
+    </div>
+    <!-- SLOT 2 -->
+    <div class="fsl"><div class="fslb">Elemen 2</div>
+      <div class="fsr"><select class="fse" id="e2" onchange="mnUpd();mnAutoTrek()"></select>
+        <select class="fmd" id="m2" onchange="mnUpd();mnAutoTrek()"></select>
+        <select class="fop" id="o2" onchange="mnUpd();mnAutoTrek()">
+          <option value="none" selected>—</option><option value="+">+</option><option value="-">−</option><option value=".">×</option>
+        </select>
+      </div>
+    </div>
+    <!-- SLOT 3 -->
+    <div class="fsl"><div class="fslb">Elemen 3</div>
+      <div class="fsr"><select class="fse" id="e3" onchange="mnUpd();mnAutoTrek()"></select>
+        <select class="fmd" id="m3" onchange="mnUpd();mnAutoTrek()"></select>
+        <select class="fop" id="o3" onchange="mnUpd();mnAutoTrek()">
+          <option value="none" selected>—</option><option value="+">+</option><option value="-">−</option><option value=".">×</option>
+        </select>
+      </div>
+    </div>
+    <!-- EXTRA SLOTS 4-6 -->
+    <div class="exs" id="exs">
+      <div class="fsl"><div class="fslb">Elemen 4</div>
+        <div class="fsr"><select class="fse" id="e4" onchange="mnUpd();mnAutoTrek()"></select>
+          <select class="fmd" id="m4" onchange="mnUpd();mnAutoTrek()"></select>
+          <select class="fop" id="o4" onchange="mnUpd();mnAutoTrek()">
+            <option value="none" selected>—</option><option value="+">+</option><option value="-">−</option><option value=".">×</option>
+          </select>
+        </div>
+      </div>
+      <div class="fsl"><div class="fslb">Elemen 5</div>
+        <div class="fsr"><select class="fse" id="e5" onchange="mnUpd();mnAutoTrek()"></select>
+          <select class="fmd" id="m5" onchange="mnUpd();mnAutoTrek()"></select>
+          <select class="fop" id="o5" onchange="mnUpd();mnAutoTrek()">
+            <option value="none" selected>—</option><option value="+">+</option><option value="-">−</option><option value=".">×</option>
+          </select>
+        </div>
+      </div>
+      <div class="fsl"><div class="fslb">Elemen 6</div>
+        <div class="fsr"><select class="fse" id="e6" onchange="mnUpd();mnAutoTrek()"></select>
+          <select class="fmd" id="m6" onchange="mnUpd();mnAutoTrek()"></select>
+        </div>
+      </div>
+    </div>
+    <button class="tgl-btn" onclick="toggleExs()">± Elemen 4/5/6</button>
+    <!-- MOD HASIL -->
+    <div style="display:flex;gap:6px;align-items:center">
+      <span style="font-size:10px;color:var(--muted);white-space:nowrap">Mod Hasil:</span>
+      <select class="fmd" id="mh" onchange="mnUpd();mnAutoTrek()" style="flex:1"></select>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom:8px">
+    <button class="btn bg bfw" onclick="mnShowTrek()">🔍 Tampilkan Trek</button>
+    <button class="btn bgrn" style="padding:10px 12px" onclick="mnSave()" title="Simpan ke Bank">💾</button>
+    <button class="btn bc" style="padding:10px 12px" onclick="mnCopy()" title="Copy Trek">📋</button>
+  </div>
+</div>
+<!-- TREK RESULT MANUAL -->
+<div class="card" id="mn-tc" style="display:none">
+  <div class="ct">📊 Trek Result</div>
+  <div id="mn-info" style="font-size:11px;margin-bottom:7px;padding:7px 9px;background:var(--bg3);border-radius:6px;line-height:1.6"></div>
+  <div class="tdsp" id="mn-tbl"></div>
+</div>
+</div><!-- /mn -->
+
+<!-- ===== BANK TAB ===== -->
+<div id="tab-bk" class="tab">
+<div class="card" style="padding-bottom:8px">
+  <div class="ct">💾 Bank Rumus</div>
+  <!-- IMPORT -->
+  <div class="row" style="margin-bottom:6px">
+    <input type="text" class="pi" id="bk-inp" placeholder="Paste kode rumus..." style="flex:1;font-size:11px">
+    <button class="btn bc" style="padding:8px 11px;font-size:11px;white-space:nowrap" onclick="bkShowImport()">+ Import</button>
+  </div>
+  <div class="impb" id="impb">
+    <div class="g2" style="margin-bottom:6px">
+      <div class="fld"><label class="lbl">Pasaran</label><select class="sel" id="bf-pas" style="font-size:12px"></select></div>
+      <div class="fld"><label class="lbl">Jenis</label>
+        <select class="sel" id="bf-jenis" style="font-size:12px">
+          <option value="ai_ke">AI KE</option><option value="ai_ac">AI AC</option><option value="ai_ck">AI CK</option>
+          <option value="bbfs_ke">BBFS KE</option><option value="bbfs_ac">BBFS AC</option><option value="bbfs_ck">BBFS CK</option><option value="bbfs_4d">BBFS 4D</option>
+          <option value="pos_e">Pos E</option><option value="pos_k">Pos K</option><option value="pos_a">Pos A</option><option value="pos_c">Pos C</option>
+        </select>
+      </div>
+    </div>
+    <div class="g3" style="margin-bottom:7px">
+      <div class="fld"><label class="lbl">Digit</label>
+        <select class="sel" id="bf-dgt" style="font-size:12px">
+          <option value="2">2D</option><option value="3">3D</option><option value="4">4D</option><option value="5">5D</option>
+        </select>
+      </div>
+      <div class="fld"><label class="lbl">Putaran</label><input type="number" class="inp" id="bf-lmt" value="15" min="5" max="100"></div>
+      <div class="fld"><label class="lbl">Hari</label>
+        <select class="sel" id="bf-hari" style="font-size:12px">
+          <option value="">Harian</option>
+          <option value="0">Minggu</option><option value="1">Senin</option><option value="2">Selasa</option>
+          <option value="3">Rabu</option><option value="4">Kamis</option><option value="5">Jumat</option><option value="6">Sabtu</option>
+        </select>
+      </div>
+    </div>
+    <div id="bf-pv" style="font-size:11px;color:var(--cyan);background:var(--bg3);padding:6px 9px;border-radius:6px;margin-bottom:7px;font-family:monospace"></div>
+    <div class="row">
+      <button class="btn bgrn bfw" onclick="bkDoImport()">✅ Simpan</button>
+      <button class="btn bgh" style="padding:10px 13px" onclick="bkHideImport()">✕</button>
+    </div>
+  </div>
+  <!-- FILTER -->
+  <div class="fbr">
+    <select class="sel" id="bk-fp" onchange="renderBank()" style="flex:1;font-size:11px">
+      <option value="">Semua Pasaran</option>
+    </select>
+    <button class="btn bgh" style="padding:7px 9px;font-size:10px" onclick="bkUpdateAll()">↺ Update</button>
+  </div>
+  <!-- BULK ACTIONS -->
+  <div class="bacts" id="bacts">
+    <button class="bab" style="color:var(--red);border-color:rgba(239,68,68,.3)" onclick="bkDelSel()">🗑 Hapus</button>
+    <button class="bab" style="color:var(--cyan);border-color:rgba(34,211,238,.3)" onclick="bkTrekSel()">📊 Trek</button>
+    <button class="bab" style="color:var(--gold);border-color:rgba(245,158,11,.3)" onclick="bkCopySel()">📋 Copy</button>
+    <button class="bab" style="color:var(--muted);border-color:var(--border)" onclick="bkTogAll(false)">✕ Uncheck</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+    <input type="checkbox" id="bk-all" class="bkc" onchange="bkTogAll(this.checked)">
+    <span style="font-size:10px;color:var(--muted)">Pilih Semua</span>
+    <span style="flex:1"></span>
+    <button onclick="clearBank()" style="padding:3px 9px;background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2);border-radius:5px;font-size:10px;font-weight:700;cursor:pointer">🗑 Hapus Semua</button>
+  </div>
+</div>
+<div id="bklist" class="bksc"></div>
+</div><!-- /bk -->
+
+<!-- TREK MODAL -->
+<div class="mo" id="trekmo">
+  <div class="mb">
+    <div class="mh">
+      <span class="mt" id="tmt">TREK</span>
+      <div style="display:flex;gap:6px;align-items:center">
+        <button class="btn bc" style="padding:5px 9px;font-size:11px" onclick="trekCopy()">📋 Copy</button>
+        <button onclick="closeMo()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer">✕</button>
+      </div>
+    </div>
+    <div class="mi" id="tmi"></div>
+    <div class="tbd" id="tbd"></div>
+  </div>
+</div>
+
+<!-- COPY OVERLAY -->
+<div class="cov" id="cov">
+  <div class="cob">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px">
+      <span style="font-weight:800;color:var(--gold);font-size:13px">📋 Copy Trek</span>
+      <button onclick="closeCov()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer">✕</button>
+    </div>
+    <textarea class="cta" id="cta" readonly onclick="this.select()"></textarea>
+    <div class="row" style="margin-top:7px">
+      <button class="btn bg bfw" onclick="doCopy()">📋 Copy Semua</button>
+      <button class="btn bgh" style="padding:10px 13px" onclick="closeCov()">✕</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════
+// DATA
+// ════════════════════════════════════════════════
+const RJ_URL='https://raw.githubusercontent.com/jonson22/data-togel/main/result.json';
+const CDN_URL='https://cdn.jsdelivr.net/gh/jonson22/data-togel@main/result.json';
+const CACHE_K='wb_rjcache_v2',CACHE_TTL=90*60*1000;
+let _rj={};
+
+const MARKETS=[
+  {id:'hk',flag:'🇭🇰',name:'Hongkong',short:'HK'},
+  {id:'hkl',flag:'🇭🇰',name:'HK Lotto',short:'HKL'},
+  {id:'sgp',flag:'🇸🇬',name:'Singapore',short:'SGP'},
+  {id:'sdy',flag:'🇦🇺',name:'Sydney',short:'SDY'},
+  {id:'sdl',flag:'🇦🇺',name:'Sydney Lotto',short:'SDL'},
+  {id:'kam',flag:'🇰🇭',name:'Kamboja',short:'KAM'},
+  {id:'bull',flag:'🇳🇿',name:'Bullseye NZ',short:'BULL'},
+  {id:'chn',flag:'🇨🇳',name:'China',short:'CHN'},
+  {id:'jpn',flag:'🇯🇵',name:'Japan',short:'JPN'},
+  {id:'twn',flag:'🇹🇼',name:'Taiwan',short:'TWN'},
+  {id:'pcso',flag:'🇵🇭',name:'PCSO',short:'PCSO'},
+  {id:'mac1',flag:'🇲🇴',name:'Toto Macau 13',short:'MAC13'},
+  {id:'mac2',flag:'🇲🇴',name:'Toto Macau 16',short:'MAC16'},
+  {id:'mac3',flag:'🇲🇴',name:'Toto Macau 19',short:'MAC19'},
+  {id:'mac4',flag:'🇲🇴',name:'Toto Macau 22',short:'MAC22'},
+  {id:'mac5',flag:'🇲🇴',name:'Toto Macau 00',short:'MAC00'},
+  {id:'mac6',flag:'🇲🇴',name:'Toto Macau 23',short:'MAC23'},
+  {id:'mrq3',flag:'🇲🇦',name:'Morocco 03',short:'MRQ3'},
+  {id:'mrq18',flag:'🇲🇦',name:'Morocco 18',short:'MRQ18'},
+  {id:'mrq21',flag:'🇲🇦',name:'Morocco 21',short:'MRQ21'},
+  {id:'mrq23',flag:'🇲🇦',name:'Morocco 23',short:'MRQ23'},
+  {id:'ger',flag:'🇩🇪',name:'Germany',short:'GER'},
+  {id:'or4',flag:'🇺🇸',name:'Oregon 04',short:'OR4'},
+  {id:'or7',flag:'🇺🇸',name:'Oregon 07',short:'OR7'},
+  {id:'or10',flag:'🇺🇸',name:'Oregon 10',short:'OR10'},
+  {id:'or13',flag:'🇺🇸',name:'Oregon 13',short:'OR13'},
+  {id:'ncd',flag:'🇺🇸',name:'NC Day',short:'NCD'},
+  {id:'nce',flag:'🇺🇸',name:'NC Evening',short:'NCE'},
+  {id:'geom',flag:'🇺🇸',name:'Georgia Mid',short:'GEOM'},
+  {id:'geoe',flag:'🇺🇸',name:'Georgia Eve',short:'GEOE'},
+  {id:'geon',flag:'🇺🇸',name:'Georgia Night',short:'GEON'},
+  {id:'txd',flag:'🇺🇸',name:'Texas Day',short:'TXD'},
+  {id:'txmr',flag:'🇺🇸',name:'Texas Morning',short:'TXMR'},
+  {id:'txe',flag:'🇺🇸',name:'Texas Eve',short:'TXE'},
+  {id:'txn',flag:'🇺🇸',name:'Texas Night',short:'TXN'},
+  {id:'nyd',flag:'🇺🇸',name:'New York Mid',short:'NYD'},
+  {id:'nye',flag:'🇺🇸',name:'New York Eve',short:'NYE'},
+  {id:'njm',flag:'🇺🇸',name:'NJ Mid',short:'NJM'},
+  {id:'nje',flag:'🇺🇸',name:'NJ Eve',short:'NJE'},
+  {id:'flm',flag:'🇺🇸',name:'Florida Mid',short:'FLM'},
+  {id:'fle',flag:'🇺🇸',name:'Florida Eve',short:'FLE'},
+  {id:'ilm',flag:'🇺🇸',name:'Illinois Mid',short:'ILM'},
+  {id:'ile',flag:'🇺🇸',name:'Illinois Eve',short:'ILE'},
+  {id:'indm',flag:'🇺🇸',name:'Indiana Mid',short:'INDM'},
+  {id:'inde',flag:'🇺🇸',name:'Indiana Eve',short:'INDE'},
+  {id:'kym',flag:'🇺🇸',name:'Kentucky Mid',short:'KYM'},
+  {id:'kye',flag:'🇺🇸',name:'Kentucky Eve',short:'KYE'},
+  {id:'mdm',flag:'🇺🇸',name:'Maryland Mid',short:'MDM'},
+  {id:'mde',flag:'🇺🇸',name:'Maryland Eve',short:'MDE'},
+  {id:'mim',flag:'🇺🇸',name:'Michigan Mid',short:'MIM'},
+  {id:'mie',flag:'🇺🇸',name:'Michigan Eve',short:'MIE'},
+  {id:'mom',flag:'🇺🇸',name:'Missouri Mid',short:'MOM'},
+  {id:'moe',flag:'🇺🇸',name:'Missouri Eve',short:'MOE'},
+  {id:'wdm',flag:'🇺🇸',name:'WDC Mid',short:'WDM'},
+  {id:'wde',flag:'🇺🇸',name:'WDC Eve',short:'WDE'},
+  {id:'ctd',flag:'🇺🇸',name:'Connecticut Day',short:'CTD'},
+  {id:'ctn',flag:'🇺🇸',name:'Connecticut Night',short:'CTN'},
+  {id:'vad',flag:'🇺🇸',name:'Virginia Day',short:'VAD'},
+  {id:'van',flag:'🇺🇸',name:'Virginia Night',short:'VAN'},
+  {id:'tnm',flag:'🇺🇸',name:'Tennessee Mid',short:'TNM'},
+  {id:'tne',flag:'🇺🇸',name:'Tennessee Eve',short:'TNE'},
+  {id:'tnmr',flag:'🇺🇸',name:'Tennessee Morning',short:'TNMR'},
+  {id:'cal',flag:'🇺🇸',name:'California',short:'CAL'},
+  {id:'wie',flag:'🇺🇸',name:'Wisconsin Eve',short:'WIE'},
+];
+
+// ════════════════════════════════════════════════
+// MOD TABLE (A1-A10, C1-C10, K1-K10, E1-E10 dll)
+// ════════════════════════════════════════════════
+const MOD_TABLE={
+  ix:{0:5,1:6,2:7,3:8,4:9,5:0,6:1,7:2,8:3,9:4},
+  ty:{0:7,1:4,2:9,3:6,4:1,5:8,6:3,7:0,8:5,9:2},
+  ml:{0:1,1:0,2:5,3:8,4:7,5:2,6:9,7:4,8:3,9:6},
+  mb:{0:8,1:7,2:6,3:9,4:5,5:4,6:2,7:1,8:0,9:3},
+  m0:{0:6,1:5,2:8,3:7,4:9,5:1,6:0,7:3,8:2,9:4},
+  m1:{0:1,1:0,2:9,3:8,4:7,5:6,6:5,7:4,8:3,9:2},
+  m2:{0:2,1:8,2:0,3:9,4:7,5:6,6:5,7:4,8:1,9:3},
+  m3:{0:3,1:2,2:1,3:0,4:9,5:8,6:7,7:6,8:5,9:4},
+  m4:{0:6,1:5,2:3,3:2,4:7,5:1,6:0,7:4,8:9,9:8},
+  m5:{0:5,1:4,2:3,3:2,4:1,5:0,6:9,7:8,8:7,9:6},
+  m6:{0:6,1:8,2:4,3:5,4:2,5:3,6:0,7:9,8:1,9:7},
+  m7:{0:7,1:6,2:5,3:4,4:3,5:2,6:1,7:0,8:9,9:8},
+  m8:{0:8,1:7,2:6,3:5,4:9,5:3,6:2,7:1,8:0,9:4},
+  m9:{0:9,1:8,2:7,3:6,4:5,5:4,6:3,7:2,8:1,9:0},
+  m10:{0:4,1:2,2:1,3:8,4:0,5:6,6:5,7:9,8:3,9:7},
+  m11:{0:1,1:0,2:5,3:4,4:3,5:2,6:8,7:9,8:6,9:7},
+  m12:{0:2,1:7,2:0,3:8,4:6,5:9,6:4,7:1,8:3,9:5},
+  m13:{0:3,1:9,2:7,3:0,4:6,5:8,6:4,7:2,8:5,9:1},
+  m14:{0:6,1:5,2:4,3:7,4:2,5:1,6:0,7:3,8:9,9:8},
+  m15:{0:5,1:6,2:4,3:9,4:2,5:0,6:1,7:8,8:7,9:3},
+  m16:{0:3,1:8,2:7,3:0,4:9,5:6,6:5,7:2,8:1,9:4},
+  m17:{0:9,1:4,2:8,3:6,4:1,5:7,6:3,7:5,8:2,9:0},
+  m18:{0:8,1:9,2:7,3:4,4:3,5:6,6:5,7:2,8:0,9:1},
+  m19:{0:7,1:8,2:3,3:2,4:9,5:6,6:5,7:0,8:1,9:4},
+};
+const ALL_MODS=['-','ix','ty','ml','mb','m0','m1','m2','m3','m4','m5','m6','m7','m8','m9','m10','m11','m12','m13','m14','m15','m16','m17','m18','m19'];
+// ELEMEN LENGKAP sesuai angkanet: A1-A10, C1-C10, K1-K10, E1-E10, J1-J10, Jt1-Jt10, Jd1-Jd10, Js1-Js10, J3D1-J3D10, J4D1-J4D10
+const ALL_ELEMS=(()=>{
+  const r=['-'];
+  ['A','C','K','E','J','Jt','Jd','Js','J3D','J4D'].forEach(p=>{
+    for(let n=1;n<=10;n++) r.push(p+n);
+  });
+  return r;
+})();
+const HNAMES=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+
+// ════════════════════════════════════════════════
+// FETCH DATA
+// ════════════════════════════════════════════════
+async function fetchData(force=false){
+  const dbar=document.getElementById('dbar');
+  dbar.textContent='⏳ Mengambil data...';
+  if(!force){
+    try{
+      const c=localStorage.getItem(CACHE_K);
+      if(c){const {ts,rj}=JSON.parse(c);if(Date.now()-ts<CACHE_TTL&&Object.keys(rj).length>5){_rj=rj;onData();return;}}
+    }catch(e){}
+  }
+  for(const url of [RJ_URL,CDN_URL]){
+    try{
+      const r=await fetch(url+'?_='+Date.now(),{signal:AbortSignal.timeout(12000)});
+      if(!r.ok)continue;
+      const d=await r.json();
+      if(Object.keys(d).length<5)continue;
+      _rj=d;
+      localStorage.setItem(CACHE_K,JSON.stringify({ts:Date.now(),rj:d}));
+      document.getElementById('dot').style.background='#10b981';
+      document.getElementById('dstxt').textContent='Live ✓';
+      onData();return;
+    }catch(e){}
+  }
+  try{const c=localStorage.getItem(CACHE_K);if(c){const{rj}=JSON.parse(c);_rj=rj;document.getElementById('dot').style.background='#f59e0b';document.getElementById('dstxt').textContent='Cache';onData();return;}}catch(e){}
+  dbar.textContent='❌ Gagal. Coba Refresh.';
+  document.getElementById('dot').style.background='#ef4444';
+}
+function onData(){
+  const cnt=Object.keys(_rj).filter(k=>k!=='_meta').length;
+  const upd=(_rj._meta||{}).updated_at||'';
+  document.getElementById('dbar').textContent=`✅ ${cnt} pasaran · ${upd||new Date().toLocaleTimeString('id-ID')}`;
+  initDropdowns();updateBKCnt();renderBank();
+}
+setInterval(()=>fetchData(true),60*60*1000);
+
+// ════════════════════════════════════════════════
+// HISTORY
+// ════════════════════════════════════════════════
+function getHist(id,max){
+  const e=_rj[id];if(!e)return[];
+  let rs=[];
+  if(e.history&&e.history.length)rs=e.history.map(h=>String(h.result||'').trim()).filter(r=>/^\d{4}$/.test(r));
+  const t=String(e.result||'').trim();
+  if(/^\d{4}$/.test(t)&&rs[0]!==t)rs.unshift(t);
+  else if(!rs.length&&/^\d{4}$/.test(t))rs.unshift(t);
+  return rs.filter((r,i)=>i===0||r!==rs[i-1]).slice(0,max||150);
+}
+function getHistHari(id,max,hari){
+  if(hari===''||hari===null||hari===undefined)return getHist(id,max);
+  const hn=parseInt(hari);if(isNaN(hn))return getHist(id,max);
+  const e=_rj[id];if(!e||!e.history||!e.history.length)return getHist(id,max);
+  const out=[];
+  if(e.fetch_date&&Array.isArray(e.fetch_date)&&e.fetch_date.length>=3){
+    const fd=new Date(e.fetch_date[0],e.fetch_date[1]-1,e.fetch_date[2]);
+    const t=String(e.result||'').trim();
+    if(!isNaN(fd.getTime())&&fd.getDay()===hn&&/^\d{4}$/.test(t))out.push(t);
+  }
+  for(const h of e.history){
+    if(out.length>=max)break;
+    const r=String(h.result||'').trim();
+    if(!/^\d{4}$/.test(r)||!h.date)continue;
+    const d=new Date(h.date+'T00:00:00');
+    if(!isNaN(d.getTime())&&d.getDay()===hn)out.push(r);
+  }
+  return out.slice(0,max);
+}
+function getH(id,max,hari){return(hari!==''&&hari!==null&&hari!==undefined)?getHistHari(id,max,hari):getHist(id,max);}
+
+// ════════════════════════════════════════════════
+// FORMULA ENGINE
+// ════════════════════════════════════════════════
+function dr(n){n=Math.abs(n);if(n===0)return 0;return n%9===0?9:n%9;}
+function apOp(a,b,op){
+  if(op==='+')return dr(a+b);
+  if(op==='-')return dr(Math.abs(a-b));
+  if(op==='.')return dr(a*b);
+  return a;
+}
+function apMod(v,mod){
+  if(!mod||mod==='-')return v;
+  const k=dr(Math.abs(v))%10;
+  return (MOD_TABLE[mod]||{})[k]??v;
+}
+function parseElem(code,hist){
+  if(!code||code==='-')return null;
+  let base=code,em='-';
+  const mlist=ALL_MODS.filter(m=>m!=='-').sort((a,b)=>b.length-a.length);
+  for(const mo of mlist){if(code.endsWith(mo)&&code.length>mo.length){const b=code.slice(0,code.length-mo.length);if(/\d$/.test(b)){base=b;em=mo;break;}}}
+  const sm=base.match(/^([A-Za-z]+)(\d+)$/);if(!sm)return null;
+  const pre=sm[1].toUpperCase(),n=parseInt(sm[2]);
+  const r=hist[n-1];if(!r||!/^\d{4}$/.test(r))return null;
+  const A=+r[0],C=+r[1],K=+r[2],E=+r[3];
+  let v=null;
+  switch(pre){
+    case 'A':v=A;break;case 'C':v=C;break;case 'K':v=K;break;case 'E':v=E;break;
+    case 'J':v=dr(K+E);break;
+    case 'JS':v=dr(Math.abs(K-E));break;
+    case 'JT':v=dr(C+K);break;
+    case 'JD':v=dr(A+C);break;
+    case 'J3D':v=dr(C+K+E);break;
+    case 'J4D':v=dr(A+C+K+E);break;
+    default:return null;
+  }
+  return em!=='-'?apMod(v,em):v;
+}
+function calcF(e1,o1,e2,mod,hist,o2,e3,o3,e4,o4,e5,o5,e6){
+  const v1=parseElem(e1,hist);if(v1===null)return null;
+  const extras=[{e:e2,o:o1},{e:e3,o:o2},{e:e4,o:o3},{e:e5,o:o4},{e:e6,o:o5}];
+  let res=v1;
+  for(const x of extras){
+    if(!x.e||x.e==='-')continue;
+    if(!x.o||x.o==='none')continue;
+    const vx=parseElem(x.e,hist);if(vx===null)continue;
+    res=apOp(res,vx,x.o);
+  }
+  return(mod&&mod!=='-')?apMod(res,mod):res;
+}
+function makePred(start,nd,cols){
+  const t=Array.from({length:10},(_,i)=>(start+i)%10);
+  return (cols||getCols(nd)).slice(0,nd).map(i=>t[i]).join('');
+}
+function getCols(nd,mingg){
+  if(mingg){
+    if(nd===1)return[3];if(nd===2)return[3,4];if(nd===3)return[2,3,4];
+    if(nd===4)return[1,2,3,4];if(nd===5)return[0,1,2,3,4];return[0,1,2,3,4,5];
+  }
+  if(nd===1)return[9];if(nd===2)return[4,5];if(nd===3)return[1,5,9];
+  if(nd===4)return[0,1,4,5];if(nd===5)return[0,4,5,6,9];
+  if(nd===6)return[0,1,4,5,6,9];if(nd===7)return[0,1,3,4,5,6,9];
+  if(nd===8)return[0,1,2,4,5,6,7,9];if(nd===9)return[0,1,2,3,4,5,6,7,9];
+  return[0,4,5,6,9];
+}
+function getTargets(K,E,A,C,jenis){
+  if(jenis==='ai_ke'||jenis==='bbfs_ke')return[K,E];
+  if(jenis==='ai_ac'||jenis==='bbfs_ac')return[A,C];
+  if(jenis==='ai_ck'||jenis==='bbfs_ck')return[C,K];
+  if(jenis==='bbfs_4d')return[A,C,K,E];
+  if(jenis==='pos_e')return[E];if(jenis==='pos_k')return[K];
+  if(jenis==='pos_a')return[A];if(jenis==='pos_c')return[C];
+  return[K,E];
+}
+function checkHit(result,pred,jenis){
+  const s=String(result).padStart(4,'0');
+  const A=+s[0],C=+s[1],K=+s[2],E=+s[3];
+  const ds=pred.split('').map(Number);
+  if(jenis.startsWith('ai_')){
+    const p=jenis.slice(3);
+    if(p==='ke')return ds.includes(K)||ds.includes(E);
+    if(p==='ac')return ds.includes(A)||ds.includes(C);
+    if(p==='ck')return ds.includes(C)||ds.includes(K);
+  }
+  if(jenis.startsWith('bbfs_')){
+    const p=jenis.slice(5);
+    if(p==='ke'){if(K===E)return ds.includes(K);return ds.includes(K)&&ds.includes(E);}
+    if(p==='ac'){if(A===C)return ds.includes(A);return ds.includes(A)&&ds.includes(C);}
+    if(p==='ck'){if(C===K)return ds.includes(C);return ds.includes(C)&&ds.includes(K);}
+    if(p==='4d'){return[...new Set([A,C,K,E])].every(d=>ds.includes(d));}
+  }
+  if(jenis.startsWith('pos_')){
+    const p=jenis.slice(4);
+    const tgt={e:E,k:K,a:A,c:C}[p];
+    return tgt!==undefined&&ds.includes(tgt);
+  }
+  return false;
+}
+
+// ════════════════════════════════════════════════
+// INIT DROPDOWNS
+// ════════════════════════════════════════════════
+let _inited=false;
+function initDropdowns(){
+  if(_inited)return;_inited=true;
+  let opts='';
+  for(const m of MARKETS){
+    if(!_rj[m.id])continue;
+    opts+=`<option value="${m.id}">${m.flag} ${m.name}</option>`;
+  }
+  ['sc-pas','mn-pas','bf-pas'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(id==='bf-pas'){el.innerHTML=opts;}
+    else el.innerHTML=opts;
+  });
+  let fopt='<option value="">Semua Pasaran</option>';
+  for(const m of MARKETS){if(!_rj[m.id])continue;fopt+=`<option value="${m.id}">${m.flag} ${m.name}</option>`;}
+  document.getElementById('bk-fp').innerHTML=fopt;
+  // Manual builder dropdowns
+  const eOpts=ALL_ELEMS.map(e=>`<option value="${e}">${e==='-'?'(none)':e}</option>`).join('');
+  const mOpts=ALL_MODS.map(m=>`<option value="${m}">${m==='-'?'(none)':m.toUpperCase()}</option>`).join('');
+  for(let i=1;i<=6;i++){
+    const ee=document.getElementById('e'+i);if(ee){ee.innerHTML=eOpts;ee.value='-';}
+    const me=document.getElementById('m'+i);if(me)me.innerHTML=mOpts;
+  }
+  const mhe=document.getElementById('mh');if(mhe)mhe.innerHTML=mOpts;
+  const e1=document.getElementById('e1');if(e1)e1.value='A1';
+  mnUpd();
+  // Mod checkboxes for scanner
+  buildMC('sk1',['−','IX','TY','ML','MB']);
+  buildMC('sk2',['−','IX','TY','ML','MB']);
+  buildMC('hsk',['−','IX','TY','ML','MB']);
+  // Watch mn selects
+  ['mn-pas','mn-jenis','mn-lmt','mn-dgt','mn-hari'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el)el.addEventListener('change',()=>mnUpd());
+  });
+}
+function buildMC(cid,defs){
+  const el=document.getElementById(cid);if(!el)return;
+  const mods=['-','ix','ty','ml','mb','m0','m1','m2','m3','m4','m5'];
+  el.innerHTML=mods.map(m=>{
+    const lbl={'-':'−',ix:'IX',ty:'TY',ml:'ML',mb:'MB'}[m]||m.toUpperCase();
+    const chk=defs.includes(lbl)||defs.includes(m.toUpperCase())?'checked':'';
+    return `<label class="ckl"><input type="checkbox" class="${cid}c" value="${m}" ${chk}>${lbl}</label>`;
+  }).join('');
+}
+function getChecked(cid){return[...document.querySelectorAll('.'+cid+'c')].filter(c=>c.checked).map(c=>c.value);}
+
+// ════════════════════════════════════════════════
+// SCAN ENGINE
+// ════════════════════════════════════════════════
+let cands=[],scanned=0,_tgt=10;
+let _bst=Array(10).fill(null),_brun=Array(10).fill(false),_btmr=Array(10).fill(null);
+let _gdone=false,_scan=false;
+
+function getBatchParams(){
+  const kNums=[...document.querySelectorAll('.kc')].filter(c=>c.checked).map(c=>parseInt(c.value));
+  let sk1=getChecked('sk1'),sk2=getChecked('sk2'),hsk=getChecked('hsk');
+  if(!sk1.length)sk1=['-','ix','ty','ml','mb'];
+  if(!sk2.length)sk2=['-','ix','ty','ml','mb'];
+  if(!hsk.length)hsk=['-','ix','ty','ml','mb'];
+  const opMode=document.querySelector('input[name="om"]:checked')?.value||'all';
+  const ops=opMode==='all'?['+','-','.']:opMode==='+'?['+']: ['-'];
+  const BASES=['A','C','K','E','J','Jt','Jd','Js','J3D','J4D'];
+  const E1=[];
+  for(const b of BASES)for(const n of kNums)for(const em of sk1)E1.push(b+n+(em==='-'?'':em));
+  const E2=[];
+  for(const b of BASES)for(let n=1;n<=8;n++)for(const em of sk2)E2.push(b+n+(em==='-'?'':em));
+  const sc=E1.length*hsk.length;
+  const dc=E1.length*ops.length*E2.length*hsk.length;
+  return{E1,ops,E2,hsk,sc,dc,tot:sc+dc};
+}
+function idxToCombo(idx,p){
+  if(idx<p.sc){
+    const ie=Math.floor(idx/p.hsk.length),im=idx%p.hsk.length;
+    return{e1:p.E1[ie],o1:'+',e2:'-',mod:p.hsk[im]};
+  }
+  let i=idx-p.sc;
+  const E2H=p.E2.length*p.hsk.length,OE2H=p.ops.length*E2H;
+  const ie=Math.floor(i/OE2H);i=i%OE2H;
+  const io=Math.floor(i/E2H);i=i%E2H;
+  const ie2=Math.floor(i/p.hsk.length),im=i%p.hsk.length;
+  return{e1:p.E1[ie],o1:p.ops[io],e2:p.E2[ie2],mod:p.hsk[im]};
+}
+function setBB(bi,state){
+  const btn=document.getElementById('bb'+(bi+1));if(!btn)return;
+  const bg={idle:'#0a1a2a',run:'#0a2a3a',done:'#0a2a1a',found:'#1a2a0a'};
+  const tc={idle:'var(--cyan)',run:'var(--gold)',done:'var(--green)',found:'var(--green)'};
+  const lb={idle:`B${bi+1}`,run:`⏳B${bi+1}`,done:`✅B${bi+1}`,found:`🎯B${bi+1}`};
+  btn.style.background=bg[state]||bg.idle;btn.style.color=tc[state]||tc.idle;
+  btn.textContent=lb[state]||lb.idle;
+}
+function updProg(){
+  let tot=0,proc=0;
+  for(let i=0;i<10;i++){const b=_bst[i];if(!b)continue;tot+=b.be-b.bs;proc+=Math.min(b.ci,b.be)-b.bs;}
+  const p=tot>0?Math.round(proc/tot*100):0;
+  document.getElementById('pb').style.width=p+'%';
+  const running=_brun.map((r,i)=>r?`B${i+1}`:'').filter(Boolean);
+  if(running.length)setC(`⏳ [${running.join(' ')}] ${p}% — ${cands.length} rumus`);
+}
+function allDone(){
+  _gdone=true;_scan=false;
+  document.getElementById('btn-stop').style.display='none';
+  document.getElementById('btn-sc').style.display='block';
+  document.getElementById('btn-sc').textContent='🔁 SCAN ULANG';
+  document.getElementById('pb').style.width='100%';
+  document.getElementById('btn-clr').style.display='block';
+  setC(cands.length>=_tgt?`🎯 TARGET ${_tgt} TERCAPAI! ${cands.length} rumus`:`✅ SELESAI — ${cands.length} rumus`);
+  if(cands.length>0){renderRes();document.getElementById('res-card').style.display='block';}
+}
+function chkStop(){if(_gdone)return true;if(_brun.every(r=>!r)){allDone();return true;}return false;}
+
+function startBatch(bnum,skipReset){
+  const bi=bnum-1;if(_brun[bi])return;
+  if(_gdone&&!skipReset)resetBatch();
+  const wbId=document.getElementById('sc-pas').value;
+  if(!wbId){alert('⚠ Pilih pasaran!');return;}
+  const lmt=parseInt(document.getElementById('sc-lmt').value);
+  const jenis=document.getElementById('sc-jenis').value;
+  const nd=parseInt(document.getElementById('sc-dgt').value);
+  const maxP=parseInt(document.getElementById('sc-pat').value);
+  const pm=document.getElementById('sc-pm').value;
+  const mhpct=parseInt(document.getElementById('sc-mh').value)||0;
+  _tgt=parseInt(document.getElementById('sc-tgt').value);
+  const hari=(document.getElementById('sc-hari')||{}).value||'';
+  const hist=getH(wbId,150,hari);
+  if(hist.length<3){alert('⚠ Data kurang!');return;}
+  const p=getBatchParams();
+  if(p.tot===0){alert('⚠ Scan kosong!');return;}
+  const bsz=Math.ceil(p.tot/10);
+  const bs=bi*bsz,be=Math.min((bi+1)*bsz,p.tot);
+  if(bs>=p.tot){setBB(bi,'done');chkStop();return;}
+  _bst[bi]={p,ci:bs,bs,be,wbId,lmt,jenis,nd,maxP,pm,mhpct,hist,hari};
+  _brun[bi]=true;_scan=true;_gdone=false;
+  setBB(bi,'run');
+  if(!skipReset){document.getElementById('btn-stop').style.display='block';document.getElementById('btn-sc').style.display='none';}
+  if(bi===0||!skipReset)setC(`⏳ Scan — ${p.tot.toLocaleString()} kombinasi`);
+  const isM=hari!=='';
+  const cols=getCols(nd,isM);
+  const st=_bst[bi];
+  function run(){
+    if(!_brun[bi]||_gdone){_brun[bi]=false;setBB(bi,'done');chkStop();return;}
+    const SL=2500;
+    for(let b=0;b<SL&&st.ci<be;b++,st.ci++){
+      const{e1,o1,e2,mod}=idxToCombo(st.ci,p);
+      let hit=0,tot=0,maxPV=0,curP=0,totP=0;
+      const eff=Math.max(lmt,4);
+      const rows=[];
+      for(let idx=1;idx<hist.length&&(idx-1)<eff;idx++){
+        const sh=hist.slice(idx);if(!sh.length)continue;
+        const s=calcF(e1,o1,e2,mod,sh);if(s===null)continue;
+        const pr=makePred(s,nd,cols);
+        rows.push(checkHit(hist[idx-1],pr,jenis));
+      }
+      rows.reverse();
+      for(const h of rows){tot++;if(h){hit++;curP=0;}else{curP++;totP++;if(curP>maxPV)maxPV=curP;}}
+      const mt=lmt<=5?1:2;
+      if(tot<mt)continue;
+      if(maxP===0&&(tot<eff||totP>0||curP>0))continue;
+      const pv=pm==='total'?totP:pm==='cur'?curP:maxPV;
+      const hp=tot>0?Math.round(hit/tot*100):0;
+      if(pv<=maxP&&hp>=mhpct){
+        const lbl=e2!=='-'?`${e1}${o1}${e2}${mod!=='-'?'.'+mod:''}`:(`${e1}${mod!=='-'?'.'+mod:''}`);
+        const s0=calcF(e1,o1,e2,mod,hist.slice(0));
+        const pn=s0!==null?makePred(s0,nd,cols):'--';
+        cands.push({e1,o1,e2,mod,formula:lbl,acc:tot>0?hit/tot:0,hit,tot,maxPV,curP,totP,wbId,jenis,nd,pn,lmt,hari});
+        if(cands.length>_tgt*30){
+          const seen=new Set(),d=[];
+          for(const c of cands){const k=c.pn+'|'+c.jenis;if(!seen.has(k)){seen.add(k);d.push(c);}}
+          d.sort((a,b)=>b.hit!==a.hit?b.hit-a.hit:a.maxPV-b.maxPV);
+          cands=d.slice(0,_tgt*10);
+        }
+      }
+    }
+    updProg();
+    if(cands.length>=_tgt&&!_gdone){
+      setBB(bi,'found');_brun[bi]=false;
+      for(let i=0;i<10;i++)_brun[i]=false;
+      allDone();return;
+    }
+    if(st.ci>=be){_brun[bi]=false;setBB(bi,'done');chkStop();return;}
+    _btmr[bi]=setTimeout(run,2);
+  }
+  run();
+}
+function startScanAll(){
+  const wbId=document.getElementById('sc-pas').value;
+  if(!wbId){alert('⚠ Pilih pasaran!');return;}
+  resetBatch();
+  document.getElementById('btn-sc').style.display='none';
+  document.getElementById('btn-stop').style.display='block';
+  document.getElementById('btn-clr').style.display='none';
+  for(let b=1;b<=10;b++){const bn=b;setTimeout(()=>startBatch(bn,true),(bn-1)*5);}
+}
+function stopAll(){
+  for(let i=0;i<10;i++)_brun[i]=false;_scan=false;
+  document.getElementById('btn-stop').style.display='none';
+  document.getElementById('btn-sc').style.display='block';
+  document.getElementById('btn-sc').textContent='🔁 SCAN ULANG';
+  document.getElementById('btn-clr').style.display='block';
+  setC(`⏹ Dihentikan — ${cands.length} rumus`);
+  if(cands.length>0){renderRes();document.getElementById('res-card').style.display='block';}
+}
+function resetBatch(){
+  for(let i=0;i<10;i++){_brun[i]=false;if(_btmr[i])clearTimeout(_btmr[i]);_btmr[i]=null;_bst[i]=null;setBB(i,'idle');}
+  _gdone=false;_scan=false;scanned=0;
+  document.getElementById('btn-sc').style.display='block';
+  document.getElementById('btn-sc').textContent='📡 SCAN SEMUA';
+  document.getElementById('btn-stop').style.display='none';
+  document.getElementById('pb').style.width='0%';
+}
+function clearRes(){
+  cands=[];
+  document.getElementById('res-card').style.display='none';
+  document.getElementById('rtb').innerHTML='';
+  document.getElementById('rescnt').textContent='0';
+  document.getElementById('btn-clr').style.display='none';
+  setC('🗑 Hasil dihapus');
+}
+function renderRes(){
+  const tb=document.getElementById('rtb');
+  const jEl=document.getElementById('sc-jenis');
+  const jlbl=jEl.options[jEl.selectedIndex].text;
+  document.getElementById('rescnt').textContent=cands.length;
+  tb.innerHTML=cands.map((c,i)=>{
+    const tc=c.curP>0?'var(--red)':'var(--green)';
+    const tl=c.curP>0?`✗P${c.curP}`:'✓HIT';
+    return `<tr>
+      <td><span class="flnk" onclick="openTrekScan(${i})">${c.formula}</span><br><span class="tjns">${jlbl}</span></td>
+      <td><span class="pbdg">${c.pn}</span></td>
+      <td style="color:var(--muted);font-size:10px">${c.lmt}</td>
+      <td style="font-size:10px"><span style="color:var(--green)">${c.hit}/${c.tot}</span><br>
+        <span style="font-size:9px;color:var(--gold)">${Math.round(c.hit/c.tot*100)}%</span><br>
+        <span style="color:${tc};font-size:9px;font-weight:700">${tl}</span></td>
+      <td><button class="btn bgrn" style="padding:3px 7px;font-size:10px" id="sv${i}" onclick="saveRumus(${i},this)">💾</button></td>
+    </tr>`;
+  }).join('');
+}
+function setC(m){document.getElementById('con').textContent='>_ '+m;}
+
+// ════════════════════════════════════════════════
+// TREK MODAL
+// ════════════════════════════════════════════════
+let _atxt='';
+function openTrekScan(idx){
+  const c=cands[idx];if(!c)return;
+  const hist=getH(c.wbId,150,c.hari);
+  const isM=c.hari!=='';
+  const cols=getCols(c.nd,isM);
+  const mkt=MARKETS.find(m=>m.id===c.wbId)||{};
+  const pn=(mkt.flag||'')+' '+(mkt.name||c.wbId.toUpperCase());
+  document.getElementById('tmt').textContent='TREK '+c.formula.toUpperCase();
+  let hits=0,pats=0;
+  const rows=[];
+  const s0=calcF(c.e1,c.o1,c.e2,c.mod,hist.slice(0));
+  const p0=s0!==null?makePred(s0,c.nd,cols):'--';
+  rows.push({r:hist[0],pred:p0,isNext:true});
+  for(let i=1;i<=c.lmt&&i<hist.length;i++){
+    const sh=hist.slice(i);if(!sh.length)continue;
+    const sv=calcF(c.e1,c.o1,c.e2,c.mod,sh);
+    const pr=sv!==null?makePred(sv,c.nd,cols):'--';
+    const nr=hist[i-1];
+    const ih=sv!==null?checkHit(nr,pr,c.jenis):false;
+    if(ih)hits++;else if(pr!=='--')pats++;
+    rows.push({r:hist[i],pred:pr,hit:ih,isNext:false,nr});
+  }
+  document.getElementById('tmi').innerHTML=
+    `<b>${pn}</b> · <span style="color:var(--gold)">${c.jenis.toUpperCase()}</span>`+
+    (c.hari!==''?` · 📅 ${HNAMES[parseInt(c.hari)]||''}`:'')+
+    `<br><span style="color:var(--muted);font-size:10px">KEY: </span><span style="color:var(--cyan);font-weight:800">${c.formula.toUpperCase()}</span>`+
+    ` · <span style="color:var(--green)">✓${hits}</span>/<span style="color:var(--red)">✗${pats}</span>`;
+  const rd=[...rows].reverse();
+  buildTrekBody(rd,c.jenis,c.nd,p0);
+  _atxt=buildCopyText(rd,pn,c.formula.toUpperCase(),c.jenis,c.nd,p0);
+  document.getElementById('trekmo').classList.add('open');
+}
+function buildTrekBody(rd,jenis,nd,p0){
+  document.getElementById('tbd').innerHTML=rd.map(row=>{
+    const r=String(row.r||'').padStart(4,'0');
+    if(row.isNext)return `<div class="tl"><span class="tp" style="color:var(--gold)">${r}</span><span class="tpr" style="color:var(--gold);letter-spacing:3px">${row.pred}</span><span class="ts"><span class="bn">??</span></span></div>`;
+    const ns=String(row.nr||'').padStart(4,'0');
+    const K=+ns[2],E=+ns[3],A=+ns[0],C=+ns[1];
+    const tgts=getTargets(K,E,A,C,jenis);
+    const ph=row.pred.split('').map(d=>{
+      const kn=tgts.includes(+d);
+      return `<span style="color:${kn?(row.hit?'var(--green)':'var(--red)'):'var(--muted)'};font-weight:${kn?800:400}">${d}</span>`;
+    }).join('');
+    return `<div class="tl"><span class="tp">${r}</span><span class="tpr">${ph}</span><span class="ts">${row.hit?'<span class="bh">✓</span>':'<span class="bp">✗</span>'}</span></div>`;
+  }).join('');
+}
+function buildCopyText(rd,pn,formula,jenis,nd,p0){
+  const lines=rd.map(row=>{
+    const r=String(row.r||'').padStart(4,'0');
+    if(row.isNext)return `${r} = ${row.pred} ?`;
+    if(!row.nr)return `${r} =`;
+    return `${r} = ${row.pred}${row.hit?' '+jenis.toUpperCase():' ×'}`;
+  }).join('\n');
+  return `${pn} · ${formula} · ${jenis.toUpperCase()}\n\nrumus AI ${nd} Digit\n${formula}\n${lines}\n\n${jenis.toUpperCase()} : ${p0}`;
+}
+function closeMo(){document.getElementById('trekmo').classList.remove('open');}
+function trekCopy(){showCov(_atxt);}
+
+// ════════════════════════════════════════════════
+// SAVE TO BANK
+// ════════════════════════════════════════════════
+function saveRumus(idx,btn){
+  const c=cands[idx];if(!c)return;
+  const bank=JSON.parse(localStorage.getItem('wb_bank')||'[]');
+  bank.push({id:'r'+Date.now()+idx,formula:c.formula,wbId:c.wbId,jenis:c.jenis,nd:c.nd,lmt:c.lmt,pn:c.pn,hari:c.hari||'',savedAt:new Date().toISOString()});
+  localStorage.setItem('wb_bank',JSON.stringify(bank));
+  updateBKCnt();
+  if(btn){btn.textContent='✅';btn.style.background='rgba(16,185,129,.3)';btn.disabled=true;setTimeout(()=>{btn.textContent='💾';btn.style.background='';btn.disabled=false;},1800);}
+  setC('💾 Saved: '+c.formula+' ['+c.pn+']');
+}
+
+// ════════════════════════════════════════════════
+// MANUAL TREK
+// ════════════════════════════════════════════════
+let _mnTrek=null;
+function mnUpd(){
+  const parts=[];
+  for(let i=1;i<=6;i++){
+    const e=(document.getElementById('e'+i)||{}).value||'-';
+    const m=(document.getElementById('m'+i)||{}).value||'-';
+    const o=i<6?(document.getElementById('o'+i)||{}).value||'none':'none';
+    if(e!=='-')parts.push({e,m,o});
+  }
+  const mh=(document.getElementById('mh')||{}).value||'-';
+  let f='';
+  for(let i=0;i<parts.length;i++){
+    const{e,m,o}=parts[i];
+    const pt=e+(m!=='-'?'.'+m:'');
+    if(i===0){f=pt;}else{const pop=parts[i-1].o!=='none'?parts[i-1].o:'+';f+=pop+pt;}
+  }
+  if(!f)f='?';
+  if(mh!=='-')f+='.'+mh;
+  const pv=document.getElementById('mn-pv');if(pv)pv.textContent=f;
+}
+function mnGetF(){
+  const em=(e,m)=>(e==='-'||!e)?'-':(m&&m!=='-'?e+m:e);
+  return{
+    e1:em((document.getElementById('e1')||{}).value,(document.getElementById('m1')||{}).value),
+    o1:(document.getElementById('o1')||{}).value||'none',
+    e2:em((document.getElementById('e2')||{}).value,(document.getElementById('m2')||{}).value),
+    o2:(document.getElementById('o2')||{}).value||'none',
+    e3:em((document.getElementById('e3')||{}).value,(document.getElementById('m3')||{}).value),
+    o3:(document.getElementById('o3')||{}).value||'none',
+    e4:em((document.getElementById('e4')||{}).value,(document.getElementById('m4')||{}).value),
+    o4:(document.getElementById('o4')||{}).value||'none',
+    e5:em((document.getElementById('e5')||{}).value,(document.getElementById('m5')||{}).value),
+    o5:(document.getElementById('o5')||{}).value||'none',
+    e6:em((document.getElementById('e6')||{}).value,(document.getElementById('m6')||{}).value),
+    mod:(document.getElementById('mh')||{}).value||'-',
+  };
+}
+function mnAutoTrek(){const c=document.getElementById('mn-tc');if(c&&c.style.display!=='none')mnShowTrek();}
+function mnShowTrek(){
+  const wbId=document.getElementById('mn-pas').value;
+  const jenis=document.getElementById('mn-jenis').value;
+  const lmt=parseInt(document.getElementById('mn-lmt').value)||15;
+  const nd=parseInt(document.getElementById('mn-dgt').value)||2;
+  const hari=(document.getElementById('mn-hari')||{}).value||'';
+  const tc=document.getElementById('mn-tc');
+  if(!wbId){if(tc)tc.style.display='none';return;}
+  const{e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod}=mnGetF();
+  const formula=(document.getElementById('mn-pv')||{}).textContent||'?';
+  const hist=getH(wbId,150,hari);
+  const isM=hari!=='';
+  const cols=getCols(nd,isM);
+  let hits=0,pats=0,patR=0;
+  const rows=[];
+  const s0=calcF(e1,o1,e2,mod,hist.slice(0),o2,e3,o3,e4,o4,e5,o5,e6);
+  rows.push({r:hist[0],kv:s0,isNext:true});
+  for(let i=1;i<=lmt&&i<hist.length;i++){
+    const sh=hist.slice(i);
+    const kv=sh.length?calcF(e1,o1,e2,mod,sh,o2,e3,o3,e4,o4,e5,o5,e6):null;
+    const nr=hist[i-1];
+    const pr=kv!==null?makePred(kv,nd,cols):'--';
+    const ih=kv!==null?checkHit(nr,pr,jenis):false;
+    if(ih)hits++;else if(pr!=='--'){pats++;patR++;}
+    rows.push({r:hist[i],kv,nr,isNext:false,ih,pr,noD:kv===null});
+  }
+  const tot=hits+pats;
+  const hp=tot>0?Math.round(hits/tot*100):0;
+  const mkt=MARKETS.find(m=>m.id===wbId)||{};
+  const pname=(mkt.flag||'')+' '+(mkt.name||wbId.toUpperCase());
+  const p0=s0!==null?makePred(s0,nd,cols):'--';
+  document.getElementById('mn-info').innerHTML=
+    `<b>${pname}</b> · <span style="color:var(--gold);font-weight:800">${jenis.toUpperCase()}</span>`+
+    (hari!==''?` · <b style="color:var(--green)">📅 ${HNAMES[parseInt(hari)]||''}</b>`:'')+
+    `<br><span style="color:var(--muted);font-size:10px">KEY: </span><span style="color:var(--cyan);font-weight:800">${formula.toUpperCase()}</span>`+
+    ` · <span style="color:var(--green)">✓${hits}</span>/<span style="color:var(--muted)">${tot}</span>`+
+    ` · <span style="color:var(--red)">✗${patR}</span> · <span style="color:var(--gold)">${hp}%</span>`;
+  const rd=[...rows].reverse();
+  const hdr=`rumus AI ${nd} Digit (Patah Real: ${patR})\n${formula.toUpperCase()}`;
+  const lines=rd.map(row=>{
+    const r=String(row.r||'').padStart(4,'0');
+    const pr2=row.pr||p0;
+    if(row.isNext)return `\u001b[33m${r} = ${p0} ?\u001b[0m`;
+    if(row.kv===null||row.pr==='--')return `${r} =`;
+    const ns=String(row.nr||'').padStart(4,'0');
+    const K=+ns[2],E=+ns[3],A=+ns[0],C=+ns[1];
+    const tgts=getTargets(K,E,A,C,jenis);
+    const ph=row.pr.split('').map(d=>{
+      const kn=tgts.includes(+d);
+      return kn?`<span style="color:${row.ih?'var(--green)':'var(--red)'};font-weight:700">${d}</span>`:d;
+    }).join('');
+    const jlbl=jenis.startsWith('ai')?' ai':' '+jenis.replace('_',' ').toUpperCase();
+    const end=row.ih?jlbl:`<span style="color:var(--red)"> ×</span>`;
+    return `<span>${r} = ${ph}${end}</span>`;
+  }).join('\n');
+  const jlbl2=jenis.replace('_',' ').toUpperCase();
+  document.getElementById('mn-tbl').innerHTML=`<b style="color:var(--muted)">${hdr}</b>\n${lines}\n<b style="color:var(--muted)">${jlbl2} : ${p0}</b>`;
+  _mnTrek={pname,formula:formula.toUpperCase(),jenis,nd,hits,pats:patR,hp,p0,rd:[...rows].reverse(),lmt,wbId,hari};
+  if(tc)tc.style.display='block';
+}
+function mnSave(){
+  const wbId=document.getElementById('mn-pas').value;
+  if(!wbId){alert('⚠ Pilih pasaran!');return;}
+  const formula=(document.getElementById('mn-pv')||{}).textContent||'';
+  if(!formula||formula==='?'){alert('⚠ Isi formula!');return;}
+  const jenis=document.getElementById('mn-jenis').value;
+  const nd=parseInt(document.getElementById('mn-dgt').value)||2;
+  const lmt=parseInt(document.getElementById('mn-lmt').value)||15;
+  const hari=(document.getElementById('mn-hari')||{}).value||'';
+  const{e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod}=mnGetF();
+  const hist=getH(wbId,20,hari);
+  const cols=getCols(nd,hari!=='');
+  const s0=calcF(e1,o1,e2,mod,hist.slice(0),o2,e3,o3,e4,o4,e5,o5,e6);
+  const pn=s0!==null?makePred(s0,nd,cols):'--';
+  const bank=JSON.parse(localStorage.getItem('wb_bank')||'[]');
+  bank.push({id:'r'+Date.now(),formula,wbId,jenis,nd,lmt,pn,hari,savedAt:new Date().toISOString()});
+  localStorage.setItem('wb_bank',JSON.stringify(bank));
+  updateBKCnt();switchTab('bk');renderBank();
+  toast('✅ Tersimpan ke Bank!');
+}
+function mnCopy(){
+  if(!_mnTrek){alert('❌ Belum ada trek');return;}
+  const d=_mnTrek;
+  const jlbl=d.jenis.replace('_',' ').toUpperCase();
+  const lines=d.rd.map(row=>{
+    const r=String(row.r||'').padStart(4,'0');
+    if(row.isNext)return `${r} = ${d.p0} ?`;
+    if(row.kv===null||row.pr==='--')return `${r} =`;
+    return `${r} = ${row.pr}${row.ih?(d.jenis.startsWith('ai')?' ai':' '+jlbl):' ×'}`;
+  }).join('\n');
+  showCov(`${d.pname} · ${d.formula} · ${jlbl}\n\nrumus AI ${d.nd} Digit (Patah Real: ${d.pats})\n${d.formula}\n${lines}\n\n${jlbl} : ${d.p0}`);
+}
+function mnAutoLoad(v){
+  v=(v||'').trim();if(!v||v.length<2)return;
+  const ok=(/[+\-]/.test(v)&&!/[+\-]$/.test(v))||(!/[+\-]/.test(v)&&(v.includes('.')||/^[A-Za-z]+\d+[a-z0-9]*$/.test(v)));
+  if(ok)mnLoadKode();
+}
+function mnLoadKode(){
+  const kode=(document.getElementById('mn-pk').value||'').trim();
+  if(!kode){alert('⚠ Paste kode dulu!');return;}
+  const mlist=ALL_MODS.filter(m=>m!=='-').sort((a,b)=>b.length-a.length);
+  let cf=kode,modh='-';
+  for(const mo of mlist){const suf='.'+mo;if(kode.endsWith(suf)&&kode.length>suf.length){cf=kode.slice(0,kode.length-suf.length);modh=mo;break;}}
+  const parts=[];let ci=0;
+  while(ci<cf.length){
+    const ch=cf[ci];
+    if(ch==='+'||ch==='-'){if(parts.length)parts[parts.length-1].op=ch;ci++;continue;}
+    let cj=ci;while(cj<cf.length&&/[A-Za-z0-9]/.test(cf[cj]))cj++;
+    let tok=cf.slice(ci,cj),em='-',base=tok;
+    if(cj<cf.length&&cf[cj]==='.'){
+      let ck=cj+1;while(ck<cf.length&&/[A-Za-z0-9]/.test(cf[ck]))ck++;
+      const mm=cf.slice(cj+1,ck);
+      if(ALL_MODS.includes(mm)){base=tok;em=mm;cj=ck;}
+      else{for(const mo of mlist){if(tok.endsWith(mo)&&tok.length>mo.length&&/\d$/.test(tok.slice(0,tok.length-mo.length))){base=tok.slice(0,tok.length-mo.length);em=mo;break;}}}
+    }else{for(const mo of mlist){if(tok.endsWith(mo)&&tok.length>mo.length&&/\d$/.test(tok.slice(0,tok.length-mo.length))){base=tok.slice(0,tok.length-mo.length);em=mo;break;}}}
+    parts.push({elem:base,mod:em,op:'none'});ci=cj;
+  }
+  function ne(e){if(!e||e==='-')return'-';const f=ALL_ELEMS.find(el=>el.toLowerCase()===e.toLowerCase());return f||e;}
+  for(let i=1;i<=6;i++){
+    const ee=document.getElementById('e'+i);if(ee)ee.value='-';
+    const me=document.getElementById('m'+i);if(me)me.value='-';
+    if(i<6){const oe=document.getElementById('o'+i);if(oe)oe.value=i===1?'+':'none';}
+  }
+  parts.forEach((p,i)=>{
+    if(i>=6)return;
+    const ee=document.getElementById('e'+(i+1));if(ee){ee.value=ne(p.elem);if(!ee.value)ee.value='-';}
+    const me=document.getElementById('m'+(i+1));if(me)me.value=p.mod||'-';
+    if(i<5){const oe=document.getElementById('o'+(i+1));if(oe)oe.value=p.op||'none';}
+  });
+  const mhe=document.getElementById('mh');if(mhe)mhe.value=modh;
+  mnUpd();mnShowTrek();
+}
+function mnReset(){
+  const pk=document.getElementById('mn-pk');if(pk)pk.value='';
+  for(let i=1;i<=6;i++){
+    const ee=document.getElementById('e'+i);if(ee)ee.value='-';
+    const me=document.getElementById('m'+i);if(me)me.value='-';
+    if(i<6){const oe=document.getElementById('o'+i);if(oe)oe.value=i===1?'+':'none';}
+  }
+  const e1=document.getElementById('e1');if(e1)e1.value='A1';
+  const mhe=document.getElementById('mh');if(mhe)mhe.value='-';
+  mnUpd();
+  const tc=document.getElementById('mn-tc');if(tc)tc.style.display='none';
+}
+
+// ════════════════════════════════════════════════
+// BANK
+// ════════════════════════════════════════════════
+function parseFormula(formula){
+  if(!formula||formula==='?')return{e1:'-',o1:'+',e2:'-',mod:'-',o2:'none',e3:'-',o3:'none',e4:'-',o4:'none',e5:'-',o5:'none',e6:'-'};
+  const mlist=ALL_MODS.filter(m=>m!=='-').sort((a,b)=>b.length-a.length);
+  let cf=formula,mod='-';
+  for(const mo of mlist){const suf='.'+mo;if(formula.endsWith(suf)&&formula.length>suf.length){cf=formula.slice(0,formula.length-suf.length);mod=mo;break;}}
+  const parts=[];let ci=0;
+  while(ci<cf.length){
+    const ch=cf[ci];
+    if(ch==='+'||ch==='-'){if(parts.length)parts[parts.length-1].op=ch;ci++;continue;}
+    let cj=ci;while(cj<cf.length&&/[A-Za-z0-9]/.test(cf[cj]))cj++;
+    let tok=cf.slice(ci,cj),em='-',base=tok;
+    for(const mo of mlist){if(tok.endsWith(mo)&&tok.length>mo.length&&/\d$/.test(tok.slice(0,tok.length-mo.length))){base=tok.slice(0,tok.length-mo.length);em=mo;break;}}
+    parts.push({elem:base,mod:em,op:'none'});ci=cj;
+  }
+  const em=(e,m)=>(e==='-'||!e)?'-':(m&&m!=='-'?e+m:e);
+  const es=parts.map(p=>em(p.elem,p.mod));
+  const ops=parts.map(p=>p.op||'none');
+  return{e1:es[0]||'-',o1:ops[0]||'+',e2:es[1]||'-',o2:ops[1]||'none',e3:es[2]||'-',o3:ops[2]||'none',e4:es[3]||'-',o4:ops[3]||'none',e5:es[4]||'-',o5:ops[4]||'none',e6:es[5]||'-',mod};
+}
+function bkCalc(item){
+  const p=parseFormula(item.formula);
+  const hist=getH(item.wbId,item.lmt+5||20,item.hari||'');
+  if(!hist.length)return{pred:'--',hit:0,tot:0,curP:0};
+  const nd=item.nd||2;
+  const cols=getCols(nd,item.hari!=='');
+  const s0=calcF(p.e1,p.o1,p.e2,p.mod,hist.slice(0),p.o2,p.e3,p.o3,p.e4,p.o4,p.e5,p.o5,p.e6);
+  const pred=s0!==null?makePred(s0,nd,cols):'--';
+  let hit=0,tot=0,curP=0;
+  const lmt=item.lmt||14;
+  for(let i=1;i<=lmt&&i<hist.length;i++){
+    const sh=hist.slice(i);if(!sh.length)continue;
+    const sv=calcF(p.e1,p.o1,p.e2,p.mod,sh,p.o2,p.e3,p.o3,p.e4,p.o4,p.e5,p.o5,p.e6);
+    if(sv===null)continue;
+    const pr=makePred(sv,nd,cols);
+    const ih=checkHit(hist[i-1],pr,item.jenis||'ai_ke');
+    tot++;if(ih){hit++;curP=0;}else curP++;
+  }
+  return{pred,hit,tot,curP};
+}
+function updateBKCnt(){
+  const b=JSON.parse(localStorage.getItem('wb_bank')||'[]');
+  document.getElementById('bkcount').textContent=b.length;
+}
+function renderBank(){
+  const list=document.getElementById('bklist');
+  const bank=JSON.parse(localStorage.getItem('wb_bank')||'[]');
+  const fp=(document.getElementById('bk-fp')||{}).value||'';
+  const filt=fp?bank.filter(x=>x.wbId===fp):bank;
+  updateBKCnt();
+  if(!filt.length){
+    list.innerHTML='<div class="es"><div class="esico">💾</div><div>Belum ada rumus</div><div style="margin-top:4px;font-size:11px">Scan lalu klik 💾, atau import manual</div></div>';
+    return;
+  }
+  list.innerHTML=filt.map(item=>{
+    const st=Object.keys(_rj).length>0?bkCalc(item):{pred:item.pn||'--',hit:'?',tot:'?',curP:0};
+    const mkt=MARKETS.find(m=>m.id===item.wbId)||{};
+    const sn=(mkt.flag||'')+' '+(mkt.short||item.wbId.toUpperCase());
+    const hl=item.hari!==''&&item.hari!==null&&item.hari!==undefined?` [${HNAMES[parseInt(item.hari)]||''}]`:'';
+    const tc=st.curP>0?'var(--red)':'var(--green)';
+    const tl=st.curP>0?`✗P${st.curP}`:'✓';
+    const hp=st.tot>0?Math.round(st.hit/st.tot*100):0;
+    return `<div class="bkr" data-id="${item.id}">
+      <input type="checkbox" class="bkc rchk" data-id="${item.id}" onclick="bkChk(event)">
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+          <span class="bkf" onclick="bkOpenTrek('${item.id}')">${item.formula.toUpperCase()}</span>
+          <span class="bkp">${st.pred}</span>
+        </div>
+        <div class="bkm">${sn}${hl} · ${(item.jenis||'').toUpperCase()} · ${item.nd||2}D
+          · <span style="color:var(--green)">${st.hit}/${st.tot}</span> <span style="color:var(--gold);font-size:9px">${hp}%</span>
+          · <span style="color:${tc};font-weight:700">${tl}</span>
+        </div>
+      </div>
+      <button onclick="bkDel('${item.id}')" style="padding:4px 7px;background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2);border-radius:5px;font-size:11px;cursor:pointer;flex-shrink:0">🗑</button>
+    </div>`;
+  }).join('');
+}
+function bkChk(e){
+  e.stopPropagation();
+  const all=document.querySelectorAll('.rchk'),chk=document.querySelectorAll('.rchk:checked');
+  const ca=document.getElementById('bk-all');if(ca)ca.checked=chk.length===all.length;
+  const ba=document.getElementById('bacts');if(ba)ba.classList.toggle('show',chk.length>0);
+}
+function bkTogAll(v){
+  document.querySelectorAll('.rchk').forEach(c=>c.checked=v);
+  const ba=document.getElementById('bacts');if(ba)ba.classList.toggle('show',v);
+}
+function bkGetSel(){return[...document.querySelectorAll('.rchk:checked')].map(c=>c.dataset.id);}
+function bkDelSel(){
+  const ids=bkGetSel();if(!ids.length)return;
+  if(!confirm(`Hapus ${ids.length} rumus?`))return;
+  let b=JSON.parse(localStorage.getItem('wb_bank')||'[]');
+  b=b.filter(x=>!ids.includes(String(x.id)));
+  localStorage.setItem('wb_bank',JSON.stringify(b));
+  renderBank();updateBKCnt();
+}
+function bkTrekSel(){const ids=bkGetSel();if(ids.length)bkOpenTrek(ids[0]);}
+function bkCopySel(){
+  const ids=bkGetSel();if(!ids.length)return;
+  const b=JSON.parse(localStorage.getItem('wb_bank')||'[]');
+  const items=b.filter(x=>ids.includes(String(x.id)));
+  const lines=items.map(item=>{
+    const st=Object.keys(_rj).length>0?bkCalc(item):{pred:item.pn||'--'};
+    const mkt=MARKETS.find(m=>m.id===item.wbId)||{};
+    const hl=item.hari!==''&&item.hari!==null?` [${HNAMES[parseInt(item.hari)]||''}]`:'';
+    return `${mkt.flag||''} ${mkt.short||item.wbId.toUpperCase()}${hl} · ${item.formula.toUpperCase()} · ${(item.jenis||'').toUpperCase()} · PRED: ${st.pred}`;
+  }).join('\n');
+  showCov(lines);
+}
+function bkDel(id){
+  if(!confirm('Hapus rumus ini?'))return;
+  let b=JSON.parse(localStorage.getItem('wb_bank')||'[]');
+  b=b.filter(x=>String(x.id)!==String(id));
+  localStorage.setItem('wb_bank',JSON.stringify(b));
+  renderBank();updateBKCnt();
+}
+function clearBank(){
+  if(!confirm('Hapus SEMUA rumus?'))return;
+  localStorage.removeItem('wb_bank');renderBank();updateBKCnt();
+}
+function bkUpdateAll(){renderBank();toast('↺ Diperbarui');}
+function bkOpenTrek(id){
+  const b=JSON.parse(localStorage.getItem('wb_bank')||'[]');
+  const item=b.find(x=>String(x.id)===String(id));if(!item)return;
+  const p=parseFormula(item.formula);
+  const hari=item.hari||'';
+  const hist=getH(item.wbId,150,hari);
+  const nd=item.nd||2;
+  const isM=hari!=='';
+  const cols=getCols(nd,isM);
+  const mkt=MARKETS.find(m=>m.id===item.wbId)||{};
+  const pname=(mkt.flag||'')+' '+(mkt.name||item.wbId.toUpperCase());
+  document.getElementById('tmt').textContent='TREK '+item.formula.toUpperCase();
+  let hits=0,pats=0;
+  const rows=[];
+  const s0=calcF(p.e1,p.o1,p.e2,p.mod,hist.slice(0),p.o2,p.e3,p.o3,p.e4,p.o4,p.e5,p.o5,p.e6);
+  const p0=s0!==null?makePred(s0,nd,cols):'--';
+  rows.push({r:hist[0],pred:p0,isNext:true});
+  const lmt=item.lmt||14;
+  for(let i=1;i<=lmt&&i<hist.length;i++){
+    const sh=hist.slice(i);if(!sh.length)continue;
+    const sv=calcF(p.e1,p.o1,p.e2,p.mod,sh,p.o2,p.e3,p.o3,p.e4,p.o4,p.e5,p.o5,p.e6);
+    const pr=sv!==null?makePred(sv,nd,cols):'--';
+    const nr=hist[i-1];
+    const ih=sv!==null?checkHit(nr,pr,item.jenis||'ai_ke'):false;
+    if(ih)hits++;else if(pr!=='--')pats++;
+    rows.push({r:hist[i],pred:pr,hit:ih,isNext:false,nr});
+  }
+  document.getElementById('tmi').innerHTML=
+    `<b>${pname}</b> · <span style="color:var(--gold)">${(item.jenis||'').toUpperCase()}</span>`+
+    (hari!==''?` · 📅 ${HNAMES[parseInt(hari)]||''}`:'')+
+    `<br><span style="color:var(--muted);font-size:10px">KEY: </span><span style="color:var(--cyan);font-weight:800">${item.formula.toUpperCase()}</span>`+
+    ` · <span style="color:var(--green)">✓${hits}</span>/<span style="color:var(--red)">✗${pats}</span>`;
+  const rd=[...rows].reverse();
+  buildTrekBody(rd,item.jenis||'ai_ke',nd,p0);
+  _atxt=buildCopyText(rd,pname,item.formula.toUpperCase(),item.jenis||'ai_ke',nd,p0);
+  document.getElementById('trekmo').classList.add('open');
+}
+function bkShowImport(){
+  const kode=(document.getElementById('bk-inp')||{}).value||'';
+  if(!kode.trim()){alert('⚠ Isi kode dulu!');return;}
+  const pv=document.getElementById('bf-pv');if(pv)pv.textContent='Formula: '+kode.trim().toUpperCase();
+  document.getElementById('impb').classList.add('open');
+}
+function bkHideImport(){document.getElementById('impb').classList.remove('open');}
+function bkDoImport(){
+  const kode=(document.getElementById('bk-inp')||{}).value||'';
+  if(!kode.trim()){alert('⚠ Isi kode!');return;}
+  const wbId=(document.getElementById('bf-pas')||{}).value;
+  const jenis=(document.getElementById('bf-jenis')||{}).value||'ai_ke';
+  const lmt=parseInt((document.getElementById('bf-lmt')||{}).value)||14;
+  const nd=parseInt((document.getElementById('bf-dgt')||{}).value)||2;
+  const hari=(document.getElementById('bf-hari')||{}).value||'';
+  const p=parseFormula(kode.trim().toUpperCase());
+  const hist=getH(wbId,20,hari);
+  const cols=getCols(nd,hari!=='');
+  const s=calcF(p.e1,p.o1,p.e2,p.mod,hist.slice(0),p.o2,p.e3,p.o3,p.e4,p.o4,p.e5,p.o5,p.e6);
+  const pn=s!==null?makePred(s,nd,cols):'--';
+  const bank=JSON.parse(localStorage.getItem('wb_bank')||'[]');
+  bank.push({id:'r'+Date.now(),formula:kode.trim().toUpperCase(),wbId,jenis,nd,lmt,pn,hari,savedAt:new Date().toISOString()});
+  localStorage.setItem('wb_bank',JSON.stringify(bank));
+  updateBKCnt();bkHideImport();renderBank();
+  const inp=document.getElementById('bk-inp');if(inp)inp.value='';
+  toast('✅ Rumus diimport!');
+}
+
+// ════════════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════════════
+function switchTab(t){
+  ['sc','mn','bk'].forEach(x=>{
+    document.getElementById('tab-'+x).classList.toggle('active',x===t);
+    document.getElementById('tb-'+x).classList.toggle('active',x===t);
+  });
+  if(t==='bk')renderBank();
+}
+function toggleLP(){
+  const p=document.getElementById('lp'),b=document.querySelector('.tgl-btn');
+  const o=p.classList.toggle('open');
+  if(b)b.textContent=o?'⚙️ Pengaturan Lanjutan ▲':'⚙️ Pengaturan Lanjutan ▼';
+}
+function toggleExs(){
+  const e=document.getElementById('exs');e.classList.toggle('open');
+}
+function setSM(mode){
+  const kmap={fast:[1,2,3],normal:[1,2,3,4,5],deep:[1,2,3,4,5,6,7,8]};
+  const mmap={fast:['-','ix','ty','ml','mb'],normal:['-','ix','ty','ml','mb'],deep:['-','ix','ty','ml','mb','m0','m1','m2','m3']};
+  const kn=kmap[mode]||kmap.normal;const ml=mmap[mode]||mmap.normal;
+  document.querySelectorAll('.kc').forEach(c=>c.checked=kn.includes(parseInt(c.value)));
+  ['sk1','sk2','hsk'].forEach(cid=>{
+    document.querySelectorAll('.'+cid+'c').forEach(c=>c.checked=ml.includes(c.value)||c.value==='-');
+  });
+}
+function showCov(txt){document.getElementById('cta').value=txt;document.getElementById('cov').classList.add('open');}
+function closeCov(){document.getElementById('cov').classList.remove('open');}
+function doCopy(){
+  const ta=document.getElementById('cta');ta.select();
+  navigator.clipboard.writeText(ta.value).then(()=>toast('✅ Dicopy!')).catch(()=>{document.execCommand('copy');toast('✅ Dicopy!');});
+}
+function toast(msg){
+  const t=document.createElement('div');
+  t.textContent=msg;
+  t.style.cssText='position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#10b981;color:#fff;font-weight:800;font-size:13px;padding:9px 20px;border-radius:10px;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.4);pointer-events:none';
+  document.body.appendChild(t);setTimeout(()=>t.remove(),2000);
+}
+// INIT
+fetchData();
+</script>
+</body>
+</html>
