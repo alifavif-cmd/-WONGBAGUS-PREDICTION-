@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>⭐ WONGBAGUS PREDICTION ⭐</title>
+<style>
+  :root {
+    --gold: #D4AF37;
+    --gold2: #FFD700;
+    --dark: #0a0a0f;
+    --dark2: #12121a;
+    --dark3: #1a1a26;
+    --dark4: #22223a;
+    --green: #00e676;
+    --red: #ff1744;
+    --blue: #2979ff;
+    --cyan: #00e5ff;
+    --purple: #d500f9;
+    --orange: #ff6d00;
+    --text: #e8e8f0;
+    --textmuted: #8888aa;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 13px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0a0a0f 0%, #1a1030 50%, #0a0a0f 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 10px 12px 8px;
+    text-align: center;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-title {
+    font-size: 16px; font-weight: 900; letter-spacing: 2px;
+    color: var(--gold2);
+    text-shadow: 0 0 12px var(--gold);
+  }
+  .header-sub {
+    font-size: 9px; letter-spacing: 3px; color: var(--textmuted);
+    margin-top: 2px;
+  }
+  .header-status {
+    font-size: 10px; color: var(--cyan);
+    margin-top: 4px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex; background: var(--dark2);
+    border-bottom: 1px solid #333;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    flex: 0 0 auto; padding: 9px 14px;
+    font-size: 11px; font-weight: 700; letter-spacing: .5px;
+    color: var(--textmuted); cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: all .2s;
+  }
+  .tab.active { color: var(--gold2); border-bottom-color: var(--gold2); }
+
+  /* MAIN PANEL */
+  .panel { display: none; padding: 10px; }
+  .panel.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--dark2);
+    border: 1px solid var(--dark4);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-size: 11px; font-weight: 700;
+    color: var(--gold); letter-spacing: 1px;
+    margin-bottom: 8px;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* FORM ELEMENTS */
+  select, input[type=text], input[type=number], textarea {
+    background: var(--dark3); border: 1px solid var(--dark4);
+    color: var(--text); border-radius: 6px;
+    padding: 7px 10px; font-size: 12px; width: 100%;
+    outline: none;
+  }
+  select:focus, input:focus, textarea:focus {
+    border-color: var(--gold);
+  }
+  label { font-size: 11px; color: var(--textmuted); display: block; margin-bottom: 4px; }
+  .form-group { margin-bottom: 8px; }
+
+  .row { display: flex; gap: 8px; }
+  .row .form-group { flex: 1; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+    padding: 8px 14px; border-radius: 7px;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+    border: none; transition: all .15s; width: 100%;
+  }
+  .btn-gold { background: linear-gradient(135deg, var(--gold), #b8860b); color: #000; }
+  .btn-gold:active { opacity: .8; transform: scale(.98); }
+  .btn-green { background: linear-gradient(135deg, #00c853, #00695c); color: #fff; }
+  .btn-red { background: linear-gradient(135deg, #d32f2f, #b71c1c); color: #fff; }
+  .btn-blue { background: linear-gradient(135deg, #1565c0, #0d47a1); color: #fff; }
+  .btn-purple { background: linear-gradient(135deg, #7b1fa2, #4a148c); color: #fff; }
+  .btn-sm { padding: 5px 10px; font-size: 11px; width: auto; }
+  .btn-row { display: flex; gap: 6px; margin-top: 8px; }
+  .btn-row .btn { flex: 1; }
+
+  /* TREK TABLE */
+  .trek-wrap { overflow-x: auto; }
+  .trek-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 12px;
+  }
+  .trek-table th {
+    background: var(--dark3); color: var(--gold);
+    padding: 6px 8px; text-align: center;
+    font-size: 10px; letter-spacing: .5px;
+    position: sticky; top: 0;
+  }
+  .trek-table td {
+    padding: 5px 8px; text-align: center;
+    border-bottom: 1px solid #1a1a2a;
+  }
+  .trek-table tr:hover td { background: #1a1a30; }
+  .trek-table .r4d { font-weight: 700; color: var(--text); font-family: monospace; font-size: 14px; }
+  .trek-table .r2d { font-weight: 700; color: var(--cyan); font-family: monospace; font-size: 13px; }
+  .trek-table .rpred { font-weight: 900; font-family: monospace; font-size: 13px; }
+  .trek-table .rhit { color: var(--green); }
+  .trek-table .rmiss { color: var(--red); }
+  .trek-table .rpending { color: var(--gold); }
+  .trek-table .rdate { font-size: 10px; color: var(--textmuted); }
+  .trek-table .rno { font-size: 10px; color: var(--textmuted); }
+
+  /* STATS BAR */
+  .stats-bar {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .stat-chip {
+    background: var(--dark3); border-radius: 20px;
+    padding: 4px 10px; font-size: 11px;
+    border: 1px solid var(--dark4);
+  }
+  .stat-chip span { font-weight: 700; }
+  .stat-chip .green { color: var(--green); }
+  .stat-chip .red { color: var(--red); }
+  .stat-chip .gold { color: var(--gold2); }
+  .stat-chip .cyan { color: var(--cyan); }
+
+  /* RESULT BADGE */
+  .result-big {
+    text-align: center; padding: 12px;
+    background: var(--dark3); border-radius: var(--radius);
+    margin-bottom: 8px;
+  }
+  .result-big .market-name { font-size: 11px; color: var(--textmuted); letter-spacing: 1px; }
+  .result-big .r4 {
+    font-size: 36px; font-weight: 900;
+    font-family: 'Courier New', monospace;
+    color: var(--gold2); letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(212,175,55,.4);
+  }
+  .result-big .r4 .r2hi { color: var(--cyan); }
+  .result-big .rdate { font-size: 10px; color: var(--textmuted); margin-top: 2px; }
+
+  /* BANK RUMUS */
+  .bank-list { display: flex; flex-direction: column; gap: 8px; }
+  .bank-item {
+    background: var(--dark3); border: 1px solid var(--dark4);
+    border-radius: 8px; padding: 10px 12px;
+  }
+  .bank-item-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 6px;
+  }
+  .bank-item-name { font-weight: 700; color: var(--gold); font-size: 12px; }
+  .bank-item-meta { font-size: 10px; color: var(--textmuted); }
+  .bank-item-code {
+    font-family: monospace; font-size: 11px;
+    color: var(--cyan); background: var(--dark);
+    padding: 4px 8px; border-radius: 4px;
+    word-break: break-all; margin-bottom: 6px;
+  }
+  .bank-item-actions { display: flex; gap: 6px; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.7); z-index: 200;
+    align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--dark2); border: 1px solid var(--gold);
+    border-radius: 12px; padding: 16px;
+    width: 100%; max-width: 400px;
+    max-height: 85vh; overflow-y: auto;
+  }
+  .modal-title {
+    font-size: 14px; font-weight: 700; color: var(--gold2);
+    margin-bottom: 12px; text-align: center;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--dark3); border: 1px solid var(--gold);
+    color: var(--gold2); padding: 8px 18px;
+    border-radius: 20px; font-size: 12px; font-weight: 700;
+    z-index: 999; opacity: 0; transition: opacity .3s;
+    pointer-events: none; white-space: nowrap;
+  }
+  .toast.show { opacity: 1; }
+
+  /* BADGES */
+  .badge {
+    display: inline-block; padding: 2px 7px;
+    border-radius: 10px; font-size: 10px; font-weight: 700;
+  }
+  .badge-green { background: #00c85322; color: var(--green); border: 1px solid #00c85344; }
+  .badge-red { background: #ff174422; color: var(--red); border: 1px solid #ff174444; }
+  .badge-gold { background: #D4AF3722; color: var(--gold2); border: 1px solid #D4AF3744; }
+  .badge-cyan { background: #00e5ff22; color: var(--cyan); border: 1px solid #00e5ff44; }
+
+  /* BBFS display */
+  .bbfs-display {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 8px;
+  }
+  .bbfs-num {
+    background: var(--dark3); border: 1px solid var(--dark4);
+    border-radius: 6px; padding: 6px 10px;
+    font-family: monospace; font-size: 14px;
+    font-weight: 700; color: var(--cyan);
+    min-width: 44px; text-align: center;
+  }
+  .bbfs-num.hit { border-color: var(--green); color: var(--green); background: #00c85311; }
+
+  /* POSISI display */
+  .posisi-row {
+    display: flex; gap: 6px; margin-bottom: 6px;
+  }
+  .posisi-box {
+    flex: 1; background: var(--dark3); border-radius: 6px;
+    padding: 6px; text-align: center;
+    border: 1px solid var(--dark4);
+  }
+  .posisi-box .plabel { font-size: 9px; color: var(--textmuted); }
+  .posisi-box .pval { font-size: 18px; font-weight: 900; color: var(--gold2); font-family: monospace; }
+  .posisi-box.phit { border-color: var(--green); }
+  .posisi-box.phit .pval { color: var(--green); }
+
+  /* loading */
+  .loading { text-align: center; padding: 20px; color: var(--textmuted); font-size: 12px; }
+  .spinner {
+    display: inline-block; width: 20px; height: 20px;
+    border: 2px solid var(--dark4); border-top-color: var(--gold);
+    border-radius: 50%; animation: spin .7s linear infinite; margin-right: 8px;
+    vertical-align: middle;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* copy paste area */
+  textarea { resize: vertical; min-height: 80px; font-family: monospace; font-size: 11px; }
+
+  /* scan result */
+  .scan-result-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px solid #1a1a2a;
+  }
+  .scan-market { font-size: 12px; color: var(--text); }
+  .scan-market small { color: var(--textmuted); font-size: 10px; display: block; }
+  .scan-info { text-align: right; font-size: 11px; }
+
+  .divider { height: 1px; background: var(--dark4); margin: 8px 0; }
+
+  /* radio group */
+  .radio-group { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .radio-btn {
+    flex: 1; min-width: 80px;
+    background: var(--dark3); border: 1px solid var(--dark4);
+    border-radius: 6px; padding: 6px 8px;
+    text-align: center; cursor: pointer;
+    font-size: 11px; font-weight: 600; color: var(--textmuted);
+    transition: all .15s;
+  }
+  .radio-btn.selected {
+    border-color: var(--gold); color: var(--gold2);
+    background: #D4AF3715;
+  }
+
+  /* Number grid for BBFS */
+  .num-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 8px 0; }
+  .num-cell {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    background: var(--dark3); border: 1px solid var(--dark4);
+    border-radius: 6px; font-size: 16px; font-weight: 700;
+    cursor: pointer; transition: all .15s; color: var(--text);
+  }
+  .num-cell.sel { background: #D4AF3722; border-color: var(--gold); color: var(--gold2); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-title">⭐ WONGBAGUS PREDICTION ⭐</div>
+  <div class="header-sub">RUMUS · SCANNER · BANK RUMUS</div>
+  <div class="header-status" id="hdrStatus">Memuat data...</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('scanner')">📡 SCANNER</div>
+  <div class="tab" onclick="showTab('trek')">📊 TREK</div>
+  <div class="tab" onclick="showTab('bank')">🏦 BANK RUMUS</div>
+  <div class="tab" onclick="showTab('hasil')">📋 HASIL</div>
+</div>
+
+<!-- SCANNER TAB -->
+<div id="panel-scanner" class="panel active">
+  <div class="card">
+    <div class="card-title">⚙️ KONFIGURASI SCAN</div>
+
+    <div class="form-group">
+      <label>Jenis Rumus</label>
+      <div class="radio-group" id="jenisRumus">
+        <div class="radio-btn selected" data-val="ai2d_bel" onclick="selectRumus(this)">AI 2D Bel</div>
+        <div class="radio-btn" data-val="ai2d_dep" onclick="selectRumus(this)">AI 2D Dep</div>
+        <div class="radio-btn" data-val="ai2d_ten" onclick="selectRumus(this)">AI 2D Ten</div>
+        <div class="radio-btn" data-val="bbfs_ke" onclick="selectRumus(this)">BBFS KE</div>
+        <div class="radio-btn" data-val="bbfs_ac" onclick="selectRumus(this)">BBFS AC</div>
+        <div class="radio-btn" data-val="bbfs_ck" onclick="selectRumus(this)">BBFS CK</div>
+        <div class="radio-btn" data-val="bbfs_4d" onclick="selectRumus(this)">BBFS 4D</div>
+        <div class="radio-btn" data-val="pos_ek" onclick="selectRumus(this)">Posisi Ek</div>
+        <div class="radio-btn" data-val="pos_kp" onclick="selectRumus(this)">Posisi Kp</div>
+        <div class="radio-btn" data-val="pos_as" onclick="selectRumus(this)">Posisi As</div>
+        <div class="radio-btn" data-val="pos_cp" onclick="selectRumus(this)">Posisi Cp</div>
+      </div>
+    </div>
+
+    <!-- AI 2D options -->
+    <div id="opts-ai2d">
+      <div class="row">
+        <div class="form-group">
+          <label>Kode Rumus</label>
+          <input type="text" id="kodeRumus" placeholder="Contoh: HKG_ai_J3D2_L17" value="HKG_ai_J3D2_L17">
+        </div>
+        <div class="form-group" style="flex:0 0 80px">
+          <label>Putaran</label>
+          <input type="number" id="putaran" value="17" min="1" max="50">
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label>Prediksi (2 digit)</label>
+          <input type="text" id="prediksi2d" placeholder="Masukkan angka prediksi" maxlength="2">
+        </div>
+        <div class="form-group" style="flex:0 0 80px">
+          <label>Maks Patah</label>
+          <input type="number" id="maksPatah" value="0" min="0" max="10">
+        </div>
+      </div>
+    </div>
+
+    <!-- BBFS options -->
+    <div id="opts-bbfs" style="display:none">
+      <div class="form-group">
+        <label>Angka BBFS (pilih digit)</label>
+        <div class="num-grid" id="bbfsGrid"></div>
+        <div id="bbfsSelected" style="font-size:11px;color:var(--cyan);margin-top:4px;">Dipilih: -</div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label>Putaran</label>
+          <input type="number" id="putaranBbfs" value="10" min="1" max="50">
+        </div>
+        <div class="form-group">
+          <label>Maks Patah</label>
+          <input type="number" id="maksPatahBbfs" value="0" min="0" max="10">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Jenis Cek</label>
+        <div class="radio-group" id="bbfsCekJenis">
+          <div class="radio-btn selected" data-val="ek" onclick="selectBbfsCek(this)">Ekor (EK)</div>
+          <div class="radio-btn" data-val="kp" onclick="selectBbfsCek(this)">Kepala (KP)</div>
+          <div class="radio-btn" data-val="2d" onclick="selectBbfsCek(this)">2D Full</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Posisi options -->
+    <div id="opts-posisi" style="display:none">
+      <div class="form-group">
+        <label>Digit Prediksi</label>
+        <div class="num-grid" id="posisiGrid"></div>
+        <div id="posisiSelected" style="font-size:11px;color:var(--cyan);margin-top:4px;">Dipilih: -</div>
+      </div>
+      <div class="row">
+        <div class="form-group">
+          <label>Putaran</label>
+          <input type="number" id="putaranPosisi" value="10" min="1" max="50">
+        </div>
+        <div class="form-group">
+          <label>Maks Patah</label>
+          <input type="number" id="maksPatahPosisi" value="0" min="0" max="10">
+        </div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="doScan()">🔍 SCAN 64 PASARAN</button>
+      <button class="btn btn-blue btn-sm" onclick="simpanKeBank()">💾 SIMPAN</button>
+    </div>
+  </div>
+
+  <div id="scanResults"></div>
+</div>
+
+<!-- TREK TAB -->
+<div id="panel-trek" class="panel">
+  <div class="card">
+    <div class="card-title">📊 TREK DETAIL</div>
+    <div class="row">
+      <div class="form-group">
+        <label>Pasaran</label>
+        <select id="trekPasaran" onchange="loadTrek()"></select>
+      </div>
+      <div class="form-group" style="flex:0 0 80px">
+        <label>Putaran</label>
+        <input type="number" id="trekPutaran" value="17" min="5" max="100" onchange="loadTrek()">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label>Jenis</label>
+        <select id="trekJenis" onchange="loadTrek()">
+          <option value="ai2d_bel">AI 2D Belakang</option>
+          <option value="ai2d_dep">AI 2D Depan</option>
+          <option value="ai2d_ten">AI 2D Tengah</option>
+          <option value="bbfs_ke">BBFS KE</option>
+          <option value="bbfs_ac">BBFS AC</option>
+          <option value="bbfs_ck">BBFS CK</option>
+          <option value="bbfs_4d">BBFS 4D</option>
+          <option value="pos_ek">Posisi Ekor</option>
+          <option value="pos_kp">Posisi Kepala</option>
+          <option value="pos_as">Posisi As</option>
+          <option value="pos_cp">Posisi Cop</option>
+        </select>
+      </div>
+      <div class="form-group" style="flex:0 0 90px">
+        <label>Input Manual</label>
+        <input type="text" id="trekPredManual" placeholder="mis: 23" maxlength="4" onchange="loadTrek()">
+      </div>
+    </div>
+    <button class="btn btn-gold" onclick="loadTrek()">📊 TAMPILKAN TREK</button>
+  </div>
+
+  <div id="trekOutput"></div>
+</div>
+
+<!-- BANK RUMUS TAB -->
+<div id="panel-bank" class="panel">
+  <div class="card">
+    <div class="card-title">🏦 BANK RUMUS</div>
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="openModalSimpan()">➕ SIMPAN RUMUS BARU</button>
+      <button class="btn btn-blue" onclick="openModalImport()">📥 IMPORT (PASTE)</button>
+    </div>
+    <div class="divider"></div>
+    <div id="bankList" class="bank-list"></div>
+  </div>
+</div>
+
+<!-- HASIL TAB -->
+<div id="panel-hasil" class="panel">
+  <div class="card">
+    <div class="card-title">📋 RESULT HARI INI</div>
+    <div class="form-group">
+      <label>Filter Pasaran</label>
+      <input type="text" id="filterPasaran" placeholder="Cari nama pasaran..." oninput="renderHasil()">
+    </div>
+  </div>
+  <div id="hasilList"></div>
+</div>
+
+<!-- MODAL SIMPAN -->
+<div class="modal-overlay" id="modalSimpan">
+  <div class="modal">
+    <div class="modal-title">💾 SIMPAN RUMUS</div>
+    <div class="form-group">
+      <label>Nama Rumus</label>
+      <input type="text" id="saveName" placeholder="Nama untuk diingat...">
+    </div>
+    <div class="form-group">
+      <label>Kode Trek (otomatis terisi)</label>
+      <textarea id="saveCode" rows="4" placeholder="Kode trek..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Catatan</label>
+      <input type="text" id="saveNote" placeholder="Catatan tambahan...">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="doSimpan()">💾 SIMPAN</button>
+      <button class="btn btn-red" onclick="closeModal('modalSimpan')">✕ BATAL</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL IMPORT -->
+<div class="modal-overlay" id="modalImport">
+  <div class="modal">
+    <div class="modal-title">📥 IMPORT RUMUS</div>
+    <div class="form-group">
+      <label>Paste Kode Rumus</label>
+      <textarea id="importCode" rows="6" placeholder="Paste kode rumus di sini..."></textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="doImport()">📥 IMPORT</button>
+      <button class="btn btn-red" onclick="closeModal('modalImport')">✕ BATAL</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EXPORT -->
+<div class="modal-overlay" id="modalExport">
+  <div class="modal">
+    <div class="modal-title">📤 EXPORT RUMUS</div>
+    <div class="form-group">
+      <label>Kode Rumus (salin semua)</label>
+      <textarea id="exportCode" rows="8" readonly onclick="this.select()"></textarea>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-gold" onclick="copyExport()">📋 SALIN</button>
+      <button class="btn btn-red" onclick="closeModal('modalExport')">✕ TUTUP</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// CONSTANTS & STATE
+// ============================================================
+const JSON_URL = 'https://3-hub.github.io/data/result.json';
+const PROXY_URL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(JSON_URL);
+const REFRESH_INTERVAL = 60 * 60 * 1000; // 1 jam
+
+let G = {
+  data: null,
+  markets: [],
+  lastFetch: null,
+  bankRumus: [],
+  selectedRumus: 'ai2d_bel',
+  bbfsSelected: [],
+  posisiSelected: [],
+  bbfsCekJenis: 'ek',
+  scanResults: []
+};
+
+// ============================================================
+// INIT
+// ============================================================
+window.addEventListener('DOMContentLoaded', () => {
+  buildBbfsGrid();
+  buildPosisiGrid();
+  loadBank();
+  fetchData();
+  setInterval(fetchData, REFRESH_INTERVAL);
+});
+
+// ============================================================
+// DATA FETCH
+// ============================================================
+async function fetchData() {
+  setStatus('⏳ Memuat data...');
+  try {
+    const urls = [
+      JSON_URL,
+      PROXY_URL,
+      'https://corsproxy.io/?' + encodeURIComponent(JSON_URL)
+    ];
+    let data = null;
+    for (const url of urls) {
+      try {
+        const r = await fetch(url, { cache: 'no-cache' });
+        if (r.ok) { data = await r.json(); break; }
+      } catch(e) { continue; }
+    }
+    if (!data) throw new Error('Semua endpoint gagal');
+    G.data = data;
+    G.markets = Object.keys(data).filter(k => k !== '_meta');
+    G.lastFetch = new Date();
+    const meta = data._meta || {};
+    setStatus(`✅ Data ${meta.total||G.markets.length} pasaran · Update ${meta.updated||'-'}`);
+    populatePasaranSelect();
+    renderHasil();
+  } catch(e) {
+    setStatus('⚠️ Gagal fetch data — coba lagi...');
+    // Try to load from embedded fallback
+    setTimeout(fetchData, 30000);
+  }
+}
+
+function setStatus(msg) {
+  document.getElementById('hdrStatus').textContent = msg;
+}
+
+function populatePasaranSelect() {
+  const sel = document.getElementById('trekPasaran');
+  sel.innerHTML = G.markets.map(k => {
+    const m = G.data[k];
+    return `<option value="${k}">${m.name||k}</option>`;
+  }).join('');
+}
+
+// ============================================================
+// TAB NAVIGATION
+// ============================================================
+function showTab(id) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const tabs = ['scanner','trek','bank','hasil'];
+    t.classList.toggle('active', tabs[i] === id);
+  });
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  if (id === 'bank') renderBank();
+  if (id === 'hasil') renderHasil();
+}
+
+// ============================================================
+// RUMUS TYPE SELECTION
+// ============================================================
+function selectRumus(el) {
+  document.querySelectorAll('#jenisRumus .radio-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  G.selectedRumus = el.dataset.val;
+  updateOptsDisplay();
+}
+
+function selectBbfsCek(el) {
+  document.querySelectorAll('#bbfsCekJenis .radio-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  G.bbfsCekJenis = el.dataset.val;
+}
+
+function updateOptsDisplay() {
+  const isAi = G.selectedRumus.startsWith('ai2d');
+  const isBbfs = G.selectedRumus.startsWith('bbfs');
+  const isPosisi = G.selectedRumus.startsWith('pos_');
+  document.getElementById('opts-ai2d').style.display = isAi ? 'block' : 'none';
+  document.getElementById('opts-bbfs').style.display = isBbfs ? 'block' : 'none';
+  document.getElementById('opts-posisi').style.display = isPosisi ? 'block' : 'none';
+}
+
+// ============================================================
+// NUMBER GRIDS
+// ============================================================
+function buildBbfsGrid() {
+  const grid = document.getElementById('bbfsGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i <= 9; i++) {
+    const d = document.createElement('div');
+    d.className = 'num-cell';
+    d.textContent = i;
+    d.onclick = () => toggleBbfs(i, d);
+    grid.appendChild(d);
+  }
+}
+
+function buildPosisiGrid() {
+  const grid = document.getElementById('posisiGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i <= 9; i++) {
+    const d = document.createElement('div');
+    d.className = 'num-cell';
+    d.textContent = i;
+    d.onclick = () => togglePosisi(i, d);
+    grid.appendChild(d);
+  }
+}
+
+function toggleBbfs(n, el) {
+  const idx = G.bbfsSelected.indexOf(n);
+  if (idx >= 0) { G.bbfsSelected.splice(idx,1); el.classList.remove('sel'); }
+  else { G.bbfsSelected.push(n); el.classList.add('sel'); }
+  document.getElementById('bbfsSelected').textContent = 
+    'Dipilih: ' + (G.bbfsSelected.length ? G.bbfsSelected.sort((a,b)=>a-b).join('') : '-');
+}
+
+function togglePosisi(n, el) {
+  const idx = G.posisiSelected.indexOf(n);
+  if (idx >= 0) { G.posisiSelected.splice(idx,1); el.classList.remove('sel'); }
+  else { G.posisiSelected.push(n); el.classList.add('sel'); }
+  document.getElementById('posisiSelected').textContent = 
+    'Dipilih: ' + (G.posisiSelected.length ? G.posisiSelected.sort((a,b)=>a-b).join(' ') : '-');
+}
+
+// ============================================================
+// FORMULA ENGINE
+// ============================================================
+
+// Extract 2D based on position type
+function get2D(result4d, type) {
+  if (!result4d || result4d.length < 4) return '??';
+  const r = result4d.padStart(4,'0');
+  if (type === 'ai2d_bel') return r.slice(2,4);
+  if (type === 'ai2d_dep') return r.slice(0,2);
+  if (type === 'ai2d_ten') return r.slice(1,3);
+  return r.slice(2,4);
+}
+
+// Get digit by position
+function getDigit(result4d, pos) {
+  // pos: 'as'=0, 'kp'=1, 'cp'=2(ekor kepala), 'ek'=3
+  const r = (result4d||'0000').padStart(4,'0');
+  if (pos === 'as' || pos === 'pos_as') return parseInt(r[0]);
+  if (pos === 'kp' || pos === 'pos_kp') return parseInt(r[1]);
+  if (pos === 'cp' || pos === 'pos_cp') return parseInt(r[2]);
+  if (pos === 'ek' || pos === 'pos_ek') return parseInt(r[3]);
+  return parseInt(r[3]);
+}
+
+// AI prediction: generate predicted 2D from a result
+// Formula: sum all 4 digits, derive a 2D prediction
+function aiPredict2D(result4d, type) {
+  const r = (result4d||'0000').padStart(4,'0');
+  const digits = r.split('').map(Number);
+  const s = digits.reduce((a,b)=>a+b,0);
+  
+  // Get the base 2D
+  const base2d = get2D(result4d, type);
+  const b0 = parseInt(base2d[0]);
+  const b1 = parseInt(base2d[1]);
+  
+  // AI transformation: cyclic addition of digit sum onto 2D
+  // This creates a deterministic mapping
+  const shift = s % 10;
+  const pred0 = (b0 + shift) % 10;
+  const pred1 = (b1 + shift) % 10;
+  
+  return String(pred0) + String(pred1);
+}
+
+// Check if a 2D prediction hits a result
+function check2DHit(pred2d, result4d, type) {
+  const actual = get2D(result4d, type);
+  if (!pred2d || pred2d === '??' || pred2d.length < 2) return false;
+  // Exact match
+  if (actual === pred2d) return true;
+  // Twin check: if pred is twin (11,22,...) count as hit if either digit matches
+  if (pred2d[0] === pred2d[1]) {
+    return actual.includes(pred2d[0]);
+  }
+  return false;
+}
+
+// BBFS check
+function checkBbfsHit(digits, result4d, cekJenis) {
+  const r = (result4d||'0000').padStart(4,'0');
+  if (cekJenis === 'ek') {
+    return digits.includes(parseInt(r[3]));
+  }
+  if (cekJenis === 'kp') {
+    return digits.includes(parseInt(r[2]));
+  }
+  if (cekJenis === '2d') {
+    // Both last 2 digits must be in the set
+    return digits.includes(parseInt(r[2])) && digits.includes(parseInt(r[3]));
+  }
+  return false;
+}
+
+// Posisi check
+function checkPosisiHit(digits, result4d, posType) {
+  const d = getDigit(result4d, posType);
+  return digits.includes(d);
+}
+
+// ============================================================
+// TREK ANALYSIS
+// ============================================================
+function analyzeTrek(history, rumusType, predParam, putaran, maxPatah) {
+  // history: array of {date, result}, newest first
+  // predParam: for AI=string pred, for BBFS=array of digits, for Posisi=array
+  
+  const rows = [];
+  const slice = history.slice(0, putaran + 1); // +1 to show last "current"
+  
+  let patahCount = 0;
+  let consecutiveHit = 0;
+  let maxConsHit = 0;
+  let totalHit = 0;
+  let foundBreak = false;
+  
+  // We iterate from oldest to newest
+  const ordered = [...slice].reverse();
+  
+  for (let i = 0; i < ordered.length; i++) {
+    const item = ordered[i];
+    const r = item.result;
+    let hit = false;
+    let display2d = '';
+    
+    if (rumusType.startsWith('ai2d')) {
+      display2d = get2D(r, rumusType);
+      if (predParam && predParam.length === 2) {
+        hit = check2DHit(predParam, r, rumusType);
+      } else {
+        hit = false; // no pred given yet - pending
+      }
+    } else if (rumusType.startsWith('bbfs')) {
+      const cek = G.bbfsCekJenis || 'ek';
+      display2d = get2D(r, 'ai2d_bel');
+      if (Array.isArray(predParam) && predParam.length > 0) {
+        hit = checkBbfsHit(predParam, r, cek);
+        // Twin special: if result is twin (11,22,...), count as hit if 1 digit matches for EK/KP
+        const r2 = r.slice(2);
+        if (r2[0] === r2[1] && (cek === '2d')) {
+          hit = predParam.includes(parseInt(r2[0]));
+        }
+      }
+    } else if (rumusType.startsWith('pos_')) {
+      const posMap = {'pos_ek':'ek','pos_kp':'kp','pos_as':'as','pos_cp':'cp'};
+      const pos = posMap[rumusType] || 'ek';
+      display2d = String(getDigit(r, pos));
+      if (Array.isArray(predParam) && predParam.length > 0) {
+        hit = checkPosisiHit(predParam, r, pos);
+      }
+    }
+    
+    if (hit) { totalHit++; consecutiveHit++; if (consecutiveHit > maxConsHit) maxConsHit = consecutiveHit; }
+    else { if (predParam && (Array.isArray(predParam) ? predParam.length > 0 : predParam.length === 2)) { patahCount++; consecutiveHit = 0; } }
+    
+    rows.push({
+      no: i+1, date: item.date, result: r,
+      display2d, hit,
+      pending: !predParam || (Array.isArray(predParam) ? predParam.length === 0 : predParam.length < 2)
+    });
+  }
+  
+  return { rows, patahCount, totalHit, maxConsHit, putaran: slice.length };
+}
+
+// ============================================================
+// SCAN ALL MARKETS
+// ============================================================
+async function doScan() {
+  if (!G.data) { toast('⚠️ Data belum dimuat'); return; }
+  
+  const rumus = G.selectedRumus;
+  let predParam, putaran, maxPatah;
+  
+  if (rumus.startsWith('ai2d')) {
+    predParam = document.getElementById('prediksi2d').value.trim().padStart(2,'0');
+    putaran = parseInt(document.getElementById('putaran').value) || 17;
+    maxPatah = parseInt(document.getElementById('maksPatah').value) || 0;
+    if (predParam.length !== 2 || isNaN(parseInt(predParam))) {
+      toast('⚠️ Masukkan prediksi 2 digit'); return;
+    }
+  } else if (rumus.startsWith('bbfs')) {
+    predParam = G.bbfsSelected.slice();
+    putaran = parseInt(document.getElementById('putaranBbfs').value) || 10;
+    maxPatah = parseInt(document.getElementById('maksPatahBbfs').value) || 0;
+    if (predParam.length === 0) { toast('⚠️ Pilih minimal 1 digit BBFS'); return; }
+  } else {
+    predParam = G.posisiSelected.slice();
+    putaran = parseInt(document.getElementById('putaranPosisi').value) || 10;
+    maxPatah = parseInt(document.getElementById('maksPatahPosisi').value) || 0;
+    if (predParam.length === 0) { toast('⚠️ Pilih minimal 1 digit posisi'); return; }
+  }
+  
+  const out = document.getElementById('scanResults');
+  out.innerHTML = `<div class="loading"><span class="spinner"></span>Scanning ${G.markets.length} pasaran...</div>`;
+  
+  await new Promise(r => setTimeout(r, 50));
+  
+  const results = [];
+  
+  for (const key of G.markets) {
+    const mkt = G.data[key];
+    const hist = mkt.history || [];
+    if (hist.length < 2) continue;
+    
+    const analysis = analyzeTrek(hist, rumus, predParam, putaran, maxPatah);
+    
+    // Check if this market qualifies (patah <= maxPatah)
+    const qualifies = analysis.patahCount <= maxPatah;
+    
+    results.push({
+      key, name: mkt.name||key, result: mkt.result||'-',
+      tgl: mkt.tgl||'-', analysis, qualifies
+    });
+  }
+  
+  G.scanResults = results;
+  
+  const qualified = results.filter(r => r.qualifies);
+  const notQual = results.filter(r => !r.qualifies);
+  
+  // Build label for what's being checked
+  let checkLabel = '';
+  if (rumus.startsWith('ai2d')) checkLabel = `Pred: <b style="color:var(--cyan)">${predParam}</b>`;
+  else if (rumus.startsWith('bbfs')) checkLabel = `BBFS: <b style="color:var(--cyan)">${predParam.join('')}</b> (${G.bbfsCekJenis.toUpperCase()})`;
+  else checkLabel = `Digit: <b style="color:var(--cyan)">${predParam.join(' ')}</b>`;
+  
+  let html = `
+  <div class="card">
+    <div class="card-title">📡 HASIL SCAN</div>
+    <div class="stats-bar">
+      <div class="stat-chip">${checkLabel}</div>
+      <div class="stat-chip">Putaran: <span class="gold">${putaran}</span></div>
+      <div class="stat-chip">Maks Patah: <span class="gold">${maxPatah}x</span></div>
+      <div class="stat-chip">Lolos: <span class="green">${qualified.length}</span></div>
+      <div class="stat-chip">Tidak: <span class="red">${notQual.length}</span></div>
+    </div>
+  </div>`;
+  
+  if (qualified.length === 0) {
+    html += `<div class="card"><div style="text-align:center;color:var(--textmuted);padding:20px">Tidak ada pasaran yang lolos filter</div></div>`;
+  } else {
+    html += `<div class="card"><div class="card-title">✅ LOLOS SCAN (${qualified.length} Pasaran)</div>`;
+    qualified.forEach(item => {
+      const a = item.analysis;
+      const r2 = rumus.startsWith('ai2d') ? get2D(item.result,'ai2d_bel') : item.result.slice(2);
+      html += `
+      <div class="scan-result-row" onclick="openTrekFromScan('${item.key}')">
+        <div class="scan-market">
+          <b>${item.name}</b>
+          <small>${item.key.toUpperCase()} · ${item.tgl}</small>
+        </div>
+        <div class="scan-info">
+          <span class="badge badge-green">Patah ${a.patahCount}x</span>
+          <div style="font-size:11px;color:var(--textmuted);margin-top:2px">
+            Hit ${a.totalHit}/${a.putaran} · ${item.result}
+          </div>
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+    
+    if (notQual.length > 0) {
+      html += `<div class="card"><div class="card-title" style="color:var(--red)">❌ TIDAK LOLOS (${notQual.length})</div>`;
+      notQual.slice(0,20).forEach(item => {
+        const a = item.analysis;
+        html += `
+        <div class="scan-result-row">
+          <div class="scan-market">
+            <b>${item.name}</b>
+            <small>${item.key.toUpperCase()} · ${item.tgl}</small>
+          </div>
+          <div class="scan-info">
+            <span class="badge badge-red">Patah ${a.patahCount}x</span>
+            <div style="font-size:11px;color:var(--textmuted);margin-top:2px">${item.result}</div>
+          </div>
+        </div>`;
+      });
+      if (notQual.length > 20) html += `<div style="text-align:center;color:var(--textmuted);font-size:11px;padding:8px">...dan ${notQual.length-20} lainnya</div>`;
+      html += '</div>';
+    }
+  }
+  
+  out.innerHTML = html;
+}
+
+function openTrekFromScan(key) {
+  document.getElementById('trekPasaran').value = key;
+  document.getElementById('trekJenis').value = G.selectedRumus;
+  showTab('trek');
+  loadTrek();
+}
+
+// ============================================================
+// TREK DISPLAY
+// ============================================================
+function loadTrek() {
+  if (!G.data) { 
+    document.getElementById('trekOutput').innerHTML = '<div class="loading">Data belum dimuat...</div>';
+    return; 
+  }
+  
+  const key = document.getElementById('trekPasaran').value;
+  const jenis = document.getElementById('trekJenis').value;
+  const putaran = parseInt(document.getElementById('trekPutaran').value) || 17;
+  const manualPred = document.getElementById('trekPredManual').value.trim();
+  
+  if (!key || !G.data[key]) return;
+  
+  const mkt = G.data[key];
+  const hist = mkt.history || [];
+  
+  // Determine predParam
+  let predParam = manualPred || '';
+  if (jenis.startsWith('bbfs') && G.bbfsSelected.length > 0) predParam = G.bbfsSelected.slice();
+  if (jenis.startsWith('pos_') && G.posisiSelected.length > 0) predParam = G.posisiSelected.slice();
+  
+  const analysis = analyzeTrek(hist, jenis, predParam, putaran, 99);
+  
+  // Column header labels
+  let col2dLabel = '2D BEL';
+  if (jenis === 'ai2d_dep') col2dLabel = '2D DEP';
+  if (jenis === 'ai2d_ten') col2dLabel = '2D TEN';
+  if (jenis.startsWith('bbfs')) col2dLabel = 'EK/KP';
+  if (jenis.startsWith('pos_')) col2dLabel = 'DIGIT';
+  
+  // Pred label
+  let predLabel = predParam;
+  if (Array.isArray(predParam)) predLabel = predParam.join('');
+  
+  let html = `
+  <div class="card">
+    <div class="result-big">
+      <div class="market-name">${mkt.name||key}</div>
+      <div class="r4">${(mkt.result||'????').slice(0,2)}<span class="r2hi">${(mkt.result||'????').slice(2)}</span></div>
+      <div class="rdate">📅 ${mkt.tgl||'-'} · Update ${mkt.updated||'-'}</div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat-chip">Putaran: <span class="gold">${analysis.putaran}</span></div>
+      <div class="stat-chip">Patah: <span class="red">${analysis.patahCount}x</span></div>
+      <div class="stat-chip">Hit: <span class="green">${analysis.totalHit}</span></div>
+      <div class="stat-chip">Pred: <span class="cyan">${predLabel||'-'}</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="trek-wrap">
+      <table class="trek-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>TGL</th>
+            <th>4D</th>
+            <th>${col2dLabel}</th>
+            <th>STATUS</th>
+          </tr>
+        </thead>
+        <tbody>`;
+  
+  analysis.rows.forEach((row, idx) => {
+    const isLast = idx === analysis.rows.length - 1;
+    let statusHtml = '';
+    if (row.pending) {
+      statusHtml = '<span class="rpred rpending">?</span>';
+    } else if (row.hit) {
+      statusHtml = '<span class="rpred rhit">✓ HIT</span>';
+    } else {
+      statusHtml = '<span class="rpred rmiss">✗ PATAH</span>';
+    }
+    
+    // Highlight last row (current/latest result)
+    const rowStyle = isLast ? 'background:#1a2a1a' : '';
+    
+    html += `
+    <tr style="${rowStyle}">
+      <td class="rno">${row.no}</td>
+      <td class="rdate">${row.date.slice(5)}</td>
+      <td class="r4d">${row.result}</td>
+      <td class="r2d">${row.display2d}</td>
+      <td>${statusHtml}</td>
+    </tr>`;
+  });
+  
+  html += `</tbody></table></div>
+  <div class="btn-row" style="margin-top:10px">
+    <button class="btn btn-blue btn-sm" onclick="simpanTrekKeBank()">💾 Simpan ke Bank</button>
+    <button class="btn btn-purple btn-sm" onclick="copyTrekAsText()">📋 Salin Trek</button>
+  </div>
+  </div>`;
+  
+  document.getElementById('trekOutput').innerHTML = html;
+}
+
+function copyTrekAsText() {
+  // Export current trek as text
+  const key = document.getElementById('trekPasaran').value;
+  const jenis = document.getElementById('trekJenis').value;
+  const putaran = document.getElementById('trekPutaran').value;
+  const pred = document.getElementById('trekPredManual').value;
+  
+  if (!G.data || !G.data[key]) return;
+  const mkt = G.data[key];
+  const hist = mkt.history || [];
+  const analysis = analyzeTrek(hist, jenis, pred, parseInt(putaran)||17, 99);
+  
+  let txt = `=== TREK ${mkt.name} ===\n`;
+  txt += `Jenis: ${jenis} | Pred: ${pred||'-'} | Putaran: ${putaran}\n`;
+  txt += `Patah: ${analysis.patahCount}x | Hit: ${analysis.totalHit}\n`;
+  txt += `${'─'.repeat(35)}\n`;
+  analysis.rows.forEach(row => {
+    const status = row.pending ? '?' : row.hit ? '✓' : '✗';
+    txt += `${row.date.slice(5)} | ${row.result} | ${row.display2d} | ${status}\n`;
+  });
+  txt += `${'─'.repeat(35)}\n`;
+  txt += `Update: ${new Date().toLocaleString('id-ID')}`;
+  
+  navigator.clipboard.writeText(txt).then(() => toast('✅ Trek tersalin!')).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = txt; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    toast('✅ Trek tersalin!');
+  });
+}
+
+// ============================================================
+// BANK RUMUS
+// ============================================================
+function loadBank() {
+  try {
+    const saved = localStorage.getItem('wongbagus_bank');
+    G.bankRumus = saved ? JSON.parse(saved) : [];
+  } catch(e) { G.bankRumus = []; }
+}
+
+function saveBank() {
+  try { localStorage.setItem('wongbagus_bank', JSON.stringify(G.bankRumus)); } catch(e) {}
+}
+
+function renderBank() {
+  const list = document.getElementById('bankList');
+  if (G.bankRumus.length === 0) {
+    list.innerHTML = '<div style="text-align:center;color:var(--textmuted);padding:20px">Belum ada rumus tersimpan</div>';
+    return;
+  }
+  list.innerHTML = G.bankRumus.map((item, idx) => `
+  <div class="bank-item">
+    <div class="bank-item-header">
+      <div>
+        <div class="bank-item-name">📌 ${item.name}</div>
+        <div class="bank-item-meta">${item.type||''} · ${item.date||''}</div>
+      </div>
+      <span class="badge badge-${item.patah===0?'green':'gold'}">Patah ${item.patah||0}x</span>
+    </div>
+    <div class="bank-item-code">${item.code}</div>
+    ${item.note ? `<div style="font-size:11px;color:var(--textmuted);margin-bottom:6px">📝 ${item.note}</div>` : ''}
+    <div class="bank-item-actions">
+      <button class="btn btn-blue btn-sm" onclick="loadRumusFromBank(${idx})">▶ LOAD</button>
+      <button class="btn btn-gold btn-sm" onclick="exportRumus(${idx})">📤 EXPORT</button>
+      <button class="btn btn-red btn-sm" onclick="deleteRumus(${idx})">🗑</button>
+    </div>
+  </div>`).join('');
+}
+
+function openModalSimpan() {
+  // Auto-fill from current scanner state
+  const rumus = G.selectedRumus;
+  let code = '';
+  let type = rumus;
+  
+  if (rumus.startsWith('ai2d')) {
+    const pred = document.getElementById('prediksi2d').value.trim();
+    const put = document.getElementById('putaran').value;
+    const mp = document.getElementById('maksPatah').value;
+    code = `TYPE:${rumus}|PRED:${pred}|PUT:${put}|PATAH:${mp}`;
+  } else if (rumus.startsWith('bbfs')) {
+    const digits = G.bbfsSelected.join('');
+    const put = document.getElementById('putaranBbfs').value;
+    const mp = document.getElementById('maksPatahBbfs').value;
+    const cek = G.bbfsCekJenis;
+    code = `TYPE:${rumus}|DIGITS:${digits}|CEK:${cek}|PUT:${put}|PATAH:${mp}`;
+  } else {
+    const digits = G.posisiSelected.join('');
+    const put = document.getElementById('putaranPosisi').value;
+    const mp = document.getElementById('maksPatahPosisi').value;
+    code = `TYPE:${rumus}|DIGITS:${digits}|PUT:${put}|PATAH:${mp}`;
+  }
+  
+  document.getElementById('saveCode').value = code;
+  document.getElementById('saveName').value = '';
+  document.getElementById('saveNote').value = '';
+  document.getElementById('modalSimpan').classList.add('open');
+}
+
+function simpanKeBank() { openModalSimpan(); }
+function simpanTrekKeBank() { openModalSimpan(); }
+
+function doSimpan() {
+  const name = document.getElementById('saveName').value.trim();
+  const code = document.getElementById('saveCode').value.trim();
+  const note = document.getElementById('saveNote').value.trim();
+  
+  if (!name) { toast('⚠️ Masukkan nama rumus'); return; }
+  if (!code) { toast('⚠️ Kode rumus kosong'); return; }
+  
+  const item = {
+    name, code, note,
+    date: new Date().toLocaleDateString('id-ID'),
+    type: G.selectedRumus,
+    patah: 0
+  };
+  
+  G.bankRumus.unshift(item);
+  saveBank();
+  closeModal('modalSimpan');
+  toast('✅ Rumus tersimpan!');
+  renderBank();
+}
+
+function loadRumusFromBank(idx) {
+  const item = G.bankRumus[idx];
+  if (!item) return;
+  
+  // Parse code
+  const parts = {};
+  item.code.split('|').forEach(p => {
+    const [k,v] = p.split(':');
+    if (k && v !== undefined) parts[k.trim()] = v.trim();
+  });
+  
+  const type = parts['TYPE'] || 'ai2d_bel';
+  G.selectedRumus = type;
+  
+  // Update radio buttons
+  document.querySelectorAll('#jenisRumus .radio-btn').forEach(b => {
+    b.classList.toggle('selected', b.dataset.val === type);
+  });
+  updateOptsDisplay();
+  
+  if (type.startsWith('ai2d')) {
+    if (parts['PRED']) document.getElementById('prediksi2d').value = parts['PRED'];
+    if (parts['PUT']) document.getElementById('putaran').value = parts['PUT'];
+    if (parts['PATAH']) document.getElementById('maksPatah').value = parts['PATAH'];
+  } else if (type.startsWith('bbfs')) {
+    const digits = (parts['DIGITS']||'').split('').map(Number);
+    G.bbfsSelected = digits;
+    // Update grid
+    document.querySelectorAll('#bbfsGrid .num-cell').forEach((el,i) => {
+      el.classList.toggle('sel', digits.includes(i));
+    });
+    document.getElementById('bbfsSelected').textContent = 'Dipilih: ' + digits.join('');
+    if (parts['PUT']) document.getElementById('putaranBbfs').value = parts['PUT'];
+    if (parts['PATAH']) document.getElementById('maksPatahBbfs').value = parts['PATAH'];
+    if (parts['CEK']) {
+      G.bbfsCekJenis = parts['CEK'];
+      document.querySelectorAll('#bbfsCekJenis .radio-btn').forEach(b => {
+        b.classList.toggle('selected', b.dataset.val === parts['CEK']);
+      });
+    }
+  } else {
+    const digits = (parts['DIGITS']||'').split('').map(Number);
+    G.posisiSelected = digits;
+    document.querySelectorAll('#posisiGrid .num-cell').forEach((el,i) => {
+      el.classList.toggle('sel', digits.includes(i));
+    });
+    document.getElementById('posisiSelected').textContent = 'Dipilih: ' + digits.join(' ');
+    if (parts['PUT']) document.getElementById('putaranPosisi').value = parts['PUT'];
+    if (parts['PATAH']) document.getElementById('maksPatahPosisi').value = parts['PATAH'];
+  }
+  
+  showTab('scanner');
+  toast('✅ Rumus dimuat!');
+}
+
+function exportRumus(idx) {
+  const item = G.bankRumus[idx];
+  if (!item) return;
+  const exportStr = `WONGBAGUS_RUMUS\nNAMA:${item.name}\n${item.code}\nNOTE:${item.note||''}\nDATE:${item.date}`;
+  document.getElementById('exportCode').value = exportStr;
+  document.getElementById('modalExport').classList.add('open');
+}
+
+function copyExport() {
+  const ta = document.getElementById('exportCode');
+  ta.select();
+  try {
+    navigator.clipboard.writeText(ta.value).then(() => toast('✅ Tersalin!'));
+  } catch(e) {
+    document.execCommand('copy');
+    toast('✅ Tersalin!');
+  }
+}
+
+function deleteRumus(idx) {
+  if (!confirm('Hapus rumus ini?')) return;
+  G.bankRumus.splice(idx,1);
+  saveBank();
+  renderBank();
+  toast('🗑 Rumus dihapus');
+}
+
+function openModalImport() {
+  document.getElementById('importCode').value = '';
+  document.getElementById('modalImport').classList.add('open');
+}
+
+function doImport() {
+  const raw = document.getElementById('importCode').value.trim();
+  if (!raw) { toast('⚠️ Paste kode dulu'); return; }
+  
+  // Try to parse multiple formats
+  const lines = raw.split('\n');
+  let name = 'Import ' + new Date().toLocaleDateString('id-ID');
+  let code = '';
+  let note = '';
+  
+  lines.forEach(l => {
+    l = l.trim();
+    if (l.startsWith('NAMA:')) name = l.slice(5);
+    else if (l.startsWith('NOTE:')) note = l.slice(5);
+    else if (l.startsWith('TYPE:')) code = l;
+    else if (l.includes('TYPE:') && l.includes('|')) code = l;
+  });
+  
+  if (!code) {
+    // Try treating whole thing as code
+    if (raw.includes('TYPE:')) code = raw.replace(/\n/g,' ');
+    else { toast('⚠️ Format kode tidak dikenali'); return; }
+  }
+  
+  const item = { name, code, note, date: new Date().toLocaleDateString('id-ID'), type: 'import', patah: 0 };
+  G.bankRumus.unshift(item);
+  saveBank();
+  closeModal('modalImport');
+  toast('✅ Rumus diimport!');
+  renderBank();
+}
+
+// ============================================================
+// HASIL (RESULTS) TAB
+// ============================================================
+function renderHasil() {
+  if (!G.data) {
+    document.getElementById('hasilList').innerHTML = '<div class="loading"><span class="spinner"></span>Memuat...</div>';
+    return;
+  }
+  
+  const filter = document.getElementById('filterPasaran').value.toLowerCase();
+  let html = '';
+  
+  G.markets.forEach(key => {
+    const m = G.data[key];
+    if (filter && !m.name.toLowerCase().includes(filter) && !key.includes(filter)) return;
+    
+    const r = m.result || '????';
+    const dep = r.slice(0,2), bel = r.slice(2);
+    
+    html += `
+    <div class="card" style="padding:8px 12px;margin-bottom:6px" onclick="quickTrek('${key}')">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div style="font-weight:700;font-size:12px">${m.name||key}</div>
+          <div style="font-size:10px;color:var(--textmuted)">${key.toUpperCase()} · ${m.tgl||'-'} · ${m.updated||''}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-family:monospace;font-size:20px;font-weight:900;color:var(--gold2);letter-spacing:2px">${dep}<span style="color:var(--cyan)">${bel}</span></div>
+          <div style="font-size:10px;color:var(--textmuted)">AS·KP·CP·EK</div>
+        </div>
+      </div>
+    </div>`;
+  });
+  
+  document.getElementById('hasilList').innerHTML = html || '<div style="text-align:center;color:var(--textmuted);padding:20px">Tidak ada hasil</div>';
+}
+
+function quickTrek(key) {
+  document.getElementById('trekPasaran').value = key;
+  showTab('trek');
+  loadTrek();
+}
+
+// ============================================================
+// MODAL HELPERS
+// ============================================================
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+// Close modal on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', e => {
+    if (e.target === overlay) overlay.classList.remove('open');
+  });
+});
+
+// ============================================================
+// TOAST
+// ============================================================
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>
