@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scanner Otomatis – WONGBAGUS</title>
+<style>
+:root {
+  --bg: #0d0f14;
+  --bg2: #13161e;
+  --bg3: #1a1e2a;
+  --border: #252b3b;
+  --gold: #f0b429;
+  --gold2: #ffd166;
+  --green: #2dce89;
+  --red: #f5365c;
+  --blue: #11cdef;
+  --text: #c8d3e8;
+  --muted: #5a6480;
+  --radius: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 13px; }
+
+/* HEADER */
+.header { background: linear-gradient(135deg, #0d0f14 0%, #1a1420 100%); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+.header .logo { font-size: 16px; font-weight: 800; letter-spacing: 1px; color: var(--gold); }
+.header .sub { color: var(--muted); font-size: 11px; }
+
+/* PANEL KONTROL */
+.controls { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end; }
+.ctrl-group { display: flex; flex-direction: column; gap: 4px; }
+.ctrl-group label { font-size: 10px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+select, input[type=number] {
+  background: var(--bg3); border: 1px solid var(--border); color: var(--text);
+  padding: 5px 8px; border-radius: var(--radius); font-size: 12px; outline: none;
+}
+select:focus, input:focus { border-color: var(--gold); }
+select { min-width: 180px; }
+input[type=number] { width: 70px; }
+
+.btn-scan {
+  background: linear-gradient(135deg, var(--gold), #d4900a);
+  color: #000; font-weight: 800; font-size: 13px; letter-spacing: .5px;
+  border: none; padding: 6px 20px; border-radius: var(--radius); cursor: pointer;
+  transition: opacity .15s;
+}
+.btn-scan:hover { opacity: .85; }
+.btn-scan:active { opacity: .7; }
+
+/* FILTER POSISI */
+.pos-filter { display: flex; gap: 4px; flex-wrap: wrap; }
+.pos-btn {
+  background: var(--bg3); border: 1px solid var(--border); color: var(--muted);
+  padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: 600;
+  transition: all .1s;
+}
+.pos-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
+
+/* HARI FILTER */
+.hari-filter { display: flex; gap: 4px; flex-wrap: wrap; }
+.hari-btn {
+  background: var(--bg3); border: 1px solid var(--border); color: var(--muted);
+  padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 10px;
+  transition: all .1s;
+}
+.hari-btn.active { background: #2a3a5c; color: var(--blue); border-color: var(--blue); }
+
+/* MAIN LAYOUT */
+.main { display: flex; height: calc(100vh - 120px); }
+
+/* SIDEBAR RUMUS */
+.sidebar {
+  width: 240px; min-width: 180px; background: var(--bg2);
+  border-right: 1px solid var(--border); overflow-y: auto; flex-shrink: 0;
+}
+.sidebar-title { padding: 8px 12px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); border-bottom: 1px solid var(--border); background: var(--bg3); position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; }
+.rumus-item {
+  padding: 7px 12px; border-bottom: 1px solid rgba(37,43,59,.5);
+  cursor: pointer; display: flex; align-items: center; gap: 8px;
+  transition: background .1s;
+}
+.rumus-item:hover { background: var(--bg3); }
+.rumus-item.active { background: rgba(240,180,41,.08); border-left: 2px solid var(--gold); }
+.rumus-item .ri-name { font-size: 11px; font-weight: 600; color: var(--text); flex: 1; }
+.rumus-item .ri-val { font-size: 11px; color: var(--gold); font-weight: 700; min-width: 28px; text-align: right; }
+.ri-badge { font-size: 9px; padding: 1px 5px; border-radius: 3px; background: var(--bg3); color: var(--muted); }
+.ri-hit { color: var(--green) !important; }
+.ri-pct { font-size: 9px; color: var(--muted); min-width: 32px; text-align: right; }
+
+/* TREK PANEL */
+.trek-panel { flex: 1; overflow-y: auto; padding: 0; }
+.trek-header {
+  position: sticky; top: 0; z-index: 3; background: var(--bg2);
+  border-bottom: 1px solid var(--border); padding: 8px 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.trek-title { font-size: 13px; font-weight: 700; color: var(--gold); }
+.trek-stats { font-size: 11px; color: var(--muted); }
+.trek-stats span { color: var(--text); font-weight: 600; }
+
+/* TREK TABLE */
+.trek-table { width: 100%; border-collapse: collapse; }
+.trek-table th {
+  background: var(--bg3); padding: 6px 10px; font-size: 10px;
+  text-transform: uppercase; letter-spacing: .5px; color: var(--muted);
+  border-bottom: 1px solid var(--border); text-align: left; position: sticky; top: 49px; z-index: 2;
+}
+.trek-table td { padding: 5px 10px; border-bottom: 1px solid rgba(37,43,59,.4); font-size: 12px; }
+.trek-table tr:hover td { background: rgba(255,255,255,.02); }
+
+.cell-no { color: var(--muted); font-size: 11px; width: 30px; }
+.cell-tgl { color: var(--muted); font-size: 11px; width: 80px; }
+.cell-hari { color: var(--muted); font-size: 10px; width: 45px; }
+.cell-result { font-weight: 700; color: var(--text); font-family: 'Courier New', monospace; letter-spacing: 2px; }
+.cell-acke { font-size: 11px; color: var(--muted); }
+.cell-pred { font-weight: 700; font-size: 13px; font-family: 'Courier New', monospace; letter-spacing: 1px; }
+.cell-status { text-align: center; width: 50px; }
+
+.hit-yes { color: var(--green); }
+.hit-no { color: var(--red); }
+.hit-dot-yes { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
+.hit-dot-no  { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: rgba(245,54,92,.3); }
+.hit-dot-wait { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+
+.digit-as   { color: #f0b429; }
+.digit-cop  { color: #11cdef; }
+.digit-kep  { color: #2dce89; }
+.digit-ekor { color: #f77f00; }
+
+/* PLACEHOLDER */
+.placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 60%; gap: 12px; opacity: .4; }
+.placeholder .ph-icon { font-size: 48px; }
+.placeholder .ph-text { font-size: 13px; color: var(--muted); }
+
+/* LOADING */
+.loading { text-align: center; padding: 40px; color: var(--muted); }
+.spinner { display: inline-block; width: 24px; height: 24px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin .7s linear infinite; margin-right: 8px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* MODIFIER CHIPS */
+.mod-chips { display: flex; gap: 3px; flex-wrap: wrap; padding: 4px 12px 6px; }
+.mod-chip {
+  font-size: 9px; padding: 2px 6px; border-radius: 3px; cursor: pointer;
+  border: 1px solid var(--border); color: var(--muted); background: transparent;
+  transition: all .1s;
+}
+.mod-chip.active { background: rgba(17,205,239,.15); color: var(--blue); border-color: var(--blue); }
+
+.section-label { padding: 5px 12px 3px; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* BANK RUMUS MODAL */
+.modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 1000;
+  background: rgba(0,0,0,.7); backdrop-filter: blur(3px);
+  align-items: center; justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: #1a1e2a; border: 1px solid var(--border); border-radius: 10px;
+  width: 540px; max-width: 95vw; max-height: 88vh; display: flex; flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,.6);
+}
+.modal-head {
+  padding: 12px 16px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.modal-head .modal-title { font-size: 14px; font-weight: 800; color: var(--gold); }
+.modal-close { background: none; border: none; color: var(--muted); font-size: 18px; cursor: pointer; padding: 0 4px; }
+.modal-close:hover { color: var(--text); }
+.modal-body { flex: 1; overflow-y: auto; padding: 14px 16px; }
+.modal-foot { padding: 10px 16px; border-top: 1px solid var(--border); display: flex; gap: 8px; flex-shrink: 0; }
+
+/* Bank Rumus save form */
+.bk-form { display: flex; gap: 6px; margin-bottom: 12px; }
+.bk-form input[type=text] {
+  flex: 1; background: var(--bg3); border: 1px solid var(--border);
+  color: var(--text); padding: 6px 10px; border-radius: var(--radius); font-size: 12px; outline: none;
+}
+.bk-form input[type=text]:focus { border-color: var(--gold); }
+.btn-bk-save {
+  background: var(--gold); color: #000; font-weight: 800; font-size: 11px;
+  border: none; padding: 6px 14px; border-radius: var(--radius); cursor: pointer;
+  white-space: nowrap;
+}
+.btn-bk-save:hover { opacity: .85; }
+
+/* Bank Rumus list */
+.bk-item {
+  background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 8px 12px; margin-bottom: 6px; display: flex; gap: 8px; align-items: flex-start;
+}
+.bk-item-info { flex: 1; min-width: 0; }
+.bk-item-name { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 2px; }
+.bk-item-code {
+  font-size: 10px; color: var(--muted); font-family: monospace;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.bk-item-meta { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.bk-item-btns { display: flex; gap: 4px; flex-shrink: 0; margin-top: 2px; }
+.btn-bk-load {
+  background: rgba(17,205,239,.15); color: var(--blue); border: 1px solid var(--blue);
+  padding: 3px 10px; border-radius: 4px; cursor: pointer; font-size: 10px; font-weight: 700;
+}
+.btn-bk-load:hover { background: rgba(17,205,239,.3); }
+.btn-bk-copy {
+  background: rgba(45,206,137,.15); color: var(--green); border: 1px solid var(--green);
+  padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 10px; font-weight: 700;
+}
+.btn-bk-copy:hover { background: rgba(45,206,137,.3); }
+.btn-bk-del {
+  background: rgba(245,54,92,.12); color: var(--red); border: 1px solid rgba(245,54,92,.4);
+  padding: 3px 8px; border-radius: 4px; cursor: pointer; font-size: 10px; font-weight: 700;
+}
+.btn-bk-del:hover { background: rgba(245,54,92,.25); }
+.bk-empty { text-align: center; padding: 30px; color: var(--muted); font-size: 12px; }
+
+/* Trek copy panel - trek-header button */
+.btn-copy-trek {
+  background: rgba(45,206,137,.15); color: var(--green); border: 1px solid var(--green);
+  padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 10px; font-weight: 700;
+  margin-left: auto; flex-shrink: 0;
+}
+.btn-copy-trek:hover { background: rgba(45,206,137,.3); }
+.btn-bank-rumus {
+  background: rgba(240,180,41,.12); color: var(--gold); border: 1px solid rgba(240,180,41,.4);
+  padding: 4px 12px; border-radius: 4px; cursor: pointer; font-size: 10px; font-weight: 700;
+  flex-shrink: 0;
+}
+.btn-bank-rumus:hover { background: rgba(240,180,41,.25); }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .sidebar { width: 150px; }
+  .controls { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div style="flex:1">
+    <div class="logo">⚡ WONGBAGUS SCANNER OTOMATIS</div>
+    <div class="sub">Auto scan semua rumus · 64 pasaran · data result.json</div>
+  </div>
+  <button class="btn-bank-rumus" onclick="openBankRumus()" style="font-size:12px;padding:6px 14px;">🏦 BANK RUMUS</button>
+</div>
+
+<div class="controls">
+  <div class="ctrl-group">
+    <label>Pasaran</label>
+    <select id="selPasaran"></select>
+  </div>
+  <div class="ctrl-group">
+    <label>Jenis Result</label>
+    <select id="selJenis">
+      <option value="harian">Harian</option>
+      <option value="senin">Senin</option>
+      <option value="selasa">Selasa</option>
+      <option value="rabu">Rabu</option>
+      <option value="kamis">Kamis</option>
+      <option value="jumat">Jumat</option>
+      <option value="sabtu">Sabtu</option>
+      <option value="minggu">Minggu</option>
+    </select>
+  </div>
+  <div class="ctrl-group">
+    <label>Putaran</label>
+    <input type="number" id="inpPutaran" value="30" min="5" max="150">
+  </div>
+  <div class="ctrl-group">
+    <label>Posisi</label>
+    <div class="pos-filter" id="posFilter">
+      <div class="pos-btn active" data-pos="A">AS</div>
+      <div class="pos-btn active" data-pos="C">COP</div>
+      <div class="pos-btn active" data-pos="K">KEP</div>
+      <div class="pos-btn active" data-pos="E">EKO</div>
+    </div>
+  </div>
+  <div class="ctrl-group">
+    <label>Min Hit%</label>
+    <input type="number" id="inpMinHit" value="0" min="0" max="100" style="width:60px">
+  </div>
+  <div class="ctrl-group">
+    <label>Urut</label>
+    <select id="selSort" style="min-width:100px">
+      <option value="pct">% Tertinggi</option>
+      <option value="hits">Hits Terbanyak</option>
+      <option value="lag">Lag Terkecil</option>
+    </select>
+  </div>
+  <button class="btn-scan" onclick="doScan()">▶ SCAN</button>
+</div>
+
+<div class="main">
+
+  <!-- SIDEBAR: daftar rumus hasil scan -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-title">
+      <span>RUMUS LIST</span>
+      <span id="sidebarCount" style="color:var(--gold)">–</span>
+    </div>
+    <div id="rumusList">
+      <div class="placeholder" style="height:200px;padding:20px">
+        <div class="ph-text">Pilih pasaran & klik SCAN</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TREK PANEL: trek detail -->
+  <div class="trek-panel" id="trekPanel">
+    <div class="placeholder">
+      <div class="ph-icon">🔍</div>
+      <div class="ph-text">Klik SCAN untuk mulai</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- BANK RUMUS MODAL -->
+<div class="modal-overlay" id="modalBankRumus">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title">🏦 BANK RUMUS</span>
+      <button class="modal-close" onclick="closeBankRumus()">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- Save form -->
+      <div class="bk-form">
+        <input type="text" id="bkNama" placeholder="Nama rumus (contoh: HK E4ml 70%)...">
+        <button class="btn-bk-save" onclick="bankRumusSave()">💾 SIMPAN</button>
+      </div>
+      <div id="bkKodePreview" style="font-size:10px;color:var(--muted);margin-bottom:10px;font-family:monospace;padding:4px 8px;background:var(--bg);border-radius:4px;display:none;"></div>
+      <!-- List -->
+      <div id="bkList"></div>
+    </div>
+    <div class="modal-foot" style="justify-content:space-between;align-items:center;">
+      <span id="bkCount" style="font-size:11px;color:var(--muted);">0 rumus tersimpan</span>
+      <button onclick="bankRumusClearAll()" style="background:rgba(245,54,92,.1);color:var(--red);border:1px solid rgba(245,54,92,.3);padding:4px 12px;border-radius:4px;cursor:pointer;font-size:11px;font-weight:700;">🗑 Hapus Semua</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// DATA & STATE
+// ═══════════════════════════════════════════════════════
+const DATA_URL = 'https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json';
+const FALLBACK_URL = 'result.json';
+
+const HARI_MAP = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+const HARI_SHORT = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+
+const MOD_TABLE = {
+  ml: {0:1,1:2,2:3,3:4,4:5,5:6,6:7,7:8,8:9,9:0},
+  ix: {0:5,1:6,2:7,3:8,4:9,5:0,6:1,7:2,8:3,9:4},
+  mb: {0:8,1:7,2:6,3:9,4:5,5:4,6:3,7:2,8:1,9:0},  // approximate
+  ty: {0:7,1:4,2:9,3:6,4:5,5:8,6:9,7:8,8:1,9:4},
+  m0: {0:6,1:5,2:8,3:7,4:9,5:8,6:9,7:8,8:9,9:6},
+  m1: {0:1,1:2,2:5,3:4,4:9,5:2,6:9,7:8,8:5,9:4},
+  m3: {0:3,1:9,2:7,3:8,4:7,5:6,6:9,7:8,8:9,9:7},  // approximate
+  m5: {0:5,1:4,2:3,3:9,4:8,5:6,6:7,7:8,8:9,9:5},
+  m7: {0:7,1:6,2:5,3:4,4:9,5:8,6:7,7:8,8:9,9:7},
+  m8: {0:8,1:9,2:7,3:6,4:5,5:4,6:3,7:2,8:1,9:0},
+  m9: {0:9,1:8,2:3,3:6,4:9,5:6,6:9,7:8,8:9,9:8},
+};
+
+// Mod table dari dokumentasi scanangka.blog (index = digit asal, value = digit hasil)
+const MOD_TABLE_FULL = {
+  ml: [1,2,3,4,5,6,7,8,9,0],
+  ix: [5,6,7,8,9,0,1,2,3,4],
+  mb: [1,5,5,8,7,4,3,6,9,2],
+  ty: [0,7,9,8,5,8,9,7,9,4],
+  m0: [6,5,1,8,9,6,1,8,9,5],
+  m1: [1,2,9,2,9,8,9,1,5,4],
+  m3: [3,2,7,8,7,8,9,8,9,7],
+  m5: [5,4,3,2,7,6,9,8,9,5],
+  m7: [7,6,5,4,9,8,7,2,9,7],
+  m8: [8,7,1,9,7,9,9,8,1,8],
+  m9: [9,8,3,6,5,6,9,8,9,8],
+};
+// Total: '' (tanpa) + 11 mod = 12 variasi per posisi·lag
+// 4 posisi × 10 lag × 12 mod = 480 rumus total per scan
+
+let resultData = null;
+let currentRumus = null;
+let currentHistory = [];
+let activePosisi = new Set(['A','C','K','E']);
+
+// ═══════════════════════════════════════════════════════
+// LOAD DATA
+// ═══════════════════════════════════════════════════════
+async function loadData() {
+  try {
+    const r = await fetch(DATA_URL);
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const txt = await r.text();
+    // Coba parse langsung sebagai JSON (result.json)
+    try {
+      resultData = JSON.parse(txt);
+      return;
+    } catch(e) {}
+    // Fallback: wb_data.js format
+    const m = txt.match(/var\s+WB_DATA\s*=\s*(\{[\s\S]*\})/);
+    if (m) { resultData = JSON.parse(m[1]); return; }
+  } catch(e) {}
+  resultData = null;
+}
+
+function loadFromFile(file) {
+  const fr = new FileReader();
+  fr.onload = e => {
+    try {
+      let txt = e.target.result;
+      // coba parse langsung (result.json)
+      resultData = JSON.parse(txt);
+    } catch(e2) {
+      // coba wb_data.js format
+      const m = txt.match(/var\s+WB_DATA\s*=\s*(\{[\s\S]*\})/);
+      if (m) resultData = JSON.parse(m[1]);
+    }
+    if (resultData) {
+      buildPasaranList();
+      alert('✅ Data berhasil dimuat! ' + Object.keys(resultData).filter(k=>k!=='_meta').length + ' pasaran.');
+    }
+  };
+  fr.readAsText(file);
+}
+
+// ═══════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════
+function getDigits(r4) {
+  const s = String(r4).padStart(4,'0');
+  return { A: +s[0], C: +s[1], K: +s[2], E: +s[3] };
+}
+
+function applyMod(val, mod) {
+  const t = MOD_TABLE_FULL[mod];
+  if (!t) return val;
+  return t[val] ?? val;
+}
+
+function applyModChain(val, mods) {
+  // mods: array of mod keys
+  let v = val;
+  for (const m of mods) v = applyMod(v, m);
+  return v;
+}
+
+// Hitung semua rumus untuk satu result
+// Return: { A1..A10, C1..C10, K1..K10, E1..E10,
+//           A1ml, A1ix, ..., (semua modifier combo) }
+function calcAllRumus(history, putaran, jenis) {
+  // Filter by hari kalau bukan harian
+  let rows = history.slice();
+  if (jenis !== 'harian') {
+    const hIdx = ['minggu','senin','selasa','rabu','kamis','jumat','sabtu'].indexOf(jenis);
+    rows = rows.filter(h => {
+      const d = new Date(h.date);
+      return d.getDay() === hIdx;
+    });
+  }
+  rows = rows.slice(0, putaran + 1); // +1 untuk referensi
+  return rows;
+}
+
+// Rumus: digit posisi ke-N dari history
+// A1 = AS result sebelumnya (lag=1), A2=lag 2, dst
+function getRumusValue(rows, pos, lag) {
+  // rows[0] = terbaru, rows[lag] = referensi di putaran ke-lag
+  if (lag >= rows.length) return null;
+  const ref = rows[lag];
+  const d = getDigits(ref.result);
+  return d[pos];
+}
+
+// ═══════════════════════════════════════════════════════
+// SCAN ENGINE
+// ═══════════════════════════════════════════════════════
+function doScan() {
+  if (!resultData) {
+    alert('Load result.json dulu! Klik tombol 📂 di atas.');
+    return;
+  }
+  const pasKey = document.getElementById('selPasaran').value;
+  const jenis = document.getElementById('selJenis').value;
+  const putaran = parseInt(document.getElementById('inpPutaran').value) || 30;
+
+  const pas = resultData[pasKey];
+  if (!pas) return;
+
+  let rows = [...(pas.history || [])];
+  // Sort newest first
+  rows.sort((a,b) => new Date(b.date) - new Date(a.date));
+
+  // Filter hari
+  if (jenis !== 'harian') {
+    const hIdx = ['minggu','senin','selasa','rabu','kamis','jumat','sabtu'].indexOf(jenis);
+    rows = rows.filter(h => new Date(h.date).getDay() === hIdx);
+  }
+
+  currentHistory = rows.slice(0, putaran + 10); // buffer
+
+  // Build semua rumus
+  buildRumusList(currentHistory, jenis, putaran);
+}
+
+function buildRumusList(rows, jenis, putaran) {
+  const MODS = ['','ml','ix','mb','ty','m0','m1','m3','m5','m7','m8','m9'];
+  const POSIS = ['A','C','K','E'];
+  const LAGS = [1,2,3,4,5,6,7,8,9,10];
+
+  // Untuk setiap rumus: hitung hit rate di N putaran
+  const allRumus = [];
+
+  for (const pos of POSIS) {
+    if (!activePosisi.has(pos)) continue;
+    for (const lag of LAGS) {
+      for (const mod of MODS) {
+        // Untuk setiap baris i, prediksi = digit pos dari rows[i+lag], apply mod
+        // Hit = prediksi === digit pos rows[i]
+        let hits = 0, total = 0;
+        const trekRows = [];
+
+        for (let i = 0; i < Math.min(putaran, rows.length - lag); i++) {
+          const curr = rows[i];
+          const ref  = rows[i + lag];
+          const dRef = getDigits(ref.result);
+          const dCurr = getDigits(curr.result);
+
+          let pred = dRef[pos];
+          if (mod) pred = applyMod(pred, mod);
+
+          const actual = dCurr[pos];
+          const isHit = pred === actual;
+          if (isHit) hits++;
+          total++;
+
+          trekRows.push({ curr, ref, pred, actual, isHit, lag, mod, pos });
+        }
+
+        // Tambahkan baris terbaru (belum ada result = "?" – prediksi untuk hari ini)
+        if (rows.length > 0) {
+          const refIdx = lag - 1; // index referensi untuk prediksi hari ini
+          if (refIdx < rows.length) {
+            const ref = rows[refIdx];
+            const dRef = getDigits(ref.result);
+            let pred = dRef[pos];
+            if (mod) pred = applyMod(pred, mod);
+            trekRows.unshift({ curr: null, ref, pred, actual: null, isHit: null, lag, mod, pos, isLatest: true });
+          }
+        }
+
+        if (total === 0) continue;
+        const pct = (hits / total * 100).toFixed(0);
+
+        const label = pos + lag + (mod ? mod.toUpperCase() : '');
+        allRumus.push({ label, pos, lag, mod, hits, total, pct: +pct, trekRows });
+      }
+    }
+  }
+
+  const minHit = parseInt(document.getElementById('inpMinHit').value) || 0;
+  const sortBy = document.getElementById('selSort').value;
+
+  // Sort
+  if (sortBy === 'pct') allRumus.sort((a,b) => b.pct - a.pct || b.hits - a.hits);
+  else if (sortBy === 'hits') allRumus.sort((a,b) => b.hits - a.hits || b.pct - a.pct);
+  else if (sortBy === 'lag') allRumus.sort((a,b) => a.lag - b.lag || b.pct - a.pct);
+
+  // Filter min hit%
+  const filtered = minHit > 0 ? allRumus.filter(r => r.pct >= minHit) : allRumus;
+
+  renderSidebar(filtered);
+
+  // Auto-tampilkan rumus pertama
+  if (filtered.length > 0) {
+    selectRumus(filtered[0]);
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════
+function renderSidebar(allRumus) {
+  document.getElementById('sidebarCount').textContent = allRumus.length;
+  const el = document.getElementById('rumusList');
+
+  // Group by pos
+  const byPos = {};
+  for (const r of allRumus) {
+    if (!byPos[r.pos]) byPos[r.pos] = [];
+    byPos[r.pos].push(r);
+  }
+
+  let html = '';
+  for (const pos of ['A','C','K','E']) {
+    if (!byPos[pos]) continue;
+    const posLabel = {A:'AS',C:'COP',K:'KEPALA',E:'EKOR'}[pos];
+    const posClass = {A:'digit-as',C:'digit-cop',K:'digit-kep',E:'digit-ekor'}[pos];
+    html += `<div class="section-label" style="margin-top:4px"><span class="${posClass}">${posLabel}</span></div>`;
+    for (const r of byPos[pos]) {
+      const hitClass = r.pct >= 50 ? 'ri-hit' : '';
+      html += `<div class="rumus-item" onclick="selectRumusById('${r.label}')" data-id="${r.label}">
+        <span class="ri-name">${r.label}</span>
+        <span class="ri-pct ${hitClass}">${r.pct}%</span>
+        <span class="ri-val ${hitClass}">${r.hits}/${r.total}</span>
+      </div>`;
+    }
+  }
+
+  el.innerHTML = html;
+  window._allRumus = allRumus;
+}
+
+function selectRumusById(label) {
+  const r = (window._allRumus || []).find(x => x.label === label);
+  if (r) selectRumus(r);
+}
+
+function selectRumus(r) {
+  currentRumus = r;
+  // Highlight sidebar
+  document.querySelectorAll('.rumus-item').forEach(el => {
+    el.classList.toggle('active', el.dataset.id === r.label);
+  });
+  renderTrek(r);
+}
+
+function renderTrek(r) {
+  const panel = document.getElementById('trekPanel');
+  const posLabel = {A:'AS',C:'COP',K:'KEPALA',E:'EKOR'}[r.pos];
+  const modStr = r.mod ? r.mod.toUpperCase() : '–';
+  const pctColor = r.pct >= 30 ? 'var(--green)' : r.pct >= 20 ? 'var(--gold)' : 'var(--red)';
+
+  // Prediksi hari ini
+  const latestRow = r.trekRows.find(x => x.isLatest);
+  const predToday = latestRow ? latestRow.pred : '?';
+
+  let html = `<div class="trek-header">
+    <div style="flex:1">
+      <div class="trek-title">Trek: <span style="color:#fff">${r.label}</span>
+        &nbsp;<span style="font-size:11px;color:var(--muted)">${posLabel} · Lag ${r.lag} · Mod ${modStr}</span>
+      </div>
+      <div class="trek-stats">
+        Hit: <span class="hit-yes">${r.hits}</span>/${r.total} &nbsp;·&nbsp;
+        Akurasi: <span style="color:${pctColor}">${r.pct}%</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+      <button class="btn-copy-trek" onclick="copyTrek()">📋 COPY TREK</button>
+      <button class="btn-bank-rumus" onclick="openBankRumusWithCurrent()" style="font-size:10px;padding:4px 10px;">🏦 SIMPAN</button>
+    </div>
+    <div style="text-align:right;margin-left:8px;">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:2px">PREDIKSI HARI INI</div>
+      <div style="font-size:28px;font-weight:900;color:var(--gold);font-family:monospace;line-height:1">${predToday}</div>
+      <button onclick="copyPred('${r.label}','${predToday}')" style="margin-top:4px;font-size:9px;background:var(--bg3);color:var(--muted);border:1px solid var(--border);padding:2px 8px;border-radius:3px;cursor:pointer">COPY</button>
+    </div>
+  </div>
+  <table class="trek-table">
+    <thead>
+      <tr>
+        <th class="cell-no">#</th>
+        <th class="cell-tgl">Tanggal</th>
+        <th class="cell-hari">Hari</th>
+        <th>Result</th>
+        <th>A·C·K·E</th>
+        <th>Ref (Lag ${r.lag})</th>
+        <th>Pred</th>
+        <th>Aktual</th>
+        <th class="cell-status">✓</th>
+      </tr>
+    </thead>
+    <tbody>`;
+
+  let rowNo = 0;
+  for (const row of r.trekRows) {
+    if (row.isLatest) {
+      // Baris prediksi hari ini
+      const refD = getDigits(row.ref.result);
+      html += `<tr style="background:rgba(240,180,41,.07)">
+        <td class="cell-no" style="color:var(--gold)">→</td>
+        <td class="cell-tgl" style="color:var(--gold)">HARI INI</td>
+        <td class="cell-hari">–</td>
+        <td class="cell-result" style="color:var(--gold)">????</td>
+        <td class="cell-acke">
+          <span class="digit-as">${refD.A}</span>·<span class="digit-cop">${refD.C}</span>·<span class="digit-kep">${refD.K}</span>·<span class="digit-ekor">${refD.E}</span>
+          <small style="color:var(--muted)">(ref ${row.ref.date.slice(5)})</small>
+        </td>
+        <td class="cell-pred" style="color:var(--gold);font-size:16px">${row.pred}</td>
+        <td>–</td>
+        <td class="cell-status"><span class="hit-dot-wait"></span></td>
+      </tr>`;
+      continue;
+    }
+
+    rowNo++;
+    const d = new Date(row.curr.date);
+    const hari = HARI_SHORT[d.getDay()];
+    const tgl = row.curr.date.slice(5);
+    const currD = getDigits(row.curr.result);
+    const refD  = getDigits(row.ref.result);
+
+    const hitDot = row.isHit
+      ? `<span class="hit-dot-yes"></span>`
+      : `<span class="hit-dot-no"></span>`;
+
+    const actualStyle = row.isHit ? 'color:var(--green);font-weight:700' : 'color:var(--red)';
+
+    html += `<tr>
+      <td class="cell-no">${rowNo}</td>
+      <td class="cell-tgl">${tgl}</td>
+      <td class="cell-hari" style="color:var(--muted)">${hari}</td>
+      <td class="cell-result">${row.curr.result}</td>
+      <td class="cell-acke">
+        <span class="digit-as" style="opacity:${row.pos==='A'?1:.4}">${currD.A}</span>·<span class="digit-cop" style="opacity:${row.pos==='C'?1:.4}">${currD.C}</span>·<span class="digit-kep" style="opacity:${row.pos==='K'?1:.4}">${currD.K}</span>·<span class="digit-ekor" style="opacity:${row.pos==='E'?1:.4}">${currD.E}</span>
+      </td>
+      <td style="font-size:11px;color:var(--muted)">${row.ref.date.slice(5)}: <b style="color:var(--text)">${refD[row.pos]}</b>${row.mod?'→<b style=color:var(--blue)>'+row.pred+'</b>':''}</td>
+      <td class="cell-pred">${row.pred}</td>
+      <td style="${actualStyle}">${row.actual}</td>
+      <td class="cell-status">${hitDot}</td>
+    </tr>`;
+  }
+
+  html += `</tbody></table>`;
+  panel.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════
+// COPY PREDIKSI
+// ═══════════════════════════════════════════════════════
+function copyPred(label, pred) {
+  const pasNm = document.getElementById('selPasaran').options[document.getElementById('selPasaran').selectedIndex]?.text || '';
+  const txt = `[WB Scanner] ${pasNm} | Rumus: ${label} | Prediksi: ${pred}`;
+  navigator.clipboard.writeText(txt).catch(() => {});
+  alert('✅ Copied: ' + txt);
+}
+
+// ═══════════════════════════════════════════════════════
+// COPY TREK (format mirip angkanet - bisa paste ke grup)
+// ═══════════════════════════════════════════════════════
+function copyTrek() {
+  if (!currentRumus) return;
+  const r = currentRumus;
+  const pasNm = document.getElementById('selPasaran').options[document.getElementById('selPasaran').selectedIndex]?.text || '';
+  const posLabel = {A:'AS',C:'COP',K:'KEPALA',E:'EKOR'}[r.pos];
+  const modStr = r.mod ? r.mod.toUpperCase() : '-';
+
+  const lines = [];
+  lines.push(`━━━━━━━━━━━━━━━━━━━━━━━`);
+  lines.push(`📊 TREK ${r.label} | ${pasNm}`);
+  lines.push(`📌 ${posLabel} · Lag ${r.lag} · Mod ${modStr}`);
+  lines.push(`✅ Hit: ${r.hits}/${r.total} (${r.pct}%)`);
+  lines.push(`━━━━━━━━━━━━━━━━━━━━━━━`);
+
+  for (const row of r.trekRows) {
+    if (row.isLatest) {
+      lines.push(`🔮 HARI INI → PRED: [${row.pred}]`);
+      continue;
+    }
+    const d = new Date(row.curr.date);
+    const hari = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'][d.getDay()];
+    const tgl = row.curr.date.slice(5);
+    const hit = row.isHit ? '✅' : '❌';
+    lines.push(`${hit} ${tgl}(${hari}) R:${row.curr.result} P:${row.pred}→${row.actual}`);
+  }
+  lines.push(`━━━━━━━━━━━━━━━━━━━━━━━`);
+
+  const txt = lines.join('\n');
+  navigator.clipboard.writeText(txt).then(() => {
+    // Flash feedback
+    const btn = document.querySelector('.btn-copy-trek');
+    if (btn) { const orig = btn.textContent; btn.textContent = '✅ COPIED!'; setTimeout(()=>btn.textContent=orig, 1500); }
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = txt;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    alert('✅ Trek disalin!');
+  });
+}
+
+// ═══════════════════════════════════════════════════════
+// BANK RUMUS
+// ═══════════════════════════════════════════════════════
+const BANK_KEY = 'wbBankRumus_v1';
+
+function bankRumusLoad() {
+  try { return JSON.parse(localStorage.getItem(BANK_KEY) || '[]'); } catch(e) { return []; }
+}
+function bankRumusSaveAll(list) {
+  localStorage.setItem(BANK_KEY, JSON.stringify(list));
+}
+
+function openBankRumus() {
+  // Clear save form
+  document.getElementById('bkNama').value = '';
+  document.getElementById('bkKodePreview').style.display = 'none';
+  document.getElementById('bkKodePreview').textContent = '';
+  renderBankRumusList();
+  document.getElementById('modalBankRumus').classList.add('open');
+}
+
+function openBankRumusWithCurrent() {
+  if (!currentRumus) { openBankRumus(); return; }
+  const r = currentRumus;
+  const pasNm = document.getElementById('selPasaran').options[document.getElementById('selPasaran').selectedIndex]?.text || '';
+  const posLabel = {A:'AS',C:'COP',K:'KEPALA',E:'EKOR'}[r.pos];
+  // Pre-fill name
+  document.getElementById('bkNama').value = `${pasNm} ${r.label} ${r.pct}%`;
+  // Show kode preview
+  const kodeEl = document.getElementById('bkKodePreview');
+  kodeEl.style.display = 'block';
+  kodeEl.textContent = `Rumus: ${r.label} | ${posLabel} Lag${r.lag} Mod ${r.mod||'-'} | Hit ${r.hits}/${r.total}`;
+  renderBankRumusList();
+  document.getElementById('modalBankRumus').classList.add('open');
+}
+
+function closeBankRumus() {
+  document.getElementById('modalBankRumus').classList.remove('open');
+}
+
+function bankRumusSave() {
+  const nama = document.getElementById('bkNama').value.trim();
+  if (!nama) { document.getElementById('bkNama').focus(); return; }
+
+  const list = bankRumusLoad();
+  const entry = {
+    id: Date.now(),
+    nama,
+    tgl: new Date().toLocaleDateString('id-ID'),
+    rumus: null,
+    trekText: null
+  };
+
+  if (currentRumus) {
+    const r = currentRumus;
+    const pasNm = document.getElementById('selPasaran').options[document.getElementById('selPasaran').selectedIndex]?.text || '';
+    entry.pasaran = pasNm;
+    entry.rumus = r.label;
+    entry.pos = r.pos;
+    entry.lag = r.lag;
+    entry.mod = r.mod || '';
+    entry.hits = r.hits;
+    entry.total = r.total;
+    entry.pct = r.pct;
+    entry.predToday = r.trekRows.find(x=>x.isLatest)?.pred ?? '?';
+
+    // Build trek text for kopipasta
+    const lines = [];
+    lines.push(`📊 TREK ${r.label} | ${pasNm}`);
+    lines.push(`✅ Hit: ${r.hits}/${r.total} (${r.pct}%)`);
+    for (const row of r.trekRows) {
+      if (row.isLatest) { lines.push(`🔮 HARI INI → PRED: [${row.pred}]`); continue; }
+      const d = new Date(row.curr.date);
+      const hari = ['Min','Sen','Sel','Rab','Kam','Jum','Sab'][d.getDay()];
+      const tgl = row.curr.date.slice(5);
+      const hit = row.isHit ? '✅' : '❌';
+      lines.push(`${hit} ${tgl}(${hari}) R:${row.curr.result} P:${row.pred}→${row.actual}`);
+    }
+    entry.trekText = lines.join('\n');
+  }
+
+  list.unshift(entry);
+  bankRumusSaveAll(list);
+  document.getElementById('bkNama').value = '';
+  document.getElementById('bkKodePreview').style.display = 'none';
+  renderBankRumusList();
+}
+
+function bankRumusDelete(id) {
+  let list = bankRumusLoad();
+  list = list.filter(x => x.id !== id);
+  bankRumusSaveAll(list);
+  renderBankRumusList();
+}
+
+function bankRumusCopyTrek(id) {
+  const list = bankRumusLoad();
+  const entry = list.find(x => x.id === id);
+  if (!entry || !entry.trekText) return;
+  const txt = `━━━━━━━━━━━━━━━━━━━━━━━\n${entry.nama}\n${entry.trekText}\n━━━━━━━━━━━━━━━━━━━━━━━`;
+  navigator.clipboard.writeText(txt).then(() => {
+    const btn = document.querySelector(`[data-copy="${id}"]`);
+    if (btn) { btn.textContent = '✅'; setTimeout(()=>btn.textContent='📋 COPY',1200); }
+  }).catch(() => alert(txt));
+}
+
+function bankRumusClearAll() {
+  if (!confirm('Hapus semua rumus tersimpan?')) return;
+  bankRumusSaveAll([]);
+  renderBankRumusList();
+}
+
+function renderBankRumusList() {
+  const list = bankRumusLoad();
+  const el = document.getElementById('bkList');
+  document.getElementById('bkCount').textContent = list.length + ' rumus tersimpan';
+  if (!list.length) {
+    el.innerHTML = '<div class="bk-empty">🏦 Belum ada rumus disimpan.<br>Scan rumus → klik 🏦 SIMPAN di trek.</div>';
+    return;
+  }
+  el.innerHTML = list.map(e => {
+    const predBadge = e.predToday != null ? `<span style="font-size:16px;font-weight:900;color:#f0b429;font-family:monospace;margin-left:4px;">${e.predToday}</span>` : '';
+    const hitBadge = e.pct != null ? `<span style="font-size:10px;padding:1px 6px;border-radius:3px;background:${e.pct>=50?'rgba(45,206,137,.2)':'rgba(245,54,92,.15)'};color:${e.pct>=50?'#2dce89':'#f5365c'};">${e.pct}% (${e.hits}/${e.total})</span>` : '';
+    return `<div class="bk-item">
+      <div class="bk-item-info">
+        <div class="bk-item-name">${e.nama} ${predBadge}</div>
+        <div class="bk-item-code">${e.rumus ? `Rumus: ${e.rumus} · ${e.pasaran||''}` : ''} ${hitBadge}</div>
+        <div class="bk-item-meta">Disimpan: ${e.tgl}</div>
+      </div>
+      <div class="bk-item-btns">
+        ${e.trekText ? `<button class="btn-bk-copy" data-copy="${e.id}" onclick="bankRumusCopyTrek(${e.id})">📋 COPY</button>` : ''}
+        <button class="btn-bk-del" onclick="bankRumusDelete(${e.id})">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Close modal on overlay click
+document.getElementById('modalBankRumus').addEventListener('click', function(e) {
+  if (e.target === this) closeBankRumus();
+});
+
+// ═══════════════════════════════════════════════════════
+// POSISI FILTER
+// ═══════════════════════════════════════════════════════
+document.getElementById('posFilter').addEventListener('click', e => {
+  const btn = e.target.closest('.pos-btn');
+  if (!btn) return;
+  const pos = btn.dataset.pos;
+  if (activePosisi.has(pos)) {
+    activePosisi.delete(pos);
+    btn.classList.remove('active');
+  } else {
+    activePosisi.add(pos);
+    btn.classList.add('active');
+  }
+});
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+function buildPasaranList() {
+  if (!resultData) return;
+  const sel = document.getElementById('selPasaran');
+  sel.innerHTML = '';
+  const keys = Object.keys(resultData).filter(k => k !== '_meta' && resultData[k].history);
+  for (const k of keys) {
+    const opt = document.createElement('option');
+    opt.value = k;
+    opt.textContent = resultData[k].name || k;
+    sel.appendChild(opt);
+  }
+}
+
+// File drop / input
+document.addEventListener('dragover', e => e.preventDefault());
+document.addEventListener('drop', e => {
+  e.preventDefault();
+  const file = e.dataTransfer.files[0];
+  if (file) loadFromFile(file);
+});
+
+// Load awal - coba dari GitHub
+(async () => {
+  await loadData();
+  buildPasaranList();
+  if (!resultData) {
+    // Tampilkan prompt upload
+    document.getElementById('trekPanel').innerHTML = `
+      <div class="placeholder" style="height:70%;gap:16px">
+        <div class="ph-icon">📂</div>
+        <div class="ph-text" style="font-size:14px;color:var(--text)">Drag & drop <b>result.json</b> ke sini</div>
+        <div class="ph-text">atau</div>
+        <label style="cursor:pointer;background:var(--gold);color:#000;padding:8px 20px;border-radius:6px;font-weight:700">
+          Pilih File
+          <input type="file" accept=".json,.js" style="display:none" onchange="loadFromFile(this.files[0])">
+        </label>
+        <div class="ph-text" style="font-size:11px">Mendukung result.json dan wb_data.js</div>
+      </div>`;
+  }
+})();
+</script>
+</body>
+</html>
