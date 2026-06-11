@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>⚡ Scanner Otomatis — WONGBAGUS</title>
+<style>
+:root{
+  --bg:#0b1220;--panel:#121a2e;--panel2:#0f1830;--line:#22304f;
+  --txt:#e7ecf7;--sub:#8ea0c4;--gold:#f5b942;--green:#3ddc97;
+  --red:#ff6b6b;--blue:#4db8ff;--mono:'JetBrains Mono','Courier New',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:
+    radial-gradient(circle at 15% 0%,rgba(245,185,66,.08),transparent 40%),
+    radial-gradient(circle at 85% 100%,rgba(61,220,151,.06),transparent 40%),
+    var(--bg);
+  color:var(--txt);font-family:'Inter',system-ui,sans-serif;
+  min-height:100vh;padding-bottom:40px;
+}
+.wrap{max-width:560px;margin:0 auto;padding:0 12px}
+header{
+  padding:16px 14px 12px;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;
+  background:rgba(11,18,32,.95);backdrop-filter:blur(8px);
+}
+header h1{font-size:17px;font-weight:800;color:var(--gold);letter-spacing:1px;display:flex;align-items:center;gap:8px}
+header .sub{font-size:11px;color:var(--sub);margin-top:3px;font-family:var(--mono)}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin-top:14px}
+.tab{flex:1;padding:10px 4px;text-align:center;font-size:12px;font-weight:700;
+  color:var(--sub);background:none;border:none;cursor:pointer;
+  border-bottom:2px solid transparent;letter-spacing:.3px}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.panel{display:none;padding:12px 0}.panel.active{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
+.card h3{font-size:12px;color:var(--gold);margin-bottom:10px;letter-spacing:.5px;
+  display:flex;align-items:center;gap:6px;text-transform:uppercase;font-weight:800}
+label{display:block;font-size:11px;color:var(--sub);margin-bottom:4px;font-weight:600}
+select,input,textarea{
+  width:100%;background:var(--panel2);border:1px solid var(--line);
+  color:var(--txt);border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;
+}
+select:focus,input:focus,textarea:focus{outline:none;border-color:var(--gold)}
+.row{display:flex;gap:8px;margin-bottom:10px}.row>div{flex:1}
+textarea{font-family:var(--mono);resize:vertical;min-height:90px;font-size:12px;line-height:1.6}
+button.btn{
+  background:var(--gold);color:#1a1000;border:none;border-radius:9px;
+  padding:11px 14px;font-weight:800;font-size:13px;cursor:pointer;width:100%;letter-spacing:.4px;
+}
+button.btn.alt{background:transparent;border:1px solid var(--line);color:var(--txt)}
+button.btn.green{background:var(--green);color:#06231a}
+button.btn.sm{width:auto;padding:7px 12px;font-size:11px;border-radius:7px}
+.btn-row{display:flex;gap:8px}.btn-row>button{flex:1}
+
+/* Result box */
+.result-big{text-align:center;padding:18px 8px;background:var(--panel2);
+  border-radius:10px;border:1px solid var(--line);margin:10px 0}
+.result-big .digits{font-family:var(--mono);font-size:36px;font-weight:800;
+  letter-spacing:8px;color:var(--green)}
+.result-big .label{font-size:10px;color:var(--sub);letter-spacing:2px;margin-top:6px;text-transform:uppercase}
+
+/* Trek table */
+.track{font-family:var(--mono);font-size:12px;border-collapse:collapse;width:100%}
+.track tr{border-bottom:1px solid rgba(34,48,79,.6)}
+.track td{padding:5px 6px;vertical-align:middle}
+.track td.res{color:var(--sub);font-size:11px}
+.track td.pred{color:var(--gold);font-weight:700;font-size:13px}
+.track td.pred-ai{font-size:11px}
+.track .hit{color:var(--green);font-weight:700}
+.track .miss{color:var(--red)}
+.track .next-row td{background:rgba(245,185,66,.05)}
+.track .next-row td.pred{color:var(--green);font-size:15px}
+.hit-dot{display:inline-block;width:8px;height:8px;border-radius:50%}
+.hit-dot.yes{background:var(--green)}
+.hit-dot.no{background:rgba(255,107,107,.4)}
+.hit-dot.wait{background:var(--gold)}
+
+/* Streak info */
+.streak{display:flex;align-items:center;justify-content:space-between;
+  background:var(--panel2);border:1px solid var(--line);border-radius:8px;
+  padding:8px 12px;margin:8px 0;font-size:12px}
+.streak b{color:var(--green);font-size:16px}
+.streak b.bad{color:var(--red)}
+
+/* Scan items */
+.scan-item{background:var(--panel2);border:1px solid var(--line);border-radius:8px;
+  padding:10px 12px;margin-bottom:8px}
+.scan-item .code{font-family:var(--mono);color:var(--gold);font-size:12.5px;font-weight:700;word-break:break-all}
+.scan-item .meta{font-size:11px;color:var(--sub);margin-top:4px;display:flex;justify-content:space-between}
+.scan-item .meta .ok{color:var(--green);font-weight:700}
+.scan-item .pred-badge{
+  display:inline-block;background:rgba(61,220,151,.12);color:var(--green);
+  border:1px solid rgba(61,220,151,.3);border-radius:6px;
+  padding:3px 10px;font-family:var(--mono);font-size:14px;font-weight:800;margin:6px 0 4px
+}
+
+/* Bank trek */
+.trek-item{background:var(--panel2);border:1px solid var(--line);border-radius:8px;
+  padding:10px 12px;margin-bottom:8px;display:flex;align-items:flex-start;gap:8px}
+.trek-item .tc{flex:1}
+.trek-item .code{font-family:var(--mono);color:var(--gold);font-size:12px;font-weight:700;word-break:break-all}
+.trek-item .meta{font-size:11px;color:var(--sub);margin-top:3px}
+.trek-item .pred{color:var(--green);font-size:13px;font-weight:800;font-family:var(--mono)}
+
+/* Misc */
+.note{font-size:11px;color:var(--sub);line-height:1.5;margin-top:6px}
+.badge{display:inline-block;background:rgba(245,185,66,.12);color:var(--gold);
+  border:1px solid rgba(245,185,66,.3);border-radius:6px;padding:2px 8px;
+  font-size:10.5px;font-weight:700;font-family:var(--mono)}
+.copybox{font-family:var(--mono);font-size:11px;background:var(--panel2);
+  border:1px dashed var(--line);border-radius:8px;padding:10px;
+  white-space:pre-wrap;word-break:break-all;color:var(--green);margin-top:8px}
+.hidden{display:none !important}
+#scanProgress{font-size:11px;color:var(--sub);text-align:center;padding:8px;font-family:var(--mono)}
+.tag-ai{color:#4db8ff;font-size:10px;font-weight:700;background:rgba(77,184,255,.1);
+  border:1px solid rgba(77,184,255,.3);padding:1px 5px;border-radius:4px}
+.tag-bbfs{color:#c49ef5;font-size:10px;font-weight:700;background:rgba(196,158,245,.1);
+  border:1px solid rgba(196,158,245,.3);padding:1px 5px;border-radius:4px}
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--line);border-radius:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>⚡ WONGBAGUS SCANNER OTOMATIS</h1>
+  <div class="sub" id="headerSub">Memuat data...</div>
+</header>
+
+<!-- SOURCE DATA (shared) -->
+<div class="card" style="margin-top:12px">
+  <h3>📡 Sumber Data</h3>
+  <div class="row">
+    <div>
+      <label>Pasaran</label>
+      <select id="market"></select>
+    </div>
+    <div>
+      <label>Mode Input</label>
+      <select id="inputMode">
+        <option value="market">Otomatis (data pasaran)</option>
+        <option value="manual">Manual (tempel angka)</option>
+      </select>
+    </div>
+  </div>
+  <div id="manualBox" class="hidden">
+    <label>Result 4D — TERLAMA di atas, TERBARU di bawah</label>
+    <textarea id="manualData" placeholder="4915&#10;5767&#10;6284&#10;3754&#10;...&#10;0933&#10;1521"></textarea>
+    <div class="note">Min. 8 baris angka 4D. Urutan: terlama paling atas, terbaru paling bawah.</div>
+  </div>
+  <div id="dataInfo" class="note"></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-tab="t-scan">Scan Otomatis</button>
+  <button class="tab" data-tab="t-manual">Formula Manual</button>
+  <button class="tab" data-tab="t-trek">Bank Trek</button>
+</div>
+
+<!-- ====== SCAN OTOMATIS ====== -->
+<div class="panel active" id="t-scan">
+  <div class="card">
+    <h3>⚙️ Pengaturan Scan</h3>
+    <div class="row">
+      <div>
+        <label>Tipe Prediksi</label>
+        <select id="scanJenis">
+          <option value="ai_ke">AI 2D — Kepala/Ekor</option>
+          <option value="ai_ac">AI 2D — As/Cop (depan)</option>
+          <option value="ai_ck">AI 2D — Cop/Kepala (tengah)</option>
+          <option value="bbfs_ke">BBFS — Kepala/Ekor</option>
+          <option value="bbfs_ac">BBFS — As/Cop</option>
+          <option value="bbfs_ck">BBFS — Cop/Kepala</option>
+          <option value="bbfs_4d">BBFS — 4D Lengkap</option>
+        </select>
+      </div>
+      <div>
+        <label>Digit BBFS</label>
+        <select id="scanDigit">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6" selected>6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Min. Putaran Berturut</label>
+        <select id="scanMinPutaran">
+          <option value="3">3 Putaran</option>
+          <option value="4">4 Putaran</option>
+          <option value="5" selected>5 Putaran</option>
+          <option value="6">6 Putaran</option>
+          <option value="7">7 Putaran</option>
+          <option value="8">8 Putaran</option>
+          <option value="10">10 Putaran</option>
+          <option value="12">12 Putaran</option>
+          <option value="15">15 Putaran</option>
+        </select>
+      </div>
+      <div>
+        <label>Kompleksitas</label>
+        <select id="scanComplexity">
+          <option value="1">1 Elemen (cepat)</option>
+          <option value="2" selected>2 Elemen</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Target Trek</label>
+        <select id="scanTarget">
+          <option value="1">1 Trek</option>
+          <option value="3">3 Trek</option>
+          <option value="5">5 Trek</option>
+          <option value="10" selected>10 Trek</option>
+          <option value="20">20 Trek</option>
+          <option value="999">Semua (full scan)</option>
+        </select>
+      </div>
+      <div>
+        <label>&nbsp;</label>
+        <button class="btn" id="btnScan">🔍 Cari Formula</button>
+      </div>
+    </div>
+    <div id="scanProgress"></div>
+  </div>
+  <div id="scanResults"></div>
+</div>
+
+<!-- ====== FORMULA MANUAL ====== -->
+<div class="panel" id="t-manual">
+  <div class="card">
+    <h3>🛠️ Susun Formula Manual</h3>
+    <div class="row">
+      <div>
+        <label>Elemen 1</label>
+        <select id="m_e1"></select>
+      </div>
+      <div>
+        <label>Modifier E1</label>
+        <select id="m_mod1"></select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Operator</label>
+        <select id="m_op1">
+          <option value="">(tidak pakai)</option>
+          <option value="+">+ (jumlah)</option>
+          <option value="-">− (selisih)</option>
+          <option value=".">× (kali)</option>
+        </select>
+      </div>
+      <div>
+        <label>Elemen 2 (opsional)</label>
+        <select id="m_e2"></select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Modifier E2</label>
+        <select id="m_mod2"></select>
+      </div>
+      <div>
+        <label>Modifier Akhir</label>
+        <select id="m_mod"></select>
+      </div>
+    </div>
+    <div class="row">
+      <div>
+        <label>Tipe Output</label>
+        <select id="m_jenis">
+          <option value="ai_ke">AI 2D — Kepala/Ekor</option>
+          <option value="ai_ac">AI 2D — As/Cop</option>
+          <option value="ai_ck">AI 2D — Cop/Kepala</option>
+          <option value="bbfs_ke">BBFS — Kepala/Ekor</option>
+          <option value="bbfs_ac">BBFS — As/Cop</option>
+          <option value="bbfs_ck">BBFS — Cop/Kepala</option>
+          <option value="bbfs_4d">BBFS — 4D Lengkap</option>
+        </select>
+      </div>
+      <div>
+        <label>Digit (BBFS)</label>
+        <select id="m_digit">
+          <option value="2">2</option><option value="3">3</option><option value="4">4</option>
+          <option value="5">5</option><option value="6" selected>6</option>
+          <option value="7">7</option><option value="8">8</option><option value="9">9</option>
+        </select>
+      </div>
+    </div>
+    <div class="note" style="margin-bottom:10px">
+      Atau masukkan kode formula langsung:<br>
+      <code style="color:var(--gold)">J3D2ML+JD3M3</code> → Elemen1=J3D2, Mod1=ML, Op=+, Elemen2=JD3, Mod2=M3
+    </div>
+    <label>Kode Formula (opsional override)</label>
+    <input type="text" id="m_kode" placeholder="cth: J3D2ML+JD3M3 atau A1ml atau E2+K3m5">
+    <div style="height:10px"></div>
+    <button class="btn" id="btnHitung">🧮 Hitung Scen</button>
+  </div>
+  <div id="manualResult"></div>
+</div>
+
+<!-- ====== BANK TREK ====== -->
+<div class="panel" id="t-trek">
+  <div class="card">
+    <h3>💾 Bank Trek</h3>
+    <div class="note">Formula yang disimpan. Tersimpan di localStorage browser.</div>
+    <div id="trekList" style="margin-top:10px"></div>
+    <div class="btn-row" style="margin-top:10px">
+      <button class="btn alt sm" id="btnExportTrek">📋 Salin Semua</button>
+      <button class="btn alt sm" id="btnClearTrek" style="border-color:var(--red);color:var(--red)">🗑️ Hapus Semua</button>
+    </div>
+    <div id="trekCopyBox"></div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+// ═══════════════════════════════════════════════════════
+// ENGINE — logika 100% dari kunci-rumus-app/engine.js
+// Sudah diverifikasi cocok dengan output angkanet
+// ═══════════════════════════════════════════════════════
+
+const MOD_TABLE_PARTIAL = {
+  ix:{0:5,1:6,2:7,3:8,4:9,5:0,6:1,7:2,8:3,9:4},
+  ty:{0:7,1:4,2:9,3:6,4:1,5:8,6:3,7:0,8:5,9:2},
+  ml:{0:1,1:0,2:5,3:8,4:7,5:2,6:9,7:4,8:3,9:6},
+  mb:{0:8,1:7,2:6,3:9,4:5,5:4,6:2,7:1,8:0,9:3},
+  m0:{0:6,1:5,2:8,3:7,4:9,5:1,6:0,7:3,8:2,9:4},
+  m1:{0:1,1:0,2:9,3:8,4:7,5:6,6:5,7:4,8:3,9:2},
+  m2:{0:2,1:8,2:0,3:9,4:7,5:6,6:5,7:4,8:1,9:3},
+  m3:{0:3,1:2,2:1,3:0,4:9,5:8,6:7,7:6,8:5,9:4},
+  m4:{0:6,1:5,2:3,3:2,4:7,5:1,6:0,7:4,8:9,9:8},
+  m5:{0:5,1:4,2:3,3:2,4:1,5:0,6:9,7:8,8:7,9:6},
+  m6:{0:6,1:8,2:4,3:5,4:2,5:3,6:0,7:9,8:1,9:7},
+  m7:{0:7,1:6,2:5,3:4,4:3,5:2,6:1,7:0,8:9,9:8},
+  m8:{0:8,1:7,2:6,3:5,4:9,5:3,6:2,7:1,8:0,9:4},
+  m9:{0:9,1:8,2:7,3:6,4:5,5:4,6:3,7:2,8:1,9:0},
+  m10:{0:4,1:2,2:1,3:8,4:0,5:6,6:5,7:9,8:3,9:7},
+  m11:{0:1,1:0,2:5,3:4,4:3,5:2,6:8,7:9,8:6,9:7},
+  m12:{0:2,1:7,2:0,3:8,4:6,5:9,6:4,7:1,8:3,9:5},
+  m13:{0:3,1:9,2:7,3:0,4:6,5:8,6:4,7:2,8:5,9:1},
+  m14:{0:6,1:5,2:4,3:7,4:2,5:1,6:0,7:3,8:9,9:8},
+  m15:{0:5,1:6,2:4,3:9,4:2,5:0,6:1,7:8,8:7,9:3},
+  m16:{0:3,1:8,2:7,3:0,4:9,5:6,6:5,7:2,8:1,9:4},
+  m17:{0:9,1:4,2:8,3:6,4:1,5:7,6:3,7:5,8:2,9:0},
+  m18:{0:8,1:9,2:7,3:4,4:3,5:6,6:5,7:2,8:0,9:1},
+  m19:{0:7,1:8,2:3,3:2,4:9,5:6,6:5,7:0,8:1,9:4},
+};
+const MOD_TABLE = {};
+for(const[k,p] of Object.entries(MOD_TABLE_PARTIAL)){
+  MOD_TABLE[k]={};
+  for(let d=0;d<=9;d++) MOD_TABLE[k][d]=p.hasOwnProperty(d)?p[d]:d;
+}
+const MOD_LIST=['ix','ty','ml','mb','m0','m1','m2','m3','m4','m5','m6','m7','m8','m9',
+                'm10','m11','m12','m13','m14','m15','m16','m17','m18','m19'];
+
+function digitalRoot(n){
+  n=Math.abs(n); if(n===0)return 0;
+  return n%9===0?9:n%9;
+}
+function applyOp(a,b,op){
+  if(op==='+')return digitalRoot(a+b);
+  if(op==='-')return digitalRoot(Math.abs(a-b));
+  if(op==='.')return digitalRoot(a*b);
+  return a;
+}
+function applyMod(v,mod){
+  if(!mod||mod==='-'||mod==='mistik')return v;
+  const vKey=digitalRoot(Math.abs(v))%10;
+  return(MOD_TABLE[mod]||{})[vKey]??v;
+}
+
+// hist[0] = P1 = hasil terbaru dalam sourceHist (newest first)
+function parseElemCode(code,hist){
+  if(!code||code==='-')return null;
+  let baseCode=code, elemMod='-';
+  const modMatch=code.match(/^(.+?)(ix|ty|ml|mb|m1[0-9]|m[0-9])$/i);
+  if(modMatch){baseCode=modMatch[1];elemMod=modMatch[2].toLowerCase();}
+  let rawVal=null;
+  const specialMatch=baseCode.match(/^(J3D|J4D|Js|Jt|Jd|JS|JT|JD)(\d+)$/i);
+  if(specialMatch){
+    const pre=specialMatch[1].toUpperCase();
+    const n=parseInt(specialMatch[2]);
+    const r=hist[n-1];
+    if(!r||!/^\d{4}$/.test(r))return null;
+    const A=+r[0],C=+r[1],K=+r[2],E=+r[3];
+    switch(pre){
+      case'JS':rawVal=digitalRoot(Math.abs(K-E));break;
+      case'JT':rawVal=digitalRoot(C+K);break;
+      case'JD':rawVal=digitalRoot(A+C);break;
+      case'J3D':rawVal=digitalRoot(C+K+E);break;
+      case'J4D':rawVal=digitalRoot(A+C+K+E);break;
+      default:return null;
+    }
+  } else {
+    const m=baseCode.match(/^([A-Za-z]+)(\d+)$/);
+    if(!m)return null;
+    const pre=m[1].toUpperCase();
+    const n=parseInt(m[2]);
+    const r=hist[n-1];
+    if(!r||!/^\d{4}$/.test(r))return null;
+    const A=+r[0],C=+r[1],K=+r[2],E=+r[3];
+    switch(pre){
+      case'A':rawVal=A;break;
+      case'C':rawVal=C;break;
+      case'K':rawVal=K;break;
+      case'E':rawVal=E;break;
+      case'J':rawVal=digitalRoot(K+E);break;
+      case'JS':rawVal=digitalRoot(Math.abs(K-E));break;
+      case'JT':rawVal=digitalRoot(C+K);break;
+      case'JD':rawVal=digitalRoot(A+C);break;
+      default:return null;
+    }
+  }
+  if(rawVal===null)return null;
+  return elemMod!=='-'?applyMod(rawVal,elemMod):rawVal;
+}
+
+const ELEM_TYPE_LABELS={
+  A:'As (digit-1)',C:'Cop (digit-2)',K:'Kepala (digit-3)',E:'Ekor (digit-4)',
+  J:'Jumlah (K+E)',Js:'Jumlah Silang |K−E|',Jt:'Jumlah Tengah (C+K)',
+  Jd:'Jumlah Depan (A+C)',J3D:'Jumlah 3D (C+K+E)',J4D:'Jumlah 4D (A+C+K+E)'
+};
+function buildElementList(){
+  const list=[];
+  for(const type of Object.keys(ELEM_TYPE_LABELS))
+    for(let p=1;p<=10;p++)
+      list.push({code:`${type}${p}`,type,putaran:p});
+  return list;
+}
+const ELEMENT_LIST=buildElementList();
+
+function parseElemMeta(code){
+  let base=code;
+  const mm=code.match(/^(.+?)(ix|ty|ml|mb|m1[0-9]|m[0-9])$/i);
+  if(mm)base=mm[1];
+  const m=base.match(/^(J3D|J4D|Js|Jt|Jd|J|A|C|K|E)(\d+)$/i);
+  if(!m)return null;
+  return{type:m[1],putaran:parseInt(m[2],10)};
+}
+
+// Formula = {e1, mod1, op1, e2, mod2, mod}
+// e1mod = mod applied to e1 individually, mod = final mod after combine
+function calcFormula(formula,hist){
+  let raw1=parseElemCode(formula.e1+(formula.mod1||''),hist);
+  if(raw1===null){
+    raw1=parseElemCode(formula.e1,hist);
+    if(raw1===null)return null;
+    if(formula.mod1)raw1=applyMod(raw1,formula.mod1);
+  }
+  let res=raw1;
+  if(formula.op1&&formula.e2&&formula.e2!=='-'){
+    let raw2=parseElemCode(formula.e2+(formula.mod2||''),hist);
+    if(raw2===null){
+      raw2=parseElemCode(formula.e2,hist);
+      if(raw2===null)return res;
+      if(formula.mod2)raw2=applyMod(raw2,formula.mod2);
+    }
+    res=applyOp(res,raw2,formula.op1);
+  }
+  return(formula.mod&&formula.mod!=='-')?applyMod(res,formula.mod):res;
+}
+
+function maxPutaranNeeded(formula){
+  let mx=parseElemMeta(formula.e1)?.putaran||1;
+  if(formula.e2){const p2=parseElemMeta(formula.e2)?.putaran||1;mx=Math.max(mx,p2);}
+  return mx;
+}
+
+function getColsByDigit(n){
+  if(n===1)return[9];
+  if(n===2)return[4,5];
+  if(n===3)return[1,5,9];
+  if(n===4)return[0,1,4,5];
+  if(n===5)return[0,4,5,6,9];
+  if(n===6)return[0,1,4,5,6,9];
+  if(n===7)return[0,1,3,4,5,6,9];
+  if(n===8)return[0,1,2,4,5,6,7,9];
+  if(n===9)return[0,1,2,3,4,5,6,7,9];
+  return[0,4,5,6,9];
+}
+function makePred(start,nDigit,cols){
+  const t=Array.from({length:10},(_,i)=>(start+i)%10);
+  const c=cols||getColsByDigit(nDigit);
+  return c.slice(0,nDigit).map(i=>t[i]).join('');
+}
+function makeAI(start){
+  const t=Array.from({length:10},(_,i)=>(start+i)%10);
+  return''+t[8]+t[9];
+}
+
+function checkHit(result,predStr,jenis){
+  const s=String(result).padStart(4,'0');
+  const A=+s[0],C=+s[1],K=+s[2],E=+s[3];
+  const digits=predStr.split('').map(Number);
+  if(jenis.startsWith('ai_')){
+    const pos=jenis.slice(3);
+    if(pos==='ke')return digits.includes(K)||digits.includes(E);
+    if(pos==='ac')return digits.includes(A)||digits.includes(C);
+    if(pos==='ck')return digits.includes(C)||digits.includes(K);
+  }
+  if(jenis.startsWith('bbfs_')){
+    const pos=jenis.slice(5);
+    if(pos==='ke'){if(K===E)return digits.includes(K);return digits.includes(K)&&digits.includes(E);}
+    if(pos==='ac'){if(A===C)return digits.includes(A);return digits.includes(A)&&digits.includes(C);}
+    if(pos==='ck'){if(C===K)return digits.includes(C);return digits.includes(C)&&digits.includes(K);}
+    if(pos==='4d'){return[...new Set([A,C,K,E])].every(d=>digits.includes(d));}
+  }
+  return false;
+}
+
+// CORE: buildScen
+// hist = newest first (hist[0]=terbaru)
+// rows displayed: sourceResult = hist[i], prediction computed from hist.slice(i)
+// hit checked against target = hist[i-1] (1 newer)
+// nextPred: from hist.slice(0) = full hist
+function buildScen(formula,hist,jenis,nDigit,maxRows){
+  const need=maxPutaranNeeded(formula);
+  const cols=getColsByDigit(nDigit);
+  const rows=[];
+  const limit=Math.min(hist.length-need+1,(maxRows||(hist.length))+1);
+  for(let i=limit-1;i>=1;i--){
+    const sourceHist=hist.slice(i);
+    if(sourceHist.length<need)continue;
+    const v=calcFormula(formula,sourceHist);
+    if(v===null)continue;
+    const pred=jenis.startsWith('ai_')?makeAI(v):makePred(v,nDigit,cols);
+    const target=hist[i-1];
+    const hit=checkHit(target,pred,jenis);
+    rows.push({sourceResult:hist[i],pred,target,hit,v});
+  }
+  let nextPred=null,nextV=null;
+  if(hist.length>=need){
+    const v=calcFormula(formula,hist);
+    if(v!==null){
+      nextPred=jenis.startsWith('ai_')?makeAI(v):makePred(v,nDigit,cols);
+      nextV=v;
+    }
+  }
+  return{rows,nextPred,nextV};
+}
+
+function streakInfo(rows){
+  let streak=0;
+  for(let i=rows.length-1;i>=0;i--){if(rows[i].hit)streak++;else break;}
+  const totalPatah=rows.filter(r=>!r.hit).length;
+  return{streak,totalPatah};
+}
+
+function formulaToCode(formula,jenis,nDigit){
+  let s=formula.e1;
+  if(formula.mod1)s+=formula.mod1.toUpperCase();
+  if(formula.op1&&formula.e2)s+=formula.op1+formula.e2+(formula.mod2?formula.mod2.toUpperCase():'');
+  if(formula.mod&&formula.mod!=='-')s+='.'+formula.mod.toUpperCase();
+  const jLabel=({
+    'ai_ke':'AI_KE','ai_ac':'AI_AC','ai_ck':'AI_CK',
+    'bbfs_ke':`BBFS${nDigit}_KE`,'bbfs_ac':`BBFS${nDigit}_AC`,
+    'bbfs_ck':`BBFS${nDigit}_CK`,'bbfs_4d':`BBFS${nDigit}_4D`
+  })[jenis]||jenis;
+  return`${s}_${jLabel}`;
+}
+
+// Parse kode formula string ke formula object
+// Format: "E1[MOD1][OP[E2[MOD2]]][.MODAKHIR]"
+// Contoh: J3D2ML+JD3M3  A1ml  E2+K3m5.ix
+function parseFormulaCode(code){
+  if(!code)return null;
+  code=code.trim().toUpperCase();
+  // Build mod pattern
+  const MODS='(IX|TY|ML|MB|M1[0-9]|M[0-9])';
+  const ELEM='(J3D|J4D|JS|JT|JD|J|A|C|K|E)(\\d+)';
+  const re=new RegExp(
+    `^${ELEM}${MODS}?([+\\-.])${ELEM}${MODS}?(?:\\.${MODS})?$|`+
+    `^${ELEM}${MODS}?(?:\\.${MODS})?$`,'i');
+  
+  // Manual parse - more robust
+  const mods=['IX','TY','ML','MB','M10','M11','M12','M13','M14','M15','M16','M17','M18','M19',
+               'M0','M1','M2','M3','M4','M5','M6','M7','M8','M9'];
+  
+  function consumeElem(s){
+    // Try to match element code (type+num) + optional mod
+    const em=s.match(/^(J3D|J4D|JS|JT|JD|J|A|C|K|E)(\d+)(IX|TY|ML|MB|M1[0-9]|M[0-9])?/i);
+    if(!em)return null;
+    return{elem:em[1]+em[2],mod:(em[3]||'').toLowerCase(),rest:s.slice(em[0].length)};
+  }
+  
+  let rest=code;
+  // Check for .MODAKHIR at end
+  let finalMod='';
+  const finalModMatch=rest.match(/\.(IX|TY|ML|MB|M1[0-9]|M[0-9])$/i);
+  if(finalModMatch){finalMod=finalModMatch[1].toLowerCase();rest=rest.slice(0,-finalModMatch[0].length);}
+  
+  const p1=consumeElem(rest);
+  if(!p1)return null;
+  rest=p1.rest;
+  
+  let op='',e2='',mod2='';
+  if(rest.length>0&&['+','-','.'].includes(rest[0])){
+    op=rest[0]; rest=rest.slice(1);
+    // dot might be for mul (.) not final mod
+    const p2=consumeElem(rest);
+    if(p2){e2=p2.elem;mod2=p2.mod;rest=p2.rest;}
+  }
+  
+  return{e1:p1.elem,mod1:p1.mod,op1:op,e2,mod2,mod:finalMod};
+}
+
+function* candidateGenerator(complexity){
+  if(complexity===1){
+    for(const e1 of ELEMENT_LIST)
+      for(const mod of[null,...MOD_LIST])
+        yield{e1:e1.code,mod1:null,op1:null,e2:null,mod2:null,mod};
+  } else {
+    const pool=ELEMENT_LIST.filter(e=>e.putaran<=6);
+    for(const e1 of pool)
+      for(const mod1 of[null,...MOD_LIST.slice(0,14)])  // ix,ty,ml,mb,m0-m9
+        for(const op of['+','-','.'])
+          for(const e2 of pool)
+            for(const mod2 of[null,...MOD_LIST.slice(0,14)])
+              for(const mod of[null,...MOD_LIST])
+                yield{e1:e1.code,mod1:mod1||'',op1:op,e2:e2.code,mod2:mod2||'',mod};
+  }
+}
+
+let _scanState=null;
+
+function scanFormulas(opts,onProgress,onDone){
+  const{hist,jenis,nDigit,minPutaran,complexity,target}=opts;
+  const gen=candidateGenerator(complexity);
+  const results=[];
+  let checked=0;
+  const maxTarget=target||10;
+
+  function step(){
+    const t0=performance.now();
+    while(performance.now()-t0<25){
+      if(_scanState==='stop'){onDone(results,checked,false);return;}
+      const nx=gen.next();
+      if(nx.done){finish(true);return;}
+      const formula=nx.value;
+      checked++;
+      const need=maxPutaranNeeded(formula)+minPutaran;
+      if(hist.length<need)continue;
+      const{rows,nextPred}=buildScen(formula,hist,jenis,nDigit,minPutaran);
+      if(rows.length<minPutaran)continue;
+      const lastN=rows.slice(-minPutaran);
+      if(lastN.every(r=>r.hit)&&nextPred){
+        const{streak,totalPatah}=streakInfo(rows);
+        results.push({formula,code:formulaToCode(formula,jenis,nDigit),
+          rows,streak,totalPatah,nextPred});
+        if(results.length>=maxTarget){finish(false);return;}
+      }
+    }
+    onProgress(checked,results.length);
+    setTimeout(step,0);
+  }
+  function finish(exhausted){
+    const sorted=results.slice().sort((a,b)=>
+      b.streak-a.streak||a.totalPatah-b.totalPatah||(a.formula.e2?1:0)-(b.formula.e2?1:0));
+    onDone(sorted,checked,exhausted);
+  }
+  _scanState='run';
+  step();
+}
+
+// ═══════════════════════════════════════════════════════
+// DATA LOADER
+// ═══════════════════════════════════════════════════════
+const RESULT_JSON_URL='https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json';
+let LIVE_DATA=null;
+
+// Market list fallback
+const MARKET_LIST=[
+  {id:'hk',name:'Hongkong Pools'},{id:'hkl',name:'Hongkong Lotto'},
+  {id:'sgp',name:'Singapore'},{id:'sdy',name:'Sydney Pools'},
+  {id:'sdl',name:'Sydney Lotto'},{id:'kam',name:'Kamboja'},
+  {id:'bull',name:'Bullseye NZ'},{id:'chn',name:'China Pools'},
+  {id:'jpn',name:'Japan'},{id:'twn',name:'Taiwan'},
+  {id:'pcso',name:'PCSO'},{id:'mac1',name:'Macau 13'},
+  {id:'mac2',name:'Macau 16'},{id:'mac3',name:'Macau 19'},
+  {id:'mac4',name:'Macau 22'},{id:'mac5',name:'Macau 00'},
+  {id:'mac6',name:'Macau 23'},{id:'mrq3',name:'Morocco 03:00'},
+  {id:'mrq18',name:'Morocco 18:00'},{id:'mrq21',name:'Morocco 21:00'},
+  {id:'mrq23',name:'Morocco 23:59'},{id:'ger',name:'Germany Plus5'},
+  {id:'or4',name:'Oregon 04'},{id:'or7',name:'Oregon 07'},
+  {id:'or10',name:'Oregon 10'},{id:'or13',name:'Oregon 13'},
+  {id:'ncd',name:'NC Day'},{id:'nce',name:'NC Evening'},
+  {id:'geom',name:'Georgia Midday'},{id:'geoe',name:'Georgia Evening'},
+  {id:'geon',name:'Georgia Night'},{id:'txd',name:'Texas Day'},
+  {id:'txmr',name:'Texas Morning'},{id:'txe',name:'Texas Evening'},
+  {id:'txn',name:'Texas Night'},{id:'nyd',name:'New York Midday'},
+  {id:'nye',name:'New York Evening'},{id:'njm',name:'NJ Midday'},
+  {id:'nje',name:'NJ Evening'},{id:'flm',name:'Florida Midday'},
+  {id:'fle',name:'Florida Evening'},{id:'ilm',name:'Illinois Midday'},
+  {id:'ile',name:'Illinois Evening'},{id:'indm',name:'Indiana Midday'},
+  {id:'inde',name:'Indiana Evening'},{id:'kym',name:'Kentucky Midday'},
+  {id:'kye',name:'Kentucky Evening'},{id:'mdm',name:'Maryland Midday'},
+  {id:'mde',name:'Maryland Evening'},{id:'mim',name:'Michigan Midday'},
+  {id:'mie',name:'Michigan Evening'},{id:'mom',name:'Missouri Midday'},
+  {id:'moe',name:'Missouri Evening'},{id:'wdm',name:'WDC Midday'},
+  {id:'wde',name:'WDC Evening'},{id:'ctd',name:'Connecticut Day'},
+  {id:'ctn',name:'Connecticut Night'},{id:'vad',name:'Virginia Day'},
+  {id:'van',name:'Virginia Night'},{id:'tnm',name:'Tennessee Midday'},
+  {id:'tne',name:'Tennessee Evening'},{id:'tnmr',name:'Tennessee Morning'},
+  {id:'cal',name:'California'},{id:'wie',name:'Wisconsin Evening'},
+];
+
+async function loadLiveData(){
+  try{
+    const res=await fetch(RESULT_JSON_URL+'?t='+Date.now(),{signal:AbortSignal.timeout(8000)});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const txt=await res.text();
+    let json;
+    // Try wb_data.js format: var WB_DATA = {...}
+    const m=txt.match(/var\s+WB_DATA\s*=\s*(\{[\s\S]*\})\s*;?\s*$/);
+    if(m){json=JSON.parse(m[1]);}
+    else{json=JSON.parse(txt);}
+
+    const markets=[],hist={};
+
+    // Format result.json Jonson: object {marketId:{name,result,history:[{date,result}]}, _meta:{...}}
+    // history sudah newest-first (index 0 = terbaru), langsung pakai
+    for(const[k,v] of Object.entries(json)){
+      if(k==='_meta'||typeof v!=='object')continue;
+      markets.push({id:k,name:v.name||k});
+      const arr=(v.history||[]).map(h=>h.result).filter(r=>/^\d{4}$/.test(r));
+      hist[k]=arr;
+    }
+    LIVE_DATA={markets,hist,updated:json._meta?.updated||''};
+    return true;
+  }catch(e){
+    console.warn('Live data gagal:',e.message);
+    return false;
+  }
+}
+
+function getMarketList(){return LIVE_DATA?.markets||MARKET_LIST;}
+function getHist(id){return LIVE_DATA?.hist?.[id]||[];}
+
+// ═══════════════════════════════════════════════════════
+// UI
+// ═══════════════════════════════════════════════════════
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById(t.dataset.tab).classList.add('active');
+}));
+
+const marketSel=document.getElementById('market');
+const inputMode=document.getElementById('inputMode');
+const manualBox=document.getElementById('manualBox');
+const manualData=document.getElementById('manualData');
+const dataInfo=document.getElementById('dataInfo');
+
+function getCurrentHist(){
+  if(inputMode.value==='manual'){
+    const arr=manualData.value.split('\n').map(s=>s.trim()).filter(s=>/^\d{4}$/.test(s));
+    return arr.reverse(); // input: lama→baru, internal: baru→lama
+  }
+  return getHist(marketSel.value);
+}
+
+function updateDataInfo(){
+  const hist=getCurrentHist();
+  if(!hist||hist.length===0){
+    dataInfo.innerHTML=`<span style="color:var(--red)">⚠️ Tidak ada data. Pilih pasaran lain atau isi manual.</span>`;
+    return;
+  }
+  const upd=LIVE_DATA?.updated?`· update ${LIVE_DATA.updated}`:inputMode.value==='manual'?'· data manual':'';
+  dataInfo.innerHTML=`📊 <b>${hist.length}</b> hasil ${upd}<br>Terbaru: <span class="badge">${hist[0]}</span>`;
+}
+
+inputMode.addEventListener('change',()=>{
+  manualBox.classList.toggle('hidden',inputMode.value!=='manual');
+  updateDataInfo();
+});
+marketSel.addEventListener('change',updateDataInfo);
+manualData.addEventListener('input',updateDataInfo);
+
+// Fill element dropdowns
+function fillElemSel(sel,withEmpty){
+  if(withEmpty){const o=document.createElement('option');o.value='';o.textContent='(tidak pakai)';sel.appendChild(o);}
+  ELEMENT_LIST.forEach(e=>{
+    const o=document.createElement('option');
+    o.value=e.code;
+    o.textContent=`${e.code} — ${ELEM_TYPE_LABELS[e.type]||e.type}, P${e.putaran}`;
+    sel.appendChild(o);
+  });
+}
+function fillModSel(sel,withEmpty){
+  if(withEmpty){const o=document.createElement('option');o.value='';o.textContent='(tanpa)';sel.appendChild(o);}
+  MOD_LIST.forEach(m=>{
+    const o=document.createElement('option');o.value=m;o.textContent=m.toUpperCase();sel.appendChild(o);
+  });
+}
+fillElemSel(document.getElementById('m_e1'),false);
+fillElemSel(document.getElementById('m_e2'),true);
+fillModSel(document.getElementById('m_mod1'),true);
+fillModSel(document.getElementById('m_mod2'),true);
+fillModSel(document.getElementById('m_mod'),true);
+
+// ── RENDER TREK TABLE ──
+function jenisLabel(jenis){
+  return({ai_ke:'AI 2D KE',ai_ac:'AI 2D AC',ai_ck:'AI 2D CK',
+    bbfs_ke:'BBFS KE',bbfs_ac:'BBFS AC',bbfs_ck:'BBFS CK',bbfs_4d:'BBFS 4D'})[jenis]||jenis;
+}
+function jenisTag(jenis){
+  const cls=jenis.startsWith('ai_')?'tag-ai':'tag-bbfs';
+  return`<span class="${cls}">${jenisLabel(jenis)}</span>`;
+}
+
+function renderTrekTable(rows,nextPred,jenis,nDigit){
+  // rows: oldest first in display = rows reversed (rows in buildScen are oldest→newest)
+  let h=`<table class="track"><tr>
+    <td style="color:var(--sub);font-size:10px;padding:4px 6px" colspan="4">
+      ← ${rows.length} putaran · ${rows.filter(r=>r.hit).length} hit
+    </td></tr>`;
+  
+  // Display oldest→newest (rows is already in that order from buildScen)
+  for(const row of rows){
+    const tgt=String(row.target).padStart(4,'0');
+    const A=tgt[0],C=tgt[1],K=tgt[2],E=tgt[3];
+    
+    // Color the matching digits in target
+    let tgtHtml='';
+    const predDigits=row.pred.split('').map(Number);
+    for(let i=0;i<4;i++){
+      const d=+tgt[i];
+      const isPos=(jenis.endsWith('_ke')&&(i===2||i===3))||
+                  (jenis.endsWith('_ac')&&(i===0||i===1))||
+                  (jenis.endsWith('_ck')&&(i===1||i===2))||
+                  jenis.endsWith('_4d');
+      const isHitDigit=isPos&&predDigits.includes(d);
+      tgtHtml+=isHitDigit?`<b style="color:var(--green)">${d}</b>`:
+                `<span style="opacity:.5">${d}</span>`;
+    }
+    
+    h+=`<tr>
+      <td class="res" style="width:50px">${String(row.sourceResult).padStart(4,'0')}</td>
+      <td style="font-size:10px;color:var(--sub)">→</td>
+      <td class="pred ${jenis.startsWith('ai_')?'pred-ai':''}">${row.pred}</td>
+      <td style="width:70px">${tgtHtml}</td>
+      <td class="cell-status" style="text-align:right;padding-right:4px">
+        <span class="hit-dot ${row.hit?'yes':'no'}"></span>
+      </td>
+    </tr>`;
+  }
+  
+  // Next prediction row
+  if(nextPred){
+    h+=`<tr class="next-row">
+      <td class="res" style="width:50px;color:var(--gold)">??</td>
+      <td style="font-size:10px;color:var(--sub)">→</td>
+      <td class="pred" style="color:var(--green);font-size:14px;font-weight:800">${nextPred}</td>
+      <td></td>
+      <td style="text-align:right"><span class="hit-dot wait"></span></td>
+    </tr>`;
+  }
+  h+=`</table>`;
+  return h;
+}
+
+function renderScenCard(item,jenis,nDigit,idx){
+  const{streak,totalPatah}=streakInfo(item.rows);
+  const isGood=streak>=3;
+  return`<div class="scan-item">
+    <div class="code">${item.code}</div>
+    <div style="margin:6px 0">
+      <div class="pred-badge">${item.nextPred}</div>
+      <span style="font-size:10px;color:var(--sub);margin-left:8px">${jenisLabel(jenis)}</span>
+    </div>
+    <div class="meta">
+      <span>Streak: <b class="${isGood?'ok':''}">${streak}×</b></span>
+      <span>Patah: <b style="color:${totalPatah===0?'var(--green)':'var(--sub)'}">${totalPatah}×</b></span>
+      <span>Hit: <b class="ok">${item.rows.filter(r=>r.hit).length}/${item.rows.length}</b></span>
+    </div>
+    <div id="trek-detail-${idx}" class="hidden" style="margin-top:8px">
+      ${renderTrekTable(item.rows,item.nextPred,jenis,nDigit)}
+    </div>
+    <div class="btn-row" style="margin-top:8px">
+      <button class="btn alt sm" onclick="toggleTrek(${idx})">📋 Trek</button>
+      <button class="btn sm green" onclick="saveTrek('${encodeURIComponent(JSON.stringify({code:item.code,nextPred:item.nextPred,streak,totalPatah,jenis,nDigit}))}')">💾 Simpan</button>
+    </div>
+  </div>`;
+}
+
+function toggleTrek(idx){
+  const el=document.getElementById(`trek-detail-${idx}`);
+  el.classList.toggle('hidden');
+}
+
+// ── SCAN OTOMATIS ──
+document.getElementById('btnScan').addEventListener('click',()=>{
+  const hist=getCurrentHist();
+  if(hist.length<5){alert('Data terlalu sedikit (min. 10 hasil).');return;}
+  const jenis=document.getElementById('scanJenis').value;
+  const nDigit=parseInt(document.getElementById('scanDigit').value);
+  const minP=parseInt(document.getElementById('scanMinPutaran').value);
+  const complexity=parseInt(document.getElementById('scanComplexity').value);
+  const target=parseInt(document.getElementById('scanTarget').value);
+  
+  const prog=document.getElementById('scanProgress');
+  const res=document.getElementById('scanResults');
+  prog.textContent='⏳ Sedang scan...';
+  res.innerHTML='';
+  _scanState='run';
+  
+  const btn=document.getElementById('btnScan');
+  btn.textContent='⛔ Stop';
+  btn.onclick=()=>{_scanState='stop';btn.textContent='🔍 Cari Formula';btn.onclick=startScan;};
+  
+  function startScan(){
+    scanFormulas({hist,jenis,nDigit,minPutaran:minP,complexity,target},
+      (checked,found)=>{
+        prog.textContent=`🔄 Diperiksa: ${checked.toLocaleString()} formula · Ditemukan: ${found}`;
+      },
+      (sorted,checked,exhausted)=>{
+        btn.textContent='🔍 Cari Formula';
+        btn.onclick=()=>document.getElementById('btnScan').click();
+        prog.textContent=exhausted?
+          `✅ Scan selesai — ${checked.toLocaleString()} formula diperiksa · ${sorted.length} trek ditemukan`:
+          `🎯 Target tercapai — ${sorted.length} trek dari ${checked.toLocaleString()} formula`;
+        if(sorted.length===0){
+          res.innerHTML=`<div class="card" style="text-align:center;color:var(--sub);padding:20px">
+            😕 Tidak ada formula yang cocok.<br>Coba kurangi Min. Putaran atau ganti tipe prediksi.
+          </div>`;
+          return;
+        }
+        res.innerHTML=sorted.map((item,i)=>renderScenCard(item,jenis,nDigit,i)).join('');
+      }
+    );
+  }
+  startScan();
+});
+document.getElementById('btnScan').onclick=()=>document.getElementById('btnScan').click();
+// Fix: reassign properly
+(()=>{
+  const btn=document.getElementById('btnScan');
+  btn.onclick=null;
+  btn.addEventListener('click',function handler(){
+    const hist=getCurrentHist();
+    if(hist.length<5){alert('Data terlalu sedikit (min. 10 hasil).');return;}
+    const jenis=document.getElementById('scanJenis').value;
+    const nDigit=parseInt(document.getElementById('scanDigit').value);
+    const minP=parseInt(document.getElementById('scanMinPutaran').value);
+    const complexity=parseInt(document.getElementById('scanComplexity').value);
+    const target=parseInt(document.getElementById('scanTarget').value);
+    const prog=document.getElementById('scanProgress');
+    const res=document.getElementById('scanResults');
+    prog.textContent='⏳ Sedang scan...';res.innerHTML='';_scanState='run';
+    btn.textContent='⛔ Stop';
+    btn.removeEventListener('click',handler);
+    btn.addEventListener('click',stopHandler);
+    function stopHandler(){_scanState='stop';}
+    scanFormulas({hist,jenis,nDigit,minPutaran:minP,complexity,target},
+      (checked,found)=>{prog.textContent=`🔄 ${checked.toLocaleString()} diperiksa · ${found} ditemukan`;},
+      (sorted,checked,exhausted)=>{
+        btn.removeEventListener('click',stopHandler);
+        btn.textContent='🔍 Cari Formula';
+        btn.addEventListener('click',handler);
+        prog.textContent=exhausted?
+          `✅ Selesai — ${checked.toLocaleString()} diperiksa · ${sorted.length} trek`:
+          `🎯 Target ${sorted.length} trek dari ${checked.toLocaleString()} formula`;
+        if(!sorted.length){
+          res.innerHTML=`<div class="card" style="text-align:center;color:var(--sub);padding:20px">
+            😕 Tidak ada formula cocok.<br>Kurangi Min. Putaran atau ganti tipe prediksi.
+          </div>`;return;
+        }
+        res.innerHTML=sorted.map((item,i)=>renderScenCard(item,jenis,nDigit,i)).join('');
+      }
+    );
+  });
+})();
+
+// ── FORMULA MANUAL ──
+document.getElementById('btnHitung').addEventListener('click',()=>{
+  const hist=getCurrentHist();
+  if(!hist||hist.length<3){alert('Data kurang.');return;}
+  
+  let formula;
+  const kode=document.getElementById('m_kode').value.trim();
+  
+  if(kode){
+    // Parse dari kode string
+    formula=parseFormulaCode(kode);
+    if(!formula){alert('Format kode tidak dikenali. Cth: J3D2ML+JD3M3 atau A1ml');return;}
+  } else {
+    // Dari dropdown
+    formula={
+      e1:document.getElementById('m_e1').value,
+      mod1:document.getElementById('m_mod1').value,
+      op1:document.getElementById('m_op1').value,
+      e2:document.getElementById('m_e2').value,
+      mod2:document.getElementById('m_mod2').value,
+      mod:document.getElementById('m_mod').value,
+    };
+  }
+  
+  const jenis=document.getElementById('m_jenis').value;
+  const nDigit=parseInt(document.getElementById('m_digit').value);
+  const{rows,nextPred,nextV}=buildScen(formula,hist,jenis,nDigit,50);
+  const{streak,totalPatah}=streakInfo(rows);
+  const code=formulaToCode(formula,jenis,nDigit);
+  
+  const res=document.getElementById('manualResult');
+  if(!nextPred||rows.length===0){
+    res.innerHTML=`<div class="card" style="color:var(--red)">⚠️ Formula tidak menghasilkan output. Cek elemen dan putaran yang tersedia.</div>`;
+    return;
+  }
+  
+  res.innerHTML=`
+    <div class="card">
+      <div class="code" style="font-family:var(--mono);color:var(--gold);font-weight:800;font-size:13px;word-break:break-all">${code}</div>
+      <div class="result-big">
+        <div class="digits">${nextPred}</div>
+        <div class="label">${jenisLabel(jenis)} · Prediksi Berikutnya</div>
+      </div>
+      <div class="streak">
+        <span>Streak saat ini</span><b class="${streak>=3?'':'bad'}">${streak}×</b>
+      </div>
+      <div class="streak">
+        <span>Total patah</span><b class="${totalPatah===0?'':'bad'}">${totalPatah}×</b>
+      </div>
+      <div class="streak">
+        <span>Hit rate</span><b>${rows.filter(r=>r.hit).length}/${rows.length}</b>
+      </div>
+      <details style="margin-top:10px">
+        <summary style="cursor:pointer;font-size:12px;color:var(--sub);padding:6px 0">📋 Lihat Trek Lengkap</summary>
+        <div style="margin-top:8px;overflow-x:auto">${renderTrekTable(rows,nextPred,jenis,nDigit)}</div>
+      </details>
+      <div class="btn-row" style="margin-top:10px">
+        <button class="btn sm green" onclick="saveTrek('${encodeURIComponent(JSON.stringify({code,nextPred,streak,totalPatah,jenis,nDigit}))}')">💾 Simpan ke Bank</button>
+        <button class="btn alt sm" onclick="copyText('${code} → ${nextPred}')">📋 Copy</button>
+      </div>
+    </div>`;
+});
+
+// ── BANK TREK ──
+function getTrekBank(){try{return JSON.parse(localStorage.getItem('wb_trek_bank')||'[]');}catch{return[];}}
+function setTrekBank(b){localStorage.setItem('wb_trek_bank',JSON.stringify(b));}
+
+function saveTrek(encoded){
+  const item=JSON.parse(decodeURIComponent(encoded));
+  const bank=getTrekBank();
+  if(bank.find(b=>b.code===item.code)){
+    if(!confirm(`Formula "${item.code}" sudah ada di bank. Simpan lagi?`))return;
+  }
+  item.savedAt=new Date().toLocaleDateString('id-ID');
+  item.market=document.getElementById('market').options[document.getElementById('market').selectedIndex]?.text||'?';
+  bank.unshift(item);
+  setTrekBank(bank);
+  renderBank();
+  // Switch to bank tab
+  document.querySelectorAll('.tab').forEach(t=>{if(t.dataset.tab==='t-trek')t.click();});
+}
+
+function renderBank(){
+  const bank=getTrekBank();
+  const el=document.getElementById('trekList');
+  if(!bank.length){el.innerHTML=`<div class="note">Bank kosong. Simpan formula dari tab Scan atau Manual.</div>`;return;}
+  el.innerHTML=bank.map((item,i)=>`
+    <div class="trek-item">
+      <div class="tc">
+        <div class="code">${item.code}</div>
+        <div class="meta">${item.market||''} · ${item.savedAt||''} · ${jenisLabel(item.jenis)}</div>
+        <div class="meta">Streak: <b style="color:var(--green)">${item.streak}×</b> · Patah: ${item.totalPatah}×</div>
+        <div class="pred" style="margin-top:4px">${item.nextPred}</div>
+      </div>
+      <div>
+        <button class="btn alt sm" onclick="deleteTrek(${i})" style="color:var(--red);border-color:var(--red)">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function deleteTrek(i){
+  const b=getTrekBank();b.splice(i,1);setTrekBank(b);renderBank();
+}
+
+document.getElementById('btnExportTrek').addEventListener('click',()=>{
+  const bank=getTrekBank();
+  if(!bank.length){alert('Bank kosong.');return;}
+  const txt=bank.map(b=>`${b.code} → ${b.nextPred} (${b.market||''}, streak ${b.streak}×)`).join('\n');
+  document.getElementById('trekCopyBox').innerHTML=`<div class="copybox">${txt}</div>`;
+  navigator.clipboard.writeText(txt).catch(()=>{});
+});
+
+document.getElementById('btnClearTrek').addEventListener('click',()=>{
+  if(confirm('Hapus semua trek?')){setTrekBank([]);renderBank();}
+});
+
+function copyText(txt){
+  navigator.clipboard.writeText(txt).then(()=>alert('✅ Disalin: '+txt)).catch(()=>alert('Gagal copy: '+txt));
+}
+
+// Make saveTrek available globally
+window.saveTrek=saveTrek;
+window.toggleTrek=toggleTrek;
+window.deleteTrek=deleteTrek;
+window.copyText=copyText;
+
+// ── INIT ──
+async function init(){
+  document.getElementById('headerSub').textContent='Memuat data...';
+  const ok=await loadLiveData();
+  
+  const markets=getMarketList();
+  marketSel.innerHTML='';
+  markets.forEach(m=>{
+    const o=document.createElement('option');
+    o.value=m.id;o.textContent=m.name;
+    marketSel.appendChild(o);
+  });
+  if(markets.find(m=>m.id==='hk'))marketSel.value='hk';
+  
+  const n=LIVE_DATA?.markets?.length||markets.length;
+  document.getElementById('headerSub').textContent=
+    ok?`${n} pasaran · ${LIVE_DATA?.updated||''}`:`${n} pasaran (data lokal)`;
+  
+  updateDataInfo();
+  renderBank();
+  
+  // File drop
+  document.addEventListener('dragover',e=>e.preventDefault());
+  document.addEventListener('drop',e=>{
+    e.preventDefault();
+    const f=e.dataTransfer.files[0];
+    if(!f)return;
+    const r=new FileReader();
+    r.onload=ev=>{
+      try{
+        let json;
+        const txt=ev.target.result;
+        const m=txt.match(/var\s+WB_DATA\s*=\s*(\{[\s\S]*\})/);
+        if(m)json=JSON.parse(m[1]);
+        else json=JSON.parse(txt);
+        const markets=[],hist={};
+        for(const[k,v] of Object.entries(json)){
+          if(k==='_meta'||typeof v!=='object')continue;
+          markets.push({id:k,name:v.name||k});
+          hist[k]=(v.history||[]).map(h=>h.result).filter(r=>/^\d{4}$/.test(r));
+        }
+        LIVE_DATA={markets,hist,updated:'drag & drop'};
+        marketSel.innerHTML='';
+        markets.forEach(m=>{const o=document.createElement('option');o.value=m.id;o.textContent=m.name;marketSel.appendChild(o);});
+        if(markets.find(m=>m.id==='hk'))marketSel.value='hk';
+        updateDataInfo();
+        document.getElementById('headerSub').textContent=`${markets.length} pasaran · data upload`;
+      }catch(err){alert('Gagal baca file: '+err.message);}
+    };
+    r.readAsText(f);
+  });
+}
+
+init();
+</script>
+</body>
+</html>
