@@ -1,0 +1,2015 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>⭐ WONGBAGUS SCANNER ⭐</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0d1117;--card:#161b22;--card2:#0d1117;
+  --border:#30363d;--yellow:#f59e0b;--cyan:#22d3ee;
+  --green:#10b981;--red:#f87171;--blue:#60a5fa;
+  --muted:#6e7681;--text:#e6edf3;--sub:#94a3b8;
+}
+body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#0f172a,#1e293b,#0f172a);border-bottom:3px solid var(--yellow);
+  padding:10px 16px;text-align:center;position:sticky;top:0;z-index:200;
+  box-shadow:0 4px 20px rgba(245,158,11,0.2)}
+.hdr-title{font-size:15px;font-weight:900;color:var(--yellow);letter-spacing:2px;text-transform:uppercase}
+.hdr-sub{font-size:9px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:1px}
+
+/* DATA BAR */
+.data-bar{background:#0d2137;border-bottom:1px solid #1a4a6e;padding:6px 14px;
+  display:flex;align-items:center;justify-content:space-between;gap:8px}
+.data-bar-text{font-size:11px;color:var(--cyan);font-family:monospace;font-weight:700}
+.data-bar-btn{padding:4px 12px;border-radius:6px;border:none;background:var(--cyan);color:#000;font-weight:700;font-size:11px;cursor:pointer}
+
+/* TABS */
+.tab-nav{display:flex;background:var(--card);border-bottom:2px solid rgba(245,158,11,0.2)}
+.tab-btn{flex:1;padding:10px 6px;border:none;cursor:pointer;font-weight:700;font-size:12px;
+  background:transparent;color:var(--muted);border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px}
+.tab-btn.active{color:var(--yellow);border-bottom-color:var(--yellow);background:rgba(245,158,11,0.06)}
+
+/* CARDS */
+.pg{padding:0 0 60px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:14px;margin:10px 12px;box-shadow:0 1px 8px rgba(0,0,0,0.4)}
+.card-title{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.6px;text-transform:uppercase;
+  margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid #21262d}
+
+/* FORM */
+.field-g{margin-bottom:10px}
+.field-lbl{font-size:10px;font-weight:800;color:var(--sub);letter-spacing:.5px;text-transform:uppercase;display:block;margin-bottom:4px}
+.inp,.sel{width:100%;background:var(--card);color:var(--text);border:1.5px solid var(--border);
+  border-radius:8px;padding:9px 12px;font-size:13px;font-weight:600;outline:none;transition:border-color .15s;
+  appearance:none;-webkit-appearance:none}
+.sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b949e' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.inp:focus,.sel:focus{border-color:var(--yellow);box-shadow:0 0 0 3px rgba(245,158,11,0.12)}
+.inp[type=number]{text-align:center;font-weight:800;font-size:15px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+
+/* BUTTONS */
+.btn{padding:10px 14px;border-radius:8px;border:none;cursor:pointer;font-weight:800;font-size:12px;transition:all .15s}
+.btn-primary{background:linear-gradient(135deg,var(--yellow),#ff8c00);color:#000}
+.btn-danger{background:rgba(248,113,113,0.15);color:var(--red);border:1px solid rgba(248,113,113,0.3)}
+.btn-cyan{background:var(--cyan);color:#000}
+.btn-ghost{background:transparent;color:var(--sub);border:1.5px solid var(--border)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:not(:disabled):hover{filter:brightness(1.1);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+
+/* PROGRESS */
+.prog-wrap{height:4px;background:rgba(255,255,255,0.05);border-radius:4px;margin:8px 0;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--cyan),#0ea5e9,var(--cyan));
+  background-size:200% auto;animation:progShine 1.5s linear infinite;border-radius:4px;transition:width .3s}
+@keyframes progShine{0%{background-position:0% center}100%{background-position:200% center}}
+
+/* CONSOLE */
+.console{background:#080c14;border:1px solid rgba(34,211,238,0.15);border-radius:8px;
+  padding:8px 12px;font-family:monospace;font-size:11px;color:var(--cyan);margin:8px 12px;min-height:32px}
+
+/* RESULT TABLE */
+.res-wrap{border-radius:10px;overflow:hidden;border:1px solid rgba(245,158,11,0.08);
+  margin:0 12px 10px;box-shadow:0 2px 16px rgba(0,0,0,0.3)}
+.res-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.res-tbl th{background:rgba(245,158,11,0.06);color:var(--yellow);font-size:9px;
+  letter-spacing:.8px;padding:9px 7px;text-align:left}
+.res-tbl td{padding:8px 7px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.res-tbl tr:hover td{background:rgba(245,158,11,0.03)}
+.formula{color:var(--blue);font-family:monospace;font-size:11px;cursor:pointer;font-weight:700}
+.formula:hover{color:#93c5fd}
+.tag-jenis{font-size:9px;color:var(--muted);font-style:italic}
+.pred{font-family:monospace;font-weight:800;font-size:13px;color:var(--yellow);letter-spacing:2px}
+
+/* BATCH BUTTONS */
+.batch-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:8px 12px}
+.btn-batch{padding:7px 4px;border-radius:7px;border:1px solid rgba(34,211,238,0.2);
+  background:rgba(34,211,238,0.04);color:var(--cyan);font-weight:700;font-size:11px;cursor:pointer;transition:all .15s}
+
+/* BADGE */
+.badge{border-radius:4px;padding:2px 6px;font-size:10px;font-weight:800}
+.badge-hit{background:rgba(16,185,129,0.12);color:var(--green);border:1px solid rgba(16,185,129,0.3)}
+.badge-patah{background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.25)}
+
+/* TREK MODAL */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(4px);
+  z-index:500;display:none;align-items:center;justify-content:center;padding:16px}
+.modal-ov.open{display:flex}
+.modal-box{background:linear-gradient(135deg,rgba(22,27,34,0.97),rgba(13,17,23,0.99));
+  border:1px solid rgba(245,158,11,0.15);box-shadow:0 24px 64px rgba(0,0,0,0.7);
+  border-radius:16px;width:100%;max-width:420px;max-height:88vh;overflow:hidden;
+  display:flex;flex-direction:column;animation:mPop .22s cubic-bezier(.34,1.56,.64,1)}
+@keyframes mPop{from{opacity:0;transform:scale(.93) translateY(12px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-hdr{padding:14px 16px 10px;border-bottom:1px solid rgba(245,158,11,0.1)}
+.modal-title{color:var(--yellow);font-size:13px;font-weight:800;letter-spacing:.5px}
+.modal-scroll{overflow-y:auto;padding:10px 14px;flex:1}
+.modal-ftr{padding:10px 14px;border-top:1px solid rgba(255,255,255,0.05);display:flex;gap:8px;justify-content:flex-end}
+
+/* TREK LINE */
+.trek-line{display:flex;align-items:center;gap:10px;padding:5px 6px;border-radius:5px;transition:background .15s}
+.trek-line:hover{background:rgba(245,158,11,0.03)}
+.trek-period{font-family:monospace;font-size:12px;color:var(--sub);min-width:44px}
+.trek-pred{font-family:monospace;letter-spacing:3px;font-size:13px;font-weight:700;min-width:80px}
+.trek-status{min-width:40px}
+
+/* BANK TABLE */
+.bank-wrap{border:1px solid rgba(245,158,11,0.1);border-radius:10px;overflow:hidden;margin:0 12px 10px}
+.bank-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.bank-tbl th{background:rgba(245,158,11,0.06);color:var(--yellow);font-size:9px;letter-spacing:.8px;padding:9px 7px}
+.bank-tbl td{padding:8px 7px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.bank-tbl tr:hover td{background:rgba(245,158,11,0.03)}
+.bank-angka{font-family:monospace;font-weight:800;color:var(--yellow);font-size:14px;letter-spacing:1px}
+.bank-empty{padding:28px;text-align:center;color:var(--muted);font-size:13px;line-height:2}
+
+.bank-actions{display:flex;gap:6px;padding:8px 12px;flex-wrap:wrap}
+.bact{padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:11px;transition:all .15s}
+.bact:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.bact:disabled{opacity:.4;cursor:not-allowed}
+.bact-hapus{background:rgba(248,113,113,0.15);color:var(--red);border:1px solid rgba(248,113,113,0.3)}
+.bact-trek{background:rgba(96,165,250,0.15);color:var(--blue);border:1px solid rgba(96,165,250,0.3)}
+.bact-rekap{background:linear-gradient(135deg,var(--cyan),#0ea5e9);color:#000}
+
+/* IMPORT BAR */
+.imp-bar{display:flex;gap:8px;padding:10px 12px}
+.imp-bar .inp{flex:1}
+.imp-form{background:var(--card2);border:1px solid var(--border);border-radius:10px;
+  margin:0 12px 10px;padding:12px;display:none}
+.imp-form.open{display:block}
+.imp-preview{font-size:11px;color:var(--cyan);font-family:monospace;margin:8px 0;
+  padding:7px;background:#0a1520;border-radius:6px}
+
+/* TREK-COPY-BOX */
+.copy-box-ov{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;
+  display:flex;align-items:flex-end;justify-content:center;padding:16px}
+.copy-box{background:var(--card);border:1px solid rgba(245,158,11,0.2);border-radius:14px;
+  padding:16px;width:100%;max-width:420px}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(245,158,11,0.25);border-radius:10px}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,rgba(22,27,34,.97),rgba(13,17,23,.99));
+  border:1px solid rgba(245,158,11,0.3);border-radius:12px;
+  padding:11px 22px;color:var(--yellow);font-weight:800;font-size:13px;
+  z-index:9999;white-space:nowrap;
+  animation:toastIn .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(12px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+
+/* HARI BADGE */
+.hari-badge{font-size:9px;color:var(--cyan);border:1px solid rgba(34,211,238,0.2);
+  border-radius:4px;padding:1px 5px;font-weight:700}
+
+/* MANUAL / paste input */
+.mn-kode-inp{background:var(--card2);border:1.5px solid var(--border);border-radius:8px;
+  padding:9px 12px;font-size:12px;color:var(--cyan);font-family:monospace;width:100%;outline:none}
+.mn-kode-inp:focus{border-color:var(--cyan)}
+.mn-preview-box{background:#060b14;border:1px solid rgba(14,165,233,0.2);border-radius:8px;
+  padding:12px;font-family:monospace;font-size:11px;color:var(--cyan);letter-spacing:4px;
+  text-align:center;font-size:22px;font-weight:800;min-height:52px;margin:8px 0}
+
+/* LANJUTAN (formula row) */
+.frow{background:var(--card2);border:1.5px solid var(--border);border-radius:10px;padding:10px;margin-bottom:6px}
+.frow-g{display:grid;grid-template-columns:2fr 1fr 1.5fr 1fr;gap:5px;margin-bottom:5px}
+.frow-g2{display:grid;grid-template-columns:1fr 2fr;gap:5px}
+.fsel{background:var(--card);color:#1e40af;border:2px solid #1d4ed8;border-radius:8px;
+  padding:8px 3px;font-size:11px;font-weight:800;outline:none;appearance:none;-webkit-appearance:none;
+  text-align:center;cursor:pointer;min-height:40px;width:100%}
+
+/* hit pct */
+.hit-pct{font-size:10px;line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-title">⭐ WONGBAGUS SCANNER ⭐</div>
+  <div class="hdr-sub">64 PASARAN · AUTO DATA · BANK RUMUS</div>
+</div>
+
+<div class="data-bar">
+  <span class="data-bar-text" id="data-status">⏳ Memuat data...</span>
+  <button class="data-bar-btn" onclick="refreshData()">🔄 Refresh</button>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" id="tab-btn-scanner" onclick="switchTab('scanner')">📡 SCANNER</button>
+  <button class="tab-btn" id="tab-btn-manual" onclick="switchTab('manual')">✏️ MANUAL</button>
+  <button class="tab-btn" id="tab-btn-bank" onclick="switchTab('bank')">💾 BANK</button>
+</div>
+
+<!-- ════════ TAB SCANNER ════════ -->
+<div id="tab-scanner" class="pg">
+
+  <div class="card">
+    <div class="card-title">⚙️ Konfigurasi Scan</div>
+    <div class="field-g">
+      <label class="field-lbl">Pasaran</label>
+      <select id="sc-pasaran" class="sel" onchange="scUpdateHari()"></select>
+    </div>
+    <div class="g2">
+      <div class="field-g">
+        <label class="field-lbl">Jenis Hari</label>
+        <select id="sc-hari" class="sel">
+          <option value="">Harian</option>
+          <option value="0">Minggu</option>
+          <option value="1">Senin</option>
+          <option value="2">Selasa</option>
+          <option value="3">Rabu</option>
+          <option value="4">Kamis</option>
+          <option value="5">Jumat</option>
+          <option value="6">Sabtu</option>
+        </select>
+      </div>
+      <div class="field-g">
+        <label class="field-lbl">Putaran</label>
+        <input type="number" id="sc-limit" class="inp" value="14" min="5" max="50">
+      </div>
+    </div>
+    <div class="g2">
+      <div class="field-g">
+        <label class="field-lbl">Jenis Trek</label>
+        <select id="sc-jenis" class="sel" onchange="scJenisChange()">
+          <optgroup label="AI VARIANT">
+            <option value="ai_ke">AI 2D Belakang</option>
+            <option value="ai_ac">AI 2D Depan</option>
+            <option value="ai_ck">AI 2D Tengah</option>
+          </optgroup>
+          <optgroup label="BBFS VARIANT">
+            <option value="bbfs_ke">BBFS KE</option>
+            <option value="bbfs_ac">BBFS AC</option>
+            <option value="bbfs_ck">BBFS CK</option>
+            <option value="bbfs_4d">BBFS 4D</option>
+          </optgroup>
+          <optgroup label="POSISI VARIANT">
+            <option value="pos_e">Posisi Ekor</option>
+            <option value="pos_k">Posisi Kepala</option>
+            <option value="pos_a">Posisi As</option>
+            <option value="pos_c">Posisi Cop</option>
+          </optgroup>
+        </select>
+      </div>
+      <div class="field-g">
+        <label class="field-lbl">Digit Output</label>
+        <select id="sc-digit" class="sel">
+          <option value="2" selected>2 digit</option>
+          <option value="3">3 digit</option>
+          <option value="4">4 digit</option>
+          <option value="5">5 digit</option>
+          <option value="6">6 digit</option>
+        </select>
+      </div>
+    </div>
+    <div class="g3" style="margin-top:4px">
+      <div class="field-g">
+        <label class="field-lbl">Max Patah</label>
+        <input type="number" id="sc-maxpatah" class="inp" value="0" min="0" max="10">
+      </div>
+      <div class="field-g">
+        <label class="field-lbl">Min Hit%</label>
+        <input type="number" id="sc-minhit" class="inp" value="0" min="0" max="100">
+      </div>
+      <div class="field-g">
+        <label class="field-lbl">Target</label>
+        <input type="number" id="sc-target" class="inp" value="10" min="1" max="100">
+      </div>
+    </div>
+  </div>
+
+  <!-- LANJUTAN -->
+  <div class="card" id="sc-lanjutan-card">
+    <div class="card-title" style="cursor:pointer" onclick="toggleLanjutan()">
+      ⚡ PENGATURAN LANJUTAN <span id="lanjutan-arrow" style="float:right">▼</span>
+    </div>
+    <div id="lanjutan-body">
+      <div style="margin-bottom:8px">
+        <div style="font-size:10px;color:var(--sub);font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px">OPERATOR</div>
+        <div style="display:flex;gap:8px">
+          <label style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text);cursor:pointer">
+            <input type="radio" name="op-mode" value="all" checked style="accent-color:var(--yellow)"> Semua (+−×)
+          </label>
+          <label style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text);cursor:pointer">
+            <input type="radio" name="op-mode" value="+" style="accent-color:var(--yellow)"> + saja
+          </label>
+          <label style="display:flex;align-items:center;gap:4px;font-size:12px;color:var(--text);cursor:pointer">
+            <input type="radio" name="op-mode" value="-" style="accent-color:var(--yellow)"> − saja
+          </label>
+        </div>
+      </div>
+      <div style="margin-bottom:8px">
+        <div style="font-size:10px;color:var(--sub);font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px">KEY (putaran ke-)</div>
+        <div id="key-checks" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+      </div>
+      <div style="margin-bottom:8px">
+        <div style="font-size:10px;color:var(--sub);font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px">MOD SUBKEY 1</div>
+        <div id="sk1-checks" style="display:flex;flex-wrap:wrap;gap:5px"></div>
+      </div>
+      <div style="margin-bottom:8px">
+        <div style="font-size:10px;color:var(--sub);font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px">MOD SUBKEY 2</div>
+        <div id="sk2-checks" style="display:flex;flex-wrap:wrap;gap:5px"></div>
+      </div>
+      <div>
+        <div style="font-size:10px;color:var(--sub);font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px">MOD HASIL</div>
+        <div id="hasil-checks" style="display:flex;flex-wrap:wrap;gap:5px"></div>
+      </div>
+      <div style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap">
+        <button class="btn btn-ghost" style="font-size:11px;padding:7px 10px;background:rgba(74,222,128,0.1);color:#4ade80;border-color:rgba(74,222,128,0.25)" onclick="setShortcut('fast')">⚡ Fast</button>
+        <button class="btn btn-ghost" style="font-size:11px;padding:7px 10px;background:rgba(96,165,250,0.1);color:var(--blue);border-color:rgba(96,165,250,0.25)" onclick="setShortcut('normal')">🔍 Normal</button>
+        <button class="btn btn-ghost" style="font-size:11px;padding:7px 10px;background:rgba(167,139,250,0.1);color:#a78bfa;border-color:rgba(167,139,250,0.25)" onclick="setShortcut('deep')">🔬 Deep</button>
+        <button class="btn btn-ghost" style="font-size:11px;padding:7px 10px;background:rgba(248,113,113,0.1);color:var(--red);border-color:rgba(248,113,113,0.25)" onclick="setShortcut('reset')">↺ Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCAN BUTTONS -->
+  <div style="padding:0 12px 8px;display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn btn-primary" id="btn-scan-all" style="flex:2" onclick="startScanAll()">📡 SCAN SEMUA</button>
+    <button class="btn btn-danger" id="btn-stop-all" style="flex:1;display:none" onclick="stopAllScans()">⏹ STOP</button>
+    <button class="btn btn-ghost" id="btn-clear" style="flex:1" onclick="clearResults()">🗑 Hapus</button>
+  </div>
+
+  <div class="batch-grid">
+    <button class="btn-batch" id="btn-batch-1" onclick="startBatch(1)">B1</button>
+    <button class="btn-batch" id="btn-batch-2" onclick="startBatch(2)">B2</button>
+    <button class="btn-batch" id="btn-batch-3" onclick="startBatch(3)">B3</button>
+    <button class="btn-batch" id="btn-batch-4" onclick="startBatch(4)">B4</button>
+    <button class="btn-batch" id="btn-batch-5" onclick="startBatch(5)">B5</button>
+    <button class="btn-batch" id="btn-batch-6" onclick="startBatch(6)">B6</button>
+    <button class="btn-batch" id="btn-batch-7" onclick="startBatch(7)">B7</button>
+    <button class="btn-batch" id="btn-batch-8" onclick="startBatch(8)">B8</button>
+    <button class="btn-batch" id="btn-batch-9" onclick="startBatch(9)">B9</button>
+    <button class="btn-batch" id="btn-batch-10" onclick="startBatch(10)">B10</button>
+  </div>
+
+  <div class="prog-wrap" style="margin:0 12px 4px">
+    <div class="prog-fill" id="sc-progress" style="width:0%"></div>
+  </div>
+  <div class="console" id="sc-console">&gt;_ Siap scan...</div>
+
+  <!-- RESULT -->
+  <div id="result-card" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px 4px">
+      <span style="font-size:11px;font-weight:700;color:var(--sub)">HASIL SCAN</span>
+      <span id="result-count-badge" style="background:var(--card);border:1px solid var(--border);color:var(--cyan);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px">0</span>
+    </div>
+    <div class="res-wrap">
+      <table class="res-tbl">
+        <thead><tr>
+          <th>FORMULA</th>
+          <th>PREDIKSI</th>
+          <th>LIMIT</th>
+          <th>AKURASI</th>
+          <th>SAVE</th>
+        </tr></thead>
+        <tbody id="result-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div><!-- /tab-scanner -->
+
+<!-- ════════ TAB MANUAL ════════ -->
+<div id="tab-manual" class="pg" style="display:none">
+
+  <!-- PASTE KODE -->
+  <div style="padding:10px 12px 0">
+    <input type="text" class="mn-kode-inp" id="mn-kode-1" placeholder="🔍 Paste Kode Rumus..." oninput="mnAutoLoad(1)" onpaste="setTimeout(()=>mnAutoLoad(1),50)" style="border-radius:10px 10px 0 0;border-bottom:none;margin:0">
+    <div style="display:flex">
+      <button onclick="mnLoad(1)" style="flex:1;padding:10px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-weight:800;font-size:13px;border:none;border-radius:0 0 0 10px;cursor:pointer">⚡ LOAD</button>
+      <button onclick="mnResetBuilder()" style="flex:1;padding:10px;background:rgba(245,158,11,0.12);color:var(--yellow);font-weight:800;font-size:13px;border:1px solid rgba(245,158,11,0.25);border-top:none;cursor:pointer">↺ RESET</button>
+      <button onclick="mnBuilderSave()" style="flex:1;padding:10px;background:linear-gradient(135deg,#059669,#047857);color:#fff;font-weight:800;font-size:13px;border:none;border-radius:0 0 10px 0;cursor:pointer">↑ SAVE</button>
+    </div>
+  </div>
+
+  <!-- CONFIG ROW 1: Limit + Pasaran -->
+  <div style="padding:8px 12px 0;display:flex;gap:7px">
+    <input type="number" id="mn-limit" value="15" min="1" max="50" oninput="mnBuildPreview()" style="width:64px;text-align:center;font-size:15px;font-weight:800;padding:9px 4px;background:var(--card);color:var(--text);border:1.5px solid var(--border);border-radius:8px;outline:none">
+    <select id="mn-pasaran" class="sel" onchange="mnBuildPreview()" style="flex:1"></select>
+  </div>
+
+  <!-- CONFIG ROW 2: Hari + Jenis + Digit -->
+  <div style="padding:6px 12px 0;display:flex;gap:7px">
+    <select id="mn-hari" class="sel" onchange="mnBuildPreview()" style="flex:1">
+      <option value="">Harian</option>
+      <option value="0">Minggu</option>
+      <option value="1">Senin</option>
+      <option value="2">Selasa</option>
+      <option value="3">Rabu</option>
+      <option value="4">Kamis</option>
+      <option value="5">Jumat</option>
+      <option value="6">Sabtu</option>
+    </select>
+    <select id="mn-jenis" class="sel" onchange="mnJenisChange()" style="flex:2">
+      <optgroup label="AI VARIANT">
+        <option value="ai_ke">ai 2d belakang</option>
+        <option value="ai_ac">ai 2d depan</option>
+        <option value="ai_ck">ai 2d tengah</option>
+      </optgroup>
+      <optgroup label="BBFS VARIANT">
+        <option value="bbfs_ke">bbfs ke</option>
+        <option value="bbfs_ac">bbfs ac</option>
+        <option value="bbfs_ck">bbfs ck</option>
+        <option value="bbfs_4d">bbfs 4d</option>
+      </optgroup>
+      <optgroup label="POSISI VARIANT">
+        <option value="pos_e">posisi ekor</option>
+        <option value="pos_k">posisi kepala</option>
+        <option value="pos_a">posisi as</option>
+        <option value="pos_c">posisi cop</option>
+      </optgroup>
+    </select>
+    <select id="mn-digit-mode" class="sel" onchange="mnDigitModeChange()" style="flex:1">
+      <option value="auto">Otomatis</option>
+      <option value="2">2 Digit</option>
+      <option value="3">3 Digit</option>
+      <option value="4">4 Digit</option>
+      <option value="5">5 Digit</option>
+      <option value="6">6 Digit</option>
+    </select>
+    <input type="hidden" id="mn-digit" value="2">
+  </div>
+
+  <!-- ELEMEN SLOTS: [Elem][Mod][Op] layout Angkanet -->
+  <div style="padding:8px 12px 0">
+    <!-- Row A: slot 0 dan 1 -->
+    <div style="display:flex;gap:4px;margin-bottom:4px">
+      <select class="sel mn-elem" data-slot="0" onchange="mnBuildPreview()" style="flex:2;font-size:12px;padding:7px 3px;font-weight:700;color:var(--blue)"></select>
+      <select class="sel mn-mod"  data-slot="0" onchange="mnBuildPreview()" style="flex:1;font-size:11px;padding:7px 2px;color:var(--cyan)"></select>
+      <select class="sel mn-op"   data-slot="0" onchange="mnBuildPreview()" style="flex:1;font-size:14px;padding:7px 2px;font-weight:800;color:var(--yellow);text-align:center">
+        <option value="none">—</option><option value="+">+</option><option value="-">−</option><option value=".">×</option>
+      </select>
+      <select class="sel mn-elem" data-slot="1" onchange="mnBuildPreview()" style="flex:2;font-size:12px;padding:7px 3px;font-weight:700;color:var(--blue)"></select>
+      <select class="sel mn-mod"  data-slot="1" onchange="mnBuildPreview()" style="flex:1;font-size:11px;padding:7px 2px;color:var(--cyan)"></select>
+      <select class="sel mn-op"   data-slot="1" onchange="mnBuildPreview()" style="flex:1;font-size:14px;padding:7px 2px;font-weight:800;color:var(--yellow);text-align:center">
+        <option value="none">—</option><option value="+">+</option><option value="-">−</option><option value=".">×</option>
+      </select>
+    </div>
+    <!-- Row B: slot 2 dan 3 -->
+    <div style="display:flex;gap:4px;margin-bottom:4px">
+      <select class="sel mn-elem" data-slot="2" onchange="mnBuildPreview()" style="flex:2;font-size:12px;padding:7px 3px;font-weight:700;color:var(--blue)"></select>
+      <select class="sel mn-mod"  data-slot="2" onchange="mnBuildPreview()" style="flex:1;font-size:11px;padding:7px 2px;color:var(--cyan)"></select>
+      <select class="sel mn-op"   data-slot="2" onchange="mnBuildPreview()" style="flex:1;font-size:14px;padding:7px 2px;font-weight:800;color:var(--yellow);text-align:center">
+        <option value="none">—</option><option value="+">+</option><option value="-">−</option><option value=".">×</option>
+      </select>
+      <select class="sel mn-elem" data-slot="3" onchange="mnBuildPreview()" style="flex:2;font-size:12px;padding:7px 3px;font-weight:700;color:var(--blue)"></select>
+      <select class="sel mn-mod"  data-slot="3" onchange="mnBuildPreview()" style="flex:1;font-size:11px;padding:7px 2px;color:var(--cyan)"></select>
+      <select class="sel mn-op"   data-slot="3" onchange="mnBuildPreview()" style="flex:1;font-size:14px;padding:7px 2px;font-weight:800;color:var(--yellow);text-align:center">
+        <option value="none">—</option><option value="+">+</option><option value="-">−</option><option value=".">×</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- PATAH -->
+  <div style="padding:4px 12px 0;display:flex;gap:7px">
+    <select id="mn-maxpatah" class="sel" style="flex:1">
+      <option value="0">Patah 0</option><option value="1">Patah 1</option>
+      <option value="2">Patah 2</option><option value="3">Patah 3</option>
+    </select>
+    <button onclick="mnToggleRef()" id="mn-ref-btn" style="flex:2;padding:9px;background:rgba(96,165,250,0.08);color:var(--blue);font-weight:700;font-size:11px;border:1px solid rgba(96,165,250,0.2);border-radius:8px;cursor:pointer">Sembunyikan Referensi</button>
+  </div>
+
+  <!-- KEY LABEL -->
+  <div style="padding:10px 14px 0">
+    <div style="font-family:monospace;font-size:13px;font-weight:800;color:var(--sub)">
+      Rumus <span id="mn-jenis-label">ai 2d belakang</span> <span id="mn-digit-label">2</span> Digit
+    </div>
+    <div style="font-family:monospace;font-size:14px;font-weight:900;margin-top:4px">
+      KEY : <span id="mn-key-display" style="color:var(--cyan)">--</span>
+    </div>
+  </div>
+
+  <!-- TREK INLINE -->
+  <div id="mn-trek-inline" style="padding:8px 14px 80px;font-family:monospace;font-size:13px;line-height:2.2">
+    <div style="color:var(--muted);padding:20px;text-align:center">— Pilih pasaran &amp; elemen —</div>
+  </div>
+
+</div><!-- /tab-manual -->
+
+<!-- ════════ TAB BANK ════════ -->
+<div id="tab-bank" class="pg" style="display:none">
+
+  <div class="imp-bar">
+    <input type="text" class="inp" id="bank-inp-code" placeholder="Paste kode rumus..." style="flex:1">
+    <button class="btn btn-cyan" onclick="bankShowImport()">⚡ IMPORT</button>
+  </div>
+  <div class="imp-form" id="bank-imp-form">
+    <div class="card-title" style="margin-bottom:10px">Detail Import</div>
+    <div class="g2">
+      <div class="field-g">
+        <label class="field-lbl">Pasaran</label>
+        <select id="bfrm-pasaran" class="sel"></select>
+      </div>
+      <div class="field-g">
+        <label class="field-lbl">Jenis Trek</label>
+        <select id="bfrm-jenis" class="sel">
+          <option value="ai_ke">AI 2D Belakang</option>
+          <option value="ai_ac">AI 2D Depan</option>
+          <option value="ai_ck">AI 2D Tengah</option>
+          <option value="bbfs_ke">BBFS KE</option>
+          <option value="bbfs_ac">BBFS AC</option>
+          <option value="bbfs_ck">BBFS CK</option>
+          <option value="bbfs_4d">BBFS 4D</option>
+          <option value="pos_e">Posisi Ekor</option>
+          <option value="pos_k">Posisi Kepala</option>
+          <option value="pos_a">Posisi As</option>
+          <option value="pos_c">Posisi Cop</option>
+        </select>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="field-g">
+        <label class="field-lbl">Limit</label>
+        <input type="number" id="bfrm-limit" class="inp" value="14" min="5" max="50">
+      </div>
+      <div class="field-g">
+        <label class="field-lbl">Digit</label>
+        <input type="number" id="bfrm-digit" class="inp" value="2" min="2" max="6">
+      </div>
+    </div>
+    <div class="imp-preview" id="bfrm-preview">Formula: --</div>
+    <div style="display:flex;gap:8px">
+      <button class="btn btn-ghost" style="flex:1" onclick="bankHideImport()">✕ Batal</button>
+      <button class="btn btn-cyan" style="flex:2" onclick="bankDoImport()">✅ Simpan Rumus</button>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 12px">
+    <span id="bank-count-badge" style="background:var(--card);border:1px solid var(--border);color:var(--cyan);font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px">0 rumus</span>
+    <select id="bank-filter-pas" class="sel" style="width:auto;font-size:11px;padding:5px 28px 5px 10px" onchange="renderBank()">
+      <option value="">-- Semua Pasaran --</option>
+    </select>
+  </div>
+
+  <div class="bank-wrap">
+    <table class="bank-tbl">
+      <thead><tr>
+        <th style="width:30px;text-align:center"><input type="checkbox" id="bank-chk-all" onchange="bankToggleAll(this)"></th>
+        <th>TIPE</th>
+        <th>HARI</th>
+        <th>ANGKA</th>
+        <th>STATUS</th>
+        <th></th>
+      </tr></thead>
+      <tbody id="bank-tbody"></tbody>
+    </table>
+    <div id="bank-empty" class="bank-empty" style="display:none">💾 Belum ada rumus tersimpan.<br><span style="font-size:11px">Scan lalu Save, atau Import kode rumus</span></div>
+  </div>
+
+  <div class="bank-actions">
+    <button class="bact bact-hapus" id="bact-hapus" onclick="bankHapusSelected()" disabled>🗑 Hapus</button>
+    <button class="bact bact-trek" id="bact-trek" onclick="bankOpenTrek()" disabled>📋 Trek</button>
+    <button class="bact bact-rekap" id="bact-rekap" onclick="bankOpenRekap()" disabled>📊 Rekap</button>
+  </div>
+
+</div><!-- /tab-bank -->
+
+<!-- ════════ TREK MODAL ════════ -->
+<div class="modal-ov" id="trek-modal" onclick="if(event.target===this)closeTrekModal()">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-title" id="trek-modal-title">TREK</div>
+      <div style="font-size:10px;color:var(--sub);margin-top:3px" id="trek-modal-info"></div>
+    </div>
+    <div class="modal-scroll" id="trek-modal-body"></div>
+    <div class="modal-ftr">
+      <button class="btn btn-cyan" style="font-size:12px;padding:8px 14px" onclick="copyTrekModal()">📋 Copy</button>
+      <button class="btn btn-ghost" style="font-size:12px;padding:8px 14px" onclick="closeTrekModal()">✕ Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ COPY BOX OVERLAY ════════ -->
+<div id="copy-box-ov" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:600;align-items:flex-end;justify-content:center;padding:16px">
+  <div class="copy-box">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <span style="font-weight:800;font-size:13px;color:var(--yellow)">📋 Copy Trek</span>
+      <button onclick="document.getElementById('copy-box-ov').style.display='none'" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer">✕</button>
+    </div>
+    <textarea id="copy-ta" style="width:100%;height:180px;background:#080c14;border:1px solid var(--border);
+      border-radius:8px;color:var(--cyan);font-family:monospace;font-size:11px;padding:10px;resize:none"
+      onclick="this.select()"></textarea>
+    <button class="btn btn-cyan" style="width:100%;margin-top:8px" onclick="doCopy(document.getElementById('copy-ta').value, this)">📋 Copy Semua</button>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ══════════════════════════════════════════════
+// DATA LAYER
+// ══════════════════════════════════════════════
+const RESULT_JSON_URLS = [
+  'https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json',
+  'https://raw.githubusercontent.com/alifavif-cmd/-WONGBAGUS-PREDICTION-/main/result.json',
+];
+const CACHE_KEY = 'wb_rj_v3';
+const CACHE_TTL = 90 * 60 * 1000;
+
+let _rjData = null; // raw result.json object
+
+const MARKETS = [
+  {id:'hk',flag:'🇭🇰',name:'Hongkong',short:'HK'},
+  {id:'hkl',flag:'🇭🇰',name:'HK Lotto',short:'HKL'},
+  {id:'sgp',flag:'🇸🇬',name:'Singapore',short:'SGP'},
+  {id:'sdy',flag:'🇦🇺',name:'Sydney Pools',short:'SDY'},
+  {id:'sdl',flag:'🇦🇺',name:'Sydney Lotto',short:'SDL'},
+  {id:'kam',flag:'🇰🇭',name:'Kamboja',short:'KAM'},
+  {id:'bull',flag:'🇳🇿',name:'Bullseye NZ',short:'BULL'},
+  {id:'chn',flag:'🇨🇳',name:'China Pools',short:'CHN'},
+  {id:'jpn',flag:'🇯🇵',name:'Japan',short:'JPN'},
+  {id:'twn',flag:'🇹🇼',name:'Taiwan',short:'TWN'},
+  {id:'pcso',flag:'🇵🇭',name:'PCSO',short:'PCSO'},
+  {id:'mac1',flag:'🇲🇴',name:'Toto Macau 13',short:'MAC13'},
+  {id:'mac2',flag:'🇲🇴',name:'Toto Macau 16',short:'MAC16'},
+  {id:'mac3',flag:'🇲🇴',name:'Toto Macau 19',short:'MAC19'},
+  {id:'mac4',flag:'🇲🇴',name:'Toto Macau 22',short:'MAC22'},
+  {id:'mac5',flag:'🇲🇴',name:'Toto Macau 00',short:'MAC00'},
+  {id:'mac6',flag:'🇲🇴',name:'Toto Macau 23',short:'MAC23'},
+  {id:'mrq3',flag:'🇲🇦',name:'Morocco 03:00',short:'MRQ3'},
+  {id:'mrq18',flag:'🇲🇦',name:'Morocco 18:00',short:'MRQ18'},
+  {id:'mrq21',flag:'🇲🇦',name:'Morocco 21:00',short:'MRQ21'},
+  {id:'mrq23',flag:'🇲🇦',name:'Morocco 23:59',short:'MRQ23'},
+  {id:'ger',flag:'🇩🇪',name:'Germany Plus5',short:'GER'},
+  {id:'or4',flag:'🇺🇸',name:'Oregon 04:00',short:'OR4'},
+  {id:'or7',flag:'🇺🇸',name:'Oregon 07:00',short:'OR7'},
+  {id:'or10',flag:'🇺🇸',name:'Oregon 10:00',short:'OR10'},
+  {id:'or13',flag:'🇺🇸',name:'Oregon 13:00',short:'OR13'},
+  {id:'ncd',flag:'🇺🇸',name:'NC Day',short:'NCD'},
+  {id:'nce',flag:'🇺🇸',name:'NC Evening',short:'NCE'},
+  {id:'geom',flag:'🇺🇸',name:'Georgia Mid',short:'GEOM'},
+  {id:'geoe',flag:'🇺🇸',name:'Georgia Eve',short:'GEOE'},
+  {id:'geon',flag:'🇺🇸',name:'Georgia Night',short:'GEON'},
+  {id:'txd',flag:'🇺🇸',name:'Texas Day',short:'TXD'},
+  {id:'txmr',flag:'🇺🇸',name:'Texas Morning',short:'TXMR'},
+  {id:'txe',flag:'🇺🇸',name:'Texas Evening',short:'TXE'},
+  {id:'txn',flag:'🇺🇸',name:'Texas Night',short:'TXN'},
+  {id:'nyd',flag:'🇺🇸',name:'New York Mid',short:'NYD'},
+  {id:'nye',flag:'🇺🇸',name:'New York Eve',short:'NYE'},
+  {id:'njm',flag:'🇺🇸',name:'NJ Midday',short:'NJM'},
+  {id:'nje',flag:'🇺🇸',name:'NJ Evening',short:'NJE'},
+  {id:'flm',flag:'🇺🇸',name:'Florida Mid',short:'FLM'},
+  {id:'fle',flag:'🇺🇸',name:'Florida Eve',short:'FLE'},
+  {id:'ilm',flag:'🇺🇸',name:'Illinois Mid',short:'ILM'},
+  {id:'ile',flag:'🇺🇸',name:'Illinois Eve',short:'ILE'},
+  {id:'indm',flag:'🇺🇸',name:'Indiana Mid',short:'INDM'},
+  {id:'inde',flag:'🇺🇸',name:'Indiana Eve',short:'INDE'},
+  {id:'kym',flag:'🇺🇸',name:'Kentucky Mid',short:'KYM'},
+  {id:'kye',flag:'🇺🇸',name:'Kentucky Eve',short:'KYE'},
+  {id:'mdm',flag:'🇺🇸',name:'Maryland Mid',short:'MDM'},
+  {id:'mde',flag:'🇺🇸',name:'Maryland Eve',short:'MDE'},
+  {id:'mim',flag:'🇺🇸',name:'Michigan Mid',short:'MIM'},
+  {id:'mie',flag:'🇺🇸',name:'Michigan Eve',short:'MIE'},
+  {id:'mom',flag:'🇺🇸',name:'Missouri Mid',short:'MOM'},
+  {id:'moe',flag:'🇺🇸',name:'Missouri Eve',short:'MOE'},
+  {id:'wdm',flag:'🇺🇸',name:'WDC Midday',short:'WDM'},
+  {id:'wde',flag:'🇺🇸',name:'WDC Evening',short:'WDE'},
+  {id:'ctd',flag:'🇺🇸',name:'Connecticut Day',short:'CTD'},
+  {id:'ctn',flag:'🇺🇸',name:'Connecticut Night',short:'CTN'},
+  {id:'vad',flag:'🇺🇸',name:'Virginia Day',short:'VAD'},
+  {id:'van',flag:'🇺🇸',name:'Virginia Night',short:'VAN'},
+  {id:'tnm',flag:'🇺🇸',name:'Tennessee Mid',short:'TNM'},
+  {id:'tne',flag:'🇺🇸',name:'Tennessee Eve',short:'TNE'},
+  {id:'tnmr',flag:'🇺🇸',name:'Tennessee Morning',short:'TNMR'},
+  {id:'cal',flag:'🇺🇸',name:'California',short:'CAL'},
+  {id:'wie',flag:'🇺🇸',name:'Wisconsin Eve',short:'WIE'},
+];
+
+function getRjEntry(wbId) {
+  if (!_rjData) return null;
+  return _rjData[wbId] || null;
+}
+
+function getSrHistory(wbId, max) {
+  const entry = getRjEntry(wbId);
+  if (!entry) return [];
+  let results = [];
+  if (entry.history && entry.history.length > 0) {
+    results = entry.history.map(h => String(h.result||'').trim()).filter(r => /^\d{4}$/.test(r));
+  }
+  const todayR = String(entry.result||'').trim();
+  if (/^\d{4}$/.test(todayR) && results[0] !== todayR) results.unshift(todayR);
+  else if (results.length === 0 && /^\d{4}$/.test(todayR)) results.unshift(todayR);
+  const deduped = results.filter((r,i) => i===0 || r!==results[i-1]);
+  return deduped.slice(0, max||150);
+}
+
+function getSrHistoryFiltered(wbId, max, hariFilter) {
+  if (hariFilter === '' || hariFilter === null || hariFilter === undefined) return getSrHistory(wbId, max);
+  const hariNum = parseInt(hariFilter);
+  if (isNaN(hariNum)) return getSrHistory(wbId, max);
+  const entry = getRjEntry(wbId);
+  if (!entry || !entry.history || entry.history.length === 0) return getSrHistory(wbId, max);
+  const filtered = [];
+  if (entry.fetch_date && Array.isArray(entry.fetch_date) && entry.fetch_date.length >= 3) {
+    const fd = new Date(entry.fetch_date[0], entry.fetch_date[1]-1, entry.fetch_date[2]);
+    const todayR = String(entry.result||'').trim();
+    if (!isNaN(fd.getTime()) && fd.getDay() === hariNum && /^\d{4}$/.test(todayR)) {
+      const h0date = entry.history[0] ? entry.history[0].date : null;
+      const fdStr = `${entry.fetch_date[0]}-${String(entry.fetch_date[1]).padStart(2,'0')}-${String(entry.fetch_date[2]).padStart(2,'0')}`;
+      if (h0date !== fdStr) filtered.push(todayR);
+    }
+  }
+  for (const h of entry.history) {
+    if (filtered.length >= max) break;
+    const r = String(h.result||'').trim();
+    if (!/^\d{4}$/.test(r) || !h.date) continue;
+    const d = new Date(h.date + 'T00:00:00');
+    if (isNaN(d.getTime())) continue;
+    if (d.getDay() === hariNum) filtered.push(r);
+  }
+  return filtered.slice(0, max);
+}
+
+async function loadData() {
+  // Coba dari cache dulu
+  try {
+    const raw = localStorage.getItem(CACHE_KEY);
+    if (raw) {
+      const {ts, rj} = JSON.parse(raw);
+      if (Date.now() - ts < CACHE_TTL && rj) {
+        _rjData = rj;
+        onDataReady(ts);
+        return;
+      }
+    }
+  } catch(e){}
+  await fetchData();
+}
+
+async function fetchData() {
+  document.getElementById('data-status').textContent = '⏳ Mengambil data...';
+  for (const url of RESULT_JSON_URLS) {
+    try {
+      const res = await Promise.race([
+        fetch(url + '?t=' + Date.now(), {cache:'no-cache'}),
+        new Promise((_,rej) => setTimeout(()=>rej(new Error('timeout')), 8000))
+      ]);
+      if (!res.ok) continue;
+      const rj = await res.json();
+      if (rj && typeof rj === 'object' && Object.keys(rj).length > 5) {
+        _rjData = rj;
+        try { localStorage.setItem(CACHE_KEY, JSON.stringify({ts:Date.now(), rj})); } catch(e){}
+        onDataReady(Date.now());
+        return;
+      }
+    } catch(e){}
+  }
+  document.getElementById('data-status').textContent = '❌ Gagal ambil data — pakai cache';
+}
+
+function onDataReady(ts) {
+  const meta = _rjData._meta || {};
+  const updated = meta.updated || new Date(ts).toLocaleTimeString('id-ID');
+  const total = meta.total || Object.keys(_rjData).filter(k=>k!=='_meta').length;
+  document.getElementById('data-status').textContent = `✅ ${total} pasaran · ${updated}`;
+  initPasaranDropdowns();
+  renderBank();
+}
+
+async function refreshData() {
+  _rjData = null;
+  try { localStorage.removeItem(CACHE_KEY); } catch(e){}
+  await fetchData();
+}
+
+// ══════════════════════════════════════════════
+// FORMULA ENGINE (PERSIS SAMA DENGAN INDEX.HTML)
+// ══════════════════════════════════════════════
+const MOD_TABLE_PARTIAL = {
+  ix:{0:5,1:6,2:7,3:8,4:9,5:0,6:1,7:2,8:3,9:4},
+  ty:{0:7,1:4,2:9,3:6,4:1,5:8,6:3,7:0,8:5,9:2},
+  ml:{0:1,1:0,2:5,3:8,4:7,5:2,6:9,7:4,8:3,9:6},
+  mb:{0:8,1:7,2:6,3:9,4:5,5:4,6:2,7:1,8:0,9:3},
+  m0:{0:6,1:5,2:8,3:7,4:9,5:1,6:0,7:3,8:2,9:4},
+  m1:{0:1,1:0,2:9,3:8,4:7,5:6,6:5,7:4,8:3,9:2},
+  m2:{0:2,1:8,2:0,3:9,4:7,5:6,6:5,7:4,8:1,9:3},
+  m3:{0:3,1:2,2:1,3:0,4:9,5:8,6:7,7:6,8:5,9:4},
+  m4:{0:6,1:5,2:3,3:2,4:7,5:1,6:0,7:4,8:9,9:8},
+  m5:{0:5,1:4,2:3,3:2,4:1,5:0,6:9,7:8,8:7,9:6},
+  m6:{0:6,1:8,2:4,3:5,4:2,5:3,6:0,7:9,8:1,9:7},
+  m7:{0:7,1:6,2:5,3:4,4:3,5:2,6:1,7:0,8:9,9:8},
+  m8:{0:8,1:7,2:6,3:5,4:9,5:3,6:2,7:1,8:0,9:4},
+  m9:{0:9,1:8,2:7,3:6,4:5,5:4,6:3,7:2,8:1,9:0},
+  m10:{0:4,1:2,2:1,3:8,4:0,5:6,6:5,7:9,8:3,9:7},
+  m11:{0:1,1:0,2:5,3:4,4:3,5:2,6:8,7:9,8:6,9:7},
+  m12:{0:2,1:7,2:0,3:8,4:6,5:9,6:4,7:1,8:3,9:5},
+  m13:{0:3,1:9,2:7,3:0,4:6,5:8,6:4,7:2,8:5,9:1},
+  m14:{0:6,1:5,2:4,3:7,4:2,5:1,6:0,7:3,8:9,9:8},
+  m15:{0:5,1:6,2:4,3:9,4:2,5:0,6:1,7:8,8:7,9:3},
+  m16:{0:3,1:8,2:7,3:0,4:9,5:6,6:5,7:2,8:1,9:4},
+  m17:{0:9,1:4,2:8,3:6,4:1,5:7,6:3,7:5,8:2,9:0},
+  m18:{0:8,1:9,2:7,3:4,4:3,5:6,6:5,7:2,8:0,9:1},
+  m19:{0:7,1:8,2:3,3:2,4:9,5:6,6:5,7:0,8:1,9:4},
+};
+const MOD_TABLE = {};
+for (const [key, partial] of Object.entries(MOD_TABLE_PARTIAL)) {
+  MOD_TABLE[key] = {};
+  for (let d=0; d<=9; d++) MOD_TABLE[key][d] = partial.hasOwnProperty(d) ? partial[d] : d;
+}
+
+function digitalRoot(n) {
+  n = Math.abs(n);
+  if (n===0) return 0;
+  return n%9===0 ? 9 : n%9;
+}
+
+function applyOp(a, b, op) {
+  if (op==='+') return digitalRoot(a+b);
+  if (op==='-') return digitalRoot(Math.abs(a-b));
+  if (op==='.') return digitalRoot(a*b);
+  return a;
+}
+
+function applyMod(v, mod) {
+  if (!mod || mod==='-' || mod==='mistik') return v;
+  const vKey = digitalRoot(Math.abs(v)) % 10;
+  return (MOD_TABLE[mod]||{})[vKey] ?? v;
+}
+
+function parseElemCode(code, hist) {
+  if (!code || code==='-') return null;
+  let baseCode = code, elemMod = '-';
+  const modMatch = code.match(/^(.+?)(ix|ty|ml|mb|m1[0-9]|m[0-9])$/);
+  if (modMatch) { baseCode = modMatch[1]; elemMod = modMatch[2]; }
+
+  let rawVal = null;
+  const specialMatch = baseCode.match(/^(J3D|J4D|Js|Jt|Jd|JS|JT|JD)(\d+)$/i);
+  if (specialMatch) {
+    const pre = specialMatch[1].toUpperCase();
+    const n = parseInt(specialMatch[2]);
+    const r = hist[n-1];
+    if (!r || !/^\d{4}$/.test(r)) return null;
+    const A=+r[0],C=+r[1],K=+r[2],E=+r[3];
+    switch(pre){
+      case 'JS': rawVal=digitalRoot(Math.abs(K-E)); break;
+      case 'JT': rawVal=digitalRoot(C+K); break;
+      case 'JD': rawVal=digitalRoot(A+C); break;
+      case 'J3D': rawVal=digitalRoot(C+K+E); break;
+      case 'J4D': rawVal=digitalRoot(A+C+K+E); break;
+      default: return null;
+    }
+  } else {
+    const m = baseCode.match(/^([A-Za-z]+)(\d+)$/);
+    if (!m) return null;
+    const pre = m[1].toUpperCase();
+    const n = parseInt(m[2]);
+    const r = hist[n-1];
+    if (!r || !/^\d{4}$/.test(r)) return null;
+    const A=+r[0],C=+r[1],K=+r[2],E=+r[3];
+    switch(pre){
+      case 'A': rawVal=A; break;
+      case 'C': rawVal=C; break;
+      case 'K': rawVal=K; break;
+      case 'E': rawVal=E; break;
+      case 'J': rawVal=digitalRoot(K+E); break;
+      case 'JS': rawVal=digitalRoot(Math.abs(K-E)); break;
+      case 'JT': rawVal=digitalRoot(C+K); break;
+      case 'JD': rawVal=digitalRoot(A+C); break;
+      default: return null;
+    }
+  }
+  if (rawVal === null) return null;
+  return elemMod !== '-' ? applyMod(rawVal, elemMod) : rawVal;
+}
+
+function calcFormula(e1,o1,e2,mod,hist, o2,e3, o3,e4, o4,e5, o5,e6) {
+  const v1 = parseElemCode(e1, hist);
+  if (v1===null) return null;
+  const extras = [
+    {e:e2,o:o1},{e:e3,o:o2},{e:e4,o:o3},{e:e5,o:o4},{e:e6,o:o5}
+  ];
+  let res = v1;
+  for (const ex of extras) {
+    if (!ex.e || ex.e==='-') continue;
+    if (!ex.o || ex.o==='none') continue;
+    const vx = parseElemCode(ex.e, hist);
+    if (vx===null) continue;
+    res = applyOp(res, vx, ex.o);
+  }
+  return (mod && mod!=='-') ? applyMod(res, mod) : res;
+}
+
+function getColsByDigit(nDigit, isMingguan) {
+  if (isMingguan) {
+    const map = {1:[3],2:[3,4],3:[2,3,4],4:[1,2,3,4],5:[0,1,2,3,4],6:[0,1,2,3,4,5],7:[0,1,2,3,4,5,6],8:[0,1,2,3,4,5,6,7],9:[0,1,2,3,4,5,6,7,8]};
+    return map[nDigit] || [0,1,2,3,4];
+  }
+  const map = {1:[9],2:[4,5],3:[1,5,9],4:[0,1,4,5],5:[0,4,5,6,9],6:[0,1,4,5,6,9],7:[0,1,3,4,5,6,9],8:[0,1,2,4,5,6,7,9],9:[0,1,2,3,4,5,6,7,9]};
+  return map[nDigit] || [0,4,5,6,9];
+}
+
+function makePred(start, nDigit, cols) {
+  const t = Array.from({length:10}, (_,i) => (start+i)%10);
+  const c = cols || getColsByDigit(nDigit);
+  return c.slice(0, nDigit).map(i => t[i]).join('');
+}
+
+function checkHit(result, predStr, jenis) {
+  const s = String(result).padStart(4,'0');
+  const A=+s[0],C=+s[1],K=+s[2],E=+s[3];
+  const digits = predStr.split('').map(Number);
+  if (jenis.startsWith('ai_')) {
+    const pos = jenis.slice(3);
+    if(pos==='ke') return digits.includes(K) || digits.includes(E);
+    if(pos==='ac') return digits.includes(A) || digits.includes(C);
+    if(pos==='ck') return digits.includes(C) || digits.includes(K);
+  }
+  if (jenis.startsWith('bbfs_')) {
+    const pos = jenis.slice(5);
+    if(pos==='ke') { if(K===E) return digits.includes(K); return digits.includes(K)&&digits.includes(E); }
+    if(pos==='ac') { if(A===C) return digits.includes(A); return digits.includes(A)&&digits.includes(C); }
+    if(pos==='ck') { if(C===K) return digits.includes(C); return digits.includes(C)&&digits.includes(K); }
+    if(pos==='4d') { const t=[...new Set([A,C,K,E])]; return t.every(d=>digits.includes(d)); }
+    return false;
+  }
+  if (jenis.startsWith('pos_')) {
+    const pos = jenis.slice(4);
+    let target;
+    if(pos==='e') target=E; else if(pos==='k') target=K;
+    else if(pos==='a') target=A; else if(pos==='c') target=C;
+    else return false;
+    return digits.includes(target);
+  }
+  return false;
+}
+
+function getTargets(K,E,A,C,jenis) {
+  if(jenis.startsWith('ai_ke')||jenis.startsWith('bbfs_ke')) return [K,E];
+  if(jenis.startsWith('ai_ac')||jenis.startsWith('bbfs_ac')) return [A,C];
+  if(jenis.startsWith('ai_ck')||jenis.startsWith('bbfs_ck')) return [C,K];
+  if(jenis==='bbfs_4d') return [A,C,K,E];
+  if(jenis.endsWith('_e')||jenis==='pos_e') return [E];
+  if(jenis.endsWith('_k')||jenis==='pos_k') return [K];
+  if(jenis.endsWith('_a')||jenis==='pos_a') return [A];
+  if(jenis.endsWith('_c')||jenis==='pos_c') return [C];
+  return [K,E];
+}
+
+// bankParseFormula — sama persis
+function bankParseFormula(fm) {
+  const _modsSorted = Object.keys(MOD_TABLE).sort((a,b)=>b.length-a.length);
+  const _modSet = new Set(Object.keys(MOD_TABLE));
+  let cleanFormula = fm, modh = '-';
+  for(const mo of _modsSorted){
+    const suffix = '.'+mo;
+    if(fm.endsWith(suffix)){
+      const before = fm.slice(0, fm.length-suffix.length);
+      if(before && !/[+\-.]$/.test(before)){cleanFormula=before; modh=mo; break;}
+    }
+  }
+  const rawParts = [];
+  let ci = 0;
+  while(ci < cleanFormula.length){
+    const ch = cleanFormula[ci];
+    if(ch==='+'||ch==='-'||ch==='.'){
+      if(rawParts.length>0) rawParts[rawParts.length-1].afterOp=ch;
+      ci++; continue;
+    }
+    let cj = ci;
+    while(cj < cleanFormula.length && /[A-Za-z0-9]/.test(cleanFormula[cj])) cj++;
+    rawParts.push({token:cleanFormula.slice(ci,cj), afterOp:'none'});
+    ci = cj;
+  }
+  const parts = [];
+  for(let i=0;i<rawParts.length;i++){
+    const rp = rawParts[i];
+    const prevAfterOp = i>0 ? rawParts[i-1].afterOp : null;
+    if(prevAfterOp==='.'&&parts.length>0&&_modSet.has(rp.token)){
+      parts[parts.length-1].elemMod=rp.token;
+      parts[parts.length-1].opAfter=rp.afterOp;
+      continue;
+    }
+    let elemMod='-', elemBase=rp.token;
+    for(const mo of _modsSorted){
+      if(rp.token.endsWith(mo)&&rp.token.length>mo.length){
+        const base=rp.token.slice(0,rp.token.length-mo.length);
+        if(/\d$/.test(base)){elemBase=base; elemMod=mo; break;}
+      }
+    }
+    parts.push({elemBase, elemMod, opAfter:rp.afterOp});
+  }
+  if(!parts.length) return {e1:'-',o1:'+',e2:'-',o2:'none',e3:'-',o3:'none',e4:'-',o4:'none',e5:'-',o5:'none',e6:'-',mod:'-'};
+  const em=(base,mod)=>(!base||base==='-')?'-':(mod&&mod!=='-'?base+mod:base);
+  const getE=i=>parts[i]?em(parts[i].elemBase,parts[i].elemMod):'-';
+  const getO=i=>{if(!parts[i])return'none';const op=parts[i].opAfter;return(op==='+'||op==='-')?op:'none';};
+  return {
+    e1:getE(0),o1:getO(0)==='none'?'+':getO(0),
+    e2:getE(1),o2:getO(1),e3:getE(2),o3:getO(2),
+    e4:getE(3),o4:getO(3),e5:getE(4),o5:getO(4),e6:getE(5),mod:modh
+  };
+}
+
+function bankParseKode(kode) {
+  kode = (kode||'').trim();
+  // Format panjang: PASARAN_jenis_formula_Llimit-P0-Ddigit
+  const long = kode.match(/^([A-Z0-9]+)_([a-z_]+)_(.+?)_L(\d+)-P(\d+)-D(\d+)/i);
+  if (long) {
+    const rawId = long[1].toLowerCase();
+    // normalize pasaran id
+    const pasMap = {hkg:'hk',sgp:'sgp',sdy:'sdy',sdl:'sdl',kam:'kam',hk:'hk',
+      hkl:'hkl',bull:'bull',chn:'chn',jpn:'jpn',twn:'twn',pcso:'pcso',
+      mac1:'mac1',mac2:'mac2',mac3:'mac3',mac4:'mac4',mac5:'mac5',mac6:'mac6'};
+    const wbId = pasMap[rawId] || rawId;
+    const jenis = long[2].replace(/_$/,'');
+    const formula = long[3];
+    const limit = parseInt(long[4]);
+    const digit = parseInt(long[6]);
+    const hariMatch = kode.match(/-H(\d)(?:[^0-9]|$)/i);
+    const hari = hariMatch ? hariMatch[1] : '';
+    return {wbId, jenis, formula, limit, digit, hari, raw:kode};
+  }
+  return {wbId:'hk', jenis:'ai_ke', formula:kode, limit:14, digit:2, hari:'', raw:kode};
+}
+
+function bankCalcPred(item) {
+  const hariFilter = (item.hari!==undefined&&item.hari!==null) ? item.hari : '';
+  const hist = hariFilter!=='' ? getSrHistoryFiltered(item.wbId,150,hariFilter) : getSrHistory(item.wbId,150);
+  if (hist.length<2) return '--';
+  const {e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod} = bankParseFormula(item.formula);
+  const isMingguan = (hariFilter!==''&&hariFilter!==null&&hariFilter!==undefined);
+  const cols = getColsByDigit(item.nDigit||2, isMingguan);
+  const start0 = calcFormula(e1,o1,e2,mod,hist.slice(0),o2,e3,o3,e4,o4,e5,o5,e6);
+  if (start0===null) return '--';
+  return makePred(start0, item.nDigit||2, cols);
+}
+
+// ══════════════════════════════════════════════
+// SCANNER ENGINE
+// ══════════════════════════════════════════════
+const _btTotal = 10;
+let candidates = [];
+let _targetN = 10;
+let _batchStates = new Array(10).fill(null);
+let _batchTimers = new Array(10).fill(null);
+let _batchRunning = new Array(10).fill(false);
+let _globalDone = false;
+let scanning = false;
+
+function computeBatchParams() {
+  const keyNums = [...document.querySelectorAll('.key-chk')].filter(c=>c.checked).map(c=>parseInt(c.value));
+  let sk1Mods = getChecked('sk1-checks');
+  let sk2Mods = getChecked('sk2-checks');
+  let hasilMods = getChecked('hasil-checks');
+  if(sk1Mods.length===0) sk1Mods=['-','ix','ty','ml','mb'];
+  if(sk2Mods.length===0) sk2Mods=['-','ix','ty','ml','mb'];
+  if(hasilMods.length===0) hasilMods=['-','ix','ty','ml','mb'];
+  const opMode = document.querySelector('input[name="op-mode"]:checked')?.value||'all';
+  const ops = opMode==='all'?['+','-','.']:opMode==='+'?['+']:['-'];
+  const BASES = ['A','C','K','E','J','Jt','Jd','Js','J3D','J4D'];
+  const ELEM1 = [];
+  for(const base of BASES) for(const n of keyNums) for(const em of sk1Mods)
+    ELEM1.push(base+n+(em==='-'?'':em));
+  const allNums = [1,2,3,4,5,6,7,8,9,10];
+  const ELEM2 = [];
+  for(const base of BASES) for(const n of allNums) for(const em of sk2Mods)
+    ELEM2.push(base+n+(em==='-'?'':em));
+  const singleCount = ELEM1.length * hasilMods.length;
+  const doubleCount = ELEM1.length * ops.length * ELEM2.length * hasilMods.length;
+  return {ELEM1, ops, ELEM2, hasilMods, singleCount, doubleCount, totalCount:singleCount+doubleCount};
+}
+
+function idxToCombo(idx, p) {
+  if (idx < p.singleCount) {
+    const i_e1 = Math.floor(idx / p.hasilMods.length);
+    const i_mod = idx % p.hasilMods.length;
+    return {e1:p.ELEM1[i_e1], o1:'+', e2:'-', mod:p.hasilMods[i_mod]};
+  } else {
+    let i = idx - p.singleCount;
+    const E2H = p.ELEM2.length * p.hasilMods.length;
+    const OE2H = p.ops.length * E2H;
+    const i_e1 = Math.floor(i / OE2H); i = i % OE2H;
+    const i_o1 = Math.floor(i / E2H); i = i % E2H;
+    const i_e2 = Math.floor(i / p.hasilMods.length);
+    const i_mod = i % p.hasilMods.length;
+    return {e1:p.ELEM1[i_e1], o1:p.ops[i_o1], e2:p.ELEM2[i_e2], mod:p.hasilMods[i_mod]};
+  }
+}
+
+function setConsole(msg) {
+  document.getElementById('sc-console').textContent = '>_ '+msg;
+}
+
+function setBtnBatch(bi, state) {
+  const btn = document.getElementById('btn-batch-'+(bi+1));
+  if (!btn) return;
+  const colors={idle:'rgba(34,211,238,0.04)',running:'#0a2a3a',done:'#0a2a1a',found:'#1a2a0a'};
+  const tcolors={idle:'var(--cyan)',running:'var(--yellow)',done:'var(--green)',found:'var(--green)'};
+  const labels={idle:`B${bi+1}`,running:`⏳${bi+1}`,done:`✅${bi+1}`,found:`🎯${bi+1}`};
+  btn.style.background=colors[state]; btn.style.color=tcolors[state]; btn.textContent=labels[state];
+}
+
+function startBatch(batchNum, skipReset) {
+  const bi = batchNum - 1;
+  if (!skipReset) {
+    if (_batchRunning[bi]) { stopBatch(bi); return; }
+    for(let i=0;i<10;i++){_batchRunning[i]=false;if(_batchTimers[i])clearTimeout(_batchTimers[i]);_batchTimers[i]=null;_batchStates[i]=null;}
+    _globalDone=false; candidates=[]; scanning=false;
+    document.getElementById('sc-progress').style.width='0%';
+    document.getElementById('result-card').style.display='none';
+    document.getElementById('result-tbody').innerHTML='';
+  }
+
+  const wbId = document.getElementById('sc-pasaran').value;
+  if (!wbId) { alert('Pilih pasaran dulu!'); return; }
+  const limit = parseInt(document.getElementById('sc-limit').value)||14;
+  const jenis = document.getElementById('sc-jenis').value;
+  const nDigit = parseInt(document.getElementById('sc-digit').value)||2;
+  const maxPatah = parseInt(document.getElementById('sc-maxpatah').value)||0;
+  const minHitPct = parseInt(document.getElementById('sc-minhit').value)||0;
+  _targetN = parseInt(document.getElementById('sc-target').value)||10;
+  const _hariVal = document.getElementById('sc-hari').value;
+  const hist = _hariVal!=='' ? getSrHistoryFiltered(wbId,150,_hariVal) : getSrHistory(wbId,150);
+  if (hist.length < 3) { alert('⚠ Data kurang (min 3). Refresh data dulu!'); return; }
+
+  const params = computeBatchParams();
+  if (params.totalCount === 0) { alert('⚠ Queue scan kosong!'); return; }
+
+  const batchSize = Math.ceil(params.totalCount / _btTotal);
+  const bStart = bi * batchSize;
+  const bEnd = Math.min((bi+1)*batchSize, params.totalCount);
+  if (bStart >= params.totalCount) { setBtnBatch(bi,'done'); checkGlobalStop(); return; }
+
+  _batchStates[bi] = {params, currentIdx:bStart, batchStart:bStart, batchEnd:bEnd, wbId, limit, jenis, nDigit, maxPatah, minHitPct, hist};
+  _batchRunning[bi] = true; scanning = true; _globalDone = false;
+  setBtnBatch(bi, 'running');
+
+  if (!skipReset) {
+    document.getElementById('btn-stop-all').style.display='block';
+    document.getElementById('btn-scan-all').style.display='none';
+  }
+  if (bi===0||!skipReset) setConsole(`⏳ Scan B${batchNum} — ${params.totalCount.toLocaleString()} kombinasi`);
+
+  const isMingguan = (_hariVal!==''&&_hariVal!==null);
+  const cols = getColsByDigit(nDigit, isMingguan);
+  const bs = _batchStates[bi];
+
+  function runSlice() {
+    if (!_batchRunning[bi]||_globalDone) { _batchRunning[bi]=false; setBtnBatch(bi,'done'); checkGlobalStop(); return; }
+    const SLICE = 3000;
+    for (let b=0; b<SLICE && bs.currentIdx<bEnd; b++, bs.currentIdx++) {
+      const {e1,o1,e2,mod} = idxToCombo(bs.currentIdx, bs.params);
+      let hit=0,tot=0,maxP=0,curP=0,totalPatah=0;
+      const effLimit = Math.max(limit, 4);
+      const _rows=[];
+      for (let idx=1; idx<hist.length&&(idx-1)<effLimit; idx++) {
+        const subH = hist.slice(idx);
+        if (!subH.length) continue;
+        const start = calcFormula(e1,o1,e2,mod,subH);
+        if (start===null) continue;
+        const predStr = makePred(start, nDigit, cols);
+        _rows.push(checkHit(hist[idx-1], predStr, jenis));
+      }
+      _rows.reverse();
+      for (const isHit of _rows) {
+        tot++;
+        if(isHit){hit++;curP=0;}else{curP++;totalPatah++;if(curP>maxP)maxP=curP;}
+      }
+      const minTot = limit<=5?1:2;
+      if (tot<minTot) continue;
+      if (maxPatah===0&&(tot<effLimit||totalPatah>0||curP>0)) continue;
+      const patahVal = maxP;
+      const hitPct = tot>0?Math.round(hit/tot*100):0;
+      if (patahVal<=maxPatah&&hitPct>=minHitPct) {
+        const label = e2!=='-'?`${e1}${o1}${e2}${mod!=='-'?'.'+mod:''}`:`${e1}${mod!=='-'?'.'+mod:''}`;
+        const start0 = calcFormula(e1,o1,e2,mod,hist.slice(0));
+        const predNow = start0!==null?makePred(start0,nDigit,cols):'--';
+        candidates.push({e1,o1,e2,mod,formula:label,acc:tot>0?hit/tot:0,hit,tot,maxP,curP,totalPatah,wbId,jenis,nDigit,predNow,limit,hari:_hariVal});
+        if (candidates.length>_targetN*20) {
+          const seen=new Set(); const deduped=[];
+          for(const c of candidates){const k=c.predNow+'|'+c.jenis;if(!seen.has(k)){seen.add(k);deduped.push(c);}}
+          deduped.sort((a,b)=>b.hit!==a.hit?b.hit-a.hit:a.maxP-b.maxP);
+          candidates=deduped.slice(0,_targetN*10);
+        }
+      }
+    }
+    // Progress
+    let totalProc=0, totalAll=0;
+    for(let i=0;i<10;i++){const s=_batchStates[i];if(!s)continue;totalAll+=s.batchEnd-s.batchStart;totalProc+=Math.min(s.currentIdx,s.batchEnd)-s.batchStart;}
+    document.getElementById('sc-progress').style.width=(totalAll>0?Math.round(totalProc/totalAll*100):0)+'%';
+
+    if (candidates.length>=_targetN&&!_globalDone) {
+      setBtnBatch(bi,'found'); _batchRunning[bi]=false;
+      for(let i=0;i<10;i++) _batchRunning[i]=false;
+      onAllBatchesDone(); return;
+    }
+    if (bs.currentIdx>=bEnd) { _batchRunning[bi]=false; setBtnBatch(bi,'done'); checkGlobalStop(); return; }
+    _batchTimers[bi] = setTimeout(runSlice, 2);
+  }
+  runSlice();
+}
+
+function startScanAll() {
+  const wbId = document.getElementById('sc-pasaran').value;
+  if (!wbId) { alert('Pilih pasaran dulu!'); return; }
+  for(let i=0;i<10;i++){_batchRunning[i]=false;if(_batchTimers[i])clearTimeout(_batchTimers[i]);_batchTimers[i]=null;_batchStates[i]=null;setBtnBatch(i,'idle');}
+  _globalDone=false; scanning=false; candidates=[];
+  document.getElementById('sc-progress').style.width='0%';
+  document.getElementById('btn-scan-all').style.display='none';
+  document.getElementById('btn-stop-all').style.display='block';
+  document.getElementById('result-card').style.display='none';
+  for(let b=1;b<=10;b++) { const bn=b; setTimeout(()=>startBatch(bn,true),(bn-1)*10); }
+}
+
+function stopAllScans() {
+  for(let i=0;i<10;i++) _batchRunning[i]=false;
+  scanning=false;
+  document.getElementById('btn-stop-all').style.display='none';
+  document.getElementById('btn-scan-all').style.display='block';
+  setConsole(`⏹ Dihentikan — ${candidates.length} rumus ditemukan`);
+  if (candidates.length>0) { renderResults(); document.getElementById('result-card').style.display='block'; }
+}
+
+function stopBatch(bi) { _batchRunning[bi]=false; setBtnBatch(bi,'idle'); }
+
+function checkGlobalStop() {
+  if (_batchRunning.every(r=>!r)) onAllBatchesDone();
+}
+
+function onAllBatchesDone() {
+  if (_globalDone) return;
+  _globalDone = true; scanning = false;
+  document.getElementById('btn-stop-all').style.display='none';
+  document.getElementById('btn-scan-all').style.display='block';
+  document.getElementById('btn-scan-all').textContent='🔁 SCAN ULANG';
+  if (candidates.length>0) {
+    const seen=new Set(); const deduped=[];
+    for(const c of candidates){const k=c.predNow+'|'+c.jenis;if(!seen.has(k)){seen.add(k);deduped.push(c);}}
+    deduped.sort((a,b)=>b.hit!==a.hit?b.hit-a.hit:a.maxP-b.maxP);
+    candidates=deduped.slice(0,_targetN);
+    renderResults();
+    document.getElementById('result-card').style.display='block';
+    setConsole(`✅ Selesai — ${candidates.length} rumus ditemukan`);
+  } else {
+    setConsole('⚠ Tidak ada rumus ditemukan — sesuaikan parameter');
+  }
+}
+
+function clearResults() {
+  candidates=[];
+  document.getElementById('result-card').style.display='none';
+  document.getElementById('result-tbody').innerHTML='';
+  document.getElementById('result-count-badge').textContent='0';
+  document.getElementById('btn-scan-all').textContent='📡 SCAN SEMUA';
+  setConsole('🗑 Hasil dihapus');
+}
+
+function renderResults() {
+  const tb = document.getElementById('result-tbody');
+  const badge = document.getElementById('result-count-badge');
+  if (badge) badge.textContent = candidates.length;
+  tb.innerHTML = candidates.map((c,i) => {
+    const trailColor = c.curP>0?'var(--red)':'var(--green)';
+    const trailLabel = c.curP>0?'✗P'+c.curP:'✓HIT';
+    return `<tr>
+      <td><span class="formula" onclick="openTrekFromScan(${i})">${c.formula}</span><br>
+          <span class="tag-jenis">${jenisLabel(c.jenis)}</span></td>
+      <td><span class="pred">${c.predNow}</span></td>
+      <td>${c.limit}</td>
+      <td class="hit-pct">
+        ${c.hit}/${c.tot}
+        <span style="color:var(--green);font-size:9px"> ${Math.round(c.hit/c.tot*100)}%</span><br>
+        <span style="color:${trailColor};font-size:9px;font-weight:700">${trailLabel}</span>
+      </td>
+      <td><button onclick="saveRumus(${i},this)" style="padding:5px 8px;border-radius:6px;border:none;background:rgba(16,185,129,0.15);color:var(--green);font-size:10px;font-weight:700;cursor:pointer">💾</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function jenisLabel(j) {
+  const m={ai_ke:'AI 2D Blkg',ai_ac:'AI 2D Dpn',ai_ck:'AI 2D Tgh',
+    bbfs_ke:'BBFS KE',bbfs_ac:'BBFS AC',bbfs_ck:'BBFS CK',bbfs_4d:'BBFS 4D',
+    pos_e:'Posisi Ek',pos_k:'Posisi Kp',pos_a:'Posisi As',pos_c:'Posisi Cp'};
+  return m[j]||j.toUpperCase();
+}
+
+function getHariLabel(h) {
+  const m={0:'Min',1:'Sen',2:'Sel',3:'Rab',4:'Kam',5:'Jum',6:'Sab'};
+  return m[h]||'';
+}
+
+function saveRumus(idx, btn) {
+  const c = candidates[idx];
+  if (!c) return;
+  const bank = JSON.parse(localStorage.getItem('wb_bank_rms')||'[]');
+  bank.push({
+    id:'rms_'+Date.now(),
+    formula:c.formula, wbId:c.wbId, jenis:c.jenis, nDigit:c.nDigit,
+    limit:c.limit, hari:c.hari, savedAt:new Date().toISOString()
+  });
+  localStorage.setItem('wb_bank_rms', JSON.stringify(bank));
+  if (btn) { btn.textContent='✅'; btn.style.background='rgba(16,185,129,.3)'; btn.disabled=true; }
+  showToast('💾 Disimpan ke Bank!');
+}
+
+// ══════════════════════════════════════════════
+// TREK MODAL
+// ══════════════════════════════════════════════
+let _trekCopyText = '';
+
+function openTrekFromScan(idx) {
+  const c = candidates[idx];
+  if (!c) return;
+  const isMingguan = (c.hari!==''&&c.hari!==null&&c.hari!==undefined);
+  const hist = isMingguan ? getSrHistoryFiltered(c.wbId,150,c.hari) : getSrHistory(c.wbId,150);
+  const {e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod} = bankParseFormula(c.formula);
+  const cols = getColsByDigit(c.nDigit, isMingguan);
+  showTrekModal({e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod}, hist, c.jenis, c.nDigit, c.formula, cols, c.wbId, c.hari, c.limit);
+}
+
+function openTrekFromBank(item) {
+  const hariFilter = (item.hari!==undefined&&item.hari!==null)?item.hari:'';
+  const isMingguan = (hariFilter!==''&&hariFilter!==null);
+  const hist = isMingguan ? getSrHistoryFiltered(item.wbId,150,hariFilter) : getSrHistory(item.wbId,150);
+  const {e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod} = bankParseFormula(item.formula);
+  const cols = getColsByDigit(item.nDigit||2, isMingguan);
+  showTrekModal({e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod}, hist, item.jenis, item.nDigit||2, item.formula, cols, item.wbId, hariFilter, item.limit||14);
+}
+
+function showTrekModal(p, hist, jenis, nDigit, formulaLabel, cols, wbId, hariFilter, limit) {
+  let hitCount=0, patahCount=0;
+  const rows=[];
+  const isMingguan = (hariFilter!==''&&hariFilter!==null&&hariFilter!==undefined);
+
+  const sub0 = hist.slice(0);
+  const start0 = calcFormula(p.e1,p.o1,p.e2,p.mod,sub0,p.o2,p.e3,p.o3,p.e4,p.o4,p.e5,p.o5,p.e6);
+  const pred0 = start0!==null?makePred(start0,nDigit,cols):'--';
+  rows.push({period:hist[0],pred:pred0,hit:false,isNext:true});
+
+  for (let i=1; i<=limit&&i<hist.length; i++) {
+    const subH = hist.slice(i);
+    if (!subH.length) { rows.push({period:hist[i],pred:'--',hit:false}); continue; }
+    const start = calcFormula(p.e1,p.o1,p.e2,p.mod,subH,p.o2,p.e3,p.o3,p.e4,p.o4,p.e5,p.o5,p.e6);
+    const predStr = start!==null?makePred(start,nDigit,cols):'--';
+    const nextResult = hist[i-1];
+    const isHit = start!==null?checkHit(nextResult,predStr,jenis):false;
+    if(isHit) hitCount++; else if(predStr!=='--') patahCount++;
+    rows.push({period:hist[i],pred:predStr,hit:isHit,nextR4d:nextResult});
+  }
+
+  const mktInfo = MARKETS.find(m=>m.id===wbId);
+  const pName = mktInfo?(mktInfo.flag+' '+mktInfo.name):(wbId||'').toUpperCase();
+  const hariSuffix = hariFilter!==''?' ['+getHariLabel(hariFilter)+']':'';
+  document.getElementById('trek-modal-title').textContent = `TREK ${formulaLabel}`;
+  document.getElementById('trek-modal-info').innerHTML =
+    `${pName}${hariSuffix} · ${jenisLabel(jenis)} · `+
+    `<span style="color:var(--green)">✓ ${hitCount}</span> · <span style="color:var(--red)">✗ ${patahCount}</span>`;
+
+  // Terlama di atas, ?? paling bawah — rows[last]=isNext, rows[0]=terlama
+  // rows sudah dibangun: [0]=isNext(terbaru), [1..limit]=terlama->terbaru
+  // Perlu dibalik: terlama di index 0 tampil paling atas, isNext paling bawah
+  const rowsDisplay = [...rows].reverse(); // rows[0]=isNext → pindah ke akhir array, terlama ke awal
+  const body = rowsDisplay.map(row => {
+    if (row.isNext) return `<div class="trek-line">
+      <span class="trek-period" style="color:var(--yellow)">${String(row.period||'').padStart(4,'0')}</span>
+      <span class="trek-pred" style="color:var(--yellow)">${row.pred}</span>
+      <span class="trek-status" style="color:var(--yellow);font-size:11px">??</span></div>`;
+    const ns = String(row.nextR4d||'0000').padStart(4,'0');
+    const K=+ns[2],E=+ns[3],A=+ns[0],C=+ns[1];
+    const targets = getTargets(K,E,A,C,jenis);
+    const predHtml = row.pred.split('').map(d=>{
+      const isH=targets.includes(+d);
+      return `<span style="color:${isH?(row.hit?'var(--green)':'var(--red)'):'var(--muted)'};font-weight:${isH?800:400}">${d}</span>`;
+    }).join('');
+    return `<div class="trek-line">
+      <span class="trek-period">${String(row.period||'').padStart(4,'0')}</span>
+      <span class="trek-pred">${predHtml}</span>
+      <span class="trek-status">${row.hit?'<span class="badge badge-hit">✓</span>':'<span class="badge badge-patah">✗</span>'}</span></div>`;
+  }).join('');
+
+  const modalBody = document.getElementById('trek-modal-body');
+  modalBody.innerHTML = body;
+  document.getElementById('trek-modal').classList.add('open');
+  // Scroll ke bawah supaya ?? langsung kelihatan
+  setTimeout(()=>{ modalBody.scrollTop = modalBody.scrollHeight; }, 60);
+
+  // Buat teks copy — urutan terlama atas, ?? bawah
+  _trekCopyText = `${pName}${hariSuffix}\nFormula: ${formulaLabel} · ${jenisLabel(jenis)}\n` +
+    `HIT: ${hitCount} | PATAH: ${patahCount}\n` +
+    '─'.repeat(30) + '\n' +
+    rowsDisplay.map(r=>`${String(r.period||'').padStart(4,'0')}  ${r.pred.padEnd(nDigit,' ')}  ${r.isNext?'??':r.hit?'✓':'✗'}`).join('\n')+
+    `\n\nPREDIKSI: ${pred0}`;
+}
+
+function closeTrekModal() { document.getElementById('trek-modal').classList.remove('open'); }
+function copyTrekModal() {
+  const box = document.getElementById('copy-box-ov');
+  document.getElementById('copy-ta').value = _trekCopyText;
+  box.style.display='flex';
+}
+
+// ══════════════════════════════════════════════
+// BANK RUMUS
+// ══════════════════════════════════════════════
+function renderBank() {
+  let bank = JSON.parse(localStorage.getItem('wb_bank_rms')||'[]');
+  let changed=false;
+  bank.forEach((item,i)=>{
+    if(!item.id){item.id='rms_idx_'+i;changed=true;}
+    if(!item.nDigit||typeof item.nDigit!=='number'){item.nDigit=2;changed=true;}
+  });
+  if(changed) localStorage.setItem('wb_bank_rms',JSON.stringify(bank));
+  document.getElementById('bank-count-badge').textContent=bank.length+' rumus';
+  const filterPas=(document.getElementById('bank-filter-pas')||{}).value||'';
+  const tbody=document.getElementById('bank-tbody');
+  const emptyEl=document.getElementById('bank-empty');
+  const filtered=filterPas?bank.filter(x=>x.wbId===filterPas):bank;
+  if(filtered.length===0){tbody.innerHTML='';emptyEl.style.display='block';bankUpdateActions();return;}
+  emptyEl.style.display='none';
+  const mMap={};MARKETS.forEach(m=>mMap[m.id]=m);
+
+  tbody.innerHTML=filtered.map((item,idx)=>{
+    const m=mMap[item.wbId]||{};
+    const pred = bankCalcPred(item);
+    const hariF=(item.hari!==undefined&&item.hari!==null)?item.hari:'';
+    const isMin=(hariF!==''&&hariF!==null);
+    const hist=isMin?getSrHistoryFiltered(item.wbId,150,hariF):getSrHistory(item.wbId,150);
+    let hit=0,tot=0,curP=0;
+    if(hist.length>=2){
+      const {e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod}=bankParseFormula(item.formula);
+      const cols=getColsByDigit(item.nDigit||2,isMin);
+      const lim=item.limit||14;
+      for(let i=1;i<=lim&&i<hist.length;i++){
+        const sub=hist.slice(i);if(!sub.length)continue;
+        const st=calcFormula(e1,o1,e2,mod,sub,o2,e3,o3,e4,o4,e5,o5,e6);if(st===null)continue;
+        const pr=makePred(st,item.nDigit||2,cols);
+        const isHit=checkHit(hist[i-1],pr,item.jenis);
+        tot++;if(isHit){hit++;curP=0;}else curP++;
+      }
+    }
+    const statusColor=curP>0?'var(--red)':'var(--green)';
+    const statusLabel=curP>0?'✗P'+curP:'✓HIT';
+    const hariHtml=item.hari!==''&&item.hari!==null&&item.hari!==undefined?
+      `<span class="hari-badge">${getHariLabel(item.hari)}</span>`:'<span style="color:var(--muted);font-size:10px">Harian</span>';
+    const realIdx=bank.findIndex(b=>b.id===item.id);
+    return `<tr>
+      <td style="text-align:center"><input type="checkbox" class="bank-chk" data-id="${item.id}" onchange="bankUpdateActions()"></td>
+      <td style="font-size:10px">
+        <span style="color:var(--blue);font-weight:700">${(m.flag||'🌐')}</span>
+        <span style="font-size:9px;color:var(--sub)">${(m.short||item.wbId)}</span><br>
+        <span style="font-size:9px;color:var(--muted)">${jenisLabel(item.jenis)}</span>
+      </td>
+      <td>${hariHtml}</td>
+      <td>
+        <div class="bank-angka" onclick="openTrekFromBank(${JSON.stringify(item).replace(/"/g,'&quot;')})" style="cursor:pointer">${pred}</div>
+        <div style="font-size:9px;color:var(--sub);font-family:monospace">${item.formula}</div>
+      </td>
+      <td>
+        <span style="color:${statusColor};font-size:10px;font-weight:700">${statusLabel}</span><br>
+        <span style="font-size:9px;color:var(--muted)">${hit}/${tot}</span>
+      </td>
+      <td>
+        <button onclick="bankHapusById('${item.id}')" style="background:none;border:none;color:var(--red);font-size:13px;cursor:pointer">🗑</button>
+        <button onclick="openTrekFromBank(${JSON.stringify(item).replace(/"/g,'&quot;')})" style="background:none;border:none;color:var(--blue);font-size:13px;cursor:pointer">📋</button>
+      </td>
+    </tr>`;
+  }).join('');
+  bankUpdateActions();
+}
+
+function bankUpdateActions() {
+  const checked = document.querySelectorAll('.bank-chk:checked');
+  const n = checked.length;
+  document.getElementById('bact-hapus').disabled = n===0;
+  document.getElementById('bact-trek').disabled = n===0;
+  document.getElementById('bact-rekap').disabled = n===0;
+}
+
+function bankToggleAll(cb) {
+  document.querySelectorAll('.bank-chk').forEach(c=>c.checked=cb.checked);
+  bankUpdateActions();
+}
+
+function bankGetCheckedIds() {
+  return [...document.querySelectorAll('.bank-chk:checked')].map(c=>c.dataset.id);
+}
+
+function bankHapusSelected() {
+  const ids = bankGetCheckedIds();
+  if (!ids.length) return;
+  if (!confirm(`Hapus ${ids.length} rumus?`)) return;
+  let bank = JSON.parse(localStorage.getItem('wb_bank_rms')||'[]');
+  bank = bank.filter(x=>!ids.includes(String(x.id)));
+  localStorage.setItem('wb_bank_rms', JSON.stringify(bank));
+  renderBank(); showToast('🗑 Dihapus');
+}
+
+function bankHapusById(id) {
+  let bank = JSON.parse(localStorage.getItem('wb_bank_rms')||'[]');
+  bank = bank.filter(x=>String(x.id)!==String(id));
+  localStorage.setItem('wb_bank_rms', JSON.stringify(bank));
+  renderBank();
+}
+
+function bankOpenTrek() {
+  const ids = bankGetCheckedIds();
+  if (!ids.length) return;
+  const bank = JSON.parse(localStorage.getItem('wb_bank_rms')||'[]');
+  const item = bank.find(x=>String(x.id)===ids[0]);
+  if (item) openTrekFromBank(item);
+}
+
+function bankOpenRekap() {
+  const ids = bankGetCheckedIds();
+  const bank = JSON.parse(localStorage.getItem('wb_bank_rms')||'[]');
+  const items = bank.filter(x=>ids.includes(String(x.id)));
+  if (!items.length) return;
+  // Hitung semua prediksi dan gabungkan
+  const allDigits=[];
+  let copyText='📊 REKAP PREDIKSI\n';
+  copyText+='─'.repeat(30)+'\n';
+  items.forEach(item=>{
+    const pred=bankCalcPred(item);
+    const mkt=MARKETS.find(m=>m.id===item.wbId)||{flag:'🌐',short:item.wbId};
+    const hStr=item.hari!==''&&item.hari!==null?'['+getHariLabel(item.hari)+']':'';
+    copyText+=`${mkt.flag} ${mkt.short} ${hStr} ${jenisLabel(item.jenis)}: ${pred}\n`;
+    if(pred!=='--') pred.split('').forEach(d=>allDigits.push(+d));
+  });
+  const freq={};
+  allDigits.forEach(d=>{freq[d]=(freq[d]||0)+1;});
+  const sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]);
+  const top4=sorted.slice(0,4).map(x=>x[0]).join('');
+  const top3=sorted.slice(0,3).map(x=>x[0]).join('');
+  copyText+='\n─'.repeat(30)+'\nTOP 4D: '+top4+'\nTOP 3D: '+top3;
+  document.getElementById('copy-ta').value = copyText;
+  document.getElementById('copy-box-ov').style.display='flex';
+}
+
+function bankShowImport() {
+  const kode=(document.getElementById('bank-inp-code').value||'').trim();
+  if(!kode) return;
+  const parsed=bankParseKode(kode);
+  // Set form
+  const pasEl=document.getElementById('bfrm-pasaran');
+  if(pasEl) pasEl.value=parsed.wbId;
+  const jenisEl=document.getElementById('bfrm-jenis');
+  if(jenisEl) jenisEl.value=parsed.jenis;
+  document.getElementById('bfrm-limit').value=parsed.limit||14;
+  document.getElementById('bfrm-digit').value=parsed.digit||2;
+  bankUpdateImportPreview();
+  document.getElementById('bank-imp-form').classList.add('open');
+}
+
+function bankUpdateImportPreview() {
+  const kode=(document.getElementById('bank-inp-code').value||'').trim();
+  if(!kode){document.getElementById('bfrm-preview').textContent='Formula: --';return;}
+  const parsed=bankParseKode(kode);
+  const wbId=(document.getElementById('bfrm-pasaran')||{}).value||parsed.wbId;
+  const jenis=(document.getElementById('bfrm-jenis')||{}).value||parsed.jenis;
+  const nDigit=parseInt(document.getElementById('bfrm-digit').value)||2;
+  const hariF=parsed.hari||'';
+  const isMin=(hariF!==''&&hariF!==null);
+  const hist=isMin?getSrHistoryFiltered(wbId,150,hariF):getSrHistory(wbId,150);
+  if(hist.length<2){document.getElementById('bfrm-preview').textContent='Formula: (data kurang)';return;}
+  const {e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod}=bankParseFormula(parsed.formula);
+  const cols=getColsByDigit(nDigit,isMin);
+  const start=calcFormula(e1,o1,e2,mod,hist.slice(0),o2,e3,o3,e4,o4,e5,o5,e6);
+  const pred=start!==null?makePred(start,nDigit,cols):'--';
+  document.getElementById('bfrm-preview').textContent=`Formula: ${parsed.formula} → ${pred}`;
+}
+
+function bankHideImport() { document.getElementById('bank-imp-form').classList.remove('open'); }
+
+function bankDoImport() {
+  const kode=(document.getElementById('bank-inp-code').value||'').trim();
+  if(!kode){showToast('⚠ Kode kosong!');return;}
+  const parsed=bankParseKode(kode);
+  const wbId=document.getElementById('bfrm-pasaran').value||parsed.wbId;
+  const jenis=document.getElementById('bfrm-jenis').value||parsed.jenis;
+  const limit=parseInt(document.getElementById('bfrm-limit').value)||14;
+  const nDigit=parseInt(document.getElementById('bfrm-digit').value)||2;
+  const bank=JSON.parse(localStorage.getItem('wb_bank_rms')||'[]');
+  bank.push({id:'rms_'+Date.now(),formula:parsed.formula,wbId,jenis,nDigit,limit,hari:parsed.hari||'',rawKode:kode,savedAt:new Date().toISOString()});
+  localStorage.setItem('wb_bank_rms',JSON.stringify(bank));
+  bankHideImport();
+  document.getElementById('bank-inp-code').value='';
+  renderBank();
+  showToast('✅ Berhasil disimpan!');
+}
+
+// ══════════════════════════════════════════════
+// MANUAL TAB
+// ══════════════════════════════════════════════
+let mnFrowCount = 1;
+
+// ══════════════════════════════════════════════
+// MANUAL TAB - ELEMEN FULL
+// ══════════════════════════════════════════════
+const ELEMS_FULL = [
+  '-',
+  'A1','A2','A3','A4','A5','A6','A7','A8','A9','A10',
+  'C1','C2','C3','C4','C5','C6','C7','C8','C9','C10',
+  'K1','K2','K3','K4','K5','K6','K7','K8','K9','K10',
+  'E1','E2','E3','E4','E5','E6','E7','E8','E9','E10',
+  'J1','J2','J3','J4','J5','J6','J7','J8','J9','J10',
+  'Jt1','Jt2','Jt3','Jt4','Jt5','Jt6','Jt7','Jt8','Jt9','Jt10',
+  'Jd1','Jd2','Jd3','Jd4','Jd5','Jd6','Jd7','Jd8','Jd9','Jd10',
+  'Js1','Js2','Js3','Js4','Js5','Js6','Js7','Js8','Js9','Js10',
+  'J3D1','J3D2','J3D3','J3D4','J3D5','J3D6','J3D7','J3D8','J3D9','J3D10',
+  'J4D1','J4D2','J4D3','J4D4','J4D5','J4D6','J4D7','J4D8','J4D9','J4D10',
+];
+const MODS_ALL = ['-','ix','ty','ml','mb','m0','m1','m2','m3','m4','m5','m6','m7','m8','m9',
+  'm10','m11','m12','m13','m14','m15','m16','m17','m18','m19'];
+
+let _mnRefVisible = true;
+
+// Init semua select elemen & mod di tab manual
+function initManualSlots() {
+  const eOpts = ELEMS_FULL.map(e=>`<option value="${e}">${e}</option>`).join('');
+  const mOpts = MODS_ALL.map(m=>`<option value="${m}">${m}</option>`).join('');
+  document.querySelectorAll('.mn-elem').forEach(el=>{ el.innerHTML=eOpts; el.value='-'; });
+  document.querySelectorAll('.mn-mod').forEach(el=>{ el.innerHTML=mOpts; el.value='-'; });
+  // Default slot 0 = E1
+  const e0 = document.querySelector('.mn-elem[data-slot="0"]');
+  if(e0) e0.value='E1';
+}
+
+function mnJenisChange() {
+  const jenis = document.getElementById('mn-jenis').value;
+  const dm = document.getElementById('mn-digit-mode');
+  if(jenis==='bbfs_4d') dm.value='4';
+  else if(jenis.startsWith('pos_')) dm.value='1';
+  else dm.value='auto';
+  mnDigitModeChange();
+}
+
+function mnDigitModeChange() {
+  const mode = document.getElementById('mn-digit-mode').value;
+  const jenis = document.getElementById('mn-jenis').value;
+  const isMin = document.getElementById('mn-hari').value !== '';
+  let nDigit;
+  if(mode==='auto') {
+    if(jenis==='bbfs_4d') nDigit=4;
+    else if(jenis.startsWith('pos_')) nDigit=1;
+    else if(jenis.startsWith('bbfs_')) nDigit=2;
+    else nDigit=2;
+  } else {
+    nDigit = parseInt(mode)||2;
+  }
+  document.getElementById('mn-digit').value = nDigit;
+  const lbl = document.getElementById('mn-digit-label');
+  if(lbl) lbl.textContent = nDigit;
+  mnBuildPreview();
+}
+
+function mnAutoLoad(slot) {
+  const kode=(document.getElementById('mn-kode-1').value||'').trim();
+  if(!kode||!_rjData) return;
+  const parsed=bankParseKode(kode);
+  // Isi form dari kode
+  const pasEl=document.getElementById('mn-pasaran');
+  if(pasEl&&parsed.wbId) pasEl.value=parsed.wbId;
+  const jenisEl=document.getElementById('mn-jenis');
+  if(jenisEl&&parsed.jenis) jenisEl.value=parsed.jenis;
+  const limitEl=document.getElementById('mn-limit');
+  if(limitEl) limitEl.value=parsed.limit||15;
+  const digitEl=document.getElementById('mn-digit');
+  if(digitEl) digitEl.value=parsed.digit||2;
+  // Parse formula ke slots
+  const {e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod} = bankParseFormula(parsed.formula);
+  const slots = [
+    {e:e1,o:o1},{e:e2,o:o2},{e:e3,o:o3},{e:e4,o:o4},{e:e5,o:o5},{e:e6,o:'none'}
+  ];
+  for(let i=0;i<4;i++){
+    const eEl=document.querySelector(`.mn-elem[data-slot="${i}"]`);
+    const mEl=document.querySelector(`.mn-mod[data-slot="${i}"]`);
+    const oEl=document.querySelector(`.mn-op[data-slot="${i}"]`);
+    const sl=slots[i];
+    if(eEl){
+      // pisahkan mod suffix dari elem
+      let base=sl.e||'-', eMod='-';
+      for(const mo of MODS_ALL.slice(1).sort((a,b)=>b.length-a.length)){
+        if(base!=='-'&&base.endsWith(mo)&&base.length>mo.length&&/\d/.test(base[base.length-mo.length-1])){
+          eMod=mo; base=base.slice(0,base.length-mo.length); break;
+        }
+      }
+      eEl.value=base; if(mEl) mEl.value=eMod;
+    }
+    // op dari slot sebelumnya
+    if(i>0&&oEl&&slots[i-1]){
+      const prevOp=slots[i-1].o;
+      oEl.value=(prevOp==='+')? '+' : (prevOp==='-')? '-' : (prevOp==='.')? '.' : 'none';
+    }
+    if(i===0&&oEl) oEl.value='none';
+  }
+  mnBuildPreview();
+}
+
+function mnLoad(slot) {
+  const kode=(document.getElementById('mn-kode-1').value||'').trim();
+  if(!kode){showToast('⚠ Kode kosong!');return;}
+  mnAutoLoad(1);
+  setTimeout(()=>{
+    const formula=getBuilderFormula();
+    const wbId=document.getElementById('mn-pasaran').value;
+    const jenis=document.getElementById('mn-jenis').value;
+    const nDigit=parseInt(document.getElementById('mn-digit').value)||2;
+    const limit=parseInt(document.getElementById('mn-limit').value)||15;
+    const hariF=document.getElementById('mn-hari').value;
+    if(!wbId){showToast('⚠ Pasaran kosong!');return;}
+    mnRenderTrekInline(formula,wbId,jenis,nDigit,limit,hariF);
+  }, 80);
+}
+
+function mnBuilderSave() {
+  const formula=getBuilderFormula();
+  if(!formula){showToast('⚠ Formula kosong!');return;}
+  const wbId=document.getElementById('mn-pasaran').value;
+  if(!wbId){showToast('⚠ Pilih pasaran!');return;}
+  const jenis=document.getElementById('mn-jenis').value;
+  const nDigit=parseInt(document.getElementById('mn-digit').value)||2;
+  const limit=parseInt(document.getElementById('mn-limit').value)||15;
+  const hariF=document.getElementById('mn-hari').value;
+  const bank=JSON.parse(localStorage.getItem('wb_bank_rms')||'[]');
+  bank.push({id:'rms_'+Date.now(),formula,wbId,jenis,nDigit,limit,hari:hariF,savedAt:new Date().toISOString()});
+  localStorage.setItem('wb_bank_rms',JSON.stringify(bank));
+  showToast('💾 Disimpan ke Bank!');
+}
+
+function mnResetBuilder() {
+  document.getElementById('mn-kode-1').value='';
+  document.querySelectorAll('.mn-elem').forEach(el=>el.value='-');
+  document.querySelectorAll('.mn-mod').forEach(el=>el.value='-');
+  document.querySelectorAll('.mn-op').forEach(el=>el.value='none');
+  const e0=document.querySelector('.mn-elem[data-slot="0"]');
+  if(e0) e0.value='E1';
+  document.getElementById('mn-trek-inline').innerHTML='<div style="color:var(--muted);padding:20px;text-align:center">— Reset —</div>';
+  document.getElementById('mn-key-display').textContent='--';
+}
+
+function mnToggleRef() {
+  _mnRefVisible=!_mnRefVisible;
+  const btn=document.getElementById('mn-ref-btn');
+  if(btn) btn.textContent=_mnRefVisible?'Sembunyikan Referensi':'Tampilkan Referensi';
+  mnBuildPreview();
+}
+
+function getBuilderFormula() {
+  let formula='';
+  let prevOp=null;
+  for(let i=0;i<4;i++){
+    const eEl=document.querySelector(`.mn-elem[data-slot="${i}"]`);
+    const mEl=document.querySelector(`.mn-mod[data-slot="${i}"]`);
+    const oEl=document.querySelector(`.mn-op[data-slot="${i}"]`);
+    if(!eEl) continue;
+    const elem=eEl.value; if(!elem||elem==='-') continue;
+    const mod=mEl?mEl.value:'-';
+    // op dari slot sebelumnya (op[i-1])
+    if(i>0 && prevOp && prevOp!=='none') formula+=prevOp;
+    formula+=elem;
+    if(mod&&mod!=='-') formula+=mod;
+    prevOp=oEl?oEl.value:'none';
+  }
+  return formula;
+}
+
+function mnBuildPreview() {
+  const formula=getBuilderFormula();
+  const wbId=document.getElementById('mn-pasaran').value;
+  const jenis=document.getElementById('mn-jenis').value;
+  const nDigit=parseInt(document.getElementById('mn-digit').value)||2;
+  const hariF=document.getElementById('mn-hari').value;
+  const limit=parseInt(document.getElementById('mn-limit').value)||15;
+  // Update labels
+  const jenisLbl=document.getElementById('mn-jenis-label');
+  if(jenisLbl) jenisLbl.textContent=document.getElementById('mn-jenis').options[document.getElementById('mn-jenis').selectedIndex]?.text||jenis;
+  const digitLbl=document.getElementById('mn-digit-label');
+  if(digitLbl) digitLbl.textContent=nDigit;
+  // KEY display
+  const keyEl=document.getElementById('mn-key-display');
+  if(keyEl) keyEl.textContent=formula||'--';
+  if(!formula||!wbId||!_rjData){
+    document.getElementById('mn-trek-inline').innerHTML='<div style="color:var(--muted);padding:20px;text-align:center">— Pilih pasaran &amp; elemen —</div>';
+    return;
+  }
+  mnRenderTrekInline(formula,wbId,jenis,nDigit,limit,hariF);
+}
+
+function mnRenderTrekInline(formula,wbId,jenis,nDigit,limit,hariF) {
+  const isMin=(hariF!==''&&hariF!==null&&hariF!==undefined);
+  const hist=isMin?getSrHistoryFiltered(wbId,150,hariF):getSrHistory(wbId,150);
+  const trekDiv=document.getElementById('mn-trek-inline');
+  if(hist.length<2){trekDiv.innerHTML='<div style="color:var(--red);padding:10px">⚠ Data kurang</div>';return;}
+  const {e1,o1,e2,o2,e3,o3,e4,o4,e5,o5,e6,mod}=bankParseFormula(formula);
+  const cols=getColsByDigit(nDigit,isMin);
+  let hitCount=0, patahCount=0, curP=0;
+  const rows=[];
+  // Baris terbaru (prediksi berikutnya)
+  const start0=calcFormula(e1,o1,e2,mod,hist.slice(0),o2,e3,o3,e4,o4,e5,o5,e6);
+  const pred0=start0!==null?makePred(start0,nDigit,cols):'--';
+  rows.push({r4d:hist[0],pred:pred0,hit:null,isNext:true});
+  // Riwayat
+  for(let i=1;i<=Math.min(limit,hist.length-1);i++){
+    const sub=hist.slice(i);
+    const st=calcFormula(e1,o1,e2,mod,sub,o2,e3,o3,e4,o4,e5,o5,e6);
+    const pr=st!==null?makePred(st,nDigit,cols):'--';
+    const isHit=st!==null?checkHit(hist[i-1],pr,jenis):false;
+    if(isHit){hitCount++;curP=0;}else{patahCount++;curP++;}
+    rows.push({r4d:hist[i],pred:pr,hit:isHit,curP:curP,nextR4d:hist[i-1]});
+  }
+  // Render: terlama di atas, ?? paling bawah
+  // rows[0]=isNext, rows[1..n]=terlama->terbaru → reverse → terlama[0], isNext[last]
+  const rowsDisp = [...rows].reverse();
+  const mktInfo=MARKETS.find(m=>m.id===wbId)||{name:wbId};
+  const hariSuffix=hariF!==''?' ['+getHariLabel(hariF)+']':'';
+  let html=`<div style="font-size:12px;color:var(--sub);margin-bottom:8px">${mktInfo.name}${hariSuffix} · <span style="color:var(--green)">✓${hitCount}</span> · <span style="color:var(--red)">✗${patahCount}</span></div>`;
+  for(const row of rowsDisp){
+    const r4d=String(row.r4d||'0000').padStart(4,'0');
+    const A=+r4d[0],C=+r4d[1],K=+r4d[2],E=+r4d[3];
+    const targets=getTargets(K,E,A,C,jenis);
+    if(row.isNext){
+      html+=`<div style="color:var(--yellow);font-weight:800">${r4d} : <span style="letter-spacing:3px">${row.pred}</span> <span style="font-size:11px">??</span></div>`;
+    } else {
+      const predHtml=row.pred.split('').map(d=>{
+        const isH=targets.includes(+d);
+        return isH ? `<span style="color:${row.hit?'var(--green)':'var(--red)'};font-weight:900">${d}</span>` : d;
+      }).join('');
+      const statusColor=row.hit?'var(--green)':'var(--red)';
+      if(_mnRefVisible){
+        html+=`<div><span style="color:var(--sub)">${r4d}</span> : <span style="letter-spacing:3px">${predHtml}</span> <span style="font-size:10px;color:${statusColor}">ai</span></div>`;
+      } else {
+        html+=`<div><span style="color:var(--sub)">${r4d}</span> : <span style="letter-spacing:3px">${predHtml}</span></div>`;
+      }
+    }
+  }
+  trekDiv.innerHTML=html;
+  // Scroll ke bawah supaya ?? kelihatan langsung
+  trekDiv.scrollTop = trekDiv.scrollHeight;
+  // Update key display
+  const keyEl=document.getElementById('mn-key-display');
+  if(keyEl) keyEl.textContent=formula;
+}
+
+// ══════════════════════════════════════════════
+// LANJUTAN UI
+// ══════════════════════════════════════════════
+let lanjutanOpen = false;
+
+function toggleLanjutan() {
+  lanjutanOpen = !lanjutanOpen;
+  document.getElementById('lanjutan-body').style.display = lanjutanOpen?'block':'none';
+  document.getElementById('lanjutan-arrow').textContent = lanjutanOpen?'▲':'▼';
+}
+
+function getChecked(containerId) {
+  return [...document.querySelectorAll(`#${containerId} input:checked`)].map(c=>c.value);
+}
+
+function initLanjutanUI() {
+  // Key checks (1-8)
+  const keyDiv=document.getElementById('key-checks');
+  if(keyDiv&&keyDiv.innerHTML==='') {
+    keyDiv.innerHTML=[1,2,3,4,5,6,7,8,9,10].map(n=>
+      `<label style="display:flex;align-items:center;gap:3px;font-size:12px;color:var(--text);cursor:pointer;background:var(--card2);padding:4px 8px;border-radius:6px;border:1px solid var(--border)">
+        <input type="checkbox" class="key-chk" value="${n}" ${n<=5?'checked':''} style="accent-color:var(--yellow)"> ${n}
+      </label>`
+    ).join('');
+  }
+  // Mod checks
+  const mods=['-','ix','ty','ml','mb','m0','m1','m3','m5','m7','m8','m9'];
+  function buildModChecks(id, defaultOnes=['-','ix','ty','ml','mb']) {
+    const div=document.getElementById(id);
+    if(div&&div.innerHTML==='') {
+      div.innerHTML=mods.map(m=>
+        `<label style="display:flex;align-items:center;gap:3px;font-size:11px;cursor:pointer;background:var(--card2);padding:3px 7px;border-radius:6px;border:1px solid var(--border);color:var(--sub)">
+          <input type="checkbox" value="${m}" ${defaultOnes.includes(m)?'checked':''} style="accent-color:var(--yellow)"> ${m}
+        </label>`
+      ).join('');
+    }
+  }
+  buildModChecks('sk1-checks');
+  buildModChecks('sk2-checks');
+  buildModChecks('hasil-checks');
+  // Sembunyikan lanjutan by default
+  document.getElementById('lanjutan-body').style.display='none';
+}
+
+function setShortcut(mode) {
+  const allKeys = [...document.querySelectorAll('.key-chk')];
+  const allSk1 = [...document.querySelectorAll('#sk1-checks input')];
+  const allSk2 = [...document.querySelectorAll('#sk2-checks input')];
+  const allHasil = [...document.querySelectorAll('#hasil-checks input')];
+  if(mode==='fast') {
+    allKeys.forEach(c=>c.checked=[1,2,3].includes(parseInt(c.value)));
+    allSk1.forEach(c=>c.checked=['-'].includes(c.value));
+    allSk2.forEach(c=>c.checked=['-'].includes(c.value));
+    allHasil.forEach(c=>c.checked=['-','ix','ml'].includes(c.value));
+  } else if(mode==='normal') {
+    allKeys.forEach(c=>c.checked=[1,2,3,4,5].includes(parseInt(c.value)));
+    allSk1.forEach(c=>c.checked=['-','ix','ty','ml','mb'].includes(c.value));
+    allSk2.forEach(c=>c.checked=['-','ix','ty','ml','mb'].includes(c.value));
+    allHasil.forEach(c=>c.checked=['-','ix','ty','ml','mb'].includes(c.value));
+  } else if(mode==='deep') {
+    allKeys.forEach(c=>c.checked=true);
+    allSk1.forEach(c=>c.checked=true);
+    allSk2.forEach(c=>c.checked=true);
+    allHasil.forEach(c=>c.checked=true);
+  } else if(mode==='reset') {
+    allKeys.forEach(c=>c.checked=[1,2,3,4,5].includes(parseInt(c.value)));
+    allSk1.forEach(c=>c.checked=['-','ix','ty','ml','mb'].includes(c.value));
+    allSk2.forEach(c=>c.checked=['-','ix','ty','ml','mb'].includes(c.value));
+    allHasil.forEach(c=>c.checked=['-','ix','ty','ml','mb'].includes(c.value));
+    document.querySelector('input[name="op-mode"][value="all"]').checked=true;
+  }
+}
+
+function scJenisChange() {
+  const jenis=document.getElementById('sc-jenis').value;
+  const digitEl=document.getElementById('sc-digit');
+  if(jenis.startsWith('bbfs_4d')) digitEl.value='4';
+  else if(jenis.startsWith('bbfs_')||jenis.startsWith('ai_')) digitEl.value='2';
+  else if(jenis.startsWith('pos_')) digitEl.value='1';
+}
+
+function scUpdateHari() {}
+
+// ══════════════════════════════════════════════
+// COPY UTILITY
+// ══════════════════════════════════════════════
+function doCopy(txt, btn) {
+  try{navigator.clipboard.writeText(txt).then(()=>{
+    if(btn){const o=btn.textContent;btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent=o,1500);}
+    showToast('✅ Tersalin!');
+  });}catch(e){
+    // fallback
+    const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);showToast('✅ Tersalin!');
+  }
+}
+
+// ══════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════
+function switchTab(tab) {
+  ['scanner','manual','bank'].forEach(t=>{
+    document.getElementById('tab-'+t).style.display=t===tab?'block':'none';
+    const btn=document.getElementById('tab-btn-'+t);
+    if(btn){btn.classList.toggle('active',t===tab);}
+  });
+  if(tab==='bank') renderBank();
+  if(tab==='manual') mnBuildPreview();
+}
+
+// ══════════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════════
+function showToast(msg, dur=2000) {
+  const old=document.querySelector('.toast');
+  if(old) old.remove();
+  const el=document.createElement('div');
+  el.className='toast';el.textContent=msg;
+  document.body.appendChild(el);
+  setTimeout(()=>{el.style.opacity='0';el.style.transition='opacity .3s';setTimeout(()=>el.remove(),300);},dur);
+}
+
+// ══════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════
+function initPasaranDropdowns() {
+  const ids=['sc-pasaran','mn-pasaran','bfrm-pasaran','bank-filter-pas'];
+  ids.forEach(id=>{
+    const sel=document.getElementById(id);
+    if(!sel)return;
+    const isFilter=id==='bank-filter-pas';
+    let opts=isFilter?'<option value="">-- Semua Pasaran --</option>':'';
+    MARKETS.forEach(m=>{
+      if(!_rjData||!_rjData[m.id])return;
+      opts+=`<option value="${m.id}">${m.flag} ${m.name}</option>`;
+    });
+    sel.innerHTML=opts;
+  });
+  // Init manual slots elemen
+  initManualSlots();
+  // Init bank filter
+  initPasaranFilterBank();
+}
+
+function initPasaranFilterBank() {
+  const sel=document.getElementById('bank-filter-pas');
+  if(!sel)return;
+  let opts='<option value="">-- Semua Pasaran --</option>';
+  MARKETS.forEach(m=>{
+    if(!_rjData||!_rjData[m.id])return;
+    opts+=`<option value="${m.id}">${m.flag} ${m.name}</option>`;
+  });
+  sel.innerHTML=opts;
+}
+
+// Jalankan
+document.addEventListener('DOMContentLoaded', ()=>{
+  initLanjutanUI();
+  loadData();
+  // Auto refresh setiap 90 menit
+  setInterval(()=>{
+    try{const raw=localStorage.getItem(CACHE_KEY);if(raw){const{ts}=JSON.parse(raw);if(Date.now()-ts>CACHE_TTL)fetchData();}}catch(e){}
+  }, 15*60*1000);
+});
+</script>
+</body>
+</html>
