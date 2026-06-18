@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCAN 4 – WONGBAGUS PREDICTION</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#f59e0b;--gold-light:#fcd34d;--gold-dark:#b45309;--red:#dc2626;--bg:#07070e;--bg2:#0f0f1a;--bg3:#15152a;--card:#111128;--border:rgba(245,158,11,0.15);--text:#e2e2f0;--muted:#6b6b8a;--green:#10b981;--cyan:#00d4ff;--purple:#9b5de5;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+    header{position:sticky;top:0;z-index:99;background:rgba(7,7,14,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 16px;}
+    .header-inner{display:flex;align-items:center;gap:12px;}
+    .back-btn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:10px;padding:7px 14px;color:var(--gold);font-size:13px;font-weight:700;text-decoration:none;}
+    .logo-text{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;background:linear-gradient(90deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .main{max-width:700px;margin:0 auto;padding:20px 14px 60px;}
+    .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,7vw,38px);letter-spacing:2px;color:var(--green);margin-bottom:4px;}
+    .page-sub{font-size:12px;color:var(--muted);margin-bottom:22px;}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;}
+    .card-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--gold);margin-bottom:14px;}
+    select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;outline:none;margin-bottom:10px;}
+    .btn{width:100%;background:linear-gradient(135deg,var(--green),#059669);border:none;border-radius:12px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#000;cursor:pointer;transition:opacity .2s;}
+    .btn:hover{opacity:.85;}
+    .btn:disabled{opacity:.4;cursor:not-allowed;}
+    .spinner{width:36px;height:36px;border:3px solid rgba(16,185,129,.2);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .loading-wrap{text-align:center;padding:30px 0;display:none;}
+    .loading-wrap.show{display:block;}
+    /* Shio */
+    .shio-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px;}
+    .shio-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:10px 6px;text-align:center;}
+    .shio-box.top{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.35);}
+    .shio-emoji{font-size:24px;line-height:1;margin-bottom:4px;}
+    .shio-name{font-size:10px;color:var(--muted);font-weight:700;margin-bottom:2px;}
+    .shio-cnt{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--green);}
+    /* Genap/ganjil */
+    .gg-bar{display:flex;height:30px;border-radius:8px;overflow:hidden;margin-top:10px;}
+    .gg-genap{background:rgba(245,158,11,.5);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#000;transition:width .4s;}
+    .gg-ganjil{background:rgba(37,99,235,.5);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff;transition:width .4s;}
+    /* Besar/kecil */
+    .bk-bar{display:flex;height:30px;border-radius:8px;overflow:hidden;margin-top:10px;}
+    .bk-besar{background:rgba(220,38,38,.5);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff;transition:width .4s;}
+    .bk-kecil{background:rgba(16,185,129,.5);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#000;transition:width .4s;}
+    .stat-pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+    .stat-half{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px;text-align:center;}
+    .stat-half-val{font-family:'Bebas Neue',sans-serif;font-size:32px;}
+    .stat-half-lbl{font-size:11px;color:var(--muted);font-weight:700;margin-top:2px;}
+    footer{text-align:center;padding:20px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);}
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="back-btn">← Kembali</a>
+    <div class="logo-text">WONGBAGUS</div>
+  </div>
+</header>
+<div class="main">
+  <div class="page-title">🐉 SCAN 4</div>
+  <div class="page-sub">Analisa Shio, Genap/Ganjil & Besar/Kecil</div>
+  <div class="card">
+    <div class="card-title">⚙️ Pengaturan</div>
+    <select id="marketSel"><option value="">— Pilih Pasaran —</option></select>
+    <select id="periodSel">
+      <option value="12" selected>12 Periode</option>
+      <option value="24">24 Periode</option>
+      <option value="48">48 Periode</option>
+    </select>
+    <button class="btn" id="scanBtn" onclick="doScan()">🐉 ANALISA SHIO</button>
+  </div>
+  <div class="loading-wrap" id="loadingWrap">
+    <div class="spinner"></div>
+    <div style="color:var(--muted);font-size:13px;font-weight:700;">Menghitung shio...</div>
+  </div>
+  <div id="resultSection"></div>
+</div>
+<footer>WONGBAGUS PREDICTION &copy; 2026</footer>
+<script>
+const RESULT_URL='https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json';
+let allData=null;
+async function loadData(){if(allData)return allData;const r=await fetch(RESULT_URL);allData=await r.json();return allData;}
+async function populateMarkets(){
+  try{const data=await loadData();const sel=document.getElementById('marketSel');Object.keys(data).forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);});}catch(e){}
+}
+
+const SHIO=[
+  {name:'Tikus',emoji:'🐀',nums:[1,13,25,37,49,61,73,85,97]},
+  {name:'Kerbau',emoji:'🐂',nums:[2,14,26,38,50,62,74,86,98]},
+  {name:'Macan',emoji:'🐯',nums:[3,15,27,39,51,63,75,87,99]},
+  {name:'Kelinci',emoji:'🐇',nums:[4,16,28,40,52,64,76,88,0]},
+  {name:'Naga',emoji:'🐉',nums:[5,17,29,41,53,65,77,89]},
+  {name:'Ular',emoji:'🐍',nums:[6,18,30,42,54,66,78,90]},
+  {name:'Kuda',emoji:'🐴',nums:[7,19,31,43,55,67,79,91]},
+  {name:'Kambing',emoji:'🐑',nums:[8,20,32,44,56,68,80,92]},
+  {name:'Monyet',emoji:'🐒',nums:[9,21,33,45,57,69,81,93]},
+  {name:'Ayam',emoji:'🐓',nums:[10,22,34,46,58,70,82,94]},
+  {name:'Anjing',emoji:'🐕',nums:[11,23,35,47,59,71,83,95]},
+  {name:'Babi',emoji:'🐖',nums:[12,24,36,48,60,72,84,96]},
+];
+function getShio(n2d){const n=parseInt(n2d);return SHIO.findIndex(s=>s.nums.includes(n));}
+
+async function doScan(){
+  const marketId=document.getElementById('marketSel').value;
+  const period=parseInt(document.getElementById('periodSel').value);
+  if(!marketId){alert('Pilih pasaran!');return;}
+  document.getElementById('loadingWrap').classList.add('show');
+  document.getElementById('scanBtn').disabled=true;
+  document.getElementById('resultSection').innerHTML='';
+  try{
+    const data=await loadData();
+    const market=data[marketId];
+    if(!market||!market.results||market.results.length<5)throw new Error('Data kurang');
+    const results=market.results.slice(0,period);
+    const twoDList=results.map(r=>parseInt(String(r.result||r.number||r).padStart(4,'0').slice(2)));
+    
+    // Shio freq
+    const shioFreq=Array(12).fill(0);
+    twoDList.forEach(n=>{const idx=getShio(n);if(idx>=0)shioFreq[idx]++;});
+    const shioSorted=[...shioFreq.map((c,i)=>({...SHIO[i],count:c,idx:i}))].sort((a,b)=>b.count-a.count);
+    const maxShio=Math.max(...shioFreq);
+    
+    // Genap ganjil
+    const genap=twoDList.filter(n=>n%2===0).length;
+    const ganjil=twoDList.length-genap;
+    const genapPct=Math.round(genap/twoDList.length*100);
+    
+    // Besar kecil
+    const besar=twoDList.filter(n=>n>=50).length;
+    const kecil=twoDList.length-besar;
+    const besarPct=Math.round(besar/twoDList.length*100);
+    
+    const shioHTML=shioSorted.map((s,i)=>`
+      <div class="shio-box${i<3?' top':''}">
+        <div class="shio-emoji">${s.emoji}</div>
+        <div class="shio-name">${s.name}</div>
+        <div class="shio-cnt">${s.count}</div>
+      </div>`).join('');
+
+    document.getElementById('resultSection').innerHTML=`
+      <div class="card">
+        <div class="card-title">🐉 Shio Terpanas — ${marketId}</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:8px;">${period} periode · hijau = top 3</div>
+        <div class="shio-grid">${shioHTML}</div>
+      </div>
+      <div class="card">
+        <div class="card-title">⚖️ Genap vs Ganjil</div>
+        <div class="stat-pair">
+          <div class="stat-half"><div class="stat-half-val" style="color:var(--gold);">${genap}</div><div class="stat-half-lbl">GENAP</div></div>
+          <div class="stat-half"><div class="stat-half-val" style="color:var(--cyan);">${ganjil}</div><div class="stat-half-lbl">GANJIL</div></div>
+        </div>
+        <div class="gg-bar" style="margin-top:12px;">
+          <div class="gg-genap" style="width:${genapPct}%;">G ${genapPct}%</div>
+          <div class="gg-ganjil" style="width:${100-genapPct}%;">J ${100-genapPct}%</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📏 Besar vs Kecil</div>
+        <div class="stat-pair">
+          <div class="stat-half"><div class="stat-half-val" style="color:#f87171;">${besar}</div><div class="stat-half-lbl">BESAR (≥50)</div></div>
+          <div class="stat-half"><div class="stat-half-val" style="color:var(--green);">${kecil}</div><div class="stat-half-lbl">KECIL (&lt;50)</div></div>
+        </div>
+        <div class="bk-bar" style="margin-top:12px;">
+          <div class="bk-besar" style="width:${besarPct}%;">B ${besarPct}%</div>
+          <div class="bk-kecil" style="width:${100-besarPct}%;">K ${100-besarPct}%</div>
+        </div>
+      </div>`;
+  }catch(e){
+    document.getElementById('resultSection').innerHTML=`<div class="card" style="border-color:rgba(220,38,38,.3);color:#f87171;">❌ Error: ${e.message}</div>`;
+  }
+  document.getElementById('loadingWrap').classList.remove('show');
+  document.getElementById('scanBtn').disabled=false;
+}
+populateMarkets();
+</script>
+</body>
+</html>

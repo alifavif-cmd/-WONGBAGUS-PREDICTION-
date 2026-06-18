@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCAN 3 – WONGBAGUS PREDICTION</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#f59e0b;--gold-light:#fcd34d;--gold-dark:#b45309;--red:#dc2626;--bg:#07070e;--bg2:#0f0f1a;--bg3:#15152a;--card:#111128;--border:rgba(245,158,11,0.15);--text:#e2e2f0;--muted:#6b6b8a;--green:#10b981;--cyan:#00d4ff;--purple:#9b5de5;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+    header{position:sticky;top:0;z-index:99;background:rgba(7,7,14,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 16px;}
+    .header-inner{display:flex;align-items:center;gap:12px;}
+    .back-btn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:10px;padding:7px 14px;color:var(--gold);font-size:13px;font-weight:700;text-decoration:none;}
+    .logo-text{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;background:linear-gradient(90deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .main{max-width:700px;margin:0 auto;padding:20px 14px 60px;}
+    .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,7vw,38px);letter-spacing:2px;color:#a78bfa;margin-bottom:4px;}
+    .page-sub{font-size:12px;color:var(--muted);margin-bottom:22px;}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;}
+    .card-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--gold);margin-bottom:14px;}
+    select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;outline:none;margin-bottom:10px;}
+    select:focus{border-color:var(--gold);}
+    .btn{width:100%;background:linear-gradient(135deg,#7c3aed,#4f46e5);border:none;border-radius:12px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#fff;cursor:pointer;transition:opacity .2s;}
+    .btn:hover{opacity:.85;}
+    .btn:disabled{opacity:.4;cursor:not-allowed;}
+    .spinner{width:36px;height:36px;border:3px solid rgba(124,58,237,.2);border-top-color:#7c3aed;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .loading-wrap{text-align:center;padding:30px 0;display:none;}
+    .loading-wrap.show{display:block;}
+    /* Kepala-Ekor matrix */
+    .ke-matrix{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin-top:10px;}
+    .ke-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--muted);}
+    .ke-cell.freq-3{background:rgba(245,158,11,.3);border-color:rgba(245,158,11,.5);color:var(--gold);}
+    .ke-cell.freq-2{background:rgba(245,158,11,.15);border-color:rgba(245,158,11,.3);color:var(--gold-light);}
+    .ke-cell.freq-1{background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.25);color:#6ee7b7;}
+    .ke-header{grid-column:1/-1;display:grid;grid-template-columns:repeat(10,1fr);gap:3px;}
+    .ke-lbl{text-align:center;font-size:9px;color:var(--muted);font-weight:700;padding:2px 0;}
+    /* Trend bars */
+    .trend-bar-wrap{margin-top:6px;}
+    .trend-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+    .trend-key{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--text);width:28px;flex-shrink:0;}
+    .trend-bar-bg{flex:1;background:rgba(255,255,255,.06);border-radius:4px;height:18px;overflow:hidden;}
+    .trend-bar-fill{height:100%;background:linear-gradient(90deg,#7c3aed,var(--cyan));border-radius:4px;transition:width .4s;}
+    .trend-cnt{font-size:11px;color:var(--muted);font-weight:700;width:28px;text-align:right;flex-shrink:0;}
+    footer{text-align:center;padding:20px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);}
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="back-btn">← Kembali</a>
+    <div class="logo-text">WONGBAGUS</div>
+  </div>
+</header>
+<div class="main">
+  <div class="page-title">🧪 SCAN 3</div>
+  <div class="page-sub">Matrix Kepala–Ekor & Trend Angka</div>
+  <div class="card">
+    <div class="card-title">⚙️ Pengaturan</div>
+    <select id="marketSel"><option value="">— Pilih Pasaran —</option></select>
+    <select id="periodSel">
+      <option value="20" selected>20 Periode</option>
+      <option value="30">30 Periode</option>
+      <option value="50">50 Periode</option>
+    </select>
+    <button class="btn" id="scanBtn" onclick="doScan()">🧪 ANALISA MATRIX</button>
+  </div>
+  <div class="loading-wrap" id="loadingWrap">
+    <div class="spinner"></div>
+    <div style="color:var(--muted);font-size:13px;font-weight:700;">Membangun matrix...</div>
+  </div>
+  <div id="resultSection"></div>
+</div>
+<footer>WONGBAGUS PREDICTION &copy; 2026</footer>
+<script>
+const RESULT_URL='https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json';
+let allData=null;
+async function loadData(){if(allData)return allData;const r=await fetch(RESULT_URL);allData=await r.json();return allData;}
+async function populateMarkets(){
+  try{const data=await loadData();const sel=document.getElementById('marketSel');Object.keys(data).forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);});}catch(e){}
+}
+async function doScan(){
+  const marketId=document.getElementById('marketSel').value;
+  const period=parseInt(document.getElementById('periodSel').value);
+  if(!marketId){alert('Pilih pasaran!');return;}
+  document.getElementById('loadingWrap').classList.add('show');
+  document.getElementById('scanBtn').disabled=true;
+  document.getElementById('resultSection').innerHTML='';
+  try{
+    const data=await loadData();
+    const market=data[marketId];
+    if(!market||!market.results||market.results.length<5)throw new Error('Data kurang');
+    const results=market.results.slice(0,period);
+    
+    // Build KE matrix (kepala 0-9 x ekor 0-9)
+    const matrix=Array.from({length:10},()=>Array(10).fill(0));
+    const kepalaFreq=Array(10).fill(0);
+    const ekorFreq=Array(10).fill(0);
+    results.forEach(r=>{
+      const s=String(r.result||r.number||r).padStart(4,'0');
+      const kep=parseInt(s[2]);
+      const ek=parseInt(s[3]);
+      matrix[kep][ek]++;
+      kepalaFreq[kep]++;
+      ekorFreq[ek]++;
+    });
+    
+    const maxCell=Math.max(...matrix.flat());
+    
+    // Matrix HTML
+    let matrixHTML='<div class="ke-lbl" style="text-align:left;font-weight:900;color:var(--gold);">K\\E</div>';
+    for(let e=0;e<10;e++) matrixHTML+=`<div class="ke-lbl">${e}</div>`;
+    matrixHTML='<div style="display:grid;grid-template-columns:repeat(11,1fr);gap:3px;margin-top:10px;">' +
+      '<div style="text-align:center;font-size:9px;color:var(--gold);font-weight:900;padding:2px;">K\\E</div>'+
+      Array.from({length:10},(_,e)=>`<div class="ke-lbl">${e}</div>`).join('');
+    for(let k=0;k<10;k++){
+      matrixHTML+=`<div class="ke-lbl" style="color:var(--gold);font-weight:900;">${k}</div>`;
+      for(let e=0;e<10;e++){
+        const v=matrix[k][e];
+        const cls=v>=3?'freq-3':v===2?'freq-2':v===1?'freq-1':'';
+        matrixHTML+=`<div class="ke-cell ${cls}" title="${k}${e}: ${v}x">${v||'·'}</div>`;
+      }
+    }
+    matrixHTML+='</div>';
+
+    // Trend bar kepala
+    const maxK=Math.max(...kepalaFreq);
+    const kepalaHTML=kepalaFreq.map((c,i)=>`
+      <div class="trend-row">
+        <div class="trend-key">${i}</div>
+        <div class="trend-bar-bg"><div class="trend-bar-fill" style="width:${maxK>0?(c/maxK*100):0}%;"></div></div>
+        <div class="trend-cnt">${c}x</div>
+      </div>`).join('');
+    
+    const maxE=Math.max(...ekorFreq);
+    const ekorHTML=ekorFreq.map((c,i)=>`
+      <div class="trend-row">
+        <div class="trend-key">${i}</div>
+        <div class="trend-bar-bg"><div class="trend-bar-fill" style="width:${maxE>0?(c/maxE*100):0}%;background:linear-gradient(90deg,var(--green),var(--cyan));"></div></div>
+        <div class="trend-cnt">${c}x</div>
+      </div>`).join('');
+
+    document.getElementById('resultSection').innerHTML=`
+      <div class="card">
+        <div class="card-title">🔢 Matrix KE — ${marketId}</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">${period} periode · warna = frekuensi</div>
+        ${matrixHTML}
+        <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;">
+          <span style="font-size:10px;color:var(--gold);">■ ≥3x</span>
+          <span style="font-size:10px;color:var(--gold-light);">■ 2x</span>
+          <span style="font-size:10px;color:#6ee7b7;">■ 1x</span>
+          <span style="font-size:10px;color:var(--muted);">· 0x</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 Trend Kepala</div>
+        <div class="trend-bar-wrap">${kepalaHTML}</div>
+      </div>
+      <div class="card">
+        <div class="card-title">📊 Trend Ekor</div>
+        <div class="trend-bar-wrap">${ekorHTML}</div>
+      </div>`;
+  }catch(e){
+    document.getElementById('resultSection').innerHTML=`<div class="card" style="border-color:rgba(220,38,38,.3);color:#f87171;">❌ Error: ${e.message}</div>`;
+  }
+  document.getElementById('loadingWrap').classList.remove('show');
+  document.getElementById('scanBtn').disabled=false;
+}
+populateMarkets();
+</script>
+</body>
+</html>

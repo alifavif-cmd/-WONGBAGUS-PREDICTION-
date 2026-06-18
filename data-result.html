@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA RESULT – WONGBAGUS PREDICTION</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#f59e0b;--gold-light:#fcd34d;--gold-dark:#b45309;--red:#dc2626;--bg:#07070e;--bg2:#0f0f1a;--bg3:#15152a;--card:#111128;--border:rgba(245,158,11,0.15);--text:#e2e2f0;--muted:#6b6b8a;--green:#10b981;--cyan:#00d4ff;--purple:#9b5de5;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+    header{position:sticky;top:0;z-index:99;background:rgba(7,7,14,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 16px;}
+    .header-inner{display:flex;align-items:center;gap:12px;}
+    .back-btn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:10px;padding:7px 14px;color:var(--gold);font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap;}
+    .logo-text{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;background:linear-gradient(90deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .main{max-width:800px;margin:0 auto;padding:16px 12px 60px;}
+    .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(24px,7vw,36px);letter-spacing:2px;color:var(--gold-light);margin-bottom:4px;}
+    .page-sub{font-size:12px;color:var(--muted);margin-bottom:16px;}
+    /* Status bar */
+    .status-bar{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:10px 14px;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+    .dot-live{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 1.5s infinite;margin-right:5px;}
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:.2;}}
+    .status-text{font-size:11px;color:var(--muted);font-weight:700;}
+    .btn-refresh{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);border-radius:50px;padding:6px 14px;font-size:11px;font-weight:800;color:var(--gold);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px;}
+    .btn-refresh:hover{background:rgba(245,158,11,.25);}
+    /* Search & filter */
+    .search-wrap{position:relative;margin-bottom:12px;}
+    .search-wrap input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:11px 16px 11px 42px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;outline:none;transition:border-color .2s;}
+    .search-wrap input:focus{border-color:var(--gold);}
+    .search-wrap input::placeholder{color:var(--muted);}
+    .search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;width:16px;height:16px;}
+    /* Market cards */
+    .market-grid{display:grid;gap:10px;}
+    .market-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:border-color .2s;}
+    .market-card:hover{border-color:rgba(245,158,11,.4);}
+    .mc-header{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:rgba(245,158,11,.04);border-bottom:1px solid var(--border);cursor:pointer;}
+    .mc-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold-light);}
+    .mc-time{font-size:11px;color:var(--muted);font-weight:600;}
+    .mc-result{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:var(--cyan);min-width:90px;text-align:right;}
+    .mc-result.loading{font-size:13px;color:var(--muted);font-family:'Nunito',sans-serif;letter-spacing:0;font-weight:700;}
+    .mc-body{padding:10px 14px 12px;display:none;}
+    .mc-body.open{display:block;}
+    .mc-hist{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+    .mc-hist-chip{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:3px 8px;color:var(--muted);}
+    .mc-digits{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:8px;}
+    .mc-digit-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:6px 4px;text-align:center;}
+    .mc-digit-lbl{font-size:9px;color:var(--muted);font-weight:800;letter-spacing:.5px;}
+    .mc-digit-val{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);line-height:1;}
+    .hidden-card{display:none!important;}
+    .spinner-inline{width:20px;height:20px;border:2px solid rgba(245,158,11,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .load-more-btn{width:100%;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:12px;padding:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;color:var(--gold);cursor:pointer;margin-top:10px;transition:background .2s;}
+    .load-more-btn:hover{background:rgba(245,158,11,.15);}
+    footer{text-align:center;padding:20px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);}
+    .count-badge{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:10px;}
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="back-btn">← Kembali</a>
+    <div class="logo-text">WONGBAGUS</div>
+  </div>
+</header>
+<div class="main">
+  <div class="page-title">📊 DATA RESULT</div>
+  <div class="page-sub">65 Pasaran Togel · Update Otomatis</div>
+
+  <div class="status-bar">
+    <div class="status-text"><span class="dot-live"></span><span id="statusText">Memuat data...</span></div>
+    <button class="btn-refresh" onclick="loadAll()">
+      <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+      Refresh
+    </button>
+  </div>
+
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Cari pasaran..." oninput="filterMarkets()">
+  </div>
+
+  <div class="count-badge" id="countBadge">Memuat...</div>
+  <div id="marketList"></div>
+  <button class="load-more-btn" id="loadMoreBtn" onclick="loadMore()" style="display:none;">⬇ Tampilkan Lebih Banyak</button>
+</div>
+<footer>WONGBAGUS PREDICTION &copy; 2026</footer>
+
+<script>
+const RESULT_URL='https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json';
+let allMarkets=[];
+let displayed=20;
+const PAGE=20;
+
+async function loadAll(){
+  document.getElementById('statusText').textContent='Memuat data...';
+  document.getElementById('marketList').innerHTML=`<div style="text-align:center;padding:40px 0;"><div class="spinner-inline"></div><div style="margin-top:10px;font-size:13px;color:var(--muted);">Mengambil data 65 pasaran...</div></div>`;
+  try{
+    const r=await fetch(RESULT_URL+'?t='+Date.now());
+    const data=await r.json();
+    allMarkets=Object.entries(data).map(([name,info])=>({name,...info}));
+    document.getElementById('statusText').textContent=`${allMarkets.length} pasaran · ${new Date().toLocaleTimeString('id')}`;
+    renderMarkets();
+  }catch(e){
+    document.getElementById('statusText').textContent='Gagal memuat';
+    document.getElementById('marketList').innerHTML=`<div style="color:#f87171;padding:20px;text-align:center;">❌ Gagal memuat data. Coba refresh.</div>`;
+  }
+}
+
+function getFiltered(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  if(!q) return allMarkets;
+  return allMarkets.filter(m=>m.name.toLowerCase().includes(q));
+}
+
+function renderMarkets(){
+  const filtered=getFiltered();
+  displayed=PAGE;
+  renderList(filtered);
+}
+
+function renderList(filtered){
+  const show=filtered.slice(0,displayed);
+  document.getElementById('countBadge').textContent=`Menampilkan ${show.length} dari ${filtered.length} pasaran`;
+  document.getElementById('marketList').innerHTML=show.map(m=>buildCard(m)).join('');
+  document.getElementById('loadMoreBtn').style.display=displayed<filtered.length?'block':'none';
+}
+
+function loadMore(){
+  displayed+=PAGE;
+  renderList(getFiltered());
+}
+
+function filterMarkets(){
+  displayed=PAGE;
+  renderList(getFiltered());
+}
+
+function buildCard(m){
+  const results=m.results||[];
+  const latest=results[0];
+  const s=latest?String(latest.result||latest.number||latest).padStart(4,'0'):'----';
+  const date=latest?(latest.date||latest.tanggal||''):'';
+  const hist=results.slice(1,6).map(r=>`<div class="mc-hist-chip">${String(r.result||r.number||r).padStart(4,'0').slice(2)}</div>`).join('');
+  return `<div class="market-card" id="mc_${CSS.escape(m.name)}">
+    <div class="mc-header" onclick="toggleCard('${m.name.replace(/'/g,"\\'")}')">
+      <div>
+        <div class="mc-name">${m.name}</div>
+        <div class="mc-time">${date} · ${m.time||''}</div>
+      </div>
+      <div class="mc-result">${s}</div>
+    </div>
+    <div class="mc-body" id="mcb_${CSS.escape(m.name)}">
+      <div class="mc-digits">
+        <div class="mc-digit-box"><div class="mc-digit-lbl">AS</div><div class="mc-digit-val">${s[0]}</div></div>
+        <div class="mc-digit-box"><div class="mc-digit-lbl">KOP</div><div class="mc-digit-val">${s[1]}</div></div>
+        <div class="mc-digit-box"><div class="mc-digit-lbl">KEP</div><div class="mc-digit-val">${s[2]}</div></div>
+        <div class="mc-digit-box"><div class="mc-digit-lbl">EKR</div><div class="mc-digit-val">${s[3]}</div></div>
+      </div>
+      <div style="font-size:10px;color:var(--muted);font-weight:800;letter-spacing:1px;margin-top:10px;margin-bottom:4px;">5 HASIL SEBELUMNYA</div>
+      <div class="mc-hist">${hist||'<span style="font-size:12px;color:var(--muted);">Data terbatas</span>'}</div>
+    </div>
+  </div>`;
+}
+
+function toggleCard(name){
+  const id='mcb_'+CSS.escape(name);
+  const el=document.getElementById(id);
+  if(el) el.classList.toggle('open');
+}
+
+loadAll();
+</script>
+</body>
+</html>

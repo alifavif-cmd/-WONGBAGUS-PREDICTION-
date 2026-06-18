@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCAN 5 – WONGBAGUS PREDICTION</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{--gold:#f59e0b;--gold-light:#fcd34d;--gold-dark:#b45309;--red:#dc2626;--bg:#07070e;--bg2:#0f0f1a;--bg3:#15152a;--card:#111128;--border:rgba(245,158,11,0.15);--text:#e2e2f0;--muted:#6b6b8a;--green:#10b981;--cyan:#00d4ff;--purple:#9b5de5;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+    header{position:sticky;top:0;z-index:99;background:rgba(7,7,14,.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:10px 16px;}
+    .header-inner{display:flex;align-items:center;gap:12px;}
+    .back-btn{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);border-radius:10px;padding:7px 14px;color:var(--gold);font-size:13px;font-weight:700;text-decoration:none;}
+    .logo-text{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;background:linear-gradient(90deg,var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+    .main{max-width:700px;margin:0 auto;padding:20px 14px 60px;}
+    .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,7vw,38px);letter-spacing:2px;color:#fb923c;margin-bottom:4px;}
+    .page-sub{font-size:12px;color:var(--muted);margin-bottom:22px;}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:16px;}
+    .card-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--gold);margin-bottom:14px;}
+    select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:11px 14px;color:var(--text);font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;outline:none;margin-bottom:10px;}
+    .btn{width:100%;background:linear-gradient(135deg,#f97316,#dc2626);border:none;border-radius:12px;padding:14px;font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#fff;cursor:pointer;transition:opacity .2s;}
+    .btn:hover{opacity:.85;}
+    .btn:disabled{opacity:.4;cursor:not-allowed;}
+    .spinner{width:36px;height:36px;border:3px solid rgba(249,115,22,.2);border-top-color:#f97316;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 10px;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .loading-wrap{text-align:center;padding:30px 0;display:none;}
+    .loading-wrap.show{display:block;}
+    /* BBFS display */
+    .bbfs-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+    .bbfs-chip{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;font-weight:700;flex-shrink:0;}
+    .bbfs-chip.hot{background:rgba(249,115,22,.3);border:1.5px solid rgba(249,115,22,.5);color:#fb923c;}
+    .bbfs-chip.warm{background:rgba(245,158,11,.2);border:1.5px solid rgba(245,158,11,.4);color:var(--gold);}
+    .bbfs-chip.cold{background:rgba(37,99,235,.15);border:1.5px solid rgba(37,99,235,.3);color:#93c5fd;}
+    /* History list */
+    .hist-list{margin-top:8px;}
+    .hist-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px;}
+    .hist-row:last-child{border-bottom:none;}
+    .hist-num{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:3px;color:var(--gold);min-width:70px;}
+    .hist-date{font-size:11px;color:var(--muted);flex:1;}
+    .hist-2d{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--cyan);}
+    /* Prediksi box */
+    .pred-box{background:linear-gradient(135deg,rgba(249,115,22,.1),rgba(220,38,38,.08));border:1.5px solid rgba(249,115,22,.35);border-radius:14px;padding:16px;margin-top:4px;text-align:center;}
+    .pred-big{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:6px;color:#fb923c;line-height:1;}
+    .pred-lbl{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:1px;margin-top:6px;}
+    footer{text-align:center;padding:20px;color:var(--muted);font-size:11px;border-top:1px solid var(--border);}
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="back-btn">← Kembali</a>
+    <div class="logo-text">WONGBAGUS</div>
+  </div>
+</header>
+<div class="main">
+  <div class="page-title">🔥 SCAN 5</div>
+  <div class="page-sub">BBFS Generator & Prediksi Angka Panas</div>
+  <div class="card">
+    <div class="card-title">⚙️ Pengaturan</div>
+    <select id="marketSel"><option value="">— Pilih Pasaran —</option></select>
+    <select id="periodSel">
+      <option value="10" selected>10 Periode</option>
+      <option value="20">20 Periode</option>
+      <option value="30">30 Periode</option>
+    </select>
+    <select id="bbfsSel">
+      <option value="4">BBFS 4 Angka</option>
+      <option value="5">BBFS 5 Angka</option>
+      <option value="6" selected>BBFS 6 Angka</option>
+      <option value="8">BBFS 8 Angka</option>
+    </select>
+    <button class="btn" id="scanBtn" onclick="doScan()">🔥 GENERATE BBFS</button>
+  </div>
+  <div class="loading-wrap" id="loadingWrap">
+    <div class="spinner"></div>
+    <div style="color:var(--muted);font-size:13px;font-weight:700;">Menganalisa angka panas...</div>
+  </div>
+  <div id="resultSection"></div>
+</div>
+<footer>WONGBAGUS PREDICTION &copy; 2026</footer>
+<script>
+const RESULT_URL='https://alifavif-cmd.github.io/-WONGBAGUS-PREDICTION-/result.json';
+let allData=null;
+async function loadData(){if(allData)return allData;const r=await fetch(RESULT_URL);allData=await r.json();return allData;}
+async function populateMarkets(){
+  try{const data=await loadData();const sel=document.getElementById('marketSel');Object.keys(data).forEach(m=>{const o=document.createElement('option');o.value=m;o.textContent=m;sel.appendChild(o);});}catch(e){}
+}
+function dr(n){let x=Math.abs(parseInt(n)||0);while(x>=10){x=String(x).split('').reduce((a,b)=>a+parseInt(b),0);}return x;}
+
+async function doScan(){
+  const marketId=document.getElementById('marketSel').value;
+  const period=parseInt(document.getElementById('periodSel').value);
+  const bbfsN=parseInt(document.getElementById('bbfsSel').value);
+  if(!marketId){alert('Pilih pasaran!');return;}
+  document.getElementById('loadingWrap').classList.add('show');
+  document.getElementById('scanBtn').disabled=true;
+  document.getElementById('resultSection').innerHTML='';
+  try{
+    const data=await loadData();
+    const market=data[marketId];
+    if(!market||!market.results||market.results.length<5)throw new Error('Data kurang');
+    const results=market.results.slice(0,period+2);
+
+    // Collect all digits from all positions
+    const digitFreq=Array(10).fill(0);
+    const twoDFreq={};
+    results.slice(0,period).forEach(r=>{
+      const s=String(r.result||r.number||r).padStart(4,'0');
+      s.split('').forEach(d=>digitFreq[parseInt(d)]++);
+      const td=s.slice(2);
+      twoDFreq[td]=(twoDFreq[td]||0)+1;
+    });
+
+    // Score each digit: frequency + DR bonus
+    const scores=digitFreq.map((freq,d)=>({d,freq,score:freq}));
+    scores.sort((a,b)=>b.score-a.score);
+
+    // BBFS = top N digits
+    const bbfs=scores.slice(0,bbfsN).map(x=>x.d).sort((a,b)=>a-b);
+    
+    // Recent history
+    const recent=results.slice(0,8);
+    const histHTML=recent.map(r=>{
+      const s=String(r.result||r.number||r).padStart(4,'0');
+      const date=r.date||r.tanggal||'-';
+      return `<div class="hist-row">
+        <div class="hist-num">${s}</div>
+        <div class="hist-date">${date}</div>
+        <div class="hist-2d">${s.slice(2)}</div>
+      </div>`;
+    }).join('');
+
+    // Top 2D
+    const top2D=Object.entries(twoDFreq).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k])=>k);
+
+    const bbfsHTML=bbfs.map((d,i)=>{
+      const cls=i<3?'hot':i<bbfsN/2?'warm':'cold';
+      return `<div class="bbfs-chip ${cls}">${d}</div>`;
+    }).join('');
+
+    document.getElementById('resultSection').innerHTML=`
+      <div class="card">
+        <div class="card-title">🎯 BBFS ${bbfsN} Angka — ${marketId}</div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:4px;">Berdasarkan ${period} periode · 🔴=terpanas</div>
+        <div class="bbfs-grid">${bbfsHTML}</div>
+        <div style="margin-top:14px;padding:10px;background:rgba(249,115,22,.06);border-radius:8px;text-align:center;">
+          <div style="font-size:10px;color:var(--muted);font-weight:800;letter-spacing:1px;margin-bottom:4px;">BBFS STRING</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;color:#fb923c;">${bbfs.join(' ')}</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">⭐ Top 3 Prediksi 2D</div>
+        <div class="pred-box">
+          <div class="pred-big">${top2D.join('  ')}</div>
+          <div class="pred-lbl">ANGKA 2D TERPANAS ${period} PERIODE</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">📋 Riwayat Terakhir</div>
+        <div class="hist-list">${histHTML}</div>
+      </div>`;
+  }catch(e){
+    document.getElementById('resultSection').innerHTML=`<div class="card" style="border-color:rgba(220,38,38,.3);color:#f87171;">❌ Error: ${e.message}</div>`;
+  }
+  document.getElementById('loadingWrap').classList.remove('show');
+  document.getElementById('scanBtn').disabled=false;
+}
+populateMarkets();
+</script>
+</body>
+</html>
