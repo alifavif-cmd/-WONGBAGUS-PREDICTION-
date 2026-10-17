@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>💫WB.PREDICTION💫</title>
+<style>
+:root{--bg:#ebeefb;--ink:#171b45;--mute:#5a6090;--line:#cfd5ee;--acc:#3239d6;--accink:#fff;--card:#f8f9ff;--bad:#c0262d}
+@media (prefers-color-scheme:dark){:root{--bg:#11142e;--ink:#e7e9ff;--mute:#9aa2d6;--line:#2a3060;--acc:#8c93ff;--accink:#11142e;--card:#1a1e42;--bad:#ff8a8f}}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0 auto;max-width:640px;padding:28px 18px 64px;color:var(--ink);font:17px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg)}
+a{color:var(--acc)}
+button{font:inherit;cursor:pointer}
+.top{text-align:center;margin-bottom:24px}
+.top a.home{text-decoration:none;color:var(--ink);display:block}
+h1.brand{font:800 clamp(22px,6.6vw,34px)/1.2 "Rockwell","Roboto Slab",Georgia,serif;margin:0;letter-spacing:.02em}
+.tag{margin:10px 0 0;line-height:1.45}
+.tag b{display:block;font:700 19px/1.4 Georgia,"Iowan Old Style",serif}
+.tag span{display:block;color:var(--mute);font-size:15px;margin-top:2px}
+.nav{display:flex;justify-content:center;gap:24px;margin:18px 0 0;font-size:15px}
+.nav a{text-decoration:none;font-weight:600}
+.nav b{border-bottom:2px solid var(--acc);padding-bottom:1px}
+.who{display:flex;justify-content:center;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px;font-size:14px;color:var(--mute)}
+.pill{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:4px 12px 4px 4px;color:var(--ink);font-weight:600}
+.av{width:28px;height:28px;border-radius:50%;background:var(--acc);color:var(--accink);display:grid;place-items:center;font-size:14px;font-weight:800}
+.btn{background:var(--acc);color:var(--accink);border:0;border-radius:99px;padding:9px 18px;font-weight:700;font-size:15px}
+.btn.ghost{background:transparent;color:var(--acc);border:1.5px solid var(--acc)}
+.btn.del{background:transparent;color:var(--bad);border:1.5px solid var(--bad)}
+.btn:disabled{opacity:.5}
+.who .btn{padding:5px 14px;font-size:14px}
+.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;margin-bottom:14px}
+a.card:hover,a.card:focus-visible{border-color:var(--acc)}
+.meta{display:block;font-size:13.5px;color:var(--mute);margin-bottom:4px}
+.card h2{font:700 21px/1.35 Georgia,"Iowan Old Style",serif;margin:0 0 8px;overflow-wrap:anywhere}
+.pv{margin:0;color:var(--mute);font-size:15.5px;line-height:1.65;white-space:pre-line;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.back{display:inline-block;margin-bottom:14px;font-size:15px}
+.read h2{font:700 27px/1.3 Georgia,"Iowan Old Style",serif;margin:2px 0 14px;overflow-wrap:anywhere}
+.ln{display:flex;flex-wrap:wrap;gap:2px 12px;align-items:baseline;margin:0 0 8px;overflow-wrap:anywhere}
+.ln.t{display:block;margin:0 0 12px}
+.k{color:var(--mute);font-size:15px;min-width:76px}
+.v{font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em;flex:1 1 150px}
+.compose{margin-bottom:18px;text-align:center}
+.compose summary{display:inline-block;list-style:none;cursor:pointer;background:var(--acc);color:var(--accink);border-radius:99px;padding:10px 22px;font-weight:700;font-size:15px}
+.compose summary::-webkit-details-marker{display:none}
+form{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0 0}
+.note{text-align:center;margin-bottom:18px;color:var(--mute)}
+label{display:block;font-size:14px;color:var(--mute);margin-bottom:4px}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:12px}
+textarea{min-height:140px;resize:vertical}
+.err{color:var(--bad)}
+.empty{color:var(--mute);text-align:center;padding:20px 0}
+footer{margin-top:40px;text-align:center;color:var(--mute);font-size:14px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.cmt{margin-top:22px}
+.cmt h3{font:700 19px/1.3 Georgia,serif;margin:0 0 10px}
+.cm{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:10px}
+.cm .meta{margin-bottom:2px}
+.cm p{margin:0;white-space:pre-line;overflow-wrap:anywhere;font-size:16px;line-height:1.55}
+.cm .x{margin-top:6px;background:transparent;border:0;color:var(--bad);font-size:13.5px;font-weight:700;padding:2px 0}
+.cmf textarea{width:100%;min-height:76px;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);margin:0 0 8px}
+.cmnote{color:var(--mute);font-size:15px}
+.bar{display:flex;flex-direction:column;gap:10px;margin:0 0 16px}
+.bar input[type=search]{width:100%;font:inherit;padding:10px 14px;border:1px solid var(--line);border-radius:99px;background:var(--card);color:var(--ink)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+.chip{flex:0 0 auto;background:transparent;color:var(--acc);border:1.5px solid var(--acc);border-radius:99px;padding:5px 14px;font-weight:700;font-size:14px}
+.chip.on{background:var(--acc);color:var(--accink)}
+.adm{display:flex;gap:8px;flex-wrap:wrap}
+.adm .btn{padding:7px 14px;font-size:14px}
+.grp{margin-bottom:12px}
+.grp>summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font:700 18px/1.3 Georgia,serif}
+.grp>summary::-webkit-details-marker{display:none}
+.grp>summary small{font:700 13px system-ui,sans-serif;color:var(--mute);white-space:nowrap}
+.grp[open]>summary{border-color:var(--acc)}
+.grp .card{margin:10px 0 0}
+.hasil{color:var(--mute);font-size:14px;margin:0 0 10px}
+.share{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.share .btn{padding:8px 14px;font-size:14px;text-decoration:none;display:inline-block;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="top">
+  <a class="home" href="#"><h1 class="brand">💫WB.PREDICTION💫</h1></a>
+  <p class="tag"><b>Semua bisa jadi master</b><span>Aplikasi Scen Angka otomatis</span></p>
+  <p class="nav"><a href="./">Aplikasi</a><b>Blog</b></p>
+  <div class="who" id="who"></div>
+</div>
+<main id="app"></main>
+<footer>© 2026 wb.prediction</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, collection, addDoc, deleteDoc, doc, writeBatch, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const ADMIN_EMAIL = "alifavif@gmail.com";
+const firebaseConfig = {
+  apiKey: "AIzaSyBgSWlU9xkG-A3seitPy9zI_743aeLIEFo",
+  authDomain: "komunikasi-e593d.firebaseapp.com",
+  projectId: "komunikasi-e593d",
+  storageBucket: "komunikasi-e593d.firebasestorage.app",
+  messagingSenderId: "509726825544",
+  appId: "1:509726825544:web:02c5e6b9100ea7954b4c7d"
+};
+
+const $ = id => document.getElementById(id);
+const bulan = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const tgl = t => { if (!t) return "baru saja"; const d = t.toDate(); return `${d.getDate()} ${bulan[d.getMonth()]} ${d.getFullYear()}`; };
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+let user = null, posts = [], loaded = false, loadErr = "";
+
+const isAdmin = () => user && user.email && user.email.toLowerCase() === ADMIN_EMAIL;
+const canDelete = p => user && (isAdmin() || p.uid === user.uid);
+
+/* baris "Label: isi" ditampilkan rapi; baris biasa tetap teks */
+const link = t => esc(t).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+const SITE_LINK = "https://scenangka.github.io/Scenangka/";
+const norm = t => String(t).replace(/https:\/\/alifavif-cmd\.github\.io\/-WONGBAGUS-PREDICTION-\/?/g, SITE_LINK);
+const shareText = p => { let t = norm(p.isi).trim(); if (!t.includes(SITE_LINK)) t += "\n\n🔗 " + SITE_LINK; return t; };
+const baris = l => {
+  if (/https?:\/\//i.test(l)) return `<p class="ln t">${link(l)}</p>`;
+  const m = l.match(/^\s*([^:：\/]{1,16}?)\s*[:：]\s*(\S.*)$/);
+  return m ? `<p class="ln"><span class="k">${esc(m[1])}</span><span class="v">${link(m[2])}</span></p>` : `<p class="ln t">${link(l)}</p>`;
+};
+
+/* ===== komentar: subkoleksi posts/{id}/comments ===== */
+let cmUnsub = null, cmPid = "", cmList = [], cmErr = "";
+const stopCm = () => { if (cmUnsub) { cmUnsub(); cmUnsub = null; } cmPid = ""; cmList = []; cmErr = ""; };
+function drawCm(){
+  const el = $("cml"); if (!el) return;
+  if (cmErr) { el.innerHTML = `<p class="cmnote">${esc(cmErr)}</p>`; return; }
+  el.innerHTML = cmList.length
+    ? cmList.map(c => `<div class="cm"><span class="meta">${esc(c.nama || "Anonim")} · ${tgl(c.createdAt)}</span><p>${esc(c.isi || "")}</p>${isAdmin() ? `<button class="x" data-c="${esc(c.id)}">Hapus komentar</button>` : ""}</div>`).join("")
+    : `<p class="cmnote">Belum ada komentar.</p>`;
+}
+function startCm(pid){
+  if (cmPid === pid) { drawCm(); return; }
+  stopCm(); cmPid = pid;
+  cmUnsub = onSnapshot(query(collection(db, "posts", pid, "comments"), orderBy("createdAt", "asc"), limit(200)),
+    snap => { cmList = snap.docs.map(d => ({ id: d.id, ...d.data() })); cmErr = ""; drawCm(); },
+    err => { cmErr = "Komentar belum bisa dimuat: " + err.code; drawCm(); });
+}
+
+/* ===== kelompok pasaran + filter hari + hapus massal ===== */
+const HARI = ["Min","Sen","Sel","Rab","Kam","Jum","Sab"];
+let fDay = "all", fQ = "";
+const openG = new Set();
+const sameDay = (d, o) => d.getFullYear() === o.getFullYear() && d.getMonth() === o.getMonth() && d.getDate() === o.getDate();
+function lolos(p){
+  if (fQ && !((p.judul || "") + " " + (p.nama || "")).toLowerCase().includes(fQ)) return false;
+  if (fDay === "all") return true;
+  const d = p.createdAt && p.createdAt.toDate ? p.createdAt.toDate() : new Date();
+  const now = new Date();
+  if (fDay === "today") return sameDay(d, now);
+  if (fDay === "yday") { const y = new Date(now); y.setDate(y.getDate() - 1); return sameDay(d, y); }
+  return d.getDay() === fDay;
+}
+function renderList(){
+  const el = $("plist"); if (!el) return;
+  const shown = posts.filter(lolos);
+  const g = {};
+  shown.forEach(p => { const k = (p.judul || "Tanpa judul").trim(); (g[k] = g[k] || []).push(p); });
+  const keys = Object.keys(g).sort((a, b) => a.localeCompare(b, "id"));
+  const auto = !!(fQ || fDay !== "all") && keys.length <= 3;
+  el.innerHTML = (shown.length ? `<p class="hasil">${shown.length} postingan · ${keys.length} pasaran</p>` : "") + (keys.length
+    ? keys.map(k => `<details class="grp" data-g="${esc(k)}"${(openG.has(k) || auto) ? " open" : ""}><summary><span>${esc(k)}</span><small>${g[k].length} post</small></summary>${g[k].map(p => `<a class="card" href="#${encodeURIComponent(p.id)}"><span class="meta">${esc(p.nama)} · ${tgl(p.createdAt)}</span><p class="pv">${esc(p.isi.slice(0, 400))}</p></a>`).join("")}</details>`).join("")
+    : `<p class="empty">${posts.length ? "Tidak ada postingan yang cocok." : "Belum ada tulisan. Jadilah yang pertama."}</p>`);
+  el.querySelectorAll("details.grp").forEach(d => d.addEventListener("toggle", () => { d.open ? openG.add(d.dataset.g) : openG.delete(d.dataset.g); }));
+  const a = $("hps"), b = $("hpa");
+  if (a) { a.textContent = `Hapus yang tampil (${shown.length})`; a.disabled = !shown.length; a._ids = shown.map(p => p.id); }
+  if (b) { b.textContent = `Hapus semua (${posts.length})`; b.disabled = !posts.length; b._ids = posts.map(p => p.id); }
+}
+async function hapusMassal(ids, label){
+  if (!ids.length) return;
+  if (!confirm(`${label}: ${ids.length} postingan akan dihapus permanen. Lanjut?`)) return;
+  if (ids.length > 20 && !confirm("Yakin? Tidak bisa dibatalkan.")) return;
+  try {
+    for (let i = 0; i < ids.length; i += 400) {
+      const b = writeBatch(db);
+      ids.slice(i, i + 400).forEach(id => b.delete(doc(db, "posts", id)));
+      await b.commit();
+    }
+  } catch (e) { alert("Gagal hapus: " + e.code); }
+}
+
+function renderWho(){
+  if (user) {
+    const nama = user.displayName || user.email;
+    $("who").innerHTML = `<span class="pill"><span class="av">${esc(nama.charAt(0).toUpperCase())}</span>${esc(nama)}${isAdmin() ? " (admin)" : ""}</span><button class="btn ghost" id="out">Keluar</button>`;
+    $("out").onclick = () => signOut(auth);
+  } else {
+    $("who").innerHTML = `<button class="btn ghost" id="in">Masuk</button>`;
+    $("in").onclick = login;
+  }
+}
+async function login(){
+  try { await signInWithPopup(auth, new GoogleAuthProvider()); }
+  catch (e) { if (e.code !== "auth/popup-closed-by-user" && e.code !== "auth/cancelled-popup-request") alert("Gagal masuk: " + e.code); }
+}
+
+function render(){
+  const id = decodeURIComponent(location.hash.slice(1));
+  const main = $("app");
+  if (loadErr) { main.innerHTML = `<p class="err">${esc(loadErr)}</p>`; return; }
+  if (!loaded) { main.innerHTML = `<p class="empty">Memuat…</p>`; return; }
+
+  if (id) {
+    const p = posts.find(x => x.id === id);
+    if (!p) { main.innerHTML = `<a class="back" href="#">‹ Semua tulisan</a><p class="empty">Postingan tidak ditemukan atau sudah dihapus.</p>`; return; }
+    document.title = p.judul + " · WB.PREDICTION";
+    main.innerHTML = `<a class="back" href="#">‹ Semua tulisan</a><div class="card read"><span class="meta">${esc(p.nama)} · ${tgl(p.createdAt)}</span><h2>${esc(p.judul)}</h2>${norm(p.isi).split(/\n+/).filter(Boolean).map(baris).join("")}</div><div class="share"><button class="btn" id="sh-c">📋 Salin</button><a class="btn ghost" id="sh-w" target="_blank" rel="noopener">WhatsApp</a><a class="btn ghost" id="sh-t" target="_blank" rel="noopener">Telegram</a><a class="btn ghost" id="sh-f" target="_blank" rel="noopener">Facebook</a><button class="btn ghost" id="sh-x" style="display:none">Lainnya</button></div>${canDelete(p) ? `<button class="btn del" id="del">Hapus postingan</button>` : ""}<section class="cmt"><h3>Komentar</h3><div id="cml"></div><div class="cmf" id="cmf"></div></section>`;
+    const d = $("del");
+    if (d) d.onclick = async () => {
+      if (!confirm("Hapus postingan ini?")) return;
+      d.disabled = true;
+      try { await deleteDoc(doc(db, "posts", p.id)); location.hash = ""; }
+      catch (e) { alert("Gagal hapus: " + e.code); d.disabled = false; }
+    };
+    const st = shareText(p), pu = location.origin + location.pathname + "#" + encodeURIComponent(p.id), enc = encodeURIComponent;
+    $("sh-c").onclick = async () => {
+      try { await navigator.clipboard.writeText(st); } catch (e) { prompt("Salin teks ini:", st); }
+      const b = $("sh-c"); b.textContent = "✅ Tersalin"; setTimeout(() => { b.textContent = "📋 Salin"; }, 1600);
+    };
+    $("sh-w").href = "https://wa.me/?text=" + enc(st);
+    $("sh-t").href = "https://t.me/share/url?url=" + enc(pu) + "&text=" + enc(st);
+    $("sh-f").href = "https://www.facebook.com/sharer/sharer.php?u=" + enc(SITE_LINK) + "&quote=" + enc(st);
+    if (navigator.share) { const x = $("sh-x"); x.style.display = ""; x.onclick = () => navigator.share({ title: p.judul, text: st }).catch(() => {}); }
+    const cf = $("cmf");
+    cf.innerHTML = user
+      ? `<textarea id="ci" maxlength="500" placeholder="Tulis komentar…"></textarea><button class="btn" id="ck">Kirim komentar</button>`
+      : `<p class="cmnote">Mau komentar? <button class="btn" id="in3">Masuk dengan Google</button></p>`;
+    const i3 = $("in3"); if (i3) i3.onclick = login;
+    const ck = $("ck");
+    if (ck) ck.onclick = async () => {
+      const t = $("ci").value.trim(); if (!t) return;
+      ck.disabled = true;
+      try { await addDoc(collection(db, "posts", p.id, "comments"), { isi: t, uid: user.uid, nama: user.displayName || "Anonim", createdAt: serverTimestamp() }); $("ci").value = ""; }
+      catch (e) { alert("Gagal kirim komentar: " + e.code); }
+      ck.disabled = false;
+    };
+    $("cml").onclick = async e => {
+      const b = e.target.closest("button[data-c]"); if (!b || !confirm("Hapus komentar ini?")) return;
+      b.disabled = true;
+      try { await deleteDoc(doc(db, "posts", p.id, "comments", b.dataset.c)); }
+      catch (err) { alert("Gagal hapus: " + err.code); b.disabled = false; }
+    };
+    startCm(p.id);
+    window.scrollTo(0, 0);
+    return;
+  }
+
+  stopCm();
+  document.title = "💫WB.PREDICTION💫";
+  const composer = user
+    ? `<details class="compose" id="cmp"><summary>Tulis postingan</summary><form id="f"><label for="j">Judul</label><input id="j" maxlength="120" required><label for="i">Isi</label><textarea id="i" maxlength="5000" required></textarea><button class="btn" id="kirim">Kirim</button></form></details>`
+    : `<p class="note">Mau menulis? <button class="btn" id="in2">Masuk dengan Google</button></p>`;
+  const chip = (v, t) => `<button class="chip${String(fDay) === String(v) ? " on" : ""}" data-d="${v}">${t}</button>`;
+  const bar = `<div class="bar"><input type="search" id="cari" placeholder="Cari pasaran…" value="${esc(fQ)}"><div class="chips">${chip("all", "Semua")}${chip("today", "Hari ini")}${chip("yday", "Kemarin")}${[1,2,3,4,5,6,0].map(n => chip(n, HARI[n])).join("")}</div>${isAdmin() ? `<div class="adm"><button class="btn del" id="hps">Hapus yang tampil</button><button class="btn del" id="hpa">Hapus semua</button></div>` : ""}</div>`;
+  main.innerHTML = composer + bar + `<div id="plist"></div>`;
+  $("cari").oninput = e => { fQ = e.target.value.trim().toLowerCase(); renderList(); };
+  main.querySelectorAll(".chip").forEach(c => c.onclick = () => {
+    const v = c.dataset.d; fDay = (v === "all" || v === "today" || v === "yday") ? v : Number(v);
+    main.querySelectorAll(".chip").forEach(x => x.classList.toggle("on", x === c)); renderList();
+  });
+  const hs = $("hps"), ha = $("hpa");
+  if (hs) hs.onclick = () => hapusMassal(hs._ids || [], "Hapus yang tampil");
+  if (ha) ha.onclick = () => hapusMassal(ha._ids || [], "Hapus SEMUA");
+  renderList();
+
+  const f = $("f");
+  if (f) f.onsubmit = async e => {
+    e.preventDefault();
+    const b = $("kirim"); b.disabled = true;
+    try {
+      await addDoc(collection(db, "posts"), { judul: $("j").value.trim(), isi: $("i").value.trim(), uid: user.uid, nama: user.displayName || "Anonim", createdAt: serverTimestamp() });
+      f.reset(); $("cmp").open = false;
+    } catch (err) { alert("Gagal kirim: " + err.code); }
+    b.disabled = false;
+  };
+  const i2 = $("in2"); if (i2) i2.onclick = login;
+}
+
+onAuthStateChanged(auth, u => { user = u; renderWho(); render(); });
+window.addEventListener("hashchange", render);
+renderWho();
+render();
+onSnapshot(query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(500)),
+  snap => { posts = snap.docs.map(d => ({ id: d.id, ...d.data() })); loaded = true; loadErr = ""; render(); },
+  err => { loadErr = "Gagal memuat tulisan: " + err.code; render(); });
+</script>
+</body>
+</html>
