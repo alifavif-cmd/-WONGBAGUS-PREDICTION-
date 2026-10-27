@@ -1,0 +1,3 @@
+UNGGAH KE: repo -WONGBAGUS-PREDICTION- di akun alifavif-cmd (timpa yang lama)
+Isi: index.html (admin + aplikasi), wb-config.js, toko.html, blog.html
+prediksi.html tidak diubah.
