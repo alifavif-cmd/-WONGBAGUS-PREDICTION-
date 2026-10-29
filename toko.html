@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCEN OTOMATIS · wb.prediction</title>
+<style>
+:root{color-scheme:dark;--bg:#232323;--ink:#fff;--mute:#9fb8a4;--line:#eca808;--acc:#f4f11a;--accink:#000;--card:#000;--bad:#ff7b7b;--gr:#19ff19;--top:#19511e;--bar:#006600;--wa:#118a4b}
+*{box-sizing:border-box}
+html{background:#232323}
+body{margin:0 auto;max-width:760px;padding:0 0 56px;color:var(--ink);font:15px/1.6 Arial,"Roboto Condensed",system-ui,sans-serif;background:#000;box-shadow:0 0 8px #000;min-height:100vh}
+a{color:var(--acc)}
+a:hover{color:#fff}
+main{padding:10px 10px 0}
+.top{text-align:center;margin:0 0 10px;background:var(--top);padding:14px 12px 0;border-bottom:2px solid #000}
+.top a.home{text-decoration:none;color:#fff;display:block}
+h1.brand{font:800 clamp(20px,6vw,30px)/1.2 "Roboto Condensed",Arial,sans-serif;margin:0;letter-spacing:.04em;text-shadow:1px 1px 2px #000}
+.tag{margin:6px 0 0;line-height:1.4}
+.tag b{display:block;font:700 14px/1.4 Arial,sans-serif;color:var(--acc)}
+.tag span{display:block;color:#d6ffd9;font-size:13px;margin-top:1px}
+.nav{display:flex;justify-content:center;gap:0;margin:12px -12px 0;font-size:14px;background:var(--bar);border-top:1px solid #000;border-bottom:1px solid #000}
+.nav a,.nav b{flex:1;text-align:center;padding:9px 6px;text-decoration:none;font-weight:700;letter-spacing:.04em;color:#fff;text-transform:uppercase;border-left:1px solid #004d00;border-right:1px solid #1f8a1f;margin:0}
+.nav b{background:#000;color:var(--acc)}
+.nav a:hover{background:#0b7a0b;color:#fff}
+.produk{background:var(--card);border:3px solid var(--line);border-radius:18px;box-shadow:0 0 10px rgba(236,168,8,.55);padding:16px 14px 18px;margin-bottom:12px}
+.produk h2{font:700 24px/1.3 "Roboto Condensed",Arial,sans-serif;margin:0 0 6px;color:#fff}
+.produk p.desc{margin:0 0 14px;color:var(--mute)}
+.produk ul{margin:0 0 18px;padding:0;list-style:none}
+.produk li{display:flex;gap:10px;align-items:flex-start;padding:4px 0}
+.dot{flex-shrink:0;width:12px;height:12px;border-radius:50%;margin-top:7px;background:var(--c)}
+.harga{font:800 24px/1.2 Arial,sans-serif;margin:0 0 14px}
+.aksi{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;border:1px solid #1c380c;border-radius:5px;padding:9px 18px;font:700 14px/1.2 Arial,system-ui,sans-serif;text-decoration:none;cursor:pointer}
+.btn.wa{background:var(--wa);color:#fff}
+.btn.ghost{background:transparent;color:var(--acc);border:1px solid var(--line)}
+.warn{margin:10px 10px 0;padding:14px 16px;background:var(--card);border:2px solid var(--line);border-radius:14px;color:var(--mute);font-size:14px;line-height:1.6}
+footer{margin-top:30px;text-align:center;color:#fff;font-size:12px;padding:5px 10px;border:2px solid #000;background:linear-gradient(80deg,#000 0,#000 0,#f50505 50%,#000 100%);text-shadow:0 0 2px #000}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.btn.tg{background:#229ed9;color:#fff}
+.btn[aria-disabled=true]{opacity:.4;pointer-events:none}
+.btn.pri{background:#19511e;color:#fff}
+.kontak{margin-top:0;padding:16px 14px;background:var(--card);border:3px solid var(--line);border-radius:18px;box-shadow:0 0 10px rgba(236,168,8,.55)}
+.kontak h3{margin:0 0 6px;font:700 18px/1.3 "Roboto Condensed",Arial,sans-serif;color:#fff}
+.kontak p{margin:0 0 12px;color:var(--mute);font-size:15px;line-height:1.55}
+.cek{display:flex;gap:10px;align-items:center;margin:0 0 14px;font-size:16px;cursor:pointer}
+.cek input{width:22px;height:22px;accent-color:var(--acc)}
+#info{margin:12px 0 0;font-size:15px;color:var(--mute)}
+#info.err{color:var(--bad)}
+
+/* ===== salam badut ===== */
+.ov{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(10,12,40,.62);padding:18px;overflow:hidden}
+.ov.on{display:flex;animation:ovin .25s ease-out}
+@keyframes ovin{from{opacity:0}to{opacity:1}}
+.ovc{position:relative;z-index:2;width:min(340px,100%);background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px 16px 16px;text-align:center;animation:pop .45s cubic-bezier(.2,1.4,.4,1)}
+@keyframes pop{from{transform:scale(.6) translateY(30px);opacity:0}to{transform:none;opacity:1}}
+.bub{position:relative;background:var(--bg);border:1.5px solid var(--acc);border-radius:16px;padding:12px 14px;font:700 17px/1.45 Arial,sans-serif;margin:0 0 14px}
+.bub:after{content:"";position:absolute;left:50%;bottom:-9px;width:14px;height:14px;background:var(--bg);border-right:1.5px solid var(--acc);border-bottom:1.5px solid var(--acc);transform:translateX(-50%) rotate(45deg)}
+#badut{width:190px;height:auto;display:block;margin:0 auto 10px;overflow:visible}
+.bob{animation:bob 1.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-7px)}}
+.wave{animation:wave .6s ease-in-out infinite alternate;transform-origin:138px 155px}
+@keyframes wave{from{transform:rotate(-16deg)}to{transform:rotate(20deg)}}
+.blink{animation:blink 4s infinite;transform-origin:100px 90px}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.fx{position:absolute;top:-30px;pointer-events:none;animation:fall linear forwards;will-change:transform}
+@keyframes fall{to{transform:translateY(112vh) rotate(540deg)}}
+.up{position:absolute;bottom:-40px;pointer-events:none;animation:up linear forwards;font-size:26px}
+@keyframes up{to{transform:translateY(-112vh) rotate(20deg)}}
+@media (prefers-reduced-motion:reduce){.bob,.wave,.blink{animation:none}.fx,.up{display:none}}
+.produk.vip{border-color:#f4f11a;box-shadow:0 0 14px rgba(244,241,26,.55)}
+.produk.vip h2{color:var(--acc)}
+.btn.vipb{background:#7a5a00;color:#fff;border-color:#f4f11a}
+.aturan{margin:0 0 14px;padding:10px 12px;border:1px dashed var(--line);border-radius:10px;color:var(--mute);font-size:14px;line-height:1.55}
+.nav a,.nav b{white-space:nowrap}
+@media (max-width:480px){.nav{font-size:12px}}
+</style>
+</head>
+<body>
+<div class="top">
+  <a class="home" href="toko.html"><h1 class="brand" id="brand"></h1></a>
+  <p class="tag" id="tag"></p>
+  <p class="nav"><a href="blog.html">Beranda</a><a href="data.html">Data</a><b>SCEN OTOMATIS</b></p>
+</div>
+<main id="app"></main>
+<div class="ov" id="badutBox" role="dialog" aria-label="Salam hoki"><div class="ovc">
+  <div class="bub" id="badutTeks">Selamat datang! 🎉<br>Semoga hoki dan banyak rejekinya ya! 🍀💰</div>
+  <svg id="badut" viewBox="0 0 200 230" aria-hidden="true"><g class="bob">
+    <path d="M60 150 Q100 135 140 150 L150 226 H50Z" fill="#e53935"/>
+    <circle cx="85" cy="176" r="7" fill="#ffd54f"/><circle cx="115" cy="190" r="7" fill="#ffd54f"/><circle cx="95" cy="211" r="6" fill="#ffd54f"/>
+    <path d="M70 148 l15 18 l15-14 l15 14 l15-18 q-30-12-60 0z" fill="#fff"/>
+    <path d="M62 155 Q35 170 38 195" stroke="#e53935" stroke-width="16" stroke-linecap="round" fill="none"/><circle cx="38" cy="198" r="9" fill="#fff"/>
+    <g class="wave"><path d="M138 155 Q168 140 172 108" stroke="#e53935" stroke-width="16" stroke-linecap="round" fill="none"/><circle cx="172" cy="104" r="9" fill="#fff"/></g>
+    <circle cx="58" cy="88" r="22" fill="#ff7043"/><circle cx="142" cy="88" r="22" fill="#ff7043"/>
+    <circle cx="100" cy="95" r="45" fill="#fff3e0" stroke="#e0b98f" stroke-width="2"/>
+    <path d="M68 62 L100 8 L132 62 Z" fill="#7e57c2"/><circle cx="100" cy="8" r="7" fill="#ffd54f"/><rect x="64" y="58" width="72" height="10" rx="5" fill="#ffd54f"/>
+    <g class="blink"><ellipse cx="84" cy="90" rx="6" ry="8" fill="#222"/><ellipse cx="116" cy="90" rx="6" ry="8" fill="#222"/></g>
+    <circle cx="72" cy="108" r="7" fill="#ffab91" opacity=".7"/><circle cx="128" cy="108" r="7" fill="#ffab91" opacity=".7"/>
+    <circle cx="100" cy="104" r="9" fill="#e53935"/>
+    <path d="M76 118 Q100 142 124 118 Q100 128 76 118Z" fill="#c62828"/>
+  </g></svg>
+  <button class="btn pri" id="badutX" type="button">Amin 🙏</button>
+</div></div>
+
+<div class="warn" id="warn"></div>
+<footer id="foot"></footer>
+
+<script src="wb-config.js"></script>
+<script>
+/* Toko alifavif: daftar link diambil dari wb-config.js alifavif (tokoLinks); status buka/kunci diatur dari Admin > tab Toko */
+window.WB_CONFIG = {
+  WORKER: (window.WB_STORE && window.WB_STORE.worker) || 'https://steep-resonance-6a71.kjago7822.workers.dev',
+  ACCT: (window.WB_STORE && window.WB_STORE.account) || 'alifavif-cmd',
+  TOKO_LINKS: (window.WB_STORE && window.WB_STORE.tokoLinks) || [
+    { id: 'kjago7822',                    url: 'https://kjago7822.github.io/WB-PREDICTION-/' },
+    { id: 'wgus543-hub',                  url: 'https://wgus543-hub.github.io/WB-PREDICTION-/' },
+    { id: 'mamakeavif-star',              url: 'https://mamakeavif-star.github.io/WB-PREDICTION-/' },
+    { id: 'adinealif-byte',               url: 'https://adinealif-byte.github.io/WB-PREDICTION-/' },
+    { id: 'paitoangka1234-cpu',           url: 'https://paitoangka1234-cpu.github.io/WB-scen/' },
+    { id: 'kpps33040420090144-creator',   url: 'https://kpps33040420090144-creator.github.io/WB-PREDICTION-/' },
+    { id: 'bototomart787-png',            url: 'https://bototomart787-png.github.io/Scenangka/' }
+  ]
+};
+</script>
+<script>
+/* ====== EDIT DI SINI ====== */
+const TOKO = {
+  nama: "💫WB.PREDICTION💫",
+  deskripsi: "Semua bisa jadi master · Aplikasi Scen Angka otomatis",
+  footer: "© 2026 wb.prediction",
+  catatan: "Aplikasi ini hanya alat bantu rekap dan analisis. Hasil undian bersifat acak, jadi tidak ada jaminan hasil apa pun."
+};
+
+/* Kontak admin: WA awali 62 tanpa + dan tanpa 0. Telegram tanpa @ */
+/* waVip / tgVip (opsional): kontak khusus Scen VIP. Kosong = pakai kontak di atas. Per situs juga bisa: tambah wa:'62...' di tokoLinks (wb-config.js). */
+const ADMIN = { wa: "6288902862338", tg: "Scenangka", waVip: "", tgVip: "" };
+
+/* Daftar link Toko Member ada di wb-config.js (TOKO_LINKS). Buka/kunci dilakukan di panel Admin > Pengaturan. */
+const LINKS = (window.WB_CONFIG && window.WB_CONFIG.TOKO_LINKS) || [];
+
+const PRODUK = [
+  {
+    nama: "Wongbagus Prediction",
+    desc: "Aplikasi scanner dan rekap angka yang jalan langsung di browser HP, tanpa install.",
+    fitur: [
+      "Scanner otomatis untuk banyak pasaran",
+      "Input rumus manual dan cek trek",
+      "Bank rumus untuk menyimpan dan mengelompokkan",
+      "Rekap otomatis dan kirim lewat WhatsApp"
+    ],
+    demo: "./"
+  }
+];
+/* Scen VIP: kartu ini muncul otomatis kalau ada link bertanda vip:true di wb-config.js. Teks di bawah ini boleh kamu ubah. */
+const PRODUK_VIP = {
+  nama: "Scen VIP",
+  desc: "Paket lengkap dengan fitur lebih canggih untuk member VIP.",
+  fitur: [
+    "Semua fitur Scen Member",
+    "Fitur lebih canggih khusus VIP",
+    "ACC dan bantuan VIP lewat WhatsApp admin"
+  ],
+  aturan: "Scen VIP punya aturan dan paket sendiri. Setelah daftar, hubungi admin lewat WhatsApp untuk di-ACC sebagai VIP."
+};
+/* ====== SELESAI ====== */
+
+const WARNA = ["#e5484d","#f2a900","#1fa36b","#2f6bff","#8b5cf6"];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const $ = id => document.getElementById(id);
+
+$("brand").textContent = TOKO.nama;
+{ const dp = TOKO.deskripsi.split(" · "); $("tag").innerHTML = `<b>${esc(dp[0])}</b>` + (dp[1] ? `<span>${esc(dp[1])}</span>` : ""); }
+$("warn").textContent = TOKO.catatan;
+$("foot").textContent = TOKO.footer;
+
+const P = PRODUK[0];
+const ADA_VIP = LINKS.some(l => l.vip);
+const kartuVip = () => !ADA_VIP ? "" : `<section class="produk vip" id="kartuVip" style="display:none">
+  <h2>⭐ ${esc(PRODUK_VIP.nama)}</h2>
+  <p class="desc">${esc(PRODUK_VIP.desc)}</p>
+  <ul>${PRODUK_VIP.fitur.map((f, i) => `<li><span class="dot" style="--c:${WARNA[(i + 2) % 5]}"></span><span>${esc(f)}</span></li>`).join("")}</ul>
+  <p class="aturan" id="aturanV" style="display:none"></p>
+  <div class="aksi"><a class="btn vipb" id="btnVip" href="#">Scen VIP</a></div>
+  <p id="infoVip"></p>
+</section>`;
+$("app").innerHTML = `<section class="produk">
+  <h2>${esc(P.nama)}</h2>
+  <p class="desc">${esc(P.desc)}</p>
+  <ul>${P.fitur.map((f, i) => `<li><span class="dot" style="--c:${WARNA[i % 5]}"></span><span>${esc(f)}</span></li>`).join("")}</ul>
+  <p class="aturan" id="aturanM" style="display:none"></p>
+  <div class="aksi">
+    <a class="btn pri" id="btnMember" href="#">Scen Member</a>
+    <button class="btn ghost" id="btnBadut" type="button">🤡 Salam Hoki</button>
+  </div>
+  <p id="info"></p>
+</section>
+${kartuVip()}
+<section class="kontak">
+  <h3>Sudah daftar? Hubungi admin</h3>
+  <p>Setelah selesai daftar di situs member, centang kotak di bawah lalu pilih WhatsApp atau Telegram untuk minta di-ACC.</p>
+  <label class="cek"><input type="checkbox" id="sudah"> Saya sudah daftar</label>
+  <div class="aksi">
+    <a class="btn wa" id="btnWa" href="#" aria-disabled="true">WhatsApp</a>
+    <a class="btn tg" id="btnTg" href="#" aria-disabled="true">Telegram</a>
+  </div>
+</section>`;
+
+/* ---- status link: true/absen = buka, false = terkunci ---- */
+let STATUS = {};
+const dibuka = vip => LINKS.filter(l => !!l.vip === !!vip && STATUS[l.id] !== false);
+const simpan = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+const baca = k => { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } };
+
+async function muatStatus() {
+  try {
+    const c = window.WB_CONFIG || {};
+    const acct = c.ACCT || "";
+    if (!c.WORKER || !acct) return;
+    const base = c.WORKER + "/" + acct;
+    const d = await (await fetch(base + "/members", { cache: "no-store" })).json();
+    const arr = Array.isArray(d) ? d : ((d && d.data) || []);
+    const st = arr.find(m => m.id === "__SETTINGS__");
+    if (st && st.tk) STATUS = st.tk;
+    if (st && st.tm && typeof st.tm === "object") TM = st.tm;
+  } catch (e) { /* gagal baca: semua link dianggap buka */ }
+}
+
+/* aturan & pesan WhatsApp bisa diedit admin (Admin > Toko). Kalau belum diisi, pakai bawaan di bawah. */
+let TM = {};
+const TM_DEF = {
+  biasa: { aturan: "", pesan: "Halo admin, saya sudah daftar di situs {situs}. Mohon di-ACC." },
+  vip:   { aturan: PRODUK_VIP.aturan, pesan: "Halo admin, saya sudah daftar di Scen VIP (kode {kode}). Mohon di-ACC VIP." }
+};
+const tmGet = (tier, f) => (TM && TM[tier] && typeof TM[tier][f] === "string") ? TM[tier][f] : TM_DEF[tier][f];
+function isiKontak() {
+  const id = baca("wb_toko_situs"), tier = baca("wb_toko_tier") === "vip" ? "vip" : "biasa", vip = tier === "vip";
+  const lk = LINKS.find(l => l.id === id) || {};
+  /* nama situs VIP disamarkan: pesan hanya memuat kode V1, V2, ... (urutan di wb-config.js) */
+  const idx = vip ? LINKS.filter(l => l.vip).findIndex(l => l.id === id) : -1;
+  const kode = idx >= 0 ? "V" + (idx + 1) : "";
+  const teks = tmGet(tier, "pesan")
+    .replace(/\{aturan\}/g, tmGet(tier, "aturan"))
+    .replace(/\{kode\}/g, kode)
+    .replace(/\{situs\}/g, vip ? "" : id);
+  const wa = lk.wa || (vip && ADMIN.waVip) || ADMIN.wa;
+  const tg = (vip && ADMIN.tgVip) || ADMIN.tg;
+  $("btnWa").href = `https://wa.me/${wa}?text=${encodeURIComponent(teks)}`;
+  $("btnTg").href = `https://t.me/${tg}?text=${encodeURIComponent(teks)}`;
+  for (const k of ["btnWa", "btnTg"]) { $(k).target = "_blank"; $(k).rel = "noopener"; }
+}
+function isiAturan() {
+  for (const [tier, el] of [["biasa", "aturanM"], ["vip", "aturanV"]]) {
+    const e = $(el); if (!e) continue;
+    const a = tmGet(tier, "aturan").trim();
+    e.textContent = a; e.style.display = a ? "" : "none";
+  }
+}
+function setAktif(on) {
+  for (const id of ["btnWa", "btnTg"]) $(id).setAttribute("aria-disabled", on ? "false" : "true");
+}
+isiAturan();
+$("sudah").checked = baca("wb_toko_sudah") === "1";
+setAktif($("sudah").checked);
+isiKontak();
+$("sudah").addEventListener("change", e => {
+  simpan("wb_toko_sudah", e.target.checked ? "1" : "0");
+  setAktif(e.target.checked);
+});
+
+async function daftar(vip) {
+  await siap;   // tunggu status centang admin selesai dibaca
+  const info = $(vip ? "infoVip" : "info");
+  const buka = dibuka(vip);
+  if (!buka.length) {
+    info.className = "err";
+    info.textContent = vip
+      ? "Scen VIP sedang penuh. Silakan hubungi admin lewat tombol di bawah."
+      : "Pendaftaran sedang penuh. Silakan hubungi admin lewat tombol di bawah.";
+    return;
+  }
+  const pilih = buka[Math.floor(Math.random() * buka.length)];
+  simpan("wb_toko_situs", pilih.id);
+  simpan("wb_toko_tier", vip ? "vip" : "biasa");
+  isiKontak();
+  info.className = "";
+  info.textContent = "Daftar dulu di situs yang terbuka, lalu kembali ke sini dan hubungi admin.";
+  window.open(pilih.url, "_blank", "noopener");
+}
+$("btnMember").addEventListener("click", e => { e.preventDefault(); daftar(false); });
+if ($("btnVip")) $("btnVip").addEventListener("click", e => { e.preventDefault(); daftar(true); });
+
+/* Toko aktif = yang dicentang admin (Admin > Toko). Tidak dicentang = terkunci dan tidak dibuka. */
+function segarkan() {
+  isiAturan(); isiKontak();
+  const v = $("kartuVip");
+  if (v) v.style.display = dibuka(true).length ? "" : "none";   // kartu Scen VIP tampil hanya kalau ada situs VIP yang aktif
+  const adaM = dibuka(false).length > 0;
+  $("btnMember").setAttribute("aria-disabled", adaM ? "false" : "true");
+  if (!adaM) { $("info").className = "err"; $("info").textContent = "Scen Member sedang penuh. Silakan hubungi admin lewat tombol di bawah."; }
+}
+const siap = muatStatus().then(segarkan, segarkan);
+
+/* ---- salam badut ---- */
+(function(){
+  var box=document.getElementById('badutBox'),btn=document.getElementById('btnBadut');
+  if(!box||!btn)return;
+  var warna=['#ff5252','#ffd54f','#69f0ae','#40c4ff','#b388ff','#ff80ab'],ikon=['🍀','💰','✨','🪙','🎉'];
+  function hujan(){
+    box.querySelectorAll('.fx,.up').forEach(function(n){n.remove();});
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    for(var i=0;i<34;i++){var d=document.createElement('i');d.className='fx';
+      d.style.cssText='left:'+(Math.random()*100)+'%;width:'+(6+Math.random()*7)+'px;height:'+(10+Math.random()*9)+'px;background:'+warna[i%warna.length]+';animation-duration:'+(2.6+Math.random()*2.6)+'s;animation-delay:'+(Math.random()*1.6)+'s;border-radius:2px';box.appendChild(d);}
+    for(var j=0;j<10;j++){var u=document.createElement('span');u.className='up';u.textContent=ikon[j%ikon.length];
+      u.style.cssText='left:'+(5+Math.random()*88)+'%;animation-duration:'+(4+Math.random()*3)+'s;animation-delay:'+(Math.random()*2.2)+'s';box.appendChild(u);}
+  }
+  function buka(){box.classList.add('on');hujan();}
+  function tutup(){box.classList.remove('on');box.querySelectorAll('.fx,.up').forEach(function(n){n.remove();});}
+  btn.addEventListener('click',buka);
+  document.getElementById('badutX').addEventListener('click',tutup);
+  box.addEventListener('click',function(e){if(e.target===box)tutup();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')tutup();});
+})();
+
+</script>
+<!-- ===== MUSIK LATAR (mp3, tanpa iklan) ===== -->
+<button id="musBtnM" aria-label="Musik" style="display:none;position:fixed;right:14px;bottom:14px;z-index:99998;width:44px;height:44px;border:0;border-radius:50%;background:#19511e;color:#fff;font-size:20px;box-shadow:0 3px 10px rgba(0,0,0,.5)">&#128263;</button>
+<script>
+(function(){
+  /* kalau halaman ini dibuka di dalam bingkai halaman utama MASTER, musik sudah diputar di sana: jangan dobel */
+  try{ if(window.top!==window.self) return; }catch(e){ return; }
+  var SRC='https://angkahoky187-crypto.github.io/MASTER/musik.mp3', KUNCI='wb_musik_mut', mut=false, bunyi=false;
+  try{mut=localStorage.getItem(KUNCI)==='1';}catch(e){}
+  var au=new Audio(SRC); au.loop=true; au.preload='auto'; au.setAttribute('playsinline','');
+  var btn=document.getElementById('musBtnM');
+  function ikon(){ btn.innerHTML=(bunyi&&!mut)?'&#128266;':'&#128263;'; }
+  function nyalakan(){ try{au.muted=false;au.volume=1;var p=au.play();if(p&&p.catch)p.catch(function(){});}catch(e){} }
+  /* jalan dulu tanpa suara, bersuara di ketukan pertama */
+  if(!mut){ try{au.muted=true;var p0=au.play();if(p0&&p0.catch)p0.catch(function(){});}catch(e){} }
+  /* ketuk/klik apa pun = musik bersuara */
+  var EVT=['click','touchend','pointerup','keydown'];
+  function picu(e){
+    if(mut) return;
+    if(e&&e.target===btn) return;
+    nyalakan();
+    setTimeout(function(){ if(!au.paused&&!au.muted){ bunyi=true; ikon(); EVT.forEach(function(n){document.removeEventListener(n,picu,true);}); } },500);
+  }
+  EVT.forEach(function(n){document.addEventListener(n,picu,true);});
+  btn.addEventListener('click',function(){
+    mut=!mut;
+    try{localStorage.setItem(KUNCI,mut?'1':'0');}catch(x){}
+    if(mut){ try{au.pause();}catch(x){} } else { nyalakan(); }
+    bunyi=!mut; ikon();
+  });
+  /* rahasia admin: ketuk 3x tulisan "Semua bisa jadi master" untuk memunculkan/menyembunyikan tombol mut */
+  var tg=document.querySelector('.tag'), t=[];
+  if(tg) tg.addEventListener('click',function(){
+    var n=Date.now(); t.push(n); t=t.filter(function(x){return n-x<900});
+    if(t.length>=3){ t=[]; btn.style.display=(btn.style.display==='none')?'block':'none'; }
+  });
+  ikon();
+})();
+</script>
+</body>
+</html>
