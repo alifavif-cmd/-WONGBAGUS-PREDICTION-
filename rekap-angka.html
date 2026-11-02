@@ -1,0 +1,219 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light dark"><title>Rekap Angka 2D 3D 4D</title><style>
+:root{--b:#fbfaf7;--t:#1f2430;--m:#6a7080;--c:#f1efe9;--l:#d8d4c8;--a:#1e5eff;--r:#c8372d;--g:#1f8a4c}
+@media(prefers-color-scheme:dark){:root{--b:#12151c;--t:#e8eaf0;--m:#8f96a6;--c:#1a1e28;--l:#2c3342}}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--b);color:var(--t)}
+.w{max-width:980px;margin:auto;padding:12px 12px 90px}
+nav{position:sticky;top:0;z-index:5;padding:6px 0;background:var(--b);display:flex;gap:6px;margin-bottom:12px}nav button{flex:1;text-align:center;padding:10px;border-radius:10px;background:var(--c);color:var(--m);font-weight:700;border:1px solid var(--l)}nav button.on{background:var(--a);border-color:var(--a);color:#fff}
+h1{font-size:20px;margin:2px 0 4px}.sub{color:var(--m);margin:0 0 12px;font-size:13px}
+.card{background:var(--c);border:1px solid var(--l);border-radius:12px;padding:10px;margin-bottom:10px}
+.card h2{font-size:13px;margin:0 0 8px;color:var(--m)}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:6px}.g3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:420px){.g3{grid-template-columns:1fr 1fr}}
+input,select,textarea{width:100%;padding:8px;border:1px solid var(--l);border-radius:8px;background:var(--b);color:var(--t);font:inherit;margin:0}
+textarea{min-height:58px;resize:vertical;margin-bottom:6px}.off{border-color:var(--r)}
+button{border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:700;color:#fff;background:var(--a);cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--a);outline-offset:1px}
+.bg{background:var(--g)}.br{background:var(--r)}.bm{background:#6a7080}
+.sums{display:grid;grid-template-columns:repeat(auto-fill,minmax(50px,1fr));gap:4px}
+.sums label{display:flex;gap:5px;align-items:center;padding:6px;border:1px solid var(--l);border-radius:8px;background:var(--b)}.sums input{width:auto}
+.bar{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;align-items:center}.bar select{width:auto}
+.res{border-left:4px solid var(--a)}.res.ok{border-left-color:var(--g)}.res.no{border-left-color:var(--r)}
+.res h3{display:flex;justify-content:space-between;align-items:center;margin:0 0 6px;font-size:13px}.res button{padding:5px 12px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(10,1fr);gap:3px}.grid b{text-align:center;padding:6px 0;border-radius:6px;background:var(--b);font-size:12px;cursor:pointer}.grid .d{background:var(--r);color:#fff;opacity:.5}
+
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:10px;display:none;z-index:9}
+.toast u{margin-left:10px;cursor:pointer;color:#8fb4ff}
+section[hidden]{display:none}</style></head><body><div class="w"><nav><button type="button" data-tab="2d">Rekap 2D</button><button type="button" data-tab="3d">Rekap 3D</button><button type="button" data-tab="4d">Rekap 4D</button></nav><section id="p2d" hidden><h1>Rekap Angka 2D</h1><p class="sub">Buang angka mati dari 100 LN, lalu urutkan sisanya berdasarkan suara AI.</p><form id="app" onsubmit="return false"></form><div id="out"></div><div class="toast" role="status"></div></section><section id="p3d" hidden><h1>Rekap Angka 3D</h1><p class="sub">Pangkas 1000 LN lewat sum, posisi, kembar, serta filter 2D depan dan belakang.</p><form id="app" onsubmit="return false"></form><div id="out"></div><div class="toast" role="status"></div></section><section id="p4d" hidden><h1>Rekap Angka 4D</h1><p class="sub">Pangkas 10000 LN lewat sum, posisi, kembar, serta filter 2D depan, tengah, dan belakang.</p><form id="app" onsubmit="return false"></form><div id="out"></div><div class="toast" role="status"></div></section></div><script>(function(ROOT,KEY){
+const $=s=>ROOT.querySelector(s),$$=s=>[...ROOT.querySelectorAll(s)];
+const V=k=>{const e=$('[data-k="'+k+'"]');return e?(e.type==='checkbox'?e.checked:e.value):''};
+const nums=(s,n)=>[...new Set((s||'').split(/\D+/).filter(x=>x.length==n))];
+const dg=s=>new Set((s||'').replace(/\D/g,'').split('').filter(Boolean));
+const rows=s=>(s||'').split('\n').map(dg).filter(x=>x.size);
+const pad=(i,n)=>String(i).padStart(n,'0');
+const sep=()=>V('sep')||'*';
+const I=(k,ph,c)=>`<input data-k="${k}" placeholder="${ph}" class="${c||''}" autocomplete="off">`;
+const TA=(k,ph,c)=>`<textarea data-k="${k}" placeholder="${ph}" class="${c||''}"></textarea>`;
+const S=(k,l,o)=>`<select data-k="${k}" class="off"><option value="">${l}</option>${o.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('')}</select>`;
+const KS=(k,l)=>`<select data-k="${k}" class="off"><option value="on">${l} on</option><option value="off">${l} off</option></select>`;
+const UQ=S('uk','Normal',[['t','Twin'],['n','Nontwin']]);
+const SUMS=n=>`<div class="sums">${Array.from({length:n+1},(_,i)=>`<label><input type="checkbox" data-k="s${i}">${i}</label>`).join('')}</div><div class="bar"><button type="button" class="bg" data-act="sg">Genap off</button><button type="button" class="bm" data-act="sj">Ganjil off</button><button type="button" class="br" data-act="sc">Clear</button></div>`;
+const BAR=(l,a)=>`<div class="bar"><select data-k="sep" title="Pemisah"><option>*</option><option>#</option><option>,</option><option>.</option></select><button type="button" class="bg" data-act="${a}">${l}</button><button type="button" class="bm" data-act="reset">Reset</button></div>`;
+const SEL={kbk:['K Besar/Kecil',[['b','Besar'],['k','Kecil']]],ebk:['E Besar/Kecil',[['b','Besar'],['k','Kecil']]],kgj:['K Ganjil/Genap',[['j','Ganjil'],['g','Genap']]],egj:['E Ganjil/Genap',[['j','Ganjil'],['g','Genap']]],hs:['Homo/Silang',[['h','Homo'],['s','Silang']]],tt:['Tengah/Tepi',[['t','Tengah'],['p','Tepi']]],jb:['Jbesar/Jkecil',[['b','Jbesar'],['k','Jkecil']]],jg:['Jganjil/Jgenap',[['j','Jganjil'],['g','Jgenap']]],bk:['Kembang/Kempis',[['m','Kembang'],['p','Kempis']]]};
+function P(p,full,ai){const ks=full?Object.keys(SEL):['hs','tt','jb','jg','bk'];
+ return TA(p+'dasar','LN dasar 2D (kosong = semua 100)')+(full?`<div class="g">${I(p+'kep','Kepala off')}${I(p+'eko','Ekor off')}${I(p+'jl1','Jarak lemah dari')}${I(p+'jl2','Jarak lemah sampai')}</div>`:'')+`<div class="g">${I(p+'shio','Shio off, misal 11,12')}${I(p+'jml','Jumlah off, misal 123')}</div>`+(full?I(p+'sls','Selisih off 0-5, misal 125')+'<div style="height:6px"></div>':'')+`<div class="g">${ks.map(k=>S(p+k,SEL[k][0],SEL[k][1])).join('')}</div>`+(ai?TA(p+'ai','AI/CT per baris (satu baris = satu set digit)'):'')}
+const TG=new Set('234567'),TP=new Set('0189');
+function f2(p){const g=k=>V(p+k);let base=nums(g('dasar'),2);if(!base.length)base=Array.from({length:100},(_,i)=>pad(i,2));
+ const ko=dg(g('kep')),eo=dg(g('eko')),sl=dg(g('sls')),sh=new Set((g('shio')||'').split(/\D+/).filter(Boolean).map(Number));
+ const jr=(g('jml')||'').trim(),jx=/\D/.test(jr)?new Set(jr.split(/\D+/).filter(Boolean).map(Number)):null,jd=jx?null:dg(jr);
+ const j1=parseInt(g('jl1')),j2=parseInt(g('jl2')),AI=rows(g('ai'));
+ return base.filter(n=>{const k=+n[0],e=+n[1],N=+n,sm=k+e,df=Math.abs(k-e),cy=Math.min(df,10-df);
+  if(ko.has(n[0])||eo.has(n[1])||sl.has(String(cy))||sh.has(((N-1)%12+12)%12+1))return 0;
+  if(jx?jx.has(sm):jd.has(String(sm%10)))return 0;
+  if(!isNaN(j1)&&!isNaN(j2)&&N>=Math.min(j1,j2)&&N<=Math.max(j1,j2))return 0;
+  const a=g('kbk'),b=g('ebk'),c=g('kgj'),d=g('egj'),h=g('hs'),t=g('tt'),jb=g('jb'),jg=g('jg'),bk=g('bk');
+  if(a=='b'&&k>=5||a=='k'&&k<5||b=='b'&&e>=5||b=='k'&&e<5)return 0;
+  if(c=='j'&&k%2||c=='g'&&!(k%2)||d=='j'&&e%2||d=='g'&&!(e%2))return 0;
+  const same=k%2==e%2;if(h=='h'&&same||h=='s'&&!same)return 0;
+  const tg=TG.has(n[0])&&TG.has(n[1]),tp=TP.has(n[0])&&TP.has(n[1]);if(t=='t'&&tg||t=='p'&&tp)return 0;
+  const s10=sm%10;if(jb=='b'&&s10>=5||jb=='k'&&s10<5||jg=='j'&&s10%2||jg=='g'&&!(s10%2))return 0;
+  if(bk=='m'&&k<e||bk=='p'&&k>e)return 0;
+  if(AI.length&&!AI.some(L=>L.has(n[0])&&L.has(n[1])))return 0;return 1})}
+const RES=(id,t,arr,cls)=>`<div class="card res ${cls||''}"><h3><span>${t} = ${arr.length} LN</span><button type="button" data-act="cp" data-id="${id}">Copy</button></h3><textarea readonly id="${id}" rows="3">${arr.join(sep())}</textarea></div>`;
+function copy(s){const fb=()=>{const a=document.createElement('textarea');a.value=s;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('Tersalin')}catch(e){toast('Gagal menyalin')}a.remove()};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(s).then(()=>toast('Tersalin'),fb);else fb()}
+let TT;function toast(m,u){const t=$('.toast');t.innerHTML=m+(u?'<u data-act="undo">Batal</u>':'');t.style.display='block';clearTimeout(TT);TT=setTimeout(()=>t.style.display='none',4000)}
+const ST=()=>{const o={};$$('[data-k]').forEach(e=>o[e.dataset.k]=e.type==='checkbox'?e.checked:e.value);return o};
+const SET=o=>$$('[data-k]').forEach(e=>{const x=o[e.dataset.k];if(x===undefined)return;if(e.type==='checkbox')e.checked=!!x;else e.value=x});
+let sv;const save=()=>{clearTimeout(sv);sv=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(ST()))}catch(e){}},300)};
+let PREV=null;const ACT={};
+ACT.cp=a=>copy($('#'+a.dataset.id).value);
+ACT.sg=()=>{$$('.sums input').forEach((e,i)=>e.checked=i%2==0);save()};
+ACT.sj=()=>{$$('.sums input').forEach((e,i)=>e.checked=i%2==1);save()};
+ACT.sc=()=>{$$('.sums input').forEach(e=>e.checked=false);save()};
+ACT.reset=()=>{PREV=ST();$$('[data-k]').forEach(e=>{if(e.type==='checkbox')e.checked=false;else if(e.tagName=='SELECT')e.selectedIndex=0;else e.value=''});$('#out').innerHTML='';save();toast('Form dikosongkan',1)};
+ACT.undo=()=>{if(PREV){SET(PREV);PREV=null;save();toast('Dikembalikan')}};
+function boot(html){$('#app').innerHTML=html;try{const o=JSON.parse(localStorage.getItem(KEY)||'null');if(o)SET(o)}catch(e){}
+ ROOT.addEventListener('input',save);ROOT.addEventListener('change',save);
+ ROOT.addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(a&&ACT[a.dataset.act]){e.preventDefault();ACT[a.dataset.act](a)}})}
+
+ACT.go=()=>{let A=f2('d');const off=new Set(nums(V('idoff'),2));A=A.filter(n=>!off.has(n));
+ const L=rows(V('ids')).slice(0,100),vt=Array(10).fill(0);L.forEach(s=>s.forEach(d=>vt[d]++));const mx=Math.max(...vt);let G;
+ if(L.length){const m=new Map();A.forEach(n=>{const k=Math.min(vt[n[0]],vt[n[1]])+','+Math.max(vt[n[0]],vt[n[1]]);(m.get(k)||m.set(k,[]).get(k)).push(n)});
+  G=[...m.entries()].sort((x,y)=>{const a=x[0].split(',').map(Number),b=y[0].split(',').map(Number);return b[0]-a[0]||b[1]-a[1]}).map(x=>x[1]);
+  while(G.length>11){const t=G.pop();G[G.length-1]=G[G.length-1].concat(t)}}else G=[A];
+ const gi={};G.forEach((g,i)=>g.forEach(n=>gi[n]=i));let h='';
+ if(L.length)h+=`<div class="card"><b>angka main ${mx>0?vt.map((c,d)=>c==mx?d:'').join(''):'-'}</b><br>${vt.map((c,d)=>c?d+' - '+c+' votes':'').filter(Boolean).join('<br>')}</div>`;
+ h+=`<div class="card"><h2>Kontrol angka, ketuk angka untuk off atau on</h2><div class="grid">${Array.from({length:100},(_,i)=>{const n=pad(i,2),g=gi[n];return g===undefined?`<b class="d" data-act="tg" data-n="${n}">${n}</b>`:`<b data-act="tg" data-n="${n}" style="background:hsl(${150-g*13} 55% 40%);color:#fff">${n}</b>`}).join('')}</div></div>`;
+ G.forEach((g,i)=>{if(g.length)h+=RES('r'+i,L.length?(i?'Patah '+i:'LN TOP'):'LN HASIL',g,i<3?'ok':'no')});
+ $('#out').innerHTML=h};
+ACT.tg=a=>{const n=a.dataset.n,s=new Set(nums(V('idoff'),2));s.has(n)?s.delete(n):s.add(n);$('[data-k=idoff]').value=[...s].sort().join(sep());save();ACT.go()};
+boot(`<div class="card"><h2>Filter angka mati</h2>${P('d',1,0)}</div><div class="card"><h2>LN off</h2>${TA('idoff','LN off, pisah dengan * # , atau spasi','off')}</div><div class="card"><h2>AI / AK / CT, maksimal 100 baris</h2>${TA('ids','Satu baris = satu set angka, misal 2468')}</div>${BAR('Generate','go')}`);
+})(document.getElementById("p2d"),"rekap_2d");
+(function(ROOT,KEY){
+const $=s=>ROOT.querySelector(s),$$=s=>[...ROOT.querySelectorAll(s)];
+const V=k=>{const e=$('[data-k="'+k+'"]');return e?(e.type==='checkbox'?e.checked:e.value):''};
+const nums=(s,n)=>[...new Set((s||'').split(/\D+/).filter(x=>x.length==n))];
+const dg=s=>new Set((s||'').replace(/\D/g,'').split('').filter(Boolean));
+const rows=s=>(s||'').split('\n').map(dg).filter(x=>x.size);
+const pad=(i,n)=>String(i).padStart(n,'0');
+const sep=()=>V('sep')||'*';
+const I=(k,ph,c)=>`<input data-k="${k}" placeholder="${ph}" class="${c||''}" autocomplete="off">`;
+const TA=(k,ph,c)=>`<textarea data-k="${k}" placeholder="${ph}" class="${c||''}"></textarea>`;
+const S=(k,l,o)=>`<select data-k="${k}" class="off"><option value="">${l}</option>${o.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('')}</select>`;
+const KS=(k,l)=>`<select data-k="${k}" class="off"><option value="on">${l} on</option><option value="off">${l} off</option></select>`;
+const UQ=S('uk','Normal',[['t','Twin'],['n','Nontwin']]);
+const SUMS=n=>`<div class="sums">${Array.from({length:n+1},(_,i)=>`<label><input type="checkbox" data-k="s${i}">${i}</label>`).join('')}</div><div class="bar"><button type="button" class="bg" data-act="sg">Genap off</button><button type="button" class="bm" data-act="sj">Ganjil off</button><button type="button" class="br" data-act="sc">Clear</button></div>`;
+const BAR=(l,a)=>`<div class="bar"><select data-k="sep" title="Pemisah"><option>*</option><option>#</option><option>,</option><option>.</option></select><button type="button" class="bg" data-act="${a}">${l}</button><button type="button" class="bm" data-act="reset">Reset</button></div>`;
+const SEL={kbk:['K Besar/Kecil',[['b','Besar'],['k','Kecil']]],ebk:['E Besar/Kecil',[['b','Besar'],['k','Kecil']]],kgj:['K Ganjil/Genap',[['j','Ganjil'],['g','Genap']]],egj:['E Ganjil/Genap',[['j','Ganjil'],['g','Genap']]],hs:['Homo/Silang',[['h','Homo'],['s','Silang']]],tt:['Tengah/Tepi',[['t','Tengah'],['p','Tepi']]],jb:['Jbesar/Jkecil',[['b','Jbesar'],['k','Jkecil']]],jg:['Jganjil/Jgenap',[['j','Jganjil'],['g','Jgenap']]],bk:['Kembang/Kempis',[['m','Kembang'],['p','Kempis']]]};
+function P(p,full,ai){const ks=full?Object.keys(SEL):['hs','tt','jb','jg','bk'];
+ return TA(p+'dasar','LN dasar 2D (kosong = semua 100)')+(full?`<div class="g">${I(p+'kep','Kepala off')}${I(p+'eko','Ekor off')}${I(p+'jl1','Jarak lemah dari')}${I(p+'jl2','Jarak lemah sampai')}</div>`:'')+`<div class="g">${I(p+'shio','Shio off, misal 11,12')}${I(p+'jml','Jumlah off, misal 123')}</div>`+(full?I(p+'sls','Selisih off 0-5, misal 125')+'<div style="height:6px"></div>':'')+`<div class="g">${ks.map(k=>S(p+k,SEL[k][0],SEL[k][1])).join('')}</div>`+(ai?TA(p+'ai','AI/CT per baris (satu baris = satu set digit)'):'')}
+const TG=new Set('234567'),TP=new Set('0189');
+function f2(p){const g=k=>V(p+k);let base=nums(g('dasar'),2);if(!base.length)base=Array.from({length:100},(_,i)=>pad(i,2));
+ const ko=dg(g('kep')),eo=dg(g('eko')),sl=dg(g('sls')),sh=new Set((g('shio')||'').split(/\D+/).filter(Boolean).map(Number));
+ const jr=(g('jml')||'').trim(),jx=/\D/.test(jr)?new Set(jr.split(/\D+/).filter(Boolean).map(Number)):null,jd=jx?null:dg(jr);
+ const j1=parseInt(g('jl1')),j2=parseInt(g('jl2')),AI=rows(g('ai'));
+ return base.filter(n=>{const k=+n[0],e=+n[1],N=+n,sm=k+e,df=Math.abs(k-e),cy=Math.min(df,10-df);
+  if(ko.has(n[0])||eo.has(n[1])||sl.has(String(cy))||sh.has(((N-1)%12+12)%12+1))return 0;
+  if(jx?jx.has(sm):jd.has(String(sm%10)))return 0;
+  if(!isNaN(j1)&&!isNaN(j2)&&N>=Math.min(j1,j2)&&N<=Math.max(j1,j2))return 0;
+  const a=g('kbk'),b=g('ebk'),c=g('kgj'),d=g('egj'),h=g('hs'),t=g('tt'),jb=g('jb'),jg=g('jg'),bk=g('bk');
+  if(a=='b'&&k>=5||a=='k'&&k<5||b=='b'&&e>=5||b=='k'&&e<5)return 0;
+  if(c=='j'&&k%2||c=='g'&&!(k%2)||d=='j'&&e%2||d=='g'&&!(e%2))return 0;
+  const same=k%2==e%2;if(h=='h'&&same||h=='s'&&!same)return 0;
+  const tg=TG.has(n[0])&&TG.has(n[1]),tp=TP.has(n[0])&&TP.has(n[1]);if(t=='t'&&tg||t=='p'&&tp)return 0;
+  const s10=sm%10;if(jb=='b'&&s10>=5||jb=='k'&&s10<5||jg=='j'&&s10%2||jg=='g'&&!(s10%2))return 0;
+  if(bk=='m'&&k<e||bk=='p'&&k>e)return 0;
+  if(AI.length&&!AI.some(L=>L.has(n[0])&&L.has(n[1])))return 0;return 1})}
+const RES=(id,t,arr,cls)=>`<div class="card res ${cls||''}"><h3><span>${t} = ${arr.length} LN</span><button type="button" data-act="cp" data-id="${id}">Copy</button></h3><textarea readonly id="${id}" rows="3">${arr.join(sep())}</textarea></div>`;
+function copy(s){const fb=()=>{const a=document.createElement('textarea');a.value=s;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('Tersalin')}catch(e){toast('Gagal menyalin')}a.remove()};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(s).then(()=>toast('Tersalin'),fb);else fb()}
+let TT;function toast(m,u){const t=$('.toast');t.innerHTML=m+(u?'<u data-act="undo">Batal</u>':'');t.style.display='block';clearTimeout(TT);TT=setTimeout(()=>t.style.display='none',4000)}
+const ST=()=>{const o={};$$('[data-k]').forEach(e=>o[e.dataset.k]=e.type==='checkbox'?e.checked:e.value);return o};
+const SET=o=>$$('[data-k]').forEach(e=>{const x=o[e.dataset.k];if(x===undefined)return;if(e.type==='checkbox')e.checked=!!x;else e.value=x});
+let sv;const save=()=>{clearTimeout(sv);sv=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(ST()))}catch(e){}},300)};
+let PREV=null;const ACT={};
+ACT.cp=a=>copy($('#'+a.dataset.id).value);
+ACT.sg=()=>{$$('.sums input').forEach((e,i)=>e.checked=i%2==0);save()};
+ACT.sj=()=>{$$('.sums input').forEach((e,i)=>e.checked=i%2==1);save()};
+ACT.sc=()=>{$$('.sums input').forEach(e=>e.checked=false);save()};
+ACT.reset=()=>{PREV=ST();$$('[data-k]').forEach(e=>{if(e.type==='checkbox')e.checked=false;else if(e.tagName=='SELECT')e.selectedIndex=0;else e.value=''});$('#out').innerHTML='';save();toast('Form dikosongkan',1)};
+ACT.undo=()=>{if(PREV){SET(PREV);PREV=null;save();toast('Dikembalikan')}};
+function boot(html){$('#app').innerHTML=html;try{const o=JSON.parse(localStorage.getItem(KEY)||'null');if(o)SET(o)}catch(e){}
+ ROOT.addEventListener('input',save);ROOT.addEventListener('change',save);
+ ROOT.addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(a&&ACT[a.dataset.act]){e.preventDefault();ACT[a.dataset.act](a)}})}
+
+ACT.go=()=>{const D=new Set(f2('d')),B=new Set(f2('b')),so=new Set();for(let i=0;i<=27;i++)if(V('s'+i))so.add(i);
+ const ko=dg(V('kop')),ke=dg(V('kep')),ek=dg(V('eko')),on=nums(V('on3d'),3),of=new Set(nums(V('mati3d'),3)),AI=rows(V('ai3d')),uk=V('uk');
+ const base=on.length?on:Array.from({length:1000},(_,i)=>pad(i,3)),tw=[['kt',0,1],['kb',1,2],['kc',0,2]];
+ const r=base.filter(n=>{if(of.has(n)||so.has(+n[0]+ +n[1]+ +n[2]))return 0;if(ko.has(n[0])||ke.has(n[1])||ek.has(n[2]))return 0;
+  if(!D.has(n.slice(0,2))||!B.has(n.slice(1)))return 0;for(const[k,a,b]of tw)if(V(k)=='off'&&n[a]==n[b])return 0;
+  const t=new Set(n).size<3;if(uk=='t'&&t||uk=='n'&&!t)return 0;if(AI.length&&!AI.some(L=>[...n].every(c=>L.has(c))))return 0;return 1});
+ $('#out').innerHTML=RES('hasil','HASIL',r)};
+boot(`<div class="card"><h2>Sum 3D off</h2>${SUMS(27)}</div><div class="card"><h2>Pangkas 3D dan kembar</h2><div class="g g3">${I('kop','Kop off')}${I('kep','Kep off')}${I('eko','Ekor off')}</div><div class="g g3">${KS('kt','kembar tengah')}${KS('kb','kembar belakang')}${KS('kc','kembar cop ekor')}</div><div class="g">${UQ}<span></span></div>${TA('ai3d','AI 3D, satu baris = satu set digit')}${TA('on3d','LN 3D on (kosong = semua 1000)')}${TA('mati3d','LN 3D off','off')}</div><div class="card"><h2>Pangkas 2D depan (digit 1-2)</h2>${P('d',1,1)}</div><div class="card"><h2>Pangkas 2D belakang (digit 2-3)</h2>${P('b',1,1)}</div>${BAR('Proses','go')}`);
+})(document.getElementById("p3d"),"rekap_3d");
+(function(ROOT,KEY){
+const $=s=>ROOT.querySelector(s),$$=s=>[...ROOT.querySelectorAll(s)];
+const V=k=>{const e=$('[data-k="'+k+'"]');return e?(e.type==='checkbox'?e.checked:e.value):''};
+const nums=(s,n)=>[...new Set((s||'').split(/\D+/).filter(x=>x.length==n))];
+const dg=s=>new Set((s||'').replace(/\D/g,'').split('').filter(Boolean));
+const rows=s=>(s||'').split('\n').map(dg).filter(x=>x.size);
+const pad=(i,n)=>String(i).padStart(n,'0');
+const sep=()=>V('sep')||'*';
+const I=(k,ph,c)=>`<input data-k="${k}" placeholder="${ph}" class="${c||''}" autocomplete="off">`;
+const TA=(k,ph,c)=>`<textarea data-k="${k}" placeholder="${ph}" class="${c||''}"></textarea>`;
+const S=(k,l,o)=>`<select data-k="${k}" class="off"><option value="">${l}</option>${o.map(x=>`<option value="${x[0]}">${x[1]}</option>`).join('')}</select>`;
+const KS=(k,l)=>`<select data-k="${k}" class="off"><option value="on">${l} on</option><option value="off">${l} off</option></select>`;
+const UQ=S('uk','Normal',[['t','Twin'],['n','Nontwin']]);
+const SUMS=n=>`<div class="sums">${Array.from({length:n+1},(_,i)=>`<label><input type="checkbox" data-k="s${i}">${i}</label>`).join('')}</div><div class="bar"><button type="button" class="bg" data-act="sg">Genap off</button><button type="button" class="bm" data-act="sj">Ganjil off</button><button type="button" class="br" data-act="sc">Clear</button></div>`;
+const BAR=(l,a)=>`<div class="bar"><select data-k="sep" title="Pemisah"><option>*</option><option>#</option><option>,</option><option>.</option></select><button type="button" class="bg" data-act="${a}">${l}</button><button type="button" class="bm" data-act="reset">Reset</button></div>`;
+const SEL={kbk:['K Besar/Kecil',[['b','Besar'],['k','Kecil']]],ebk:['E Besar/Kecil',[['b','Besar'],['k','Kecil']]],kgj:['K Ganjil/Genap',[['j','Ganjil'],['g','Genap']]],egj:['E Ganjil/Genap',[['j','Ganjil'],['g','Genap']]],hs:['Homo/Silang',[['h','Homo'],['s','Silang']]],tt:['Tengah/Tepi',[['t','Tengah'],['p','Tepi']]],jb:['Jbesar/Jkecil',[['b','Jbesar'],['k','Jkecil']]],jg:['Jganjil/Jgenap',[['j','Jganjil'],['g','Jgenap']]],bk:['Kembang/Kempis',[['m','Kembang'],['p','Kempis']]]};
+function P(p,full,ai){const ks=full?Object.keys(SEL):['hs','tt','jb','jg','bk'];
+ return TA(p+'dasar','LN dasar 2D (kosong = semua 100)')+(full?`<div class="g">${I(p+'kep','Kepala off')}${I(p+'eko','Ekor off')}${I(p+'jl1','Jarak lemah dari')}${I(p+'jl2','Jarak lemah sampai')}</div>`:'')+`<div class="g">${I(p+'shio','Shio off, misal 11,12')}${I(p+'jml','Jumlah off, misal 123')}</div>`+(full?I(p+'sls','Selisih off 0-5, misal 125')+'<div style="height:6px"></div>':'')+`<div class="g">${ks.map(k=>S(p+k,SEL[k][0],SEL[k][1])).join('')}</div>`+(ai?TA(p+'ai','AI/CT per baris (satu baris = satu set digit)'):'')}
+const TG=new Set('234567'),TP=new Set('0189');
+function f2(p){const g=k=>V(p+k);let base=nums(g('dasar'),2);if(!base.length)base=Array.from({length:100},(_,i)=>pad(i,2));
+ const ko=dg(g('kep')),eo=dg(g('eko')),sl=dg(g('sls')),sh=new Set((g('shio')||'').split(/\D+/).filter(Boolean).map(Number));
+ const jr=(g('jml')||'').trim(),jx=/\D/.test(jr)?new Set(jr.split(/\D+/).filter(Boolean).map(Number)):null,jd=jx?null:dg(jr);
+ const j1=parseInt(g('jl1')),j2=parseInt(g('jl2')),AI=rows(g('ai'));
+ return base.filter(n=>{const k=+n[0],e=+n[1],N=+n,sm=k+e,df=Math.abs(k-e),cy=Math.min(df,10-df);
+  if(ko.has(n[0])||eo.has(n[1])||sl.has(String(cy))||sh.has(((N-1)%12+12)%12+1))return 0;
+  if(jx?jx.has(sm):jd.has(String(sm%10)))return 0;
+  if(!isNaN(j1)&&!isNaN(j2)&&N>=Math.min(j1,j2)&&N<=Math.max(j1,j2))return 0;
+  const a=g('kbk'),b=g('ebk'),c=g('kgj'),d=g('egj'),h=g('hs'),t=g('tt'),jb=g('jb'),jg=g('jg'),bk=g('bk');
+  if(a=='b'&&k>=5||a=='k'&&k<5||b=='b'&&e>=5||b=='k'&&e<5)return 0;
+  if(c=='j'&&k%2||c=='g'&&!(k%2)||d=='j'&&e%2||d=='g'&&!(e%2))return 0;
+  const same=k%2==e%2;if(h=='h'&&same||h=='s'&&!same)return 0;
+  const tg=TG.has(n[0])&&TG.has(n[1]),tp=TP.has(n[0])&&TP.has(n[1]);if(t=='t'&&tg||t=='p'&&tp)return 0;
+  const s10=sm%10;if(jb=='b'&&s10>=5||jb=='k'&&s10<5||jg=='j'&&s10%2||jg=='g'&&!(s10%2))return 0;
+  if(bk=='m'&&k<e||bk=='p'&&k>e)return 0;
+  if(AI.length&&!AI.some(L=>L.has(n[0])&&L.has(n[1])))return 0;return 1})}
+const RES=(id,t,arr,cls)=>`<div class="card res ${cls||''}"><h3><span>${t} = ${arr.length} LN</span><button type="button" data-act="cp" data-id="${id}">Copy</button></h3><textarea readonly id="${id}" rows="3">${arr.join(sep())}</textarea></div>`;
+function copy(s){const fb=()=>{const a=document.createElement('textarea');a.value=s;document.body.appendChild(a);a.select();try{document.execCommand('copy');toast('Tersalin')}catch(e){toast('Gagal menyalin')}a.remove()};
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(s).then(()=>toast('Tersalin'),fb);else fb()}
+let TT;function toast(m,u){const t=$('.toast');t.innerHTML=m+(u?'<u data-act="undo">Batal</u>':'');t.style.display='block';clearTimeout(TT);TT=setTimeout(()=>t.style.display='none',4000)}
+const ST=()=>{const o={};$$('[data-k]').forEach(e=>o[e.dataset.k]=e.type==='checkbox'?e.checked:e.value);return o};
+const SET=o=>$$('[data-k]').forEach(e=>{const x=o[e.dataset.k];if(x===undefined)return;if(e.type==='checkbox')e.checked=!!x;else e.value=x});
+let sv;const save=()=>{clearTimeout(sv);sv=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(ST()))}catch(e){}},300)};
+let PREV=null;const ACT={};
+ACT.cp=a=>copy($('#'+a.dataset.id).value);
+ACT.sg=()=>{$$('.sums input').forEach((e,i)=>e.checked=i%2==0);save()};
+ACT.sj=()=>{$$('.sums input').forEach((e,i)=>e.checked=i%2==1);save()};
+ACT.sc=()=>{$$('.sums input').forEach(e=>e.checked=false);save()};
+ACT.reset=()=>{PREV=ST();$$('[data-k]').forEach(e=>{if(e.type==='checkbox')e.checked=false;else if(e.tagName=='SELECT')e.selectedIndex=0;else e.value=''});$('#out').innerHTML='';save();toast('Form dikosongkan',1)};
+ACT.undo=()=>{if(PREV){SET(PREV);PREV=null;save();toast('Dikembalikan')}};
+function boot(html){$('#app').innerHTML=html;try{const o=JSON.parse(localStorage.getItem(KEY)||'null');if(o)SET(o)}catch(e){}
+ ROOT.addEventListener('input',save);ROOT.addEventListener('change',save);
+ ROOT.addEventListener('click',e=>{const a=e.target.closest('[data-act]');if(a&&ACT[a.dataset.act]){e.preventDefault();ACT[a.dataset.act](a)}})}
+
+ACT.go=()=>{const D=new Set(f2('a')),T=new Set(f2('b')),B=new Set(f2('c')),so=new Set();for(let i=0;i<=36;i++)if(V('s'+i))so.add(i);
+ const o=['as','kop','kep','eko'].map(k=>dg(V(k))),on=nums(V('on4d'),4),of=new Set(nums(V('off4d'),4)),AI=rows(V('ai4d')),uk=V('uk');
+ const base=on.length?on:Array.from({length:10000},(_,i)=>pad(i,4)),tw=[['kd',0,1],['kk',0,2],['kt',1,2],['ke',0,3],['kb',2,3],['kc',1,3]];
+ const r=base.filter(n=>{if(of.has(n)||so.has(+n[0]+ +n[1]+ +n[2]+ +n[3]))return 0;for(let i=0;i<4;i++)if(o[i].has(n[i]))return 0;
+  if(!D.has(n.slice(0,2))||!T.has(n.slice(1,3))||!B.has(n.slice(2)))return 0;for(const[k,a,b]of tw)if(V(k)=='off'&&n[a]==n[b])return 0;
+  const t=new Set(n).size<4;if(uk=='t'&&t||uk=='n'&&!t)return 0;if(AI.length&&!AI.some(L=>[...n].every(c=>L.has(c))))return 0;return 1});
+ window.R4=r;$('#out').innerHTML=RES('hasil','Jumlah LN',r)+(r.length?'<div class="bar"><button type="button" class="bg" data-act="split">Split hasil (400 LN / bagian)</button></div><div id="parts"></div>':'')};
+ACT.split=()=>{const r=window.R4||[];let h='';for(let i=0;i<r.length;i+=400)h+=RES('p'+i,'Bagian '+(i/400+1),r.slice(i,i+400),'ok');$('#parts').innerHTML=h};
+boot(`<div class="card"><h2>Sum off 4D</h2>${SUMS(36)}</div><div class="card"><h2>Pangkas posisi dan kembar</h2><div class="g">${I('as','As off, misal 123')}${I('kop','Kop off')}${I('kep','Kepala off')}${I('eko','Ekor off')}</div><div class="g">${KS('kd','kembar depan')}${KS('kk','kembar as kep')}${KS('kt','kembar tengah')}${KS('ke','kembar as ekor')}${KS('kb','kembar belakang')}${KS('kc','kembar cop ekor')}${UQ}</div></div><div class="card"><h2>2D depan on (digit 1-2)</h2>${P('a',0,1)}</div><div class="card"><h2>2D tengah on (digit 2-3)</h2>${P('b',0,1)}</div><div class="card"><h2>2D belakang on (digit 3-4)</h2>${P('c',0,1)}</div><div class="card"><h2>AI / CT 4D</h2>${TA('ai4d','Satu baris = satu set digit')}</div><div class="g"><div>${TA('on4d','4D on (kosong = semua 10000)')}</div><div>${TA('off4d','4D off','off')}</div></div>${BAR('Generate','go')}`);
+})(document.getElementById("p4d"),"rekap_4d");
+(function(){var T=document.querySelectorAll("[data-tab]"),S;try{S=localStorage.getItem("rekap_tab")}catch(e){}
+function show(k){document.querySelectorAll("section").forEach(function(x){x.hidden=x.id!=="p"+k});T.forEach(function(b){b.classList.toggle("on",b.dataset.tab===k)});try{localStorage.setItem("rekap_tab",k)}catch(e){}}
+T.forEach(function(b){b.addEventListener("click",function(){show(b.dataset.tab);window.scrollTo(0,0)})});show(S||"2d")})();</script></body></html>
