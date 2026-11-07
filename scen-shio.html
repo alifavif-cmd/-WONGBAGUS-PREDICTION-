@@ -111,7 +111,7 @@ JALUR 3 = SHIO 3, 6, 9, 12</pre></details></div>
   <div id="rhFindOut" style="font-size:13px"></div>
   <div id="rhOut" style="font-size:13px">Data result.json (alifavif) belum termuat. Periksa koneksi lalu muat ulang halaman.</div>
   <div class="row" style="margin-top:8px"><input id="rhCode" readonly placeholder="kode rumus"><button id="rhCopy" style="flex:0 0 auto">Salin rumus</button></div>
-  <div class="row" style="margin-top:8px"><button id="rhCopyRes" class="pri" style="flex:1 1 45%">Salin hasil (+ link)</button><button id="rhSendRes" class="pri" style="flex:1 1 45%">📤 Kirim ke Blog</button></div>
+  <div class="row" style="margin-top:8px"><button id="rhCopyRes" class="pri" style="flex:1 1 45%">Salin hasil (+ link)</button><button id="rhSendRes" class="pri" style="flex:1 1 45%;display:none">📤 Kirim ke Blog</button></div>
   <textarea id="rhCopyBox" readonly rows="8" style="display:none;width:100%;margin-top:6px;font-family:monospace"></textarea>
 </div>
 
@@ -1072,6 +1072,8 @@ document.addEventListener('click',e=>{
   else if(t.id==='rhGabSend')wbSendText($('rhGabBox').value,t,'📤 Kirim gabungan ke Blog');
   else if(t.id==='rhSendRes')wbSendText(rhResultText(),t,'📤 Kirim ke Blog');
 });
+function wbSendVis(){const b=$('rhSendRes');if(b)b.style.display=wbIsAdmin()?'':'none';}
+wbSendVis();setInterval(wbSendVis,1500);
 
 /* ===== Mode umum (sederhana) vs admin =====
    Umum: hanya rumus / kunci / mistik yang dicentang admin. Admin (login di Blog) atau kode 240306 = tanpa batas. */
