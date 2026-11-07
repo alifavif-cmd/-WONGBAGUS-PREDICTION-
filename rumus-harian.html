@@ -261,9 +261,6 @@ const VARS={
  sel2db:{name:'selisih 2d belakang',lab:'sl',mod:10,cap:6,mark:d=>[[Math.abs(d[2]-d[3]),'r']]},
  sel2dt:{name:'selisih tengah',lab:'slt',mod:10,cap:6,mark:d=>[[Math.abs(d[1]-d[2]),'r']]},
  sel2dd:{name:'selisih depan',lab:'sld',mod:10,cap:6,mark:d=>[[Math.abs(d[0]-d[1]),'r']]},
- jar2db:{name:'jarak 2d belakang',lab:'jr',mod:10,cap:6,mark:d=>[[(d[3]-d[2]+10)%10,'r']]},
- jar2dt:{name:'jarak tengah',lab:'jrt',mod:10,cap:6,mark:d=>[[(d[2]-d[1]+10)%10,'r']]},
- jar2dd:{name:'jarak depan',lab:'jrd',mod:10,cap:6,mark:d=>[[(d[1]-d[0]+10)%10,'r']]},
 };
 const mapEl=(b,v,mod)=>{const x=(b+v)%mod;return mod===12?(x||12):x;};
 // ch: hasil (oldest->newest, 4 digit). Baris uji i = n-1-L .. n-2 ; baris prediksi i = n-1
@@ -303,7 +300,7 @@ const baseCode=b=>b.map(x=>LET[x]).join('');
 // ===== Rumus Harian: antarmuka =====
 const RH_DAYS=['Harian','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 const RH_DOW=[null,1,2,3,4,5,6,0];               // indeks hari -> getUTCDay
-const RH_VCODE={cb:'cb',ai3d:'ai3d',ai2db:'ai',ai2dt:'ait',ai2dd:'aid',sh:'s',sht:'st',shd:'sd',as:'a',cop:'c',kep:'k',eko:'e',ke:'ke',j2d:'j',jt:'jt',jd:'jd',sel2db:'sl',sel2dt:'slt',sel2dd:'sld',jar2db:'jr',jar2dt:'jrt',jar2dd:'jrd'};
+const RH_VCODE={cb:'cb',ai3d:'ai3d',ai2db:'ai',ai2dt:'ait',ai2dd:'aid',sh:'s',sht:'st',shd:'sd',as:'a',cop:'c',kep:'k',eko:'e',ke:'ke',j2d:'j',jt:'jt',jd:'jd',sel2db:'sl',sel2dt:'slt',sel2dd:'sld'};
 const RH_OPT=(arr,first)=>(first!==undefined?`<option value="">${first}</option>`:'')+arr.map(x=>`<option>${x}</option>`).join('');
 function rhInit(){
   $('rhVar').innerHTML=Object.entries(VARS).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('');
@@ -451,7 +448,7 @@ function rhShow(r){
 let rhLast=null;
 const RH_LINK='https://angkahoky187-crypto.github.io/MASTER';
 // ---- format teks yang dibaca blog: baris "⭐ WONGBAGUS PREDICTION", "Code :", "Rumus :", dan "N putaran" ----
-const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK',sel2db:'Selisih KE',sel2dt:'Selisih CK',sel2dd:'Selisih AC',jar2db:'Jarak KE',jar2dt:'Jarak CK',jar2dd:'Jarak AC'};
+const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK',sel2db:'Selisih KE',sel2dt:'Selisih CK',sel2dd:'Selisih AC'};
 const wbrFlag=m=>{const w=String(m||'').trim().split(/\s+/)[0].toLowerCase();return RH_FLAG[w]?RH_FLAG[w]+' ':'';};
 function rhResultText(){
   const r=rhLast; if(!r)return '';
@@ -782,7 +779,7 @@ function wbIsAdmin(){
 // ===== Bank Harian (sendiri) + rekap untuk tab Bank/Prediksi =====
 const SHB_KEY='wb_harian_bank_v1',SHR_KEY='wb_harian_rekap_v1';
 const SH_NAME={};Object.keys(VARS).forEach(k=>{SH_NAME[k]=VARS[k].name;});
-const shbGet=()=>{try{const a=JSON.parse(localStorage.getItem(SHB_KEY)||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}};
+const shbGet=()=>{try{const a=JSON.parse(localStorage.getItem(SHB_KEY)||'[]');return Array.isArray(a)?a.filter(x=>x&&VARS[x.vk]):[];}catch(e){return [];}};
 const shbSet=a=>{try{localStorage.setItem(SHB_KEY,JSON.stringify(a));}catch(e){}};
 const shF=(x,mod)=>mod===12?String(x).padStart(2,'0'):String(x);
 const shEsc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));

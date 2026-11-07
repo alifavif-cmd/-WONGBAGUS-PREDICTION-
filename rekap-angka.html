@@ -73,8 +73,7 @@ button.red{border-color:var(--bad);color:#ff8d84;background:#2a0f0c}
   <div class="r"><b>Jumlah</b><input id="jml" inputmode="numeric" placeholder="jumlah off, mis. 123"></div>
   <div class="r" id="rowShio"><b>Shio</b><input id="shio" placeholder="shio off, mis. 11,12 (2 digit belakang)"></div>
   <div class="r" id="rowSls"><b>Selisih</b><input id="sls" inputmode="numeric" placeholder="selisih off 0-9, mis. 123"></div>
-  <div class="r"><b>Jarak</b><input id="jr" inputmode="numeric" placeholder="jarak off 0-9 (kanan−kiri), mis. 123"></div>
-  <div class="r"><b>Rentang</b><input id="r1" inputmode="numeric" placeholder="off dari angka"><input id="r2" inputmode="numeric" placeholder="sampai angka"></div>
+  <div class="r"><b>Jarak</b><input id="r1" inputmode="numeric" placeholder="off dari angka"><input id="r2" inputmode="numeric" placeholder="sampai angka"></div>
   <div class="r">
     <select id="hs"><option value="">Silang/Homo: normal</option><option value="h">Hanya homo</option><option value="s">Hanya silang</option></select>
     <select id="tt"><option value="">Tengah/Tepi: normal</option><option value="tg">Hanya tengah</option><option value="tp">Hanya tepi</option></select>
@@ -135,7 +134,7 @@ function cfg(){
     gg:POS[N].map((_,i)=>$('gg'+i).value),
     jml:dset($('jml').value),
     shio:new Set(String($('shio').value).split(/\D+/).filter(Boolean).map(Number)),
-    sls:dset($('sls').value),jr:dset($('jr').value),
+    sls:dset($('sls').value),
     r1:$('r1').value===''?null:+$('r1').value,r2:$('r2').value===''?null:+$('r2').value,
     hs:$('hs').value,tt:$('tt').value,kk:$('kk').value,
     lnoff:new Set(toks($('lnoff').value,N))
@@ -153,7 +152,6 @@ function pass(d,v,s,c){
   const k=d[N-2],e=d[N-1];
   if(c.shio.has(shio(k*10+e)))return false;
   if(c.sls.has(Math.abs(k-e)))return false;
-  if(c.jr.has((e-k+10)%10))return false;
   if(c.r1!==null&&c.r2!==null&&v>=c.r1&&v<=c.r2)return false;
   const par=d.every(x=>x%2===d[0]%2);
   if(c.hs==='h'&&!par)return false;
@@ -249,7 +247,7 @@ $('paste').onclick=async()=>{
   catch(_){$('ids').focus();note('Browser menolak tempel otomatis. Tahan kotak data lalu pilih Tempel.',true);}
 };
 $('reset').onclick=()=>{
-  ['ids','dasar','lnoff','out','jml','shio','sls','jr','r1','r2','pasaran'].forEach(i=>$(i).value='');
+  ['ids','dasar','lnoff','out','jml','shio','sls','r1','r2','pasaran'].forEach(i=>$(i).value='');
   ['hs','tt','kk'].forEach(i=>$(i).value='');$('top').value=100;$('groups').innerHTML='';last=null;note('');build();
 };
 $('copy').onclick=()=>{const t=$('out').value;if(!t){flash($('copy'),'Belum ada hasil','Salin hasil');return;}copyText(t,$('copy'),'Salin hasil',$('out'));};
@@ -275,20 +273,19 @@ $('bkSrc').onfocus=bkFill;
 $('bkGet').onclick=()=>{
   bkFill();const l=bkRead(),x=l.find(y=>y.v===$('bkSrc').value);
   if(!x){$('bkInfo').textContent='Bank belum ada isi. Buka Rumus Harian / Scen Shio dan simpan rumus ke Bank dulu.';return;}
-  const lines=[],jml=new Set(),sls=new Set(),jr=new Set();let skip=0,used=0;
+  const lines=[],jml=new Set(),sls=new Set();let skip=0,used=0;
   Object.entries(x.M.pos).forEach(([vk,P])=>{
     const top=(P.top||[]).filter(d=>d>=0&&d<=9);
     if(['ai2db','ai3d','cb'].includes(vk)&&top.length){lines.push(top.join(''));used++;}
     else if(vk==='j2d'){top.forEach(d=>jml.add(d));used++;}
     else if(vk==='sel2db'){top.forEach(d=>sls.add(d));used++;}
-    else if(vk==='jar2db'){top.forEach(d=>jr.add(d));used++;}
     else skip++;
   });
   $('ids').value=[...new Set(lines)].join('\n');$('mode').value='ikut';
-  $('jml').value=[...jml].join('');$('sls').value=[...sls].join('');$('jr').value=[...jr].join('');
+  $('jml').value=[...jml].join('');$('sls').value=[...sls].join('');
   $('pasaran').value=x.M.name;
   rekap();
-  $('bkInfo').textContent=`Terisi dari ${x.t}: ${lines.length} baris AI, jumlah off ${[...jml].join('')||'-'}, selisih off ${[...sls].join('')||'-'}, jarak off ${[...jr].join('')||'-'}.`+(skip?` ${skip} rumus lain (shio/posisi/tengah/depan) belum dipakai di rekap.`:'');
+  $('bkInfo').textContent=`Terisi dari ${x.t}: ${lines.length} baris AI, jumlah off ${[...jml].join('')||'-'}, selisih off ${[...sls].join('')||'-'}.`+(skip?` ${skip} rumus lain (shio/posisi/tengah/depan) belum dipakai di rekap.`:'');
 };
 $('toBlog').onclick=async()=>{
   const btn=$('toBlog'),lab='📤 Kirim ke Blog',msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=lab,2800);};
@@ -297,7 +294,7 @@ $('toBlog').onclick=async()=>{
   const mk=$('pasaran').value.trim();if(!mk){msg('Isi pasaran dulu');$('pasaran').focus();return;}
   let W=null;try{W=window.parent&&window.parent!==window?window.parent.WBBlog:null;}catch(_){}
   if(!W||!W.send){msg('Buka lewat Blog untuk kirim');return;}
-  let h=0;const sig=[$('ids').value,$('jml').value,$('sls').value,$('jr').value,$('shio').value,$('dasar').value,$('lnoff').value,N].join('|');
+  let h=0;const sig=[$('ids').value,$('jml').value,$('sls').value,$('shio').value,$('dasar').value,$('lnoff').value,N].join('|');
   for(let i=0;i<sig.length;i++)h=(h*31+sig.charCodeAt(i))|0;
   const code='RK'+N+'D-'+(h>>>0).toString(36),ln=last?last.lines:0;
   const isi=`⭐ WONGBAGUS PREDICTION — REKAP ${N}D\n📍 ${mk}\n📝 Rumus : Rekap ${N}D\n\n Code : ${code}\n${nums.join('*')}\n\n${ln} putaran`;
