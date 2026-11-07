@@ -821,6 +821,7 @@ function shbText(out){
   return L.join('\n').trim();
 }
 const shSel=new Set();
+const shOpen=new Set();
 function shbRender(){
   const {out,list}=shbSummary();
   try{localStorage.setItem(SHR_KEY,JSON.stringify(out));}catch(e){}
@@ -834,7 +835,8 @@ function shbRender(){
   el.innerHTML=list.length?list.map(({it,e})=>{
     const st=!e?'<span style="color:#b36b00">data kurang</span>':e.alive?`<span style="color:#1a9d1a">✅ aktif · trek ${e.streak}×</span>`:'<span style="color:#d22">❌ patah</span>';
     const mod=VARS[it.vk].mod;
-    return `<div style="border-top:1px solid #ddd;padding:6px 0"><div style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-shck="${it.id}"${shSel.has(it.id)?' checked':''} style="width:22px;height:22px;flex:0 0 auto"><b>${shEsc(rhKeyName(it.spec,true))}</b> · ${SH_NAME[it.vk]} · ${shEsc(it.mkt)}</div></div><div style="font-size:12.5px;color:#777">basis ${baseCode(it.base)} · L${it.L} P${it.P}${it.day?' · '+RH_DAYS[it.day]:''} · ${st}${e?' · pred <b style="color:inherit">'+e.set.map(x=>shF(x,mod)).join(mod===12?', ':'')+'</b>':''}</div><div><button data-shdel="${it.id}" style="padding:3px 10px">🗑 Hapus</button></div></div>`;}).join(''):'<div style="color:#777;padding:6px 0">Bank Harian masih kosong. Simpan rumus dari hasil Cari trek (centang → 💾) atau tombol Simpan di atas.</div>';
+    const isOpen=shOpen.has(it.id);
+    return `<div style="border-top:1px solid #ddd;padding:6px 0"><div style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-shck="${it.id}"${shSel.has(it.id)?' checked':''} style="width:22px;height:22px;flex:0 0 auto"><a href="#" data-shopen="${it.id}" style="text-decoration:none;color:inherit;flex:1 1 auto"><b>${shEsc(rhKeyName(it.spec,true))}</b> · ${SH_NAME[it.vk]} · ${shEsc(it.mkt)} <span style="color:#777">${isOpen?'▲':'▼'}</span></a></div><div style="font-size:12.5px;color:#777">basis ${baseCode(it.base)} · L${it.L} P${it.P}${it.day?' · '+RH_DAYS[it.day]:''} · ${st}${e?' · pred <b style="color:inherit">'+e.set.map(x=>shF(x,mod)).join(mod===12?', ':'')+'</b>':''}</div><div><button data-shdel="${it.id}" style="padding:3px 10px">🗑 Hapus</button> <button data-shopenb="${it.id}" style="padding:3px 10px">${isOpen?'✕ Tutup':'🔍 Lihat'}</button></div>${isOpen?shDetail(it,e):''}</div>`;}).join(''):'<div style="color:#777;padding:6px 0">Bank Harian masih kosong. Simpan rumus dari hasil Cari trek (centang → 💾) atau tombol Simpan di atas.</div>';
 }
 (function(){
   const msg=t=>{const b=$('shSave');if(b){const o=b.textContent;b.textContent=t;setTimeout(()=>b.textContent='💾 Simpan rumus di atas',1600);}};
@@ -921,6 +923,69 @@ function shbGabText(ids){
 })();
 
 
+
+
+const shCodeOf=it=>`#${rhMkt(it.mkt)}_${RH_VCODE[it.vk]}_${rhKeyName(it.spec,false)}_L${it.L}-P${it.P}-D${it.day||0}_${baseCode(it.base)}`;
+function shDetail(it,e){
+  const g=shbGabText([it.id]),txt=g.txt||'',code=shCodeOf(it);
+  return `<div data-shdet="${it.id}" style="margin:8px 0;padding:8px;border:1px solid #888;border-radius:10px;background:rgba(128,128,128,.08)">`
+   +`<div style="font-size:12.5px;color:#777">Kode kunci (salin / tempel di kotak Tempel kode):</div>`
+   +`<div style="display:flex;gap:6px;margin:4px 0"><input readonly value="${shEsc(code)}" data-shcode style="flex:1 1 auto;min-width:0;font-family:monospace;font-size:13px"><button data-shcopycode="${it.id}" style="flex:0 0 auto">Salin kode</button></div>`
+   +`<div style="display:flex;gap:6px;flex-wrap:wrap;margin:6px 0"><button class="pri" data-shman="${it.id}" style="flex:1 1 45%">🧪 Cek di Manual</button><button data-shcopytrek="${it.id}" style="flex:1 1 45%">Salin trek (+ link)</button></div>`
+   +(txt?`<textarea readonly rows="10" data-shtrek style="width:100%;font-family:monospace;font-size:12.5px">${shEsc(txt)}</textarea>`:`<div style="color:#b36b00">${shEsc(g.err||'Data kurang')}</div>`)
+   +`<button data-shclose="${it.id}" style="width:100%;margin-top:6px">✕ Tutup / Kembali ke daftar</button></div>`;
+}
+
+let shBackId=null,shIgnorePop=false;
+function shScrollTo(id){setTimeout(()=>{try{const el=document.querySelector('[data-shck="'+id+'"]');if(el)el.scrollIntoView({behavior:'smooth',block:'center'});}catch(_){}},60);}
+function shOpenItem(id){shOpen.add(id);try{history.pushState({shd:id},'');}catch(_){}shbRender();shScrollTo(id);}
+function shCloseItem(id,viaPop){
+  shOpen.delete(id);shbRender();shScrollTo(id);
+  if(!viaPop){try{if(history.state&&history.state.shd===id){shIgnorePop=true;history.back();setTimeout(()=>{shIgnorePop=false;},400);}}catch(_){}}
+}
+window.addEventListener('popstate',()=>{
+  if(shIgnorePop){shIgnorePop=false;return;}
+  if(shBackId){const id=shBackId;shBackBtn(false);shScrollTo(id);return;}
+  if(shOpen.size){shCloseItem([...shOpen].pop(),true);}
+});
+function shBackBtn(on){
+  let b=document.getElementById('shBackFloat');
+  if(!b){b=document.createElement('button');b.id='shBackFloat';b.textContent='← Kembali ke Bank';
+    b.style.cssText='position:fixed;left:12px;right:12px;bottom:14px;z-index:9999;padding:14px;border-radius:14px;border:2px solid #f5b800;background:#2d7be5;color:#fff;font:700 15px system-ui,sans-serif;display:none';
+    b.onclick=()=>{const id=shBackId;shBackBtn(false);if(id){if(!shOpen.has(id))shOpen.add(id);shbRender();shScrollTo(id);}};
+    document.body.appendChild(b);}
+  b.style.display=on?'block':'none';if(!on)shBackId=null;
+}
+async function shCopyText(txt,btn,label,ta){
+  let ok=false;
+  try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(txt);ok=true;}}catch(_){}
+  if(!ok&&ta){try{ta.focus();ta.select();ta.setSelectionRange(0,txt.length);ok=document.execCommand('copy');}catch(_){}}
+  if(!ok){const x=document.createElement('textarea');x.value=txt;x.style.cssText='position:fixed;opacity:0';document.body.appendChild(x);x.select();try{ok=document.execCommand('copy');}catch(_){}x.remove();}
+  btn.textContent=ok?'Tersalin ✓':'Tahan teks → Salin';setTimeout(()=>btn.textContent=label,1800);
+}
+
+(function(){
+  const box=$('shBank'),find=id=>shbGet().find(x=>x.id===id);
+  box.addEventListener('click',e=>{
+    const t=e.target;
+    const a=t.closest&&t.closest('[data-shopen],[data-shopenb],[data-shclose]');
+    if(a){e.preventDefault();const id=a.dataset.shopen||a.dataset.shopenb||a.dataset.shclose;
+      if(a.dataset.shclose||shOpen.has(id))shCloseItem(id);else shOpenItem(id);
+      return;}
+    const c=t.closest&&t.closest('[data-shcopycode]');
+    if(c){const d=c.closest('[data-shdet]');const inp=d.querySelector('[data-shcode]');shCopyText(inp.value,c,'Salin kode',inp);return;}
+    const ct=t.closest&&t.closest('[data-shcopytrek]');
+    if(ct){const d=ct.closest('[data-shdet]');const ta=d.querySelector('[data-shtrek]');if(!ta){ct.textContent='Tidak ada trek';return;}shCopyText(ta.value,ct,'Salin trek (+ link)',ta);return;}
+    const m=t.closest&&t.closest('[data-shman]');
+    if(m){const it=find(m.dataset.shman);if(!it)return;
+      if(![...$('market').options].some(o=>o.value===it.mkt)){m.textContent='Pasaran tidak ada di data';return;}
+      $('market').value=it.mkt;$('rhKode').value=shCodeOf(it);rhDecode();
+      $('rhManWrap').style.display='';
+      shBackId=it.id;shBackBtn(true);
+      try{$('rhOut').scrollIntoView({behavior:'smooth',block:'start'});}catch(_){}
+      return;}
+  });
+})();
 
 /* ===== Mode umum (sederhana) vs admin =====
    Umum: hanya rumus / kunci / mistik yang dicentang admin. Admin (login di Blog) atau kode 240306 = tanpa batas. */
