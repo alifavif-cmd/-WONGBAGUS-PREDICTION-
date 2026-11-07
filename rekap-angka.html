@@ -43,6 +43,13 @@ button.red{border-color:var(--bad);color:#ff8d84;background:#2a0f0c}
   <button data-n="2" class="on">2D</button><button data-n="3">3D</button><button data-n="4">4D</button>
 </div>
 
+<div class="card" id="admCard" style="display:none">
+  <h2>Bank otomatis (admin)</h2>
+  <label>Ambil otomatis dari rekap Bank Rumus Harian / Scen Shio</label>
+  <div class="r"><select id="bkSrc"></select><button class="pri" id="bkGet" style="flex:0 0 auto">Ambil dari Bank</button></div>
+  <div id="bkInfo" class="hint"></div>
+</div>
+
 <div class="card">
   <h2>Isi data</h2>
   <label id="lbIds">Baris AI / AK / CT (maks 100 baris, satu rekap per baris)</label>
@@ -66,7 +73,8 @@ button.red{border-color:var(--bad);color:#ff8d84;background:#2a0f0c}
   <div class="r"><b>Jumlah</b><input id="jml" inputmode="numeric" placeholder="jumlah off, mis. 123"></div>
   <div class="r" id="rowShio"><b>Shio</b><input id="shio" placeholder="shio off, mis. 11,12 (2 digit belakang)"></div>
   <div class="r" id="rowSls"><b>Selisih</b><input id="sls" inputmode="numeric" placeholder="selisih off 0-9, mis. 123"></div>
-  <div class="r"><b>Jarak</b><input id="r1" inputmode="numeric" placeholder="off dari angka"><input id="r2" inputmode="numeric" placeholder="sampai angka"></div>
+  <div class="r"><b>Jarak</b><input id="jr" inputmode="numeric" placeholder="jarak off 0-9 (kanan−kiri), mis. 123"></div>
+  <div class="r"><b>Rentang</b><input id="r1" inputmode="numeric" placeholder="off dari angka"><input id="r2" inputmode="numeric" placeholder="sampai angka"></div>
   <div class="r">
     <select id="hs"><option value="">Silang/Homo: normal</option><option value="h">Hanya homo</option><option value="s">Hanya silang</option></select>
     <select id="tt"><option value="">Tengah/Tepi: normal</option><option value="tg">Hanya tengah</option><option value="tp">Hanya tepi</option></select>
@@ -86,6 +94,8 @@ button.red{border-color:var(--bad);color:#ff8d84;background:#2a0f0c}
   <h2 id="hTop">LN TOP</h2>
   <textarea id="out" rows="4" readonly placeholder="Hasil rekap tampil di sini"></textarea>
   <div class="row"><button class="pri" id="copy">Salin hasil</button><button id="use">Jadikan LN dasar</button></div>
+  <div id="admSend" style="display:none"><div class="r"><input id="pasaran" placeholder="Pasaran untuk Blog, mis. Hongkong Pools"></div>
+  <div class="row"><button class="pri" id="toBlog">📤 Kirim ke Blog</button></div></div>
   <div id="groups"></div>
 </div>
 
@@ -94,6 +104,8 @@ button.red{border-color:var(--bad);color:#ff8d84;background:#2a0f0c}
   <div class="hint" id="gridHint">Warna emas makin terang = makin banyak baris yang kena. Setelah Rekap, ketuk angka untuk mengubah LN dasar.</div>
   <div id="grid"></div>
 </div>
+
+<div class="r" style="justify-content:flex-end"><input id="gate" type="text" inputmode="numeric" maxlength="6" autocomplete="off" aria-label="kode" style="flex:0 0 120px;opacity:.7"></div>
 
 <script>
 const $=id=>document.getElementById(id);
@@ -105,7 +117,7 @@ const digitsOf=s=>[...s].map(Number);
 const dset=t=>new Set([...String(t).replace(/\D/g,'')].map(Number));
 const dr=d=>{let s=d.reduce((a,b)=>a+b,0);while(s>9)s=[...String(s)].reduce((a,b)=>a+ +b,0);return s;};
 const shio=v=>v===0?4:((v-1)%12)+1;
-const toks=(t,n)=>String(t).split(/\D+/).filter(x=>x.length===n);
+const toks=(t,n)=>{const o=[];String(t).split(/\D+/).forEach(x=>{if(x.length===n)o.push(x);else if(x.length>n&&x.length%n===0)for(let i=0;i<x.length;i+=n)o.push(x.slice(i,i+n));});return o;};
 const note=(t,bad)=>{const m=$('msg');m.style.color=bad?'var(--bad)':'var(--ok)';m.textContent=t;};
 
 function build(){
@@ -123,7 +135,7 @@ function cfg(){
     gg:POS[N].map((_,i)=>$('gg'+i).value),
     jml:dset($('jml').value),
     shio:new Set(String($('shio').value).split(/\D+/).filter(Boolean).map(Number)),
-    sls:dset($('sls').value),
+    sls:dset($('sls').value),jr:dset($('jr').value),
     r1:$('r1').value===''?null:+$('r1').value,r2:$('r2').value===''?null:+$('r2').value,
     hs:$('hs').value,tt:$('tt').value,kk:$('kk').value,
     lnoff:new Set(toks($('lnoff').value,N))
@@ -141,6 +153,7 @@ function pass(d,v,s,c){
   const k=d[N-2],e=d[N-1];
   if(c.shio.has(shio(k*10+e)))return false;
   if(c.sls.has(Math.abs(k-e)))return false;
+  if(c.jr.has((e-k+10)%10))return false;
   if(c.r1!==null&&c.r2!==null&&v>=c.r1&&v<=c.r2)return false;
   const par=d.every(x=>x%2===d[0]%2);
   if(c.hs==='h'&&!par)return false;
@@ -236,7 +249,7 @@ $('paste').onclick=async()=>{
   catch(_){$('ids').focus();note('Browser menolak tempel otomatis. Tahan kotak data lalu pilih Tempel.',true);}
 };
 $('reset').onclick=()=>{
-  ['ids','dasar','lnoff','out','jml','shio','sls','r1','r2'].forEach(i=>$(i).value='');
+  ['ids','dasar','lnoff','out','jml','shio','sls','jr','r1','r2','pasaran'].forEach(i=>$(i).value='');
   ['hs','tt','kk'].forEach(i=>$(i).value='');$('top').value=100;$('groups').innerHTML='';last=null;note('');build();
 };
 $('copy').onclick=()=>{const t=$('out').value;if(!t){flash($('copy'),'Belum ada hasil','Salin hasil');return;}copyText(t,$('copy'),'Salin hasil',$('out'));};
@@ -245,6 +258,67 @@ $('use').onclick=()=>{
   $('dasar').value=t.join('*');drawGrid(null);flash($('use'),'Dipakai ✓','Jadikan LN dasar');
 };
 build();
+/* ===== kode, bank otomatis, kirim ke blog ===== */
+const BK=[['Harian','wb_harian_rekap_v1'],['Shio','wb_shio_rekap_v1']];
+function bkRead(){
+  const o=[];
+  BK.forEach(([nm,key])=>{try{const j=JSON.parse(localStorage.getItem(key)||'null');
+    if(j&&j.mk)Object.entries(j.mk).forEach(([k,M])=>o.push({v:nm+'|'+k,t:nm+' · '+M.name,M}));}catch(_){}});
+  return o;
+}
+function bkFill(){
+  const cur=$('bkSrc').value,l=bkRead();
+  $('bkSrc').innerHTML=l.length?l.map(x=>`<option value="${x.v}">${x.t}</option>`).join(''):'<option value="">(bank kosong / belum dibuka)</option>';
+  if(cur&&l.some(x=>x.v===cur))$('bkSrc').value=cur;
+}
+$('bkSrc').onfocus=bkFill;
+$('bkGet').onclick=()=>{
+  bkFill();const l=bkRead(),x=l.find(y=>y.v===$('bkSrc').value);
+  if(!x){$('bkInfo').textContent='Bank belum ada isi. Buka Rumus Harian / Scen Shio dan simpan rumus ke Bank dulu.';return;}
+  const lines=[],jml=new Set(),sls=new Set(),jr=new Set();let skip=0,used=0;
+  Object.entries(x.M.pos).forEach(([vk,P])=>{
+    const top=(P.top||[]).filter(d=>d>=0&&d<=9);
+    if(['ai2db','ai3d','cb'].includes(vk)&&top.length){lines.push(top.join(''));used++;}
+    else if(vk==='j2d'){top.forEach(d=>jml.add(d));used++;}
+    else if(vk==='sel2db'){top.forEach(d=>sls.add(d));used++;}
+    else if(vk==='jar2db'){top.forEach(d=>jr.add(d));used++;}
+    else skip++;
+  });
+  $('ids').value=[...new Set(lines)].join('\n');$('mode').value='ikut';
+  $('jml').value=[...jml].join('');$('sls').value=[...sls].join('');$('jr').value=[...jr].join('');
+  $('pasaran').value=x.M.name;
+  rekap();
+  $('bkInfo').textContent=`Terisi dari ${x.t}: ${lines.length} baris AI, jumlah off ${[...jml].join('')||'-'}, selisih off ${[...sls].join('')||'-'}, jarak off ${[...jr].join('')||'-'}.`+(skip?` ${skip} rumus lain (shio/posisi/tengah/depan) belum dipakai di rekap.`:'');
+};
+$('toBlog').onclick=async()=>{
+  const btn=$('toBlog'),lab='📤 Kirim ke Blog',msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=lab,2800);};
+  if(!wbIsAdmin()){msg('🔒 Hanya admin');return;}
+  const nums=toks($('out').value,N);if(!nums.length){msg('Belum ada hasil');return;}
+  const mk=$('pasaran').value.trim();if(!mk){msg('Isi pasaran dulu');$('pasaran').focus();return;}
+  let W=null;try{W=window.parent&&window.parent!==window?window.parent.WBBlog:null;}catch(_){}
+  if(!W||!W.send){msg('Buka lewat Blog untuk kirim');return;}
+  let h=0;const sig=[$('ids').value,$('jml').value,$('sls').value,$('jr').value,$('shio').value,$('dasar').value,$('lnoff').value,N].join('|');
+  for(let i=0;i<sig.length;i++)h=(h*31+sig.charCodeAt(i))|0;
+  const code='RK'+N+'D-'+(h>>>0).toString(36),ln=last?last.lines:0;
+  const isi=`⭐ WONGBAGUS PREDICTION — REKAP ${N}D\n📍 ${mk}\n📝 Rumus : Rekap ${N}D\n\n Code : ${code}\n${nums.join('*')}\n\n${ln} putaran`;
+  try{const m=await W.send([{id:'rk|'+code,judul:mk+' · Rekap '+N+'D',isi}],'Rekap',false);msg(m||'Terkirim ✓');}catch(_){msg('Gagal kirim');}
+};
+bkFill();
+/* ===== mode umum vs admin (sama seperti Rumus Harian / Scen Shio) ===== */
+function wbIsAdmin(){
+  if(window.WB_CODE_OK===true)return true;
+  const chk=ls=>{try{for(let i=0;i<ls.length;i++){const k=ls.key(i);if(k&&k.indexOf('wb_logged_member__')===0){const o=JSON.parse(ls.getItem(k)||'null');if(o&&(o.isAdmin===true||o.id==='ADMIN'))return true;}}}catch(e){}return false;};
+  try{if(chk(localStorage))return true;}catch(e){}
+  try{if(window.parent&&window.parent!==window){if(window.parent.WB_IS_ADMIN===true||chk(window.parent.localStorage))return true;}}catch(e){}
+  return false;
+}
+function admOpen(){$('admCard').style.display='';$('admSend').style.display='';$('gate').style.display='none';bkFill();}
+function admCheck(){if(wbIsAdmin()){admOpen();return true;}return false;}
+try{if(sessionStorage.getItem('rkOpen')==='1')window.WB_CODE_OK=true;}catch(e){}
+$('gate').addEventListener('input',()=>{
+  if($('gate').value.trim()==='240306'){window.WB_CODE_OK=true;try{sessionStorage.setItem('rkOpen','1');}catch(e){}admOpen();}
+});
+if(!admCheck()){const iv=setInterval(()=>{if(admCheck())clearInterval(iv);},2000);}
 </script>
 </body>
 </html>
