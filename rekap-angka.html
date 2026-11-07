@@ -44,9 +44,9 @@ button.red{border-color:var(--bad);color:#ff8d84;background:#2a0f0c}
 </div>
 
 <div class="card" id="admCard" style="display:none">
-  <h2>Bank otomatis (admin)</h2>
-  <label>Ambil otomatis dari rekap Bank Rumus Harian / Scen Shio</label>
-  <div class="r"><select id="bkSrc"></select><button class="pri" id="bkGet" style="flex:0 0 auto">Ambil dari Bank</button></div>
+  <h2>Rekap final otomatis (admin)</h2>
+  <label>Satukan semua trek Bank Rumus Harian + Scen Shio untuk satu pasaran jadi satu rekap final 2D</label>
+  <div class="r"><select id="bkSrc"></select><button class="pri" id="bkGet" style="flex:0 0 auto">Rekap final</button></div>
   <div id="bkInfo" class="hint"></div>
 </div>
 
@@ -259,10 +259,13 @@ build();
 /* ===== kode, bank otomatis, kirim ke blog ===== */
 const BK=[['Harian','wb_harian_rekap_v1'],['Shio','wb_shio_rekap_v1']];
 function bkRead(){
-  const o=[];
+  const mk=new Map();
   BK.forEach(([nm,key])=>{try{const j=JSON.parse(localStorage.getItem(key)||'null');
-    if(j&&j.mk)Object.entries(j.mk).forEach(([k,M])=>o.push({v:nm+'|'+k,t:nm+' · '+M.name,M}));}catch(_){}});
-  return o;
+    if(j&&j.mk)Object.entries(j.mk).forEach(([k,M])=>{
+      const m=mk.get(k)||{name:M.name,srcs:[],pos:{}};m.srcs.push(nm);
+      Object.entries(M.pos||{}).forEach(([vk,P])=>{const T=m.pos[vk]||(m.pos[vk]={items:[]});T.items=T.items.concat(P.items||[]);});
+      mk.set(k,m);});}catch(_){}});
+  return [...mk.entries()].map(([k,m])=>({v:k,t:m.name+' ('+m.srcs.join('+')+')',M:m}));
 }
 function bkFill(){
   const cur=$('bkSrc').value,l=bkRead();
@@ -273,19 +276,38 @@ $('bkSrc').onfocus=bkFill;
 $('bkGet').onclick=()=>{
   bkFill();const l=bkRead(),x=l.find(y=>y.v===$('bkSrc').value);
   if(!x){$('bkInfo').textContent='Bank belum ada isi. Buka Rumus Harian / Scen Shio dan simpan rumus ke Bank dulu.';return;}
-  const lines=[],jml=new Set(),sls=new Set();let skip=0,used=0;
+  if(N!==2){const b=document.querySelector('#tabs button[data-n="2"]');if(b)b.click();}
+  const shi=v=>v===0?4:((v-1)%12)+1,jal=v=>((shi(v)-1)%3)+1;
+  const PRED={ai2db:(s,k,e)=>s.includes(k)||s.includes(e),sh:(s,k,e,v)=>s.includes(shi(v)),jl:(s,k,e,v)=>s.includes(jal(v))};
+  const OFF={kep:(s,k)=>s.includes(k),eko:(s,k,e)=>s.includes(e),ke:(s,k,e)=>s.includes(k)||s.includes(e),j2d:(s,k,e)=>s.includes(dr([k,e])),sel2db:(s,k,e)=>s.includes(Math.abs(k-e))};
+  const pred=[],off=[];let skip=0;
   Object.entries(x.M.pos).forEach(([vk,P])=>{
-    const top=(P.top||[]).filter(d=>d>=0&&d<=9);
-    if(['ai2db','ai3d','cb'].includes(vk)&&top.length){lines.push(top.join(''));used++;}
-    else if(vk==='j2d'){top.forEach(d=>jml.add(d));used++;}
-    else if(vk==='sel2db'){top.forEach(d=>sls.add(d));used++;}
-    else skip++;
+    const it=(P.items||[]).filter(i=>Array.isArray(i.s)&&i.s.length);
+    if(PRED[vk])it.forEach(i=>pred.push({f:PRED[vk],s:i.s}));
+    else if(OFF[vk]&&it.length){
+      const vt={};it.forEach(i=>i.s.forEach(d=>vt[d]=(vt[d]||0)+1));
+      const need=Math.ceil(it.length/2);let set=Object.keys(vt).filter(d=>vt[d]>=need).map(Number);
+      if(!set.length){const mx=Math.max(...Object.values(vt));set=Object.keys(vt).filter(d=>vt[d]===mx).map(Number);}
+      off.push({f:OFF[vk],s:set});
+    }else skip+=it.length;
   });
-  $('ids').value=[...new Set(lines)].join('\n');$('mode').value='ikut';
-  $('jml').value=[...jml].join('');$('sls').value=[...sls].join('');
-  $('pasaran').value=x.M.name;
-  rekap();
-  $('bkInfo').textContent=`Terisi dari ${x.t}: ${lines.length} baris AI, jumlah off ${[...jml].join('')||'-'}, selisih off ${[...sls].join('')||'-'}.`+(skip?` ${skip} rumus lain (shio/posisi/tengah/depan) belum dipakai di rekap.`:'');
+  const cand=[];
+  for(let v=0;v<100;v++){
+    const k=Math.floor(v/10),e=v%10;
+    if(off.some(o=>o.f(o.s,k,e,v)))continue;
+    let n=0;pred.forEach(p=>{if(p.f(p.s,k,e,v))n++;});
+    cand.push({s:pad(v,2),n});
+  }
+  const list=cand.slice().sort((a,b)=>b.n-a.n||(a.s<b.s?-1:1)),tot=pred.length;
+  if($('top').value==100)$('top').value=20;
+  const top=Math.max(1,+$('top').value||20),sel=list.slice(0,top);
+  $('out').value=sel.map(o=>o.s).join($('sep').value);
+  const g=new Map();sel.forEach(o=>{if(!g.has(o.n))g.set(o.n,[]);g.get(o.n).push(o.s);});
+  $('groups').innerHTML=[...g.entries()].map(([n,a])=>`<div class="grp"><b>${n}/${tot}×</b>${a.join(' ')}</div>`).join('');
+  last={list,cnt:new Map(cand.map(o=>[o.s,o.n])),lines:tot+off.length};
+  $('dasar').value='';drawGrid(last);$('pasaran').value=x.M.name;
+  $('bkInfo').textContent=`${x.t}: ${tot} trek prediksi (AI/shio/jalur) + ${off.length} kelompok lemah (kepala/ekor/jumlah/selisih) disatukan → ${cand.length} angka lolos, ${sel.length} ditampilkan (Top ${top}).`+(skip?` ${skip} trek lain (tengah/depan/3D) belum dipakai.`:'')+(tot?'':' Belum ada trek prediksi (AI/shio/jalur) di bank.');
+  note(`Rekap final ${x.M.name}: ${sel.length} angka jadi`);
 };
 $('toBlog').onclick=async()=>{
   const btn=$('toBlog'),lab='📤 Kirim ke Blog',msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=lab,2800);};
@@ -294,7 +316,7 @@ $('toBlog').onclick=async()=>{
   const mk=$('pasaran').value.trim();if(!mk){msg('Isi pasaran dulu');$('pasaran').focus();return;}
   let W=null;try{W=window.parent&&window.parent!==window?window.parent.WBBlog:null;}catch(_){}
   if(!W||!W.send){msg('Buka lewat Blog untuk kirim');return;}
-  let h=0;const sig=[$('ids').value,$('jml').value,$('sls').value,$('shio').value,$('dasar').value,$('lnoff').value,N].join('|');
+  let h=0;const sig=[$('ids').value,$('jml').value,$('sls').value,$('shio').value,$('out').value,$('dasar').value,$('lnoff').value,N].join('|');
   for(let i=0;i<sig.length;i++)h=(h*31+sig.charCodeAt(i))|0;
   const code='RK'+N+'D-'+(h>>>0).toString(36),ln=last?last.lines:0;
   const isi=`⭐ WONGBAGUS PREDICTION — REKAP ${N}D\n📍 ${mk}\n📝 Rumus : Rekap ${N}D\n\n Code : ${code}\n${nums.join('*')}\n\n${ln} putaran`;

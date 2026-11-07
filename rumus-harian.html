@@ -221,7 +221,7 @@ $('market').onchange = () => { rhRun(); };
 const RH_KEYS=(()=>{const o=[];for(const t of ['A','C','K','E','J','Js','J4D','J3D','Jt','Jd'])for(let n=1;n<=20;n++)o.push(t+n);return o;})();
 const RH_MBS=['ix','ty','ml','mb',...Array.from({length:20},(_,i)=>'m'+i)];
 const red=n=>{while(n>=10)n=String(n).split('').reduce((a,b)=>a+ +b,0);return n;};
-const shio=n=>(n%12)||12;
+const shio=n=>n===0?4:((n-1)%12)+1;           // 00 dihitung 100 → shio 4 (sama dengan Scen Shio & tabel)
 function srcDigit(r,t){const d=[...r].map(Number);
   switch(t){case 'A':return d[0];case 'C':return d[1];case 'K':return d[2];case 'E':return d[3];
   case 'J':return red(d[2]+d[3]);case 'Js':return Math.abs(d[2]-d[3]);case 'J4D':return red(d[0]+d[1]+d[2]+d[3]);
