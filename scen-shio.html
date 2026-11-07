@@ -261,12 +261,12 @@ function keyVal(ch,i,spec){
 }
 const D2=(d,a,b)=>d[a]*10+d[b];
 const VARS={
- sh:{name:'shio belakang (ke)',lab:'s',mod:12,cap:7,mark:d=>[[shio(D2(d,2,3)),'g']]},
- sht:{name:'shio tengah',lab:'s',mod:12,cap:7,mark:d=>[[shio(D2(d,1,2)),'g']]},
- shd:{name:'shio depan',lab:'s',mod:12,cap:7,mark:d=>[[shio(D2(d,0,1)),'g']]},
- jl:{name:'jalur main belakang (ke)',lab:'jalur',mod:3,cap:2,mark:d=>[[jalur(D2(d,2,3)),'g']]},
- jlt:{name:'jalur main tengah',lab:'jalur',mod:3,cap:2,mark:d=>[[jalur(D2(d,1,2)),'g']]},
- jld:{name:'jalur main depan',lab:'jalur',mod:3,cap:2,mark:d=>[[jalur(D2(d,0,1)),'g']]},
+ sh:{name:'shio belakang (ke)',lab:'ske',mod:12,cap:7,mark:d=>[[shio(D2(d,2,3)),'g']]},
+ sht:{name:'shio tengah',lab:'sck',mod:12,cap:7,mark:d=>[[shio(D2(d,1,2)),'g']]},
+ shd:{name:'shio depan',lab:'sac',mod:12,cap:7,mark:d=>[[shio(D2(d,0,1)),'g']]},
+ jl:{name:'jalur main belakang (ke)',lab:'jlke',mod:3,cap:2,mark:d=>[[jalur(D2(d,2,3)),'g']]},
+ jlt:{name:'jalur main tengah',lab:'jlck',mod:3,cap:2,mark:d=>[[jalur(D2(d,1,2)),'g']]},
+ jld:{name:'jalur main depan',lab:'jlac',mod:3,cap:2,mark:d=>[[jalur(D2(d,0,1)),'g']]},
 };
 const mapEl=(b,v,mod)=>{const x=(b+v)%mod;return mod===10?x:(x||mod);};
 // ch: hasil (oldest->newest, 4 digit). Baris uji i = n-1-L .. n-2 ; baris prediksi i = n-1

@@ -243,24 +243,24 @@ function keyVal(ch,i,spec){
 const D2=(d,a,b)=>d[a]*10+d[b];
 const VARS={
  cb:{name:'colok bebas (cb)',lab:'cb',mod:10,cap:4,mark:d=>[[d[0],'b'],[d[1],'y'],[d[2],'r'],[d[3],'g']]},
- ai3d:{name:'ai 3d',lab:'ai',mod:10,cap:5,mark:d=>[[d[1],'y'],[d[2],'r'],[d[3],'g']]},
- ai2db:{name:'ai 2d belakang',lab:'ai',mod:10,cap:5,mark:d=>[[d[2],'r'],[d[3],'g']]},
- ai2dt:{name:'ai 2d tengah',lab:'ai',mod:10,cap:5,mark:d=>[[d[1],'y'],[d[2],'r']]},
- ai2dd:{name:'ai 2d depan',lab:'ai',mod:10,cap:5,mark:d=>[[d[0],'b'],[d[1],'y']]},
- sh:{name:'shio',lab:'s',mod:12,cap:7,mark:d=>[[shio(D2(d,2,3)),'g']]},
- sht:{name:'shio tengah',lab:'s',mod:12,cap:7,mark:d=>[[shio(D2(d,1,2)),'g']]},
- shd:{name:'shio depan',lab:'s',mod:12,cap:7,mark:d=>[[shio(D2(d,0,1)),'g']]},
- as:{name:'as (a)',lab:'a',mod:10,cap:5,mark:d=>[[d[0],'g']]},
- cop:{name:'cop (c)',lab:'c',mod:10,cap:5,mark:d=>[[d[1],'g']]},
- kep:{name:'kepala (k)',lab:'k',mod:10,cap:5,mark:d=>[[d[2],'r']]},
- eko:{name:'ekor (e)',lab:'e',mod:10,cap:5,mark:d=>[[d[3],'g']]},
- ke:{name:'kepala ekor (ke)',lab:'ke',mod:10,cap:5,mark:d=>[[d[2],'r'],[d[3],'g']]},
- j2d:{name:'jumlah 2d',lab:'j',mod:10,cap:6,mark:d=>[[red(d[2]+d[3]),'r']]},
- jt:{name:'jumlah tengah',lab:'jt',mod:10,cap:6,mark:d=>[[red(d[1]+d[2]),'r']]},
- jd:{name:'jumlah depan',lab:'jd',mod:10,cap:6,mark:d=>[[red(d[0]+d[1]),'r']]},
- sel2db:{name:'selisih 2d belakang',lab:'sl',mod:10,cap:6,mark:d=>[[Math.abs(d[2]-d[3]),'r']]},
- sel2dt:{name:'selisih tengah',lab:'slt',mod:10,cap:6,mark:d=>[[Math.abs(d[1]-d[2]),'r']]},
- sel2dd:{name:'selisih depan',lab:'sld',mod:10,cap:6,mark:d=>[[Math.abs(d[0]-d[1]),'r']]},
+ ai3d:{name:'ai 3d',lab:'ai3d',mod:10,cap:5,mark:d=>[[d[1],'y'],[d[2],'r'],[d[3],'g']]},
+ ai2db:{name:'ai 2d belakang',lab:'ke',mod:10,cap:5,mark:d=>[[d[2],'r'],[d[3],'g']]},
+ ai2dt:{name:'ai 2d tengah',lab:'ck',mod:10,cap:5,mark:d=>[[d[1],'y'],[d[2],'r']]},
+ ai2dd:{name:'ai 2d depan',lab:'ac',mod:10,cap:5,mark:d=>[[d[0],'b'],[d[1],'y']]},
+ sh:{name:'shio',lab:'ske',mod:12,cap:7,mark:d=>[[shio(D2(d,2,3)),'g']]},
+ sht:{name:'shio tengah',lab:'sck',mod:12,cap:7,mark:d=>[[shio(D2(d,1,2)),'g']]},
+ shd:{name:'shio depan',lab:'sac',mod:12,cap:7,mark:d=>[[shio(D2(d,0,1)),'g']]},
+ as:{name:'as (a)',lab:'as',mod:10,cap:5,mark:d=>[[d[0],'g']]},
+ cop:{name:'cop (c)',lab:'cp',mod:10,cap:5,mark:d=>[[d[1],'g']]},
+ kep:{name:'kepala (k)',lab:'kp',mod:10,cap:5,mark:d=>[[d[2],'r']]},
+ eko:{name:'ekor (e)',lab:'ek',mod:10,cap:5,mark:d=>[[d[3],'g']]},
+ ke:{name:'kepala ekor (ke)',lab:'kpek',mod:10,cap:5,mark:d=>[[d[2],'r'],[d[3],'g']]},
+ j2d:{name:'jumlah 2d',lab:'jke',mod:10,cap:6,mark:d=>[[red(d[2]+d[3]),'r']]},
+ jt:{name:'jumlah tengah',lab:'jck',mod:10,cap:6,mark:d=>[[red(d[1]+d[2]),'r']]},
+ jd:{name:'jumlah depan',lab:'jac',mod:10,cap:6,mark:d=>[[red(d[0]+d[1]),'r']]},
+ sel2db:{name:'selisih 2d belakang',lab:'slke',mod:10,cap:6,mark:d=>[[Math.abs(d[2]-d[3]),'r']]},
+ sel2dt:{name:'selisih tengah',lab:'slck',mod:10,cap:6,mark:d=>[[Math.abs(d[1]-d[2]),'r']]},
+ sel2dd:{name:'selisih depan',lab:'slac',mod:10,cap:6,mark:d=>[[Math.abs(d[0]-d[1]),'r']]},
 };
 const mapEl=(b,v,mod)=>{const x=(b+v)%mod;return mod===12?(x||12):x;};
 // ch: hasil (oldest->newest, 4 digit). Baris uji i = n-1-L .. n-2 ; baris prediksi i = n-1
@@ -448,7 +448,7 @@ function rhShow(r){
 let rhLast=null;
 const RH_LINK='https://angkahoky187-crypto.github.io/MASTER';
 // ---- format teks yang dibaca blog: baris "⭐ WONGBAGUS PREDICTION", "Code :", "Rumus :", dan "N putaran" ----
-const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK',sel2db:'Selisih KE',sel2dt:'Selisih CK',sel2dd:'Selisih AC'};
+const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK',sel2db:'Selisih KE',sel2dt:'Selisih CK',sel2dd:'Selisih AC',j2d:'Jumlah KE',jt:'Jumlah CK',jd:'Jumlah AC',cb:'Colok Bebas',ai3d:'AI 3D',ke:'Kepala Ekor'};
 const wbrFlag=m=>{const w=String(m||'').trim().split(/\s+/)[0].toLowerCase();return RH_FLAG[w]?RH_FLAG[w]+' ':'';};
 function rhResultText(){
   const r=rhLast; if(!r)return '';
