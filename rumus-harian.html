@@ -37,6 +37,7 @@ table.gt th.on{cursor:pointer}
 table.gt td.dl{cursor:pointer;min-width:34px;touch-action:manipulation;-webkit-tap-highlight-color:rgba(255,0,0,.25)}
 table.gt th[data-del],table.gt th.del,table.gt th[data-resrows]{touch-action:manipulation}
 table.gt td.dl:active{background:#ffd0d0}
+table.gt td.dl::after{content:"✕";color:#e5483b;font-size:10px;margin-left:3px}
 .chip{display:inline-block;background:#8a8a8a;color:#fff;border-radius:3px;padding:2px 9px;margin:2px 3px 2px 0;font-weight:600;cursor:pointer}
 table.gt th.del{background:#8a8a8a;color:#fff;cursor:pointer}
 table.gt td.tg{text-align:left;padding-left:6px;white-space:nowrap}
@@ -317,6 +318,14 @@ function rhInit(){
   };
   $('rhOut').addEventListener('click',e=>{
     if($('rhMode').value!=='man')return;
+    if(e.target.id==='rhDelNoGo'){
+      ($('rhDelNo').value||'').split(/[,\s.;]+/).filter(Boolean).forEach(t=>{
+        const m=t.match(/^(\d+)(?:-(\d+))?$/);if(!m)return;
+        let a=+m[1],b=m[2]?+m[2]:a;if(a>b)[a,b]=[b,a];
+        for(let k=Math.max(a,2);k<=b;k++){const i=rhLastN-k;if(i>=0&&i<rhLastN)rhHidRows.add(i);}
+      });
+      rhRun();return;
+    }
     const rc=e.target.closest&&e.target.closest('[data-resrow]');
     if(rc){rhHidRows.delete(+rc.dataset.resrow);rhRun();return;}
     const dr=e.target.closest&&e.target.closest('td[data-delrow]'),rr=e.target.closest&&e.target.closest('th[data-resrows]');
@@ -427,7 +436,7 @@ function rhShow(r){
   const lastSet=setOf(base,rows[rows.length-1].v,mod).map(fmt).join(mod===12?', ':'');
   const code=`#${rhMkt($('market').value)}_${RH_VCODE[vk]}_${rhKeyName(spec,false)}_L${L}-P${P}-D${$('rhDay').value}_${baseCode(base)}`;
   out.innerHTML=`<b>Rumus ${V.name} ${base.length} Digit</b><br>KEY : <b style="color:var(--ac)">${rhKeyName(spec,true)}</b>`
-    +(manual?`<div style="color:var(--mut);margin:4px 0">Ketuk huruf di atas atau nomor baris untuk menghapus; ketuk huruf/“no” abu-abu di bawah untuk mengembalikan. Merah muda = bukan basis.</div>${rhGrid(r)}`
+    +(manual?`<div style="color:var(--mut);margin:4px 0">Ketuk huruf di atas atau nomor baris untuk menghapus; ketuk huruf/“no” abu-abu di bawah untuk mengembalikan. Merah muda = bukan basis.</div><div class="row"><input id="rhDelNo" inputmode="numeric" placeholder="Hapus no urut, mis. 2-5,9" style="flex:1 1 150px"><button id="rhDelNoGo">🗑 Hapus nomor</button></div>${rhGrid(r)}`
             :`<pre style="max-height:none">${refLines.concat(lines).join('\n')}</pre><b>${V.lab} : ${lastSet}</b>`)
     +`<div style="color:var(--mut);margin-top:4px">Basis ${baseCode(base)} · zonk ${missShow}/${nTest} baris</div>`;
   $('rhCode').value=code;
@@ -475,9 +484,9 @@ async function rhCopyResult(){
 const rhSort0First=a=>a.slice().sort((x,y)=>x-y);
 const rhSort0Last=a=>a.slice().sort((x,y)=>(x||10)-(y||10));
 const RH_PRED=new Set(['cb','ai3d','ai2db','ai2dt','ai2dd','sh','sht','shd']);
-let rhHid={},rhHidRows=new Set();   // kolom yang dihapus: {indeks: apakah tadinya termasuk basis}
+let rhLastN=0,rhHid={},rhHidRows=new Set();   // kolom yang dihapus: {indeks: apakah tadinya termasuk basis}
 function rhGrid(r){
-  const {vk,V,rows,base}=r,mod=V.mod,sel=new Set(base),n=rows.length;
+  const {vk,V,rows,base}=r,mod=V.mod,sel=new Set(base),n=rows.length;rhLastN=n;
   const fmt=x=>mod===12?String(x).padStart(2,'0'):String(x);
   const cols=[...Array(mod).keys()],vis=cols.filter(b=>!(b in rhHid));
   const head='<tr><th class="no">No</th><th>Data</th>'+vis.map(b=>`<th class="${sel.has(b)?'on':'off'}" data-del="${b}">${LET[b]}</th>`).join('')+'<th></th></tr>';
