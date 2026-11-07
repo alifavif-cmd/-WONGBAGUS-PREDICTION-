@@ -114,7 +114,7 @@ table.gt td.c.gb{background:#8e24aa}table.gt td.c.gy{background:#a0522d}table.gt
   <h2>📅 Bank Harian <span id="shN" style="font-weight:400;font-size:13px"></span></h2>
   <div class="cm" style="font-size:12.5px;color:#777;margin-bottom:6px">Rumus yang disimpan di sini dihitung ulang dari result terbaru. Rumus patah (zonk &gt; batas patah) tidak ikut rekap. Simpan ke bank <b>hanya admin</b>; hasil salin membawa link.</div>
   <div class="row"><button id="shSave" class="pri">💾 Simpan rumus di atas</button><button id="shRefresh">↻ Hitung ulang</button><button id="shDelPatah">Hapus patah</button><button id="shDelAll">Kosongkan</button></div>
-  <div class="row"><button id="shGab" class="pri">Gabung (0 dipilih)</button><button id="shPickAll">Pilih semua aktif</button></div>
+  <div class="row"><button id="shGab" class="pri">Gabung (0 dipilih)</button><button id="shPickAll">Pilih semua aktif</button><button id="shBlog" class="pri">📤 Kirim dicentang ke Blog</button></div>
   <textarea id="shGabBox" readonly rows="14" style="display:none;width:100%;margin-top:6px;font-family:monospace;font-size:13px"></textarea>
   <button id="shGabCopy" class="pri" style="display:none;width:100%;margin:6px 0">Salin gabungan</button>
   <div id="shRekap"></div>
@@ -832,11 +832,12 @@ function shbRender(){
     return `${SH_NAME[vk]}: <b>main ${P.top.map(x=>shF(x,P.mod)).join(' ')||'-'}</b> <span style="color:#777">· ${P.n} rumus · `+Object.keys(P.votes).map(Number).sort((a,b)=>P.votes[b]-P.votes[a]||a-b).map(x=>`${shF(x,P.mod)}-${P.votes[x]}`).join(' ')+'</span>';}).join('<br>')+'</div>').join('');
   $('shRekap').innerHTML=rk?'<div style="border:1px solid #cfe0c8;border-radius:8px;padding:6px 10px;margin:8px 0;background:rgba(80,160,60,.07)"><b>Rekap suara Bank Harian</b>'+rk+'</div>':'';
   const gb=$('shGab');if(gb)gb.textContent=`Gabung (${[...shSel].filter(id=>list.some(x=>x.it.id===id)).length} dipilih)`;
-  el.innerHTML=list.length?list.map(({it,e})=>{
+  const shRow=({it,e})=>{
     const st=!e?'<span style="color:#b36b00">data kurang</span>':e.alive?`<span style="color:#1a9d1a">✅ aktif · trek ${e.streak}×</span>`:'<span style="color:#d22">❌ patah</span>';
     const mod=VARS[it.vk].mod;
     const isOpen=shOpen.has(it.id);
-    return `<div style="border-top:1px solid #ddd;padding:6px 0"><div style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-shck="${it.id}"${shSel.has(it.id)?' checked':''} style="width:22px;height:22px;flex:0 0 auto"><a href="#" data-shopen="${it.id}" style="text-decoration:none;color:inherit;flex:1 1 auto"><b>${shEsc(rhKeyName(it.spec,true))}</b> · ${SH_NAME[it.vk]} · ${shEsc(it.mkt)} <span style="color:#777">${isOpen?'▲':'▼'}</span></a></div><div style="font-size:12.5px;color:#777">basis ${baseCode(it.base)} · L${it.L} P${it.P}${it.day?' · '+RH_DAYS[it.day]:''} · ${st}${e?' · pred <b style="color:inherit">'+e.set.map(x=>shF(x,mod)).join(mod===12?', ':'')+'</b>':''}</div><div><button data-shdel="${it.id}" style="padding:3px 10px">🗑 Hapus</button> <button data-shopenb="${it.id}" style="padding:3px 10px">${isOpen?'✕ Tutup':'🔍 Lihat'}</button></div>${isOpen?shDetail(it,e):''}</div>`;}).join(''):'<div style="color:#777;padding:6px 0">Bank Harian masih kosong. Simpan rumus dari hasil Cari trek (centang → 💾) atau tombol Simpan di atas.</div>';
+    return `<div style="border-top:1px solid #ddd;padding:6px 0"><div style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-shck="${it.id}"${shSel.has(it.id)?' checked':''} style="width:22px;height:22px;flex:0 0 auto"><a href="#" data-shopen="${it.id}" style="text-decoration:none;color:inherit;flex:1 1 auto"><b>${shEsc(rhKeyName(it.spec,true))}</b> · ${SH_NAME[it.vk]} · ${shEsc(it.mkt)} <span style="color:#777">${isOpen?'▲':'▼'}</span></a></div><div style="font-size:12.5px;color:#777">basis ${baseCode(it.base)} · L${it.L} P${it.P}${it.day?' · '+RH_DAYS[it.day]:''} · ${st}${e?' · pred <b style="color:inherit">'+e.set.map(x=>shF(x,mod)).join(mod===12?', ':'')+'</b>':''}</div><div><button data-shdel="${it.id}" style="padding:3px 10px">🗑 Hapus</button> <button data-shopenb="${it.id}" style="padding:3px 10px">${isOpen?'✕ Tutup':'🔍 Lihat'}</button></div>${isOpen?shDetail(it,e):''}</div>`;};
+  el.innerHTML=list.length?shGroups(list).map(g=>shGroupHtml(g,shRow)).join(''):'<div style="color:#777;padding:6px 0">Bank Harian masih kosong. Simpan rumus dari hasil Cari trek (centang → 💾) atau tombol Simpan di atas.</div>';
 }
 (function(){
   const msg=t=>{const b=$('shSave');if(b){const o=b.textContent;b.textContent=t;setTimeout(()=>b.textContent='💾 Simpan rumus di atas',1600);}};
@@ -956,6 +957,38 @@ function shBackBtn(on){
     document.body.appendChild(b);}
   b.style.display=on?'block':'none';if(!on)shBackId=null;
 }
+
+const shGrpClosed=new Set();
+const shEnc=s=>encodeURIComponent(s),shDec=s=>decodeURIComponent(s);
+function shGroups(list){
+  const m=new Map();
+  list.forEach(x=>{const k=x.it.mkt;if(!m.has(k))m.set(k,{mkt:k,items:[]});m.get(k).items.push(x);});
+  return [...m.values()].sort((a,b)=>String(a.mkt).localeCompare(String(b.mkt)));
+}
+function shGroupHtml(g,rowFn){
+  const alive=g.items.filter(x=>x.e&&x.e.alive).length,closed=shGrpClosed.has(g.mkt),k=shEnc(g.mkt);
+  return `<div style="margin-top:12px;border:1px solid #f5b800;border-radius:10px;padding:0 8px 4px">`
+   +`<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 0">`
+   +`<a href="#" data-shgrp="${k}" style="flex:1 1 140px;text-decoration:none;color:inherit"><b>📍 ${shEsc(g.mkt)}</b> <span style="color:#777;font-size:12.5px">· ${g.items.length} rumus · ${alive} aktif</span> <span>${closed?'▼':'▲'}</span></a>`
+   +`<button data-shgpick="${k}" style="padding:4px 10px">Pilih aktif</button><button data-shgsend="${k}" class="pri" style="padding:4px 10px">📤 Blog</button></div>`
+   +(closed?'':g.items.map(rowFn).join(''))+`</div>`;
+}
+const shHash=s=>{let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return (h>>>0).toString(36);};
+async function shSendBlog(ids,btn,label){
+  const msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=label,2400);};
+  if(!wbIsAdmin()){msg('🔒 Hanya admin');return;}
+  const all=shbGet(),items=[];
+  ids.forEach(id=>{const it=all.find(x=>x.id===id);if(!it)return;const e=shEval(it);if(!e||!e.alive)return;
+    const g=shbGabText([id]);if(!g.txt)return;
+    items.push({id:'shb|'+shKey(it)+'|'+shHash(g.txt),judul:it.mkt+' · '+rhKeyName(it.spec,true)+' · '+SH_NAME[it.vk],isi:g.txt});});
+  if(!items.length){msg('Tidak ada rumus aktif');return;}
+  let W=null;try{W=window.parent&&window.parent!==window?window.parent.WBBlog:null;}catch(_){}
+  const src=document.title==='Scen Shio'?'Bank Shio':'Bank Harian';
+  if(W&&W.send){try{const m=await W.send(items,src,false);msg(m||('Terkirim '+items.length+' trek ✓'));}catch(_){msg('Gagal kirim');}return;}
+  const txt=items.map(i=>i.judul+'\n'+i.isi).join('\n\n');let ok=false;
+  try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(txt);ok=true;}}catch(_){}
+  msg(ok?'Teks disalin — tempel ke Blog':'Pengirim Blog tidak ada di halaman ini');
+}
 async function shCopyText(txt,btn,label,ta){
   let ok=false;
   try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(txt);ok=true;}}catch(_){}
@@ -984,6 +1017,22 @@ async function shCopyText(txt,btn,label,ta){
       shBackId=it.id;shBackBtn(true);
       try{$('rhOut').scrollIntoView({behavior:'smooth',block:'start'});}catch(_){}
       return;}
+  });
+})();
+
+
+(function(){
+  const box=$('shBank');
+  box.addEventListener('click',e=>{
+    const t=e.target,q=s=>t.closest&&t.closest(s);
+    let a=q('[data-shgrp]');
+    if(a){e.preventDefault();const k=shDec(a.dataset.shgrp);if(shGrpClosed.has(k))shGrpClosed.delete(k);else shGrpClosed.add(k);shbRender();return;}
+    a=q('[data-shgpick]');
+    if(a){const k=shDec(a.dataset.shgpick);shbGet().forEach(it=>{if(it.mkt!==k)return;const x=shEval(it);if(x&&x.alive)shSel.add(it.id);});shGrpClosed.delete(k);shbRender();return;}
+    a=q('[data-shgsend]');
+    if(a){const k=shDec(a.dataset.shgsend);shSendBlog(shbGet().filter(it=>it.mkt===k).map(it=>it.id),a,'📤 Blog');return;}
+    a=q('#shBlog');
+    if(a){shSendBlog(shbGet().filter(it=>shSel.has(it.id)).map(it=>it.id),a,'📤 Kirim dicentang ke Blog');return;}
   });
 })();
 
