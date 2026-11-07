@@ -258,6 +258,7 @@ const VARS={
  j2d:{name:'jumlah 2d',lab:'jke',mod:10,cap:6,mark:d=>[[red(d[2]+d[3]),'r']]},
  jt:{name:'jumlah tengah',lab:'jck',mod:10,cap:6,mark:d=>[[red(d[1]+d[2]),'r']]},
  jd:{name:'jumlah depan',lab:'jac',mod:10,cap:6,mark:d=>[[red(d[0]+d[1]),'r']]},
+ jlke:{name:'jarak lemah belakang',lab:'jlke',mod:10,cap:5,rng:1,mark:d=>[[d[2],'r']]},
  sel2db:{name:'selisih 2d belakang',lab:'slke',mod:10,cap:6,mark:d=>[[Math.min(Math.abs(d[2]-d[3]),10-Math.abs(d[2]-d[3])),'r']]},
  sel2dt:{name:'selisih tengah',lab:'slck',mod:10,cap:6,mark:d=>[[Math.min(Math.abs(d[1]-d[2]),10-Math.abs(d[1]-d[2])),'r']]},
  sel2dd:{name:'selisih depan',lab:'slac',mod:10,cap:6,mark:d=>[[Math.min(Math.abs(d[0]-d[1]),10-Math.abs(d[0]-d[1])),'r']]},
@@ -300,7 +301,7 @@ const baseCode=b=>b.map(x=>LET[x]).join('');
 // ===== Rumus Harian: antarmuka =====
 const RH_DAYS=['Harian','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 const RH_DOW=[null,1,2,3,4,5,6,0];               // indeks hari -> getUTCDay
-const RH_VCODE={cb:'cb',ai3d:'ai3d',ai2db:'ai',ai2dt:'ait',ai2dd:'aid',sh:'s',sht:'st',shd:'sd',as:'a',cop:'c',kep:'k',eko:'e',ke:'ke',j2d:'j',jt:'jt',jd:'jd',sel2db:'sl',sel2dt:'slt',sel2dd:'sld'};
+const RH_VCODE={cb:'cb',ai3d:'ai3d',ai2db:'ai',ai2dt:'ait',ai2dd:'aid',sh:'s',sht:'st',shd:'sd',as:'a',cop:'c',kep:'k',eko:'e',ke:'ke',j2d:'j',jt:'jt',jd:'jd',sel2db:'sl',sel2dt:'slt',sel2dd:'sld',jlke:'jlke'};
 const RH_OPT=(arr,first)=>(first!==undefined?`<option value="">${first}</option>`:'')+arr.map(x=>`<option>${x}</option>`).join('');
 function rhInit(){
   $('rhVar').innerHTML=Object.entries(VARS).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('');
@@ -428,16 +429,16 @@ function rhShow(r){
   const manual=$('rhMode').value==='man';
   let nTest=L,missShow=miss;
   if(manual&&rhHidRows.size){const rv=rows.filter((_,i)=>!rhHidRows.has(i));missShow=evalBase(rv,base,mod);nTest=rv.filter(x=>!x.last).length;}
-  const fmt=x=>mod===12?String(x).padStart(2,'0'):String(x);
+  const fmt=x=>mod===12?String(x).padStart(2,'0'):(V.rng?x+'x':String(x));
   const lines=rows.map(row=>{
     const S=setOf(base,row.v,mod),cm={};
     if(!row.last)row.marks.forEach(([x,c])=>{cm[x]=c;});
-    const els=S.map(x=>{const t=fmt(x);return cm[x]?`<span class="h${cm[x]}">${t}</span>`:t;}).join(mod===12?', ':'');
+    const els=S.map(x=>{const t=fmt(x);return cm[x]?`<span class="h${cm[x]}">${t}</span>`:t;}).join((mod===12||V.rng)?', ':'');
     const tag=row.last?'??':(row.marks.some(([x])=>S.includes(x))?V.lab:`${V.lab} <span class="r">zonk</span>`);
     return `${row.res} : ${els} ${tag}`;
   });
   const refLines=showRef?refs.map(x=>`${x} :`):[];
-  const lastSet=setOf(base,rows[rows.length-1].v,mod).map(fmt).join(mod===12?', ':'');
+  const lastSet=RJ(V,setOf(base,rows[rows.length-1].v,mod),fmt,(mod===12||V.rng)?', ':'');
   const code=`#${rhMkt($('market').value)}_${RH_VCODE[vk]}_${rhKeyName(spec,false)}_L${L}-P${P}-D${$('rhDay').value}_${baseCode(base)}`;
   out.innerHTML=`<b>Rumus ${V.name} ${base.length} Digit</b><br>KEY : <b style="color:var(--ac)">${rhKeyName(spec,true)}</b>`
     +(manual?`<div style="color:var(--mut);margin:4px 0">Ketuk huruf atau “No” di atas untuk menghapus (kolom No hilang = tampilan seperti versi otomatis); ketuk huruf/“no” abu-abu di bawah untuk mengembalikan. Merah muda = bukan basis.</div>${rhGrid(r)}`
@@ -448,12 +449,12 @@ function rhShow(r){
 let rhLast=null;
 const RH_LINK='https://angkahoky187-crypto.github.io/MASTER';
 // ---- format teks yang dibaca blog: baris "⭐ WONGBAGUS PREDICTION", "Code :", "Rumus :", dan "N putaran" ----
-const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK',sel2db:'Selisih KE',sel2dt:'Selisih CK',sel2dd:'Selisih AC',j2d:'Jumlah KE',jt:'Jumlah CK',jd:'Jumlah AC',cb:'Colok Bebas',ai3d:'AI 3D',ke:'Kepala Ekor'};
+const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK',sel2db:'Selisih KE',sel2dt:'Selisih CK',sel2dd:'Selisih AC',jlke:'Jarak Lemah KE',j2d:'Jumlah KE',jt:'Jumlah CK',jd:'Jumlah AC',cb:'Colok Bebas',ai3d:'AI 3D',ke:'Kepala Ekor'};
 const wbrFlag=m=>{const w=String(m||'').trim().split(/\s+/)[0].toLowerCase();return RH_FLAG[w]?RH_FLAG[w]+' ':'';};
 function rhResultText(){
   const r=rhLast; if(!r)return '';
   const {spec,V,rows,base,refs}=r,mod=V.mod,showRef=$('rhRef').value==='1',vk=r.vk||Object.keys(VARS).find(k=>VARS[k]===V)||'',rl=WBR_MAP[vk]||'',lb=rl||String(V.lab).toUpperCase();
-  const fmt=x=>mod===12?String(x).padStart(2,'0'):String(x),sep=mod===12?',':'';
+  const fmt=x=>mod===12?String(x).padStart(2,'0'):(V.rng?x+'x':String(x)),sep=(mod===12||V.rng)?',':'';
   const mk=$('market').value;
   const out=['⭐ WONGBAGUS PREDICTION','📍 '+wbrFlag(mk)+mk,'🔑 Code : '+rhKeyName(spec,true)];
   if(rl)out.push('📝 Rumus : '+rl);
@@ -462,13 +463,13 @@ function rhResultText(){
   const hits=[];
   rows.forEach(row=>{
     const S=setOf(base,row.v,mod);
-    if(row.last){out.push(`${row.res} : ${S.map(fmt).join(sep)}   ??`);return;}
+    if(row.last){out.push(`${row.res} : ${RJ(V,S,fmt,sep)}   ??`);return;}
     const h=row.marks.some(([x])=>S.includes(x));hits.push(h);
-    out.push(`${row.res} : ${S.map(fmt).join(sep)}   ${h?lb:'✗'}`);
+    out.push(`${row.res} : ${RJ(V,S,fmt,sep)}   ${h?lb:'✗'}`);
   });
   let streak=0;for(let i=hits.length-1;i>=0&&hits[i];i--)streak++;
   const patah=hits.filter(h=>!h).length;
-  out.push('─────────────────────',`${lb} : ${setOf(base,rows[rows.length-1].v,mod).map(fmt).join(sep)}`,'',`${streak} putaran | patah ${patah}x`);
+  out.push('─────────────────────',`${lb} : ${RJ(V,setOf(base,rows[rows.length-1].v,mod),fmt,sep)}`,'',`${streak} putaran | patah ${patah}x`);
   out.push(RH_LINK);                                   // link selalu dibawa
   return out.join('\n');
 }
@@ -491,7 +492,7 @@ const RH_PRED=new Set(['cb','ai3d','ai2db','ai2dt','ai2dd','sh','sht','shd']);
 let rhNoHide=false,rhLastN=0,rhHid={},rhHidRows=new Set();   // kolom yang dihapus: {indeks: apakah tadinya termasuk basis}
 function rhGrid(r){
   const {vk,V,rows,base}=r,mod=V.mod,sel=new Set(base),n=rows.length;rhLastN=n;
-  const fmt=x=>mod===12?String(x).padStart(2,'0'):String(x);
+  const fmt=x=>mod===12?String(x).padStart(2,'0'):(V.rng?x+'x':String(x));
   const cols=[...Array(mod).keys()],vis=cols.filter(b=>!(b in rhHid));
   const head='<tr>'+(rhNoHide?'':'<th class="no" data-nohide="1">No</th>')+'<th>Data</th>'+vis.map(b=>`<th class="${sel.has(b)?'on':'off'}" data-del="${b}">${LET[b]}</th>`).join('')+'<th></th></tr>';
   const foot=`<tr><th class="no${rhNoHide?' del':''}"${rhNoHide?' data-nohide="1"':''}>no</th><th>Data</th>`+cols.map(b=>(b in rhHid)?`<th class="del" data-res="${b}">${LET[b]}</th>`:`<th>${LET[b]}</th>`).join('')+'</tr>';
@@ -509,7 +510,7 @@ function rhGrid(r){
   const predSel=base.map(b=>mapEl(b,lastV,mod)),predOff=cols.filter(b=>!sel.has(b)).map(b=>mapEl(b,lastV,mod));
   let cap;
   if(RH_PRED.has(vk))cap=`${V.lab.toUpperCase()} : ${rhSort0First(predSel).join('.')||'-'}`;
-  else cap=`Lemah ${V.lab.toUpperCase()} ${(predOff.length?rhSort0Last(predOff):[]).map(fmt).join(', ')||'-'}`;
+  else cap=`Lemah ${V.lab.toUpperCase()} ${RJ(V,(predOff.length?rhSort0Last(predOff):[]),fmt,', ')||'-'}`;
   const gone=[...rhHidRows].sort((x,y)=>x-y).map(i=>`<span class="chip" data-resrow="${i}">${n-i}</span>`).join('');
   return `<div class="gw"><table class="gt">${head}${body}${blank}${foot}</table></div>`+(gone?`<div style="margin:4px 0"><span style="color:var(--mut)">Nomor dihapus (ketuk untuk kembalikan):</span> ${gone}</div>`:'')+`<div>${cap}</div>`;
 }
@@ -639,6 +640,12 @@ async function rhSearch(mkt,vk,onProg){
   const top=[...seen.values()].sort((x,y)=>x.old-y.old||y.n-x.n).slice(0,150);
   return {top,count,E,vk,L,P,N,mkt,day,cancelled,stopped:stopHit,stop:STOP};
 }
+function RJ(V,arr,fmt,sep){
+  if(!V||!V.rng)return arr.map(fmt).join(sep);
+  const a=[...new Set(arr)].sort((x,y)=>x-y),o=[];
+  for(let i=0;i<a.length;){let j=i;while(j+1<a.length&&a[j+1]===a[j]+1)j++;o.push(a[i]+'0-'+a[j]+'9');i=j+1;}
+  return o.join(', ');
+}
 const rhFmt=(x,mod)=>mod===12?String(x).padStart(2,'0'):String(x);
 async function rhFindTracks(){
   if(rhFinding){rhFinding=false;return;}                       // klik lagi = batal
@@ -717,7 +724,7 @@ function rhGabText(box){
   box=box||$('rhFindOut');const F=box._found||[],ctx=box._ctx;
   const idx=[...box.querySelectorAll('input[data-ck]:checked')].map(c=>+c.dataset.ck);
   if(!idx.length||!ctx)return '';
-  const {vk,L,mkt}=ctx,V=VARS[vk],mod=V.mod,fmt=x=>mod===12?String(x).padStart(2,'0'):String(x),sep=mod===12?',':'';
+  const {vk,L,mkt}=ctx,V=VARS[vk],mod=V.mod,fmt=x=>mod===12?String(x).padStart(2,'0'):(V.rng?x+'x':String(x)),sep=(mod===12||V.rng)?',':'';
   const ch=rhChain(ctx.mkt,ctx.day),lab=V.lab.toUpperCase();
   const items=idx.map(i=>{const f=F[i],rows=rhRows(ch,f.sp,vk,L);return rows?{f,rows}:null;}).filter(Boolean);
   if(!items.length)return '';
@@ -725,7 +732,7 @@ function rhGabText(box){
   const n=items[0].rows.length,lines=[],hits=[];
   for(let r=0;r<n;r++){
     const last=items[0].rows[r].last;
-    const sets=items.map(it=>{const row=it.rows[r],S=setOf(it.f.base,row.v,mod);return {t:S.map(fmt).join(sep),hit:!last&&row.marks.some(([x])=>S.includes(x))};});
+    const sets=items.map(it=>{const row=it.rows[r],S=setOf(it.f.base,row.v,mod);return {t:RJ(V,S,fmt,sep),hit:!last&&row.marks.some(([x])=>S.includes(x))};});
     const hit=sets.some(x=>x.hit);
     if(!last)hits.push(hit);
     lines.push(`${items[0].rows[r].res} : ${sets.map(x=>x.t).join(' vs ')} ${last?'?':(hit?lb0:'✗')}`);
@@ -740,7 +747,7 @@ function rhGabText(box){
   out.push('');
   lines.forEach(l=>out.push(l));
   out.push('');
-  out.push(lb+' : '+items.map(it=>setOf(it.f.base,it.rows[n-1].v,mod).map(fmt).join(sep)).join(' vs '));
+  out.push(lb+' : '+items.map(it=>RJ(V,setOf(it.f.base,it.rows[n-1].v,mod),fmt,sep)).join(' vs '));
   out.push('===============');
   out.push(`${hits.length} putaran | patah ${patah}x`);
   out.push('');
@@ -1070,6 +1077,19 @@ document.addEventListener('click',e=>{
 function wbSendVis(){const b=$('rhSendRes');if(b)b.style.display=wbIsAdmin()?'':'none';}
 wbSendVis();setInterval(wbSendVis,1500);
 
+
+/* ===== catatan label (dibuat otomatis dari daftar rumus) ===== */
+(function(){
+  const d=document.createElement('details');d.id='rhLegend';
+  d.style.cssText='margin:8px 0;border:1px solid #6b5a22;border-radius:10px;padding:6px 10px';
+  const rows=Object.keys(VARS).map(k=>`<tr><td style="padding:2px 8px 2px 0"><b>${String(VARS[k].lab).toUpperCase()}</b></td><td style="padding:2px 8px 2px 0">${VARS[k].name}</td><td>${RH_PRED.has(k)?'prediksi (main)':'lemah (dibuang)'}</td></tr>`).join('');
+  d.innerHTML=`<summary style="cursor:pointer;color:var(--ac)">📖 Catatan label</summary><div style="font-size:12.5px;margin-top:6px;line-height:1.5">
+<b>Posisi</b>: KE = belakang (2 digit belakang) · CK = tengah (2 digit tengah) · AC = depan (2 digit depan).<br>
+<b>Jenis</b>: AI = angka ikut · S = shio · JR = jalur shio (1: 1,4,7,10 · 2: 2,5,8,11 · 3: 3,6,9,12) · J = jumlah · SL = selisih (0–5, melingkar) · JL = jarak lemah (rentang angka, mis. 20-49) · CB = colok bebas · AS/CP/KP/EK = as/kop/kepala/ekor.<br>
+<b>Di hasil</b>: label = kena · label + zonk = meleset · ?? = baris target (belum keluar) · patah = jumlah meleset yang diizinkan · "Lemah …" = angka/rentang yang dibuang.</div>
+<table style="font-size:12.5px;margin-top:6px;border-collapse:collapse">${rows}</table>`;
+  const o=$('rhOut');if(o&&o.parentNode)o.parentNode.insertBefore(d,o);
+})();
 /* ===== Mode umum (sederhana) vs admin =====
    Umum: hanya rumus / kunci / mistik yang dicentang admin. Admin (login di Blog) atau kode 240306 = tanpa batas. */
 const PUB_PAGE='rh';
