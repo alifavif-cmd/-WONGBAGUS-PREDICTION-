@@ -110,7 +110,7 @@ JALUR 3 = SHIO 3, 6, 9, 12</pre></details></div>
   <div id="rhFindOut" style="font-size:13px"></div>
   <div id="rhOut" style="font-size:13px">Data result.json (alifavif) belum termuat. Periksa koneksi lalu muat ulang halaman.</div>
   <div class="row" style="margin-top:8px"><input id="rhCode" readonly placeholder="kode rumus"><button id="rhCopy" style="flex:0 0 auto">Salin rumus</button></div>
-  <div class="row" style="margin-top:8px"><button id="rhCopyRes" class="pri" style="flex:1 1 100%">Salin hasil (+ link)</button></div>
+  <div class="row" style="margin-top:8px"><button id="rhCopyRes" class="pri" style="flex:1 1 45%">Salin hasil (+ link)</button><button id="rhSendRes" class="pri" style="flex:1 1 45%">📤 Kirim ke Blog</button></div>
   <textarea id="rhCopyBox" readonly rows="8" style="display:none;width:100%;margin-top:6px;font-family:monospace"></textarea>
 </div>
 
@@ -135,6 +135,7 @@ JALUR 3 = SHIO 3, 6, 9, 12</pre></details></div>
   <div class="row"><button id="shGab" class="pri">Gabung (0 dipilih)</button><button id="shPickAll">Pilih semua aktif</button><button id="shBlog" class="pri">📤 Kirim dicentang ke Blog</button></div>
   <textarea id="shGabBox" readonly rows="14" style="display:none;width:100%;margin-top:6px;font-family:monospace;font-size:13px"></textarea>
   <button id="shGabCopy" class="pri" style="display:none;width:100%;margin:6px 0">Salin gabungan</button>
+  <button id="shGabSend" class="pri" style="display:none;width:100%;margin:6px 0">📤 Kirim gabungan ke Blog</button>
   <div id="shRekap"></div>
   <div id="shList"></div>
   <div class="row" style="margin-top:8px"><button id="shCopyRek" class="pri" style="flex:1 1 100%">Salin rekap shio</button></div>
@@ -652,7 +653,7 @@ async function rhFindTracks(){
     +(E?`<br>Urut dari yang paling sedikit zonk di ${E} baris sebelum jendela uji (kolom terakhir):`:'')
     +`<div style="margin:6px 0;max-height:260px;overflow:auto">`+(top.length?top.map((f,i)=>
       `<div style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-ck="${i}" style="width:22px;height:22px;flex:0 0 auto;margin:3px 0"><a href="#" data-trek="${i}" style="text-decoration:none;color:var(--ac)">${rhKeyName(f.sp,true)} · ${baseCode(f.base)} · ${f.pred.map(fmt).join(mod===12?',':'')}${E?` · lama ${f.old}/${E}`:''} · ×${f.n}</a></div>`).join(''):'Tidak ada.')+'</div>'
-    +(top.length?'<div class="row"><button id="rhGab" class="pri">Gabung (0 dipilih)</button><button id="rhGabAll">Pilih 5 teratas</button><button id="rhGabBank">💾 Simpan dicentang ke Bank</button></div><textarea id="rhGabBox" rows="14" readonly style="display:none;width:100%;font-family:monospace;font-size:13px"></textarea><button id="rhGabCopy" style="display:none;width:100%;margin:6px 0" class="pri">Salin gabungan</button>':'')
+    +(top.length?'<div class="row"><button id="rhGab" class="pri">Gabung (0 dipilih)</button><button id="rhGabAll">Pilih 5 teratas</button><button id="rhGabBank">💾 Simpan dicentang ke Bank</button></div><textarea id="rhGabBox" rows="14" readonly style="display:none;width:100%;font-family:monospace;font-size:13px"></textarea><button id="rhGabCopy" style="display:none;width:100%;margin:6px 0" class="pri">Salin gabungan</button><button id="rhGabSend" style="display:none;width:100%;margin:6px 0" class="pri">📤 Kirim gabungan ke Blog</button>':'')
     +'<div style="color:var(--mut)">Hasil yang sama hanya ditampilkan sekali (×n = jumlah trek yang menghasilkannya). Ketuk satu baris untuk dipakai di rumus. Dicari: kunci tunggal dan pasangan dua kunci (+/−) dengan semua 24 mistik. Mistik 1, Mistik 2, atau Mistik akhir yang sudah Anda pilih di formulir dipakai tetap; yang masih "-" dicari semua. Pencarian penuh bisa makan waktu setengah menit atau lebih di HP.</div>';
   box._found=top;box._ctx={vk,L,P,mkt:r.mkt,day:r.day};
 }
@@ -752,7 +753,7 @@ function rhGabText(box){
     if(t.id==='rhGab'){
       const txt=rhGabText(),ta=$('rhGabBox');
       if(!txt){t.textContent='Centang dulu minimal 1';setTimeout(upd,1500);return;}
-      ta.value=txt;ta.style.display='';$('rhGabCopy').style.display='';return;
+      ta.value=txt;ta.style.display='';$('rhGabCopy').style.display='';if($('rhGabSend'))$('rhGabSend').style.display='';return;
     }
     if(t.id==='rhGabCopy'){
       const ta=$('rhGabBox'),txt=ta.value;let ok=false;
@@ -921,7 +922,7 @@ function shbGabText(ids){
     if(t.id==='shGab'){
       const r=shbGabText(shbGet().filter(it=>shSel.has(it.id)).map(it=>it.id));
       if(r.err){t.textContent=r.err;setTimeout(()=>shbRender(),1800);return;}
-      $('shGabBox').value=r.txt;$('shGabBox').style.display='';$('shGabCopy').style.display='';return;
+      $('shGabBox').value=r.txt;$('shGabBox').style.display='';$('shGabCopy').style.display='';$('shGabSend').style.display='';return;
     }
     if(t.id==='shGabCopy'){
       const ta=$('shGabBox'),txt=ta.value;let ok=false;
@@ -988,7 +989,7 @@ async function shSendBlog(ids,btn,label){
   const all=shbGet(),items=[];
   ids.forEach(id=>{const it=all.find(x=>x.id===id);if(!it)return;const e=shEval(it);if(!e||!e.alive)return;
     const g=shbGabText([id]);if(!g.txt)return;
-    items.push({id:'shb|'+shKey(it)+'|'+shHash(g.txt),judul:it.mkt+' · '+rhKeyName(it.spec,true)+' · '+SH_NAME[it.vk],isi:g.txt});});
+    items.push({id:'shb|'+shKey(it)+'|'+shHash(g.txt),judul:it.mkt+' · '+rhKeyName(it.spec,true)+' · '+SH_NAME[it.vk],isi:g.txt.replace(/Code\s+1\s*:/,'Code :')});});
   if(!items.length){msg('Tidak ada rumus aktif');return;}
   let W=null;try{W=window.parent&&window.parent!==window?window.parent.WBBlog:null;}catch(_){}
   const src=document.title==='Scen Shio'?'Bank Shio':'Bank Harian';
@@ -1043,6 +1044,24 @@ async function shCopyText(txt,btn,label,ta){
     if(a){shSendBlog(shbGet().filter(it=>shSel.has(it.id)).map(it=>it.id),a,'📤 Kirim dicentang ke Blog');return;}
   });
 })();
+
+
+async function wbSendText(txt,btn,label){
+  const msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=label,2400);};
+  if(!txt){msg('Belum ada hasil');return;}
+  if(!wbIsAdmin()){msg('🔒 Hanya admin');return;}
+  let W=null;try{W=window.parent&&window.parent!==window?window.parent.WBBlog:null;}catch(_){}
+  if(!W||!W.send){msg('Buka lewat Blog untuk kirim');return;}
+  const mk=((txt.match(/📍\s*(?:[\u{1F1E6}-\u{1F1FF}]{2}\s*)?(.+)/u)||[])[1]||'Lainnya').trim();
+  const rl=((txt.match(/Rumus\s*:\s*(.+)/)||[])[1]||'').trim();
+  try{const m=await W.send([{id:'tx|'+shHash(txt),judul:mk+(rl?' · '+rl:''),isi:txt}],'Hasil',false);msg(m||'Terkirim ✓');}catch(_){msg('Gagal kirim');}
+}
+document.addEventListener('click',e=>{
+  const t=e.target;
+  if(t.id==='shGabSend')wbSendText($('shGabBox').value,t,'📤 Kirim gabungan ke Blog');
+  else if(t.id==='rhGabSend')wbSendText($('rhGabBox').value,t,'📤 Kirim gabungan ke Blog');
+  else if(t.id==='rhSendRes')wbSendText(rhResultText(),t,'📤 Kirim ke Blog');
+});
 
 /* ===== Mode umum (sederhana) vs admin =====
    Umum: hanya rumus / kunci / mistik yang dicentang admin. Admin (login di Blog) atau kode 240306 = tanpa batas. */

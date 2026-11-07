@@ -302,6 +302,23 @@ window.WB_CFG_SAVE = async (key, cfg) => {
   cur[key] = cfg; await setDoc(ref, { j: JSON.stringify(cur), ts: Date.now() }); return true;
 };
 
+/* dipakai alat (Rumus Harian / Scen Shio / Scan Multi) untuk kirim trek langsung ke blog tanpa salin-tempel; masuk kelompok pasaran dari judul */
+window.WBBlog = { send: async (items) => {
+  if (!isAdmin()) return "🔒 Hanya admin — login di Blog dulu";
+  let baru = 0, lewat = 0;
+  try {
+    const daftar = await postsHariIni();
+    for (const it of items) {
+      const judul = String(it.judul || "").trim() || "Tanpa judul";
+      const sr = saringBaru(judul, String(it.isi || "").trim(), daftar);
+      if (sr.lewat && !sr.isi) { lewat++; continue; }
+      const ref = await addDoc(collection(db, "posts"), { judul, isi: sr.isi, uid: user.uid, nama: user.displayName || "Anonim", createdAt: serverTimestamp() });
+      daftar.push({ id: ref.id, judul, isi: sr.isi }); baru++;
+    }
+  } catch (e) { return "Gagal kirim: " + (e.code || e.message); }
+  return "Terkirim " + baru + " ✓" + (lewat ? " · " + lewat + " sudah ada" : "");
+} };
+
 /* baris "Label: isi" ditampilkan rapi; baris biasa tetap teks */
 const link = t => esc(t).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
 const SITE_LINK = "https://angkahoky187-crypto.github.io/MASTER/";
@@ -419,8 +436,8 @@ function buildMarkets(list){
     const add = (idx, item, dk) => {
       const g = m.groups[idx] || (m.groups[idx] = []);
       const old = g.find(x => x.dk === dk);
-      if (!old) { item.dk = dk; g.push(item); }
-      else if (item.type === "trek" && item.st > old.st) { Object.assign(old, item, { dk }); }
+      if (!old) { item.dk = dk; item.pids = new Set([p.id]); g.push(item); }
+      else { old.pids = old.pids || new Set(); old.pids.add(p.id); if (item.type === "trek" && item.st > old.st) { const pd = old.pids; Object.assign(old, item, { dk }); old.pids = pd; } }
     };
     const pr = parsePost(p);
     pr.blocks.forEach(b => add(b.idx >= 0 ? b.idx : LAIN, b, b.dk));
@@ -434,7 +451,7 @@ function buildMarkets(list){
   return M;
 }
 /*LOGIC-END*/
-let GT = {};
+let GT = {}, GDEL = {};
 /* ===== komentar langsung di tiap pasaran (tanpa klik angka Post) ===== */
 const MC = {}, DRAFT = {};
 const mcItem = (c, mail) => {
@@ -542,7 +559,7 @@ function renderList(){
   const M = buildMarkets(shown);
   const keys = Object.keys(M).sort((a, b) => a.localeCompare(b, "id"));
   const auto = keys.length <= 3;
-  GT = {};
+  GT = {}; GDEL = {};
   let total = 0;
   const kpHtml = id => { const t = encodeURIComponent(GT[id]), u = encodeURIComponent(SITE_LINK); return `<div class="kp"><b>🔒 Kopipasta (hanya admin)</b><button class="btn" data-cp="${esc(id)}">📋 Salin</button><a class="btn ghost" href="https://wa.me/?text=${t}" target="_blank" rel="noopener">WhatsApp</a><a class="btn ghost" href="https://t.me/share/url?url=${u}&text=${t}" target="_blank" rel="noopener">Telegram</a><a class="btn ghost" href="https://www.facebook.com/sharer/sharer.php?u=${u}&quote=${t}" target="_blank" rel="noopener">Facebook</a></div>`; };
   const grpHtml = (k, i, items) => {
@@ -554,9 +571,12 @@ function renderList(){
       : `<div class="tb">${esc(x.text)}</div>`).join("");
     const copyable = [...(merged ? [{ text: merged }] : []), ...oth.filter(x => x.type !== "post" || x.text)];
     const id = k + "§" + i;
+    const allP = new Set(); items.forEach(x => x.pids && x.pids.forEach(v => allP.add(v)));
+    const exc = [...allP].filter(pid => !Object.keys(M[k].groups).some(j => +j !== i && M[k].groups[j].some(x => x.pids && x.pids.has(pid))));
+    GDEL[id] = { ids: exc, shared: allP.size - exc.length, label: k + " · " + (i < LAIN ? MODES[i][0] : "Lainnya") };
     GT[id] = copyable.map(x => x.text).join("\n\n") + "\n\n🔗 " + SITE_LINK;
     const needLink = items.some(x => x.type !== "post");
-    return `<div class="mg"><div class="mh"><b>${esc(i < LAIN ? MODES[i][0] : "Lainnya")}</b><small>${trs ? trs + " trek" : items.length + " item"}</small></div>${bodyItems}${needLink ? `<p class="lk">🔗 <a href="${SITE_LINK}" target="_blank" rel="noopener">${SITE_LINK}</a></p>` : ""}${isAdmin() ? kpHtml(id) : ""}</div>`;
+    return `<div class="mg"><div class="mh"><b>${esc(i < LAIN ? MODES[i][0] : "Lainnya")}</b><small>${trs ? trs + " trek" : items.length + " item"}</small>${isAdmin() ? `<button class="btn ghost gdel" data-gd="${esc(id)}">🗑 Hapus kelompok</button>` : ""}</div>${bodyItems}${needLink ? `<p class="lk">🔗 <a href="${SITE_LINK}" target="_blank" rel="noopener">${SITE_LINK}</a></p>` : ""}${isAdmin() ? kpHtml(id) : ""}</div>`;
   };
   const mobHtml = () => keys.map(k => {
     const m = M[k]; total += m.ntrek;
@@ -591,6 +611,12 @@ function renderList(){
     else if (c.contains("mcs")) d.s = e.target.value; else if (c.contains("mce")) d.e = e.target.value;
   };
   el.onclick = async e => {
+    const gd = e.target.closest("button.gdel");
+    if (gd) {
+      const g = GDEL[gd.dataset.gd]; if (!g || !isAdmin()) return;
+      if (!g.ids.length) { alert("Tidak ada postingan yang bisa dihapus sendiri: semuanya juga memuat kelompok lain."); return; }
+      await hapusMassal(g.ids, "Hapus kelompok " + g.label + (g.shared ? " (" + g.shared + " postingan dilewati karena juga memuat kelompok lain)" : "")); return;
+    }
     const pk = e.target.closest("button.pk");
     if (pk) { selMk = pk.dataset.k; renderList(); showAdPopup(); return; }
     const zm = e.target.closest("button.zm");
