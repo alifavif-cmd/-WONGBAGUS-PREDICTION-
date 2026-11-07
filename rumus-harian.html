@@ -258,9 +258,9 @@ const VARS={
  j2d:{name:'jumlah 2d',lab:'jke',mod:10,cap:6,mark:d=>[[red(d[2]+d[3]),'r']]},
  jt:{name:'jumlah tengah',lab:'jck',mod:10,cap:6,mark:d=>[[red(d[1]+d[2]),'r']]},
  jd:{name:'jumlah depan',lab:'jac',mod:10,cap:6,mark:d=>[[red(d[0]+d[1]),'r']]},
- sel2db:{name:'selisih 2d belakang',lab:'slke',mod:10,cap:6,mark:d=>[[Math.abs(d[2]-d[3]),'r']]},
- sel2dt:{name:'selisih tengah',lab:'slck',mod:10,cap:6,mark:d=>[[Math.abs(d[1]-d[2]),'r']]},
- sel2dd:{name:'selisih depan',lab:'slac',mod:10,cap:6,mark:d=>[[Math.abs(d[0]-d[1]),'r']]},
+ sel2db:{name:'selisih 2d belakang',lab:'slke',mod:10,cap:6,mark:d=>[[Math.min(Math.abs(d[2]-d[3]),10-Math.abs(d[2]-d[3])),'r']]},
+ sel2dt:{name:'selisih tengah',lab:'slck',mod:10,cap:6,mark:d=>[[Math.min(Math.abs(d[1]-d[2]),10-Math.abs(d[1]-d[2])),'r']]},
+ sel2dd:{name:'selisih depan',lab:'slac',mod:10,cap:6,mark:d=>[[Math.min(Math.abs(d[0]-d[1]),10-Math.abs(d[0]-d[1])),'r']]},
 };
 const mapEl=(b,v,mod)=>{const x=(b+v)%mod;return mod===12?(x||12):x;};
 // ch: hasil (oldest->newest, 4 digit). Baris uji i = n-1-L .. n-2 ; baris prediksi i = n-1

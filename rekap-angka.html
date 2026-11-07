@@ -33,6 +33,11 @@ button.red{border-color:var(--bad);color:#ff8d84;background:#2a0f0c}
 .c.x{border-color:#5a1a14;color:#7a4a45}
 .grp{padding:5px 0;border-top:1px solid #2e2610;word-break:break-word}
 .grp b{color:var(--ac);margin-right:6px}
+textarea.pt{font-size:13px}
+.pn{border:1px solid #6b5a22;border-radius:10px;margin:8px 0;overflow:hidden}
+.pn .ph{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 8px;background:#2a2208;font-weight:700;color:var(--ac)}
+.pn.top .ph{background:var(--ln);color:#000}
+.pn button{padding:4px 10px}
 #msg{font-size:13px;margin:6px 0;color:var(--ok)}
 </style>
 </head>
@@ -72,13 +77,14 @@ button.red{border-color:var(--bad);color:#ff8d84;background:#2a0f0c}
   <div id="pos"></div>
   <div class="r"><b>Jumlah</b><input id="jml" inputmode="numeric" placeholder="jumlah off, mis. 123"></div>
   <div class="r" id="rowShio"><b>Shio</b><input id="shio" placeholder="shio off, mis. 11,12 (2 digit belakang)"></div>
-  <div class="r" id="rowSls"><b>Selisih</b><input id="sls" inputmode="numeric" placeholder="selisih off 0-9, mis. 123"></div>
+  <div class="r" id="rowSls"><b>Selisih</b><input id="sls" inputmode="numeric" placeholder="selisih off 0-5, mis. 123"></div>
   <div class="r"><b>Jarak</b><input id="r1" inputmode="numeric" placeholder="off dari angka"><input id="r2" inputmode="numeric" placeholder="sampai angka"></div>
   <div class="r">
     <select id="hs"><option value="">Silang/Homo: normal</option><option value="h">Hanya homo</option><option value="s">Hanya silang</option></select>
     <select id="tt"><option value="">Tengah/Tepi: normal</option><option value="tg">Hanya tengah</option><option value="tp">Hanya tepi</option></select>
     <select id="kk"><option value="">Kembang/Kempis: normal</option><option value="kb">Hanya kembang</option><option value="kp">Hanya kempis</option></select>
   </div>
+  <div class="r"><select id="jbs"><option value="">Jbesar/Jkecil: normal</option><option value="B">Hanya Jbesar (5–9)</option><option value="K">Hanya Jkecil (0–4)</option></select><select id="jgj"><option value="">Jganjil/Jgenap: normal</option><option value="J">Hanya Jganjil</option><option value="G">Hanya Jgenap</option></select></div>
   <div class="hint">Homo = semua digit sama ganjil/genap. Tengah = semua digit 2–7, tepi = semua digit 0,1,8,9. Kembang = digit naik, kempis = digit turun.</div>
 </div>
 
@@ -122,7 +128,7 @@ const note=(t,bad)=>{const m=$('msg');m.style.color=bad?'var(--bad)':'var(--ok)'
 function build(){
   $('pos').innerHTML=POS[N].map((p,i)=>`<div class="r"><b>${p}</b><input id="off${i}" inputmode="numeric" placeholder="digit off, mis. 123"><select id="bk${i}"><option value="">Besar/Kecil: normal</option><option value="B">Hanya besar (5–9)</option><option value="K">Hanya kecil (0–4)</option></select><select id="gg${i}"><option value="">Ganjil/Genap: normal</option><option value="J">Hanya ganjil</option><option value="G">Hanya genap</option></select></div>`).join('');
   $('rowSls').style.display=$('rowShio').style.display='';
-  $('hTop').textContent='LN TOP '+N+'D';
+  $('hTop').textContent='ANGKA JADI '+N+'D';
   $('ids').placeholder=N===2?'Contoh: 01235679':N===3?'Contoh: 01235679 (digit) atau 123 456 789 (angka, mode CT)':'Contoh: 01235679 (digit) atau 1234 5678 (angka, mode CT)';
   $('gridCard').style.display=N>3?'none':'';
   drawGrid(null);
@@ -136,7 +142,7 @@ function cfg(){
     shio:new Set(String($('shio').value).split(/\D+/).filter(Boolean).map(Number)),
     sls:dset($('sls').value),
     r1:$('r1').value===''?null:+$('r1').value,r2:$('r2').value===''?null:+$('r2').value,
-    hs:$('hs').value,tt:$('tt').value,kk:$('kk').value,
+    hs:$('hs').value,jbs:$('jbs').value,jgj:$('jgj').value,tt:$('tt').value,kk:$('kk').value,
     lnoff:new Set(toks($('lnoff').value,N))
   };
 }
@@ -151,7 +157,12 @@ function pass(d,v,s,c){
   if(c.jml.has(dr(d)))return false;
   const k=d[N-2],e=d[N-1];
   if(c.shio.has(shio(k*10+e)))return false;
-  if(c.sls.has(Math.abs(k-e)))return false;
+  if(c.sls.has(Math.min(Math.abs(k-e),10-Math.abs(k-e))))return false;
+  const jd=dr(d);
+  if(c.jbs==='B'&&jd<5)return false;
+  if(c.jbs==='K'&&jd>4)return false;
+  if(c.jgj==='J'&&jd%2===0)return false;
+  if(c.jgj==='G'&&jd%2===1)return false;
   if(c.r1!==null&&c.r2!==null&&v>=c.r1&&v<=c.r2)return false;
   const par=d.every(x=>x%2===d[0]%2);
   if(c.hs==='h'&&!par)return false;
@@ -192,16 +203,42 @@ function rekap(){
   const list=cand.slice().sort((a,b)=>b.n-a.n||(a.s<b.s?-1:1));
   const cnt=new Map(cand.map(o=>[o.s,o.n]));
   last={list,cnt,lines:lines.length};
-  const top=Math.max(1,+$('top').value||100),sel=list.slice(0,top);
-  $('out').value=sel.map(o=>o.s).join($('sep').value);
-  const g=new Map();sel.forEach(o=>{if(!g.has(o.n))g.set(o.n,[]);g.get(o.n).push(o.s);});
-  $('groups').innerHTML=lines.length?[...g.entries()].map(([n,a])=>`<div class="grp"><b>${n}×</b>${a.join(' ')}</div>`).join(''):'';
+  const votes={};
+  if(mode!=='angka')lines.forEach(L=>{new Set(L.replace(/\D/g,'')).forEach(d=>votes[d]=(votes[d]||0)+1);});
+  const pf=showRes(list,lines.length,mode==='angka'?null:votes);
+  const sel=$('out').value?toks($('out').value,N):[];
   drawGrid(last);
-  let t=`${cand.length} angka lolos filter · ${lines.length} baris dibaca · ${sel.length} tampil`;
+  let t=`${cand.length} angka lolos filter · ${lines.length} baris dibaca · angka jadi ${sel.length}`;
   if(cut)t+=` · ${cut} baris lebih dibuang (maks ${MAXL})`;
   if(!lines.length)t+=' · isi baris AI/AK/CT dulu untuk menghitung';
   note(t,!cand.length);
 }
+
+/* ===== hasil gaya Angkanet: angka main, LN TOP (patah 0), Patah 1..10 ===== */
+function showRes(list,tot,votes){
+  const by={};list.forEach(o=>{const p=tot-o.n;(by[p]=by[p]||[]).push(o.s);});
+  const keys=Object.keys(by).map(Number).sort((a,b)=>a-b),sep=$('sep').value;
+  const top=Math.max(1,+$('top').value||100);
+  const first=keys.length?by[keys[0]].slice(0,top):[];
+  $('out').value=first.join(sep);
+  let h='';
+  if(votes&&Object.keys(votes).length){
+    const mx=Math.max(...Object.values(votes)),ds=Object.keys(votes).filter(d=>votes[d]===mx).sort();
+    h+=`<div class="pn"><div class="ph"><span>angka main ${ds.join(' ')}</span></div><div style="padding:6px 8px">${Object.keys(votes).sort().map(d=>`${d} - ${votes[d]} votes`).join('<br>')}</div></div>`;
+  }
+  keys.filter(p=>p<=10).forEach(p=>{
+    const a=by[p];
+    h+=`<div class="pn${p===0?' top':''}"><div class="ph"><span>${p===0?'LN TOP':'Patah '+p} = ${a.length} LN</span><button data-cp="${p}">Copy</button></div><textarea class="pt" readonly rows="2" id="pt${p}">${a.join(sep)}</textarea></div>`;
+  });
+  const more=keys.filter(p=>p>10).reduce((n,p)=>n+by[p].length,0);
+  if(more)h+=`<div class="hint">${more} LN dengan patah lebih dari 10 tidak ditampilkan.</div>`;
+  $('groups').innerHTML=h;
+  return keys.length?keys[0]:null;
+}
+$('groups').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-cp]');if(!b)return;
+  const ta=$('pt'+b.dataset.cp);copyText(ta.value,b,'Copy',ta);
+});
 function drawGrid(res){
   if(N>3)return;
   const p=pool(),total=Math.pow(10,N),cols=N===2?10:10;
@@ -248,7 +285,7 @@ $('paste').onclick=async()=>{
 };
 $('reset').onclick=()=>{
   ['ids','dasar','lnoff','out','jml','shio','sls','r1','r2','pasaran'].forEach(i=>$(i).value='');
-  ['hs','tt','kk'].forEach(i=>$(i).value='');$('top').value=100;$('groups').innerHTML='';last=null;note('');build();
+  ['hs','tt','kk','jbs','jgj'].forEach(i=>$(i).value='');$('top').value=100;$('groups').innerHTML='';last=null;note('');build();
 };
 $('copy').onclick=()=>{const t=$('out').value;if(!t){flash($('copy'),'Belum ada hasil','Salin hasil');return;}copyText(t,$('copy'),'Salin hasil',$('out'));};
 $('use').onclick=()=>{
@@ -279,7 +316,7 @@ $('bkGet').onclick=()=>{
   if(N!==2){const b=document.querySelector('#tabs button[data-n="2"]');if(b)b.click();}
   const shi=v=>v===0?4:((v-1)%12)+1,jal=v=>((shi(v)-1)%3)+1;
   const PRED={ai2db:(s,k,e)=>s.includes(k)||s.includes(e),sh:(s,k,e,v)=>s.includes(shi(v)),jl:(s,k,e,v)=>s.includes(jal(v))};
-  const OFF={kep:(s,k)=>s.includes(k),eko:(s,k,e)=>s.includes(e),ke:(s,k,e)=>s.includes(k)||s.includes(e),j2d:(s,k,e)=>s.includes(dr([k,e])),sel2db:(s,k,e)=>s.includes(Math.abs(k-e))};
+  const OFF={kep:(s,k)=>s.includes(k),eko:(s,k,e)=>s.includes(e),ke:(s,k,e)=>s.includes(k)||s.includes(e),j2d:(s,k,e)=>s.includes(dr([k,e])),sel2db:(s,k,e)=>s.includes(Math.min(Math.abs(k-e),10-Math.abs(k-e)))};
   const pred=[],off=[];let skip=0;
   Object.entries(x.M.pos).forEach(([vk,P])=>{
     const it=(P.items||[]).filter(i=>Array.isArray(i.s)&&i.s.length);
@@ -300,10 +337,9 @@ $('bkGet').onclick=()=>{
   }
   const list=cand.slice().sort((a,b)=>b.n-a.n||(a.s<b.s?-1:1)),tot=pred.length;
   if($('top').value==100)$('top').value=20;
-  const top=Math.max(1,+$('top').value||20),sel=list.slice(0,top);
-  $('out').value=sel.map(o=>o.s).join($('sep').value);
-  const g=new Map();sel.forEach(o=>{if(!g.has(o.n))g.set(o.n,[]);g.get(o.n).push(o.s);});
-  $('groups').innerHTML=[...g.entries()].map(([n,a])=>`<div class="grp"><b>${n}/${tot}×</b>${a.join(' ')}</div>`).join('');
+  const av={};Object.entries(x.M.pos).forEach(([vk,P])=>{if(vk==='ai2db')(P.items||[]).forEach(i=>(i.s||[]).forEach(d=>av[d]=(av[d]||0)+1));});
+  showRes(list,tot,av);
+  const sel=toks($('out').value,N),top=Math.max(1,+$('top').value||20);
   last={list,cnt:new Map(cand.map(o=>[o.s,o.n])),lines:tot+off.length};
   $('dasar').value='';drawGrid(last);$('pasaran').value=x.M.name;
   $('bkInfo').textContent=`${x.t}: ${tot} trek prediksi (AI/shio/jalur) + ${off.length} kelompok lemah (kepala/ekor/jumlah/selisih) disatukan → ${cand.length} angka lolos, ${sel.length} ditampilkan (Top ${top}).`+(skip?` ${skip} trek lain (tengah/depan/3D) belum dipakai.`:'')+(tot?'':' Belum ada trek prediksi (AI/shio/jalur) di bank.');
