@@ -318,6 +318,7 @@ function rhInit(){
   };
   $('rhOut').addEventListener('click',e=>{
     if($('rhMode').value!=='man')return;
+    if(e.target.id==='rhNoTog'||(e.target.closest&&e.target.closest('[data-nohide]'))){rhNoHide=!rhNoHide;rhRun();return;}
     if(e.target.id==='rhDelNoGo'){
       ($('rhDelNo').value||'').split(/[,\s.;]+/).filter(Boolean).forEach(t=>{
         const m=t.match(/^(\d+)(?:-(\d+))?$/);if(!m)return;
@@ -436,7 +437,7 @@ function rhShow(r){
   const lastSet=setOf(base,rows[rows.length-1].v,mod).map(fmt).join(mod===12?', ':'');
   const code=`#${rhMkt($('market').value)}_${RH_VCODE[vk]}_${rhKeyName(spec,false)}_L${L}-P${P}-D${$('rhDay').value}_${baseCode(base)}`;
   out.innerHTML=`<b>Rumus ${V.name} ${base.length} Digit</b><br>KEY : <b style="color:var(--ac)">${rhKeyName(spec,true)}</b>`
-    +(manual?`<div style="color:var(--mut);margin:4px 0">Ketuk huruf di atas atau nomor baris untuk menghapus; ketuk huruf/“no” abu-abu di bawah untuk mengembalikan. Merah muda = bukan basis.</div><div class="row"><input id="rhDelNo" inputmode="numeric" placeholder="Hapus no urut, mis. 2-5,9" style="flex:1 1 150px"><button id="rhDelNoGo">🗑 Hapus nomor</button></div>${rhGrid(r)}`
+    +(manual?`<div style="color:var(--mut);margin:4px 0">Ketuk huruf di atas atau nomor baris untuk menghapus; ketuk huruf/“no” abu-abu di bawah untuk mengembalikan. Merah muda = bukan basis.</div><div class="row"><input id="rhDelNo" inputmode="numeric" placeholder="Hapus no urut, mis. 2-5,9" style="flex:1 1 150px"><button id="rhDelNoGo">🗑 Hapus nomor</button><button id="rhNoTog">🔢 ${rhNoHide?'Tampilkan':'Sembunyikan'} No</button></div>${rhGrid(r)}`
             :`<pre style="max-height:none">${refLines.concat(lines).join('\n')}</pre><b>${V.lab} : ${lastSet}</b>`)
     +`<div style="color:var(--mut);margin-top:4px">Basis ${baseCode(base)} · zonk ${missShow}/${nTest} baris</div>`;
   $('rhCode').value=code;
@@ -484,13 +485,13 @@ async function rhCopyResult(){
 const rhSort0First=a=>a.slice().sort((x,y)=>x-y);
 const rhSort0Last=a=>a.slice().sort((x,y)=>(x||10)-(y||10));
 const RH_PRED=new Set(['cb','ai3d','ai2db','ai2dt','ai2dd','sh','sht','shd']);
-let rhLastN=0,rhHid={},rhHidRows=new Set();   // kolom yang dihapus: {indeks: apakah tadinya termasuk basis}
+let rhNoHide=false,rhLastN=0,rhHid={},rhHidRows=new Set();   // kolom yang dihapus: {indeks: apakah tadinya termasuk basis}
 function rhGrid(r){
   const {vk,V,rows,base}=r,mod=V.mod,sel=new Set(base),n=rows.length;rhLastN=n;
   const fmt=x=>mod===12?String(x).padStart(2,'0'):String(x);
   const cols=[...Array(mod).keys()],vis=cols.filter(b=>!(b in rhHid));
-  const head='<tr><th class="no">No</th><th>Data</th>'+vis.map(b=>`<th class="${sel.has(b)?'on':'off'}" data-del="${b}">${LET[b]}</th>`).join('')+'<th></th></tr>';
-  const foot=`<tr><th class="no${rhHidRows.size?' del':''}" data-resrows="1">no</th><th>Data</th>`+cols.map(b=>(b in rhHid)?`<th class="del" data-res="${b}">${LET[b]}</th>`:`<th>${LET[b]}</th>`).join('')+'</tr>';
+  const head='<tr>'+(rhNoHide?'':'<th class="no" data-nohide="1">No</th>')+'<th>Data</th>'+vis.map(b=>`<th class="${sel.has(b)?'on':'off'}" data-del="${b}">${LET[b]}</th>`).join('')+'<th></th></tr>';
+  const foot=`<tr>${rhNoHide?'':`<th class="no${rhHidRows.size?' del':''}" data-resrows="1">no</th>`}<th>Data</th>`+cols.map(b=>(b in rhHid)?`<th class="del" data-res="${b}">${LET[b]}</th>`:`<th>${LET[b]}</th>`).join('')+'</tr>';
   const body=rows.map((row,i)=>{
     if(rhHidRows.has(i))return '';
     const cm={};
@@ -498,9 +499,9 @@ function rhGrid(r){
     const tds=vis.map(b=>{const x=mapEl(b,row.v,mod);const c=(sel.has(b)&&cm[x])?' g'+cm[x]:'';return `<td class="c${c}">${fmt(x)}</td>`;}).join('');
     let tag=V.lab;
     if(!row.last&&base.length){const S=setOf(base,row.v,mod);if(!row.marks.some(([x])=>S.includes(x)))tag='<span class="r">zonk</span>';}
-    return `<tr><td class="no${row.last?'':' dl'}"${row.last?'':` data-delrow="${i}"`}>${n-i}</td><td class="dt">${row.res}:</td>${tds}<td class="tg">${tag}</td></tr>`;
+    return `<tr>${rhNoHide?'':`<td class="no${row.last?'':' dl'}"${row.last?'':` data-delrow="${i}"`}>${n-i}</td>`}<td class="dt">${row.res}:</td>${tds}<td class="tg">${tag}</td></tr>`;
   }).join('');
-  const blank='<tr><td class="no">&nbsp;</td><td></td>'+vis.map(()=>'<td></td>').join('')+'<td></td></tr>';
+  const blank='<tr>'+(rhNoHide?'':'<td class="no">&nbsp;</td>')+'<td></td>'+vis.map(()=>'<td></td>').join('')+'<td></td></tr>';
   const lastV=rows[rows.length-1].v;
   const predSel=base.map(b=>mapEl(b,lastV,mod)),predOff=cols.filter(b=>!sel.has(b)).map(b=>mapEl(b,lastV,mod));
   let cap;
