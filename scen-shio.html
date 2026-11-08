@@ -204,7 +204,7 @@ function applyData(j,label){
   $('market').innerHTML = ms.map(m=>`<option>${m}</option>`).join('');
   if(ms.includes(keep)) $('market').value=keep;
   $('status').className='';
-  $('status').textContent = `OK (${label}): ${DATA.length} data, ${ms.length} pasaran.`;
+  $('status').textContent = `OK (${label}${j&&j._meta&&j._meta.updated?' · data '+j._meta.updated:''}): ${DATA.length} data, ${ms.length} pasaran.`;
   onData();
   try{shbRender();}catch(e){}
   try{mlChips();}catch(e){}
