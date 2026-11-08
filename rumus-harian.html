@@ -646,9 +646,10 @@ async function rhSearch(mkt,vk,onProg){
 }
 function RJ(V,arr,fmt,sep){
   if(!V||!V.rng)return arr.map(fmt).join(sep);
-  const a=[...new Set(arr)].sort((x,y)=>x-y),o=[];
-  for(let i=0;i<a.length;){let j=i;while(j+1<a.length&&a[j+1]===a[j]+1)j++;o.push(a[i]+'0-'+a[j]+'9');i=j+1;}
-  return o.join(', ');
+  const a=[...new Set(arr)].sort((x,y)=>x-y),r=[];
+  for(let i=0;i<a.length;){let j=i;while(j+1<a.length&&a[j+1]===a[j]+1)j++;r.push([a[i],a[j]]);i=j+1;}
+  if(r.length>1&&r[0][0]===0&&r[r.length-1][1]===9){const f=r.shift(),l=r.pop();r.unshift([l[0],f[1]]);}   // sambung melingkar: 90-09
+  return r.map(([x,y])=>x+'0-'+y+'9').join(', ');
 }
 function RO(V,S,fmt,sep){      // rumus rentang: tampilkan rentang yang DIBUANG (komplemen dari yang terpilih)
   if(!V||!V.rng)return S.map(fmt).join(sep);
