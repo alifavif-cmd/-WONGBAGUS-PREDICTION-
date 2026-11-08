@@ -286,7 +286,7 @@ function evalBase(rows,base,mod){
     if(!r.marks.some(([x])=>S.includes(x)))miss++;}
   return miss;
 }
-function* arcs(m,n){for(let st=0;st<m;st++){const a=[];for(let i=0;i<n;i++)a.push((st+i)%m);yield a.sort((x,y)=>x-y);}}
+function* arcs(m,n){if(n!==8)return;yield [0,1,2,3,4,5,6,7];}   // jarak lemah: basis tetap (tanpa aturan digit); kunci menggeser rentang buang 20 angka
 function* combos(m,n,start=0,cur=[]){
   if(cur.length===n){yield cur.slice();return;}
   for(let x=start;x<m;x++){cur.push(x);yield* combos(m,n,x+1,cur);cur.pop();}
@@ -436,17 +436,18 @@ function rhShow(r){
   const lines=rows.map(row=>{
     const S=setOf(base,row.v,mod),cm={};
     if(!row.last)row.marks.forEach(([x,c])=>{cm[x]=c;});
-    const els=S.map(x=>{const t=fmt(x);return cm[x]?`<span class="h${cm[x]}">${t}</span>`:t;}).join((mod===12||V.rng)?', ':'');
-    const tag=row.last?'??':(row.marks.some(([x])=>S.includes(x))?V.lab:`${V.lab} <span class="r">zonk</span>`);
+    const isMiss=!row.last&&!row.marks.some(([x])=>S.includes(x));
+    const els=V.rng?(isMiss?`<span class="r">${RO(V,S,fmt,', ')}</span>`:RO(V,S,fmt,', ')):S.map(x=>{const t=fmt(x);return cm[x]?`<span class="h${cm[x]}">${t}</span>`:t;}).join((mod===12||V.rng)?', ':'');
+    const tag=row.last?'??':(row.marks.some(([x])=>S.includes(x))?V.lab:`${V.lab} <span class="r">${V.rng?'patah':'zonk'}</span>`);
     return `${row.res} : ${els} ${tag}`;
   });
   const refLines=showRef?refs.map(x=>`${x} :`):[];
-  const lastSet=RJ(V,setOf(base,rows[rows.length-1].v,mod),fmt,(mod===12||V.rng)?', ':'');
+  const lastSet=RO(V,setOf(base,rows[rows.length-1].v,mod),fmt,(mod===12||V.rng)?', ':'');
   const code=`#${rhMkt($('market').value)}_${RH_VCODE[vk]}_${rhKeyName(spec,false)}_L${L}-P${P}-D${$('rhDay').value}_${baseCode(base)}`;
   out.innerHTML=`<b>Rumus ${V.name} ${base.length} Digit</b><br>KEY : <b style="color:var(--ac)">${rhKeyName(spec,true)}</b>`
     +(manual?`<div style="color:var(--mut);margin:4px 0">Ketuk huruf atau “No” di atas untuk menghapus (kolom No hilang = tampilan seperti versi otomatis); ketuk huruf/“no” abu-abu di bawah untuk mengembalikan. Merah muda = bukan basis.</div>${rhGrid(r)}`
             :`<pre style="max-height:none">${refLines.concat(lines).join('\n')}</pre><b>${V.lab} : ${lastSet}</b>`)
-    +`<div style="color:var(--mut);margin-top:4px">Basis ${baseCode(base)} · zonk ${missShow}/${nTest} baris</div>`;
+    +`<div style="color:var(--mut);margin-top:4px">Basis ${baseCode(base)} · ${V.rng?'patah':'zonk'} ${missShow}/${nTest} baris</div>`;
   $('rhCode').value=code;
 }
 let rhLast=null;
@@ -466,13 +467,13 @@ function rhResultText(){
   const hits=[];
   rows.forEach(row=>{
     const S=setOf(base,row.v,mod);
-    if(row.last){out.push(`${row.res} : ${RJ(V,S,fmt,sep)}   ??`);return;}
+    if(row.last){out.push(`${row.res} : ${RO(V,S,fmt,sep)}   ??`);return;}
     const h=row.marks.some(([x])=>S.includes(x));hits.push(h);
-    out.push(`${row.res} : ${RJ(V,S,fmt,sep)}   ${h?lb:'✗'}`);
+    out.push(`${row.res} : ${RO(V,S,fmt,sep)}   ${h?lb:'✗'}`);
   });
   let streak=0;for(let i=hits.length-1;i>=0&&hits[i];i--)streak++;
   const patah=hits.filter(h=>!h).length;
-  out.push('─────────────────────',`${lb} : ${RJ(V,setOf(base,rows[rows.length-1].v,mod),fmt,sep)}`,'',`${streak} putaran | patah ${patah}x`);
+  out.push('─────────────────────',`${lb} : ${RO(V,setOf(base,rows[rows.length-1].v,mod),fmt,sep)}`,'',`${streak} putaran | patah ${patah}x`);
   out.push(RH_LINK);                                   // link selalu dibawa
   return out.join('\n');
 }
@@ -505,7 +506,7 @@ function rhGrid(r){
     if(!row.last)row.marks.forEach(([x,c])=>{cm[x]=c;});
     const tds=vis.map(b=>{const x=mapEl(b,row.v,mod);const c=(sel.has(b)&&cm[x])?' g'+cm[x]:'';return `<td class="c${c}">${fmt(x)}</td>`;}).join('');
     let tag=V.lab;
-    if(!row.last&&base.length){const S=setOf(base,row.v,mod);if(!row.marks.some(([x])=>S.includes(x)))tag='<span class="r">zonk</span>';}
+    if(!row.last&&base.length){const S=setOf(base,row.v,mod);if(!row.marks.some(([x])=>S.includes(x)))tag='<span class="r">'+(V.rng?'patah':'zonk')+'</span>';}
     return `<tr>${rhNoHide?'':`<td class="no" data-nohide="1">${n-i}</td>`}<td class="dt">${row.res}:</td>${tds}<td class="tg">${tag}</td></tr>`;
   }).join('');
   const blank='<tr>'+(rhNoHide?'':'<td class="no">&nbsp;</td>')+'<td></td>'+vis.map(()=>'<td></td>').join('')+'<td></td></tr>';
@@ -649,6 +650,11 @@ function RJ(V,arr,fmt,sep){
   for(let i=0;i<a.length;){let j=i;while(j+1<a.length&&a[j+1]===a[j]+1)j++;o.push(a[i]+'0-'+a[j]+'9');i=j+1;}
   return o.join(', ');
 }
+function RO(V,S,fmt,sep){      // rumus rentang: tampilkan rentang yang DIBUANG (komplemen dari yang terpilih)
+  if(!V||!V.rng)return S.map(fmt).join(sep);
+  const off=[0,1,2,3,4,5,6,7,8,9].filter(b=>!S.includes(b));
+  return 'off '+(off.length?RJ(V,off,fmt,sep):'-');
+}
 const rhFmt=(x,mod)=>mod===12?String(x).padStart(2,'0'):String(x);
 async function rhFindTracks(){
   if(rhFinding){rhFinding=false;return;}                       // klik lagi = batal
@@ -735,7 +741,7 @@ function rhGabText(box){
   const n=items[0].rows.length,lines=[],hits=[];
   for(let r=0;r<n;r++){
     const last=items[0].rows[r].last;
-    const sets=items.map(it=>{const row=it.rows[r],S=setOf(it.f.base,row.v,mod);return {t:RJ(V,S,fmt,sep),hit:!last&&row.marks.some(([x])=>S.includes(x))};});
+    const sets=items.map(it=>{const row=it.rows[r],S=setOf(it.f.base,row.v,mod);return {t:RO(V,S,fmt,sep),hit:!last&&row.marks.some(([x])=>S.includes(x))};});
     const hit=sets.some(x=>x.hit);
     if(!last)hits.push(hit);
     lines.push(`${items[0].rows[r].res} : ${sets.map(x=>x.t).join(' vs ')} ${last?'?':(hit?lb0:'✗')}`);
@@ -750,7 +756,7 @@ function rhGabText(box){
   out.push('');
   lines.forEach(l=>out.push(l));
   out.push('');
-  out.push(lb+' : '+items.map(it=>RJ(V,setOf(it.f.base,it.rows[n-1].v,mod),fmt,sep)).join(' vs '));
+  out.push(lb+' : '+items.map(it=>RO(V,setOf(it.f.base,it.rows[n-1].v,mod),fmt,sep)).join(' vs '));
   out.push('===============');
   out.push(`${hits.length} putaran | patah ${patah}x`);
   out.push('');
@@ -860,7 +866,7 @@ function shbRender(){
     const st=!e?'<span style="color:#b36b00">data kurang</span>':e.alive?`<span style="color:#1a9d1a">✅ aktif · trek ${e.streak}×</span>`:'<span style="color:#d22">❌ patah</span>';
     const mod=VARS[it.vk].mod;
     const isOpen=shOpen.has(it.id);
-    return `<div style="border-top:1px solid #ddd;padding:6px 0"><div style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-shck="${it.id}"${shSel.has(it.id)?' checked':''} style="width:22px;height:22px;flex:0 0 auto"><a href="#" data-shopen="${it.id}" style="text-decoration:none;color:inherit;flex:1 1 auto"><b>${shEsc(rhKeyName(it.spec,true))}</b> · ${SH_NAME[it.vk]} · ${shEsc(it.mkt)} <span style="color:#777">${isOpen?'▲':'▼'}</span></a></div><div style="font-size:12.5px;color:#777">basis ${baseCode(it.base)} · L${it.L} P${it.P}${it.day?' · '+RH_DAYS[it.day]:''} · ${st}${e?' · pred <b style="color:inherit">'+e.set.map(x=>shF(x,mod)).join(mod===12?', ':'')+'</b>':''}</div><div><button data-shdel="${it.id}" style="padding:3px 10px">🗑 Hapus</button> <button data-shopenb="${it.id}" style="padding:3px 10px">${isOpen?'✕ Tutup':'🔍 Lihat'}</button></div>${isOpen?shDetail(it,e):''}</div>`;};
+    return `<div style="border-top:1px solid #ddd;padding:6px 0"><div style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-shck="${it.id}"${shSel.has(it.id)?' checked':''} style="width:22px;height:22px;flex:0 0 auto"><a href="#" data-shopen="${it.id}" style="text-decoration:none;color:inherit;flex:1 1 auto"><b>${shEsc(rhKeyName(it.spec,true))}</b> · ${SH_NAME[it.vk]} · ${shEsc(it.mkt)} <span style="color:#777">${isOpen?'▲':'▼'}</span></a></div><div style="font-size:12.5px;color:#777">basis ${baseCode(it.base)} · L${it.L} P${it.P}${it.day?' · '+RH_DAYS[it.day]:''} · ${st}${e?' · pred <b style="color:inherit">'+(VARS[it.vk].rng?RO(VARS[it.vk],e.set,x=>x,', '):e.set.map(x=>shF(x,mod)).join(mod===12?', ':''))+'</b>':''}</div><div><button data-shdel="${it.id}" style="padding:3px 10px">🗑 Hapus</button> <button data-shopenb="${it.id}" style="padding:3px 10px">${isOpen?'✕ Tutup':'🔍 Lihat'}</button></div>${isOpen?shDetail(it,e):''}</div>`;};
   el.innerHTML=list.length?shGroups(list).map(g=>shGroupHtml(g,shRow)).join(''):'<div style="color:#777;padding:6px 0">Bank Harian masih kosong. Simpan rumus dari hasil Cari trek (centang → 💾) atau tombol Simpan di atas.</div>';
 }
 (function(){
@@ -912,7 +918,7 @@ function shbGabText(ids){
   for(let r=0;r<n;r++){
     const last=R[0][r].last;
     const sets=items.map((x,k)=>{const V=VARS[x.it.vk],row=R[k][r],S=setOf(x.it.base,row.v,V.mod);
-      return {t:S.map(v=>shF(v,V.mod)).join(V.mod===12?',':''),hit:!last&&row.marks.some(([m])=>S.includes(m))};});
+      return {t:V.rng?RO(V,S,x=>x,','):S.map(v=>shF(v,V.mod)).join(V.mod===12?',':''),hit:!last&&row.marks.some(([m])=>S.includes(m))};});
     const hit=sets.every(z=>z.hit);          // gabungan HIT hanya bila SEMUA rumus hit (sama seperti bank lain)
     if(!last)hits.push(hit);
     lines.push(`${R[0][r].res} : ${sets.map(z=>z.t).join(' vs ')} ${last?'?':(hit?lbAll:'✗')}`);
@@ -922,7 +928,7 @@ function shbGabText(ids){
   const out=['⭐ WONGBAGUS PREDICTION — GABUNG TREK','📍 '+flag+mk0];if(rl)out.push('📝 Rumus : '+rl);out.push('');
   items.forEach((x,k)=>out.push(` Code ${k+1} : ${rhKeyName(x.it.spec,false)}.${RH_VCODE[x.it.vk]}`));
   out.push('');lines.forEach(l=>out.push(l));out.push('');
-  out.push(lbAll+' : '+items.map((x,k)=>{const V=VARS[x.it.vk];return setOf(x.it.base,R[k][n-1].v,V.mod).map(v=>shF(v,V.mod)).join(V.mod===12?',':'');}).join(' vs '));
+  out.push(lbAll+' : '+items.map((x,k)=>{const V=VARS[x.it.vk];const SS=setOf(x.it.base,R[k][n-1].v,V.mod);return V.rng?RO(V,SS,x=>x,','):SS.map(v=>shF(v,V.mod)).join(V.mod===12?',':'');}).join(' vs '));
   out.push('===============');out.push(`${hits.length} putaran | patah ${patah}x`);out.push('');out.push(RH_LINK);
   return {txt:out.join('\n')};
 }
@@ -1088,8 +1094,8 @@ wbSendVis();setInterval(wbSendVis,1500);
   const rows=Object.keys(VARS).map(k=>`<tr><td style="padding:2px 8px 2px 0"><b>${String(VARS[k].lab).toUpperCase()}</b></td><td style="padding:2px 8px 2px 0">${VARS[k].name}</td><td>${RH_PRED.has(k)?'prediksi (main)':'lemah (dibuang)'}</td></tr>`).join('');
   d.innerHTML=`<summary style="cursor:pointer;color:var(--ac)">📖 Catatan label</summary><div style="font-size:12.5px;margin-top:6px;line-height:1.5">
 <b>Posisi</b>: KE = belakang (2 digit belakang) · CK = tengah (2 digit tengah) · AC = depan (2 digit depan).<br>
-<b>Jenis</b>: AI = angka ikut · S = shio · JR = jalur shio (1: 1,4,7,10 · 2: 2,5,8,11 · 3: 3,6,9,12) · J = jumlah · SL = selisih (0–5, melingkar) · JL = jarak lemah (trek pangkas): rentang angka yang dibuang, mis. 20-49; per 10 angka · CB = colok bebas · AS/CP/KP/EK = as/kop/kepala/ekor.<br>
-<b>Di hasil</b>: label = kena · label + zonk = meleset · ?? = baris target (belum keluar) · patah = jumlah meleset yang diizinkan · "Lemah …" = angka/rentang yang dibuang.</div>
+<b>Jenis</b>: AI = angka ikut · S = shio · JR = jalur shio (1: 1,4,7,10 · 2: 2,5,8,11 · 3: 3,6,9,12) · J = jumlah · SL = selisih (0–5, melingkar) · JL = jarak lemah (trek pangkas): tanpa basis digit, tiap trek menghasilkan satu rentang buang 20 angka, mis. 30-49 · CB = colok bebas · AS/CP/KP/EK = as/kop/kepala/ekor.<br>
+<b>Di hasil</b>: label = kena · label + zonk = meleset · ?? = baris target (belum keluar) · patah = jumlah meleset yang diizinkan (untuk JL: hasil jatuh di rentang off = patah) · "Lemah …" = angka/rentang yang dibuang.</div>
 <table style="font-size:12.5px;margin-top:6px;border-collapse:collapse">${rows}</table>`;
   const o=$('rhOut');if(o&&o.parentNode)o.parentNode.insertBefore(d,o);
 })();
