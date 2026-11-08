@@ -137,6 +137,7 @@ m8:[8,7,6,5,9,3,2,1,0,4], m9:[9,8,7,6,5,4,3,2,1,0], m10:[4,2,1,8,0,6,5,9,3,7], m
 m12:[2,7,0,8,6,9,4,1,3,5], m13:[3,9,7,0,6,8,4,2,5,1], m14:[6,5,4,7,2,1,0,3,9,8], m15:[5,6,4,9,2,0,1,8,7,3],
 m16:[3,8,7,0,9,6,5,2,1,4], m17:[9,4,8,6,1,7,3,5,2,0], m18:[8,9,7,4,3,6,5,2,0,1], m19:[7,8,3,2,9,6,5,0,1,4]};
 const $ = id => document.getElementById(id);
+const wbTime=s=>{s=String(s||'').trim();const m=/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{4})/.exec(s);return m?Date.UTC(+m[3],+m[2]-1,+m[1]):Date.parse(s);};
 const nums = s => (s.match(/\d+/g) || []).map(Number);
 // ===== Normalisasi JSON (format fleksibel) =====
 // Didukung: [{market,date,result}] | {hk:[{date,result}]} | {hk:{"2026-01-01":"1234"}} | {hk:["1234",...]}
@@ -161,7 +162,15 @@ function normalize(j){
     }
   };
   if(j && typeof j==='object' && !Array.isArray(j) && Object.values(j).some(v=>v && Array.isArray(v.history))){
-    for(const k in j){const v=j[k]; if(v && Array.isArray(v.history)) v.history.forEach(x=>push(x,v.name||k));}
+    for(const k in j){const v=j[k]; if(!(v && Array.isArray(v.history))) continue;
+      const rv=x=>String(x&&typeof x==='object'?(pick(x,['result','hasil','angka','number','keluaran','nomor','value'])??''):x).replace(/\D/g,'');
+      const lat=v.result!=null?String(v.result).replace(/\D/g,''):'';
+      let hh=v.history.slice();
+      if(lat.length===4){
+        if(hh.length>1 && rv(hh[0])!==lat && rv(hh[1])===lat) hh.shift();      // salinan result lama di depan (pola A,B,A) dibuang
+        else if(!hh.length || rv(hh[0])!==lat) hh.unshift({result:lat});        // result terbaru belum masuk history
+      }
+      hh.forEach(x=>push(x&&typeof x==='object'?x:{result:x},v.name||k));}
     return out;
   }
   walk(j,'default');
@@ -209,10 +218,7 @@ async function load(){
 // data pasaran terpilih, urut terbaru -> terlama
 function series(mk){
   const m = mk||$('market').value;
-  let a = DATA.filter(d=>d.market===m);
-  const t = a.map(d=>Date.parse(d.date));
-  if(a.length && t.every(x=>!isNaN(x))) return a.map((d,i)=>[d,t[i]]).sort((x,y)=>y[1]-x[1]).map(x=>x[0]);
-  return a;
+  return DATA.filter(d=>d.market===m);   // urutan file = terbaru -> terlama (tanpa sort tanggal, hindari salah baca dd/mm)
 }
 function onData(){ rhRun(); }
 $('market').onchange = () => { rhRun(); };
@@ -394,7 +400,7 @@ const rhKeyName=(s,up)=>s.terms.map((T,k)=>(k?s.ops[k-1]:'')+T.tok+(T.mb?`(${up?
 function rhChain(mk,dy){
   let s=series(mk).slice().reverse();                     // terlama -> terbaru
   const di=dy==null?+$('rhDay').value:+dy;
-  if(di)s=s.filter(d=>{const t=Date.parse(d.date);return !isNaN(t)&&new Date(t).getUTCDay()===RH_DOW[di];});
+  if(di)s=s.filter(d=>{const t=wbTime(d.date);return !isNaN(t)&&new Date(t).getUTCDay()===RH_DOW[di];});
   return s.map(d=>d.num.padStart(4,'0').slice(-4));
 }
 function rhParseBase(txt,mod){
@@ -802,10 +808,9 @@ const shbSet=a=>{try{localStorage.setItem(SHB_KEY,JSON.stringify(a));}catch(e){}
 const shF=(x,mod)=>mod===12?String(x).padStart(2,'0'):String(x);
 const shEsc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function chainOf(mkt,di){
-  let a=DATA.filter(d=>d.market===mkt);const t=a.map(d=>Date.parse(d.date));
-  if(a.length&&t.every(x=>!isNaN(x)))a=a.map((d,i)=>[d,t[i]]).sort((x,y)=>y[1]-x[1]).map(x=>x[0]);
+  let a=DATA.filter(d=>d.market===mkt);
   let s=a.slice().reverse();
-  if(di)s=s.filter(d=>{const tt=Date.parse(d.date);return !isNaN(tt)&&new Date(tt).getUTCDay()===RH_DOW[di];});
+  if(di)s=s.filter(d=>{const tt=wbTime(d.date);return !isNaN(tt)&&new Date(tt).getUTCDay()===RH_DOW[di];});
   return s.map(d=>d.num.padStart(4,'0').slice(-4));
 }
 function shWide(ch,spec,vk,L){for(let i=0;i<=ch.length-1-L;i++){const r=rhRows(ch,spec,vk,ch.length-1-i);if(r)return r;}return null;}
