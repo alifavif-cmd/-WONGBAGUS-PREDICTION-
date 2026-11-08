@@ -286,13 +286,13 @@ function evalBase(rows,base,mod){
     if(!r.marks.some(([x])=>S.includes(x)))miss++;}
   return miss;
 }
-function* arcs(m,n){if(n!==8)return;yield [0,1,2,3,4,5,6,7];}   // jarak lemah: basis tetap (tanpa aturan digit); kunci menggeser rentang buang 20 angka
+function* arcs(m,n){if(n!==8)return;for(let st=0;st<m;st++){const a=[];for(let i=0;i<8;i++)a.push((st+i)%m);yield a.sort((x,y)=>x-y);}}   // jarak lemah: selalu 8 pita berurutan = rentang buang 20 angka
 function* combos(m,n,start=0,cur=[]){
   if(cur.length===n){yield cur.slice();return;}
   for(let x=start;x<m;x++){cur.push(x);yield* combos(m,n,x+1,cur);cur.pop();}
 }
 function autoBase(rows,vk,P,maxd){
-  const mod=VARS[vk].mod;
+  const mod=VARS[vk].mod;if(VARS[vk].rng)maxd=8;   // jarak lemah: selalu basis tetap 8, tidak ikut 'Maks digit'
   for(let n=1;n<=Math.min(maxd,mod);n++)
     for(const b of (VARS[vk].rng?arcs(mod,n):combos(mod,n)))
       if(evalBase(rows,b,mod)<=P)return b;
@@ -527,6 +527,7 @@ function rhMkt(name){
   return x+y;
 }
 function rhFastBase(rows,vk,P,maxd){
+  if(VARS[vk].rng)maxd=8;
   const mod=VARS[vk].mod,T=rows.filter(r=>!r.last),masks=Array(mod).fill(0n);
   T.forEach((r,i)=>{const tg=new Set(r.marks.map(m=>m[0]));for(let b=0;b<mod;b++)if(tg.has(mapEl(b,r.v,mod)))masks[b]|=1n<<BigInt(i);});
   const all=(1n<<BigInt(T.length))-1n,pc=x=>{let c=0;while(x){x&=x-1n;c++;}return c;};
@@ -544,7 +545,7 @@ const rhStopN=()=>{const e=document.getElementById('rhStopN');return e?Math.max(
 async function rhSearch(mkt,vk,onProg){
   const V=VARS[vk],mod=V.mod;
   const L=Math.max(3,Math.min(110,parseInt($('rhL').value)||10)),P=+$('rhP').value;
-  const N=Math.max(1,Math.min(mod,(vk===$('rhVar').value?parseInt($('rhMax').value):0)||V.cap));
+  const N=V.rng?8:Math.max(1,Math.min(mod,(vk===$('rhVar').value?parseInt($('rhMax').value):0)||V.cap));
   const day=$('rhDay').value,STOP=rhStopN();
   const ch=rhChain(mkt,day),n=ch.length,base0=n-1-L;
   const E=Math.max(0,Math.min(30,base0-8));                       // baris lama (di luar jendela) untuk menguji ketahanan
