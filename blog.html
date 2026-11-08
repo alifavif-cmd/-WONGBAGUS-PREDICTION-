@@ -548,7 +548,7 @@ function initTools(root) {
     const t = TOOLS.find(x => x[0] === d.dataset.t), body = d.querySelector(".tlb");
     const fill = () => {
       if (body.firstChild) return;
-      body.innerHTML = `<iframe src="${t[2]}" title="${t[1]}" loading="lazy"></iframe><span class="tlf"><a href="${t[2]}" target="_blank" rel="noopener">Buka layar penuh ↗</a></span>`;
+      body.innerHTML = `<iframe src="${t[2]}?v=${Math.floor(Date.now() / 60000)}" title="${t[1]}" loading="lazy"></iframe><span class="tlf"><a href="${t[2]}?v=${Math.floor(Date.now() / 60000)}" target="_blank" rel="noopener">Buka layar penuh ↗</a></span>`;
     };
     if (d.open) fill();
     d.addEventListener("toggle", () => { toolOpen[t[0]] = d.open; if (d.open) fill(); });
