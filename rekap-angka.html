@@ -52,6 +52,11 @@ textarea.pt{font-size:13px}
   <h2>Rekap final otomatis (admin)</h2>
   <label>Satukan semua trek Bank Rumus Harian + Scen Shio untuk satu pasaran jadi satu rekap final 2D</label>
   <div class="r"><select id="bkSrc"></select><button class="pri" id="bkGet" style="flex:0 0 auto">Rekap final</button></div>
+  <div class="r"><b>Kelompok</b><select id="bkGrp"><option value="KE">KE (2 digit belakang)</option><option value="CK">CK (2 digit tengah)</option><option value="AC">AC (2 digit depan)</option></select></div>
+  <div class="r"><b>JL KE</b><input id="jlKe1" inputmode="numeric" placeholder="dari"><input id="jlKe2" inputmode="numeric" placeholder="sampai"></div>
+  <div class="r"><b>JL CK</b><input id="jlCk1" inputmode="numeric" placeholder="dari"><input id="jlCk2" inputmode="numeric" placeholder="sampai"></div>
+  <div class="r"><b>JL AC</b><input id="jlAc1" inputmode="numeric" placeholder="dari"><input id="jlAc2" inputmode="numeric" placeholder="sampai"></div>
+  <div class="hint">JL = jarak lemah: angka jadi di antara dari–sampai (mis. 20–40) dibuang total, untuk kelompok masing-masing.</div>
   <div id="bkInfo" class="hint"></div>
 </div>
 
@@ -115,7 +120,7 @@ textarea.pt{font-size:13px}
 <b>AI</b> = angka ikut (kena jika ≥1 digit ada di baris) · <b>AK</b> = angka kontrol (semua digit ada di baris) · <b>CT</b> = baris berisi angka jadi.<br>
 <b>angka main</b> = digit paling banyak muncul di semua baris. <b>LN TOP</b> = angka yang kena semua baris (patah 0). <b>Patah k</b> = angka yang meleset di k baris. <b>ANGKA JADI</b> = kelompok patah paling kecil yang ada.<br>
 <b>Jumlah</b> = jumlah digit dikecilkan jadi 1 digit · <b>Selisih</b> = selisih dua digit belakang, 0–5 melingkar · <b>Jarak</b> = rentang angka yang dibuang (dari–sampai) · <b>Homo</b> = digit sama ganjil/genap, <b>Silang</b> = beda · <b>Tengah</b> = digit 2–7, <b>Tepi</b> = 0,1,8,9 · <b>Kembang</b> = digit naik, <b>Kempis</b> = turun · <b>Jbesar/Jkecil</b> = jumlah 5–9 / 0–4.<br>
-<b>Rekap final</b> = semua trek Bank Harian + Scen Shio satu pasaran disatukan; skor "5/8×" = kena 5 dari 8 trek.</div></details>
+<b>JL</b> = jarak lemah: angka jadi di antara dari–sampai (mis. 20–40) dibuang total, per kelompok <b>KE</b> belakang / <b>CK</b> tengah / <b>AC</b> depan. <b>Rekap final</b> = semua trek Bank Harian + Scen Shio satu pasaran disatukan; skor "5/8×" = kena 5 dari 8 trek.</div></details>
 
 <div class="r" style="justify-content:flex-end"><input id="gate" type="text" inputmode="numeric" maxlength="6" autocomplete="off" aria-label="kode" style="flex:0 0 120px;opacity:.7"></div>
 
@@ -123,7 +128,7 @@ textarea.pt{font-size:13px}
 const $=id=>document.getElementById(id);
 const POS={2:['Kepala','Ekor'],3:['KOP','Kepala','Ekor'],4:['AS','KOP','Kepala','Ekor']};
 const MAXL=100;
-let N=2,last=null;
+let N=2,last=null,rkLabel='';
 const pad=(v,n)=>String(v).padStart(n,'0');
 const digitsOf=s=>[...s].map(Number);
 const dset=t=>new Set([...String(t).replace(/\D/g,'')].map(Number));
@@ -184,6 +189,7 @@ function pass(d,v,s,c){
 function pool(){const t=toks($('dasar').value,N);return t.length?new Set(t):null;}
 
 function rekap(){
+  rkLabel='';
   const c=cfg(),p=pool(),total=Math.pow(10,N),cand=[];
   for(let v=0;v<total;v++){
     const s=pad(v,N);
@@ -321,22 +327,28 @@ $('bkGet').onclick=()=>{
   bkFill();const l=bkRead(),x=l.find(y=>y.v===$('bkSrc').value);
   if(!x){$('bkInfo').textContent='Bank belum ada isi. Buka Rumus Harian / Scen Shio dan simpan rumus ke Bank dulu.';return;}
   if(N!==2){const b=document.querySelector('#tabs button[data-n="2"]');if(b)b.click();}
-  const shi=v=>v===0?4:((v-1)%12)+1,jal=v=>((shi(v)-1)%3)+1;
-  const PRED={ai2db:(s,k,e)=>s.includes(k)||s.includes(e),sh:(s,k,e,v)=>s.includes(shi(v)),jl:(s,k,e,v)=>s.includes(jal(v))};
-  const OFF={kep:(s,k)=>s.includes(k),jlke:(s,k)=>s.includes(k),eko:(s,k,e)=>s.includes(e),ke:(s,k,e)=>s.includes(k)||s.includes(e),j2d:(s,k,e)=>s.includes(dr([k,e])),sel2db:(s,k,e)=>s.includes(Math.min(Math.abs(k-e),10-Math.abs(k-e)))};
-  const pred=[],off=[];let skip=0;
+  const grp=$('bkGrp').value||'KE',shi=v=>v===0?4:((v-1)%12)+1,jal=v=>((shi(v)-1)%3)+1,cs=a=>Math.min(a,10-a);
+  const GC={KE:{pred:['ai2db','sh','jl'],off:{kep:'X',eko:'Y',ke:'XY',j2d:'J',sel2db:'S',jlke:'X'},jl:'jlKe'},
+            CK:{pred:['ai2dt','sht','jlt'],off:{cop:'X',jt:'J',sel2dt:'S',jlck:'X'},jl:'jlCk'},
+            AC:{pred:['ai2dd','shd','jld'],off:{as:'X',jd:'J',sel2dd:'S',jlac:'X'},jl:'jlAc'}}[grp];
+  const PF=[(s,k,e)=>s.includes(k)||s.includes(e),(s,k,e,v)=>s.includes(shi(v)),(s,k,e,v)=>s.includes(jal(v))];
+  const OF={X:(s,k)=>s.includes(k),Y:(s,k,e)=>s.includes(e),XY:(s,k,e)=>s.includes(k)||s.includes(e),J:(s,k,e)=>s.includes(dr([k,e])),S:(s,k,e)=>s.includes(cs(Math.abs(k-e)))};
+  const pred=[],off=[],av={};let skip=0;
   Object.entries(x.M.pos).forEach(([vk,P])=>{
     const it=(P.items||[]).filter(i=>Array.isArray(i.s)&&i.s.length);
-    if(PRED[vk])it.forEach(i=>pred.push({f:PRED[vk],s:i.s}));
-    else if(OFF[vk]&&it.length){
+    const pi=GC.pred.indexOf(vk);
+    if(pi>=0){it.forEach(i=>{pred.push({f:PF[pi],s:i.s});if(pi===0)i.s.forEach(d=>av[d]=(av[d]||0)+1);});}
+    else if(GC.off[vk]&&it.length){
       const vt={};it.forEach(i=>i.s.forEach(d=>vt[d]=(vt[d]||0)+1));
-      const need=Math.ceil(it.length/2);let set=Object.keys(vt).filter(d=>vt[d]>=need).map(Number);
-      if(!set.length){const mx=Math.max(...Object.values(vt));set=Object.keys(vt).filter(d=>vt[d]===mx).map(Number);}
-      off.push({f:OFF[vk],s:set});
+      const need=Math.ceil(it.length/2),set=[];
+      for(let d=0;d<10;d++)if((vt[d]||0)<need)set.push(d);   // lemah = digit yang tidak dipilih mayoritas trek
+      if(set.length)off.push({f:OF[GC.off[vk]],s:set});
     }else skip+=it.length;
   });
+  const g=GC.jl,lo=$(g+'1').value===''?null:+$(g+'1').value,hi=$(g+'2').value===''?null:+$(g+'2').value;
   const cand=[];
   for(let v=0;v<100;v++){
+    if(lo!==null&&hi!==null&&v>=lo&&v<=hi)continue;
     const k=Math.floor(v/10),e=v%10;
     if(off.some(o=>o.f(o.s,k,e,v)))continue;
     let n=0;pred.forEach(p=>{if(p.f(p.s,k,e,v))n++;});
@@ -344,13 +356,13 @@ $('bkGet').onclick=()=>{
   }
   const list=cand.slice().sort((a,b)=>b.n-a.n||(a.s<b.s?-1:1)),tot=pred.length;
   if($('top').value==100)$('top').value=20;
-  const av={};Object.entries(x.M.pos).forEach(([vk,P])=>{if(vk==='ai2db')(P.items||[]).forEach(i=>(i.s||[]).forEach(d=>av[d]=(av[d]||0)+1));});
   showRes(list,tot,av);
   const sel=toks($('out').value,N),top=Math.max(1,+$('top').value||20);
   last={list,cnt:new Map(cand.map(o=>[o.s,o.n])),lines:tot+off.length};
+  rkLabel='Rekap '+grp;
   $('dasar').value='';drawGrid(last);$('pasaran').value=x.M.name;
-  $('bkInfo').textContent=`${x.t}: ${tot} trek prediksi (AI/shio/jalur) + ${off.length} kelompok lemah (kepala/ekor/jumlah/selisih) disatukan → ${cand.length} angka lolos, ${sel.length} ditampilkan (Top ${top}).`+(skip?` ${skip} trek lain (tengah/depan/3D) belum dipakai.`:'')+(tot?'':' Belum ada trek prediksi (AI/shio/jalur) di bank.');
-  note(`Rekap final ${x.M.name}: ${sel.length} angka jadi`);
+  $('bkInfo').textContent=`${grp} · ${x.t}: ${tot} trek prediksi + ${off.length} kelompok lemah disatukan`+(lo!==null&&hi!==null?`, JL ${lo}-${hi} dibuang`:'')+` → ${cand.length} angka lolos, angka jadi ${sel.length} (Top ${top}).`+(skip?` ${skip} trek kelompok lain belum dipakai.`:'')+(tot?'':' Belum ada trek prediksi untuk kelompok ini di bank.');
+  note(`Rekap final ${grp} ${x.M.name}: ${sel.length} angka jadi`);
 };
 $('toBlog').onclick=async()=>{
   const btn=$('toBlog'),lab='📤 Kirim ke Blog',msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=lab,2800);};
@@ -361,9 +373,9 @@ $('toBlog').onclick=async()=>{
   if(!W||!W.send){msg('Buka lewat Blog untuk kirim');return;}
   let h=0;const sig=[$('ids').value,$('jml').value,$('sls').value,$('shio').value,$('out').value,$('dasar').value,$('lnoff').value,N].join('|');
   for(let i=0;i<sig.length;i++)h=(h*31+sig.charCodeAt(i))|0;
-  const code='RK'+N+'D-'+(h>>>0).toString(36),ln=last?last.lines:0;
-  const isi=`⭐ WONGBAGUS PREDICTION — REKAP ${N}D\n📍 ${mk}\n📝 Rumus : Rekap ${N}D\n\n Code : ${code}\n${nums.join('*')}\n\n${ln} putaran`;
-  try{const m=await W.send([{id:'rk|'+code,judul:mk+' · Rekap '+N+'D',isi}],'Rekap',false);msg(m||'Terkirim ✓');}catch(_){msg('Gagal kirim');}
+  const RL=rkLabel||('Rekap '+N+'D'),code='RK'+(rkLabel?rkLabel.slice(6):N+'D')+'-'+(h>>>0).toString(36),ln=last?last.lines:0;
+  const isi=`⭐ WONGBAGUS PREDICTION — ${RL.toUpperCase()}\n📍 ${mk}\n📝 Rumus : ${RL}\n\n Code : ${code}\n${nums.join('*')}\n\n${ln} putaran`;
+  try{const m=await W.send([{id:'rk|'+code,judul:mk+' · '+RL,isi}],'Rekap',false);msg(m||'Terkirim ✓');}catch(_){msg('Gagal kirim');}
 };
 bkFill();
 /* ===== mode umum vs admin (sama seperti Rumus Harian / Scen Shio) ===== */

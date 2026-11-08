@@ -258,7 +258,9 @@ const VARS={
  j2d:{name:'jumlah 2d',lab:'jke',mod:10,cap:6,mark:d=>[[red(d[2]+d[3]),'r']]},
  jt:{name:'jumlah tengah',lab:'jck',mod:10,cap:6,mark:d=>[[red(d[1]+d[2]),'r']]},
  jd:{name:'jumlah depan',lab:'jac',mod:10,cap:6,mark:d=>[[red(d[0]+d[1]),'r']]},
- jlke:{name:'jarak lemah belakang',lab:'jlke',mod:10,cap:5,rng:1,mark:d=>[[d[2],'r']]},
+ jlke:{name:'jarak lemah belakang',lab:'jlke',mod:10,cap:8,rng:1,mark:d=>[[d[2],'r']]},
+ jlck:{name:'jarak lemah tengah',lab:'jlck',mod:10,cap:8,rng:1,mark:d=>[[d[1],'r']]},
+ jlac:{name:'jarak lemah depan',lab:'jlac',mod:10,cap:8,rng:1,mark:d=>[[d[0],'r']]},
  sel2db:{name:'selisih 2d belakang',lab:'slke',mod:10,cap:6,mark:d=>[[Math.min(Math.abs(d[2]-d[3]),10-Math.abs(d[2]-d[3])),'r']]},
  sel2dt:{name:'selisih tengah',lab:'slck',mod:10,cap:6,mark:d=>[[Math.min(Math.abs(d[1]-d[2]),10-Math.abs(d[1]-d[2])),'r']]},
  sel2dd:{name:'selisih depan',lab:'slac',mod:10,cap:6,mark:d=>[[Math.min(Math.abs(d[0]-d[1]),10-Math.abs(d[0]-d[1])),'r']]},
@@ -284,6 +286,7 @@ function evalBase(rows,base,mod){
     if(!r.marks.some(([x])=>S.includes(x)))miss++;}
   return miss;
 }
+function* arcs(m,n){for(let st=0;st<m;st++){const a=[];for(let i=0;i<n;i++)a.push((st+i)%m);yield a.sort((x,y)=>x-y);}}
 function* combos(m,n,start=0,cur=[]){
   if(cur.length===n){yield cur.slice();return;}
   for(let x=start;x<m;x++){cur.push(x);yield* combos(m,n,x+1,cur);cur.pop();}
@@ -291,7 +294,7 @@ function* combos(m,n,start=0,cur=[]){
 function autoBase(rows,vk,P,maxd){
   const mod=VARS[vk].mod;
   for(let n=1;n<=Math.min(maxd,mod);n++)
-    for(const b of combos(mod,n))
+    for(const b of (VARS[vk].rng?arcs(mod,n):combos(mod,n)))
       if(evalBase(rows,b,mod)<=P)return b;
   return null;
 }
@@ -301,7 +304,7 @@ const baseCode=b=>b.map(x=>LET[x]).join('');
 // ===== Rumus Harian: antarmuka =====
 const RH_DAYS=['Harian','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 const RH_DOW=[null,1,2,3,4,5,6,0];               // indeks hari -> getUTCDay
-const RH_VCODE={cb:'cb',ai3d:'ai3d',ai2db:'ai',ai2dt:'ait',ai2dd:'aid',sh:'s',sht:'st',shd:'sd',as:'a',cop:'c',kep:'k',eko:'e',ke:'ke',j2d:'j',jt:'jt',jd:'jd',sel2db:'sl',sel2dt:'slt',sel2dd:'sld',jlke:'jlke'};
+const RH_VCODE={cb:'cb',ai3d:'ai3d',ai2db:'ai',ai2dt:'ait',ai2dd:'aid',sh:'s',sht:'st',shd:'sd',as:'a',cop:'c',kep:'k',eko:'e',ke:'ke',j2d:'j',jt:'jt',jd:'jd',sel2db:'sl',sel2dt:'slt',sel2dd:'sld',jlke:'jlke',jlck:'jlck',jlac:'jlac'};
 const RH_OPT=(arr,first)=>(first!==undefined?`<option value="">${first}</option>`:'')+arr.map(x=>`<option>${x}</option>`).join('');
 function rhInit(){
   $('rhVar').innerHTML=Object.entries(VARS).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('');
@@ -449,7 +452,7 @@ function rhShow(r){
 let rhLast=null;
 const RH_LINK='https://angkahoky187-crypto.github.io/MASTER';
 // ---- format teks yang dibaca blog: baris "⭐ WONGBAGUS PREDICTION", "Code :", "Rumus :", dan "N putaran" ----
-const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK',sel2db:'Selisih KE',sel2dt:'Selisih CK',sel2dd:'Selisih AC',jlke:'Jarak Lemah KE',j2d:'Jumlah KE',jt:'Jumlah CK',jd:'Jumlah AC',cb:'Colok Bebas',ai3d:'AI 3D',ke:'Kepala Ekor'};
+const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK',sel2db:'Selisih KE',sel2dt:'Selisih CK',sel2dd:'Selisih AC',jlke:'Jarak Lemah KE',jlck:'Jarak Lemah CK',jlac:'Jarak Lemah AC',j2d:'Jumlah KE',jt:'Jumlah CK',jd:'Jumlah AC',cb:'Colok Bebas',ai3d:'AI 3D',ke:'Kepala Ekor'};
 const wbrFlag=m=>{const w=String(m||'').trim().split(/\s+/)[0].toLowerCase();return RH_FLAG[w]?RH_FLAG[w]+' ':'';};
 function rhResultText(){
   const r=rhLast; if(!r)return '';
@@ -526,7 +529,7 @@ function rhFastBase(rows,vk,P,maxd){
   const mod=VARS[vk].mod,T=rows.filter(r=>!r.last),masks=Array(mod).fill(0n);
   T.forEach((r,i)=>{const tg=new Set(r.marks.map(m=>m[0]));for(let b=0;b<mod;b++)if(tg.has(mapEl(b,r.v,mod)))masks[b]|=1n<<BigInt(i);});
   const all=(1n<<BigInt(T.length))-1n,pc=x=>{let c=0;while(x){x&=x-1n;c++;}return c;};
-  for(let n=1;n<=Math.min(maxd,mod);n++)for(const b of combos(mod,n)){
+  for(let n=1;n<=Math.min(maxd,mod);n++)for(const b of (VARS[vk].rng?arcs(mod,n):combos(mod,n))){
     let m=0n;for(const x of b)m|=masks[x];
     if(P===0?m===all:pc(all&~m)<=P)return b;
   }
@@ -559,7 +562,7 @@ async function rhSearch(mkt,vk,onProg){
     for(let v=0;v<10;v++){let m=0;for(let b=0;b<mod;b++)if(tg.has(mapEl(b,v,mod)))m|=1<<b;bm[q*10+v]=m;}
   }
   const all=new Int32Array(W);for(let r=0;r<L;r++)all[(r/30)|0]|=1<<(r%30);
-  const rm=new Int32Array(mod*W),combo=[];for(let k=1;k<=N;k++)combo[k]=[...combos(mod,k)];
+  const rm=new Int32Array(mod*W),combo=[];for(let k=1;k<=N;k++)combo[k]=[...(V.rng?arcs(mod,k):combos(mod,k))];
   const v=new Int8Array(LL+1);
   const cnt=new Int8Array(mod),ps=new Int16Array(N+1);
   function check(){            // basis tepat N digit (tidak ada yang lebih kecil), atau null
@@ -1085,7 +1088,7 @@ wbSendVis();setInterval(wbSendVis,1500);
   const rows=Object.keys(VARS).map(k=>`<tr><td style="padding:2px 8px 2px 0"><b>${String(VARS[k].lab).toUpperCase()}</b></td><td style="padding:2px 8px 2px 0">${VARS[k].name}</td><td>${RH_PRED.has(k)?'prediksi (main)':'lemah (dibuang)'}</td></tr>`).join('');
   d.innerHTML=`<summary style="cursor:pointer;color:var(--ac)">📖 Catatan label</summary><div style="font-size:12.5px;margin-top:6px;line-height:1.5">
 <b>Posisi</b>: KE = belakang (2 digit belakang) · CK = tengah (2 digit tengah) · AC = depan (2 digit depan).<br>
-<b>Jenis</b>: AI = angka ikut · S = shio · JR = jalur shio (1: 1,4,7,10 · 2: 2,5,8,11 · 3: 3,6,9,12) · J = jumlah · SL = selisih (0–5, melingkar) · JL = jarak lemah (rentang angka, mis. 20-49) · CB = colok bebas · AS/CP/KP/EK = as/kop/kepala/ekor.<br>
+<b>Jenis</b>: AI = angka ikut · S = shio · JR = jalur shio (1: 1,4,7,10 · 2: 2,5,8,11 · 3: 3,6,9,12) · J = jumlah · SL = selisih (0–5, melingkar) · JL = jarak lemah (trek pangkas): rentang angka yang dibuang, mis. 20-49; per 10 angka · CB = colok bebas · AS/CP/KP/EK = as/kop/kepala/ekor.<br>
 <b>Di hasil</b>: label = kena · label + zonk = meleset · ?? = baris target (belum keluar) · patah = jumlah meleset yang diizinkan · "Lemah …" = angka/rentang yang dibuang.</div>
 <table style="font-size:12.5px;margin-top:6px;border-collapse:collapse">${rows}</table>`;
   const o=$('rhOut');if(o&&o.parentNode)o.parentNode.insertBefore(d,o);

@@ -267,8 +267,6 @@ const VARS={
  jl:{name:'jalur main belakang (ke)',lab:'jrke',mod:3,cap:2,mark:d=>[[jalur(D2(d,2,3)),'g']]},
  jlt:{name:'jalur main tengah',lab:'jrck',mod:3,cap:2,mark:d=>[[jalur(D2(d,1,2)),'g']]},
  jld:{name:'jalur main depan',lab:'jrac',mod:3,cap:2,mark:d=>[[jalur(D2(d,0,1)),'g']]},
- jlck:{name:'jarak lemah tengah',lab:'jlck',mod:10,cap:5,rng:1,mark:d=>[[d[1],'r']]},
- jlac:{name:'jarak lemah depan',lab:'jlac',mod:10,cap:5,rng:1,mark:d=>[[d[0],'r']]},
 };
 const mapEl=(b,v,mod)=>{const x=(b+v)%mod;return mod===10?x:(x||mod);};
 // ch: hasil (oldest->newest, 4 digit). Baris uji i = n-1-L .. n-2 ; baris prediksi i = n-1
@@ -308,7 +306,7 @@ const baseCode=b=>b.map(x=>LET[x]).join('');
 // ===== Rumus Harian: antarmuka =====
 const RH_DAYS=['Harian','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
 const RH_DOW=[null,1,2,3,4,5,6,0];               // indeks hari -> getUTCDay
-const RH_VCODE={cb:'cb',ai3d:'ai3d',ai2db:'ai',ai2dt:'ait',ai2dd:'aid',sh:'s',sht:'st',shd:'sd',jl:'jl',jlt:'jlt',jld:'jld',jlck:'jlck',jlac:'jlac',as:'a',cop:'c',kep:'k',eko:'e',ke:'ke',j2d:'j',jt:'jt',jd:'jd'};
+const RH_VCODE={cb:'cb',ai3d:'ai3d',ai2db:'ai',ai2dt:'ait',ai2dd:'aid',sh:'s',sht:'st',shd:'sd',jl:'jl',jlt:'jlt',jld:'jld',as:'a',cop:'c',kep:'k',eko:'e',ke:'ke',j2d:'j',jt:'jt',jd:'jd'};
 const RH_OPT=(arr,first)=>(first!==undefined?`<option value="">${first}</option>`:'')+arr.map(x=>`<option>${x}</option>`).join('');
 function rhInit(){
   $('rhVar').innerHTML=Object.entries(VARS).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('');
@@ -456,7 +454,7 @@ function rhShow(r){
 let rhLast=null;
 const RH_LINK='https://angkahoky187-crypto.github.io/MASTER';
 // ---- format teks yang dibaca blog: baris "⭐ WONGBAGUS PREDICTION", "Code :", "Rumus :", dan "N putaran" ----
-const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK',jlck:'Jarak Lemah CK',jlac:'Jarak Lemah AC'};
+const WBR_MAP={sh:'Shio KE',sht:'Shio CK',shd:'Shio AC',jl:'Jalur KE',jlt:'Jalur CK',jld:'Jalur AC',ai2db:'AI Belakang',ai2dt:'AI Tengah',ai2dd:'AI Depan',as:'Pos AS',cop:'Pos CP',kep:'Pos KP',eko:'Pos EK'};
 const wbrFlag=m=>{const w=String(m||'').trim().split(/\s+/)[0].toLowerCase();return RH_FLAG[w]?RH_FLAG[w]+' ':'';};
 function rhResultText(){
   const r=rhLast; if(!r)return '';
@@ -793,7 +791,7 @@ function wbIsAdmin(){
 // ===== Bank Shio (sendiri) + rekap untuk tab Bank/Prediksi =====
 const SHB_KEY='wb_shio_bank_v1',SHR_KEY='wb_shio_rekap_v1';
 const SH_NAME={sh:'Shio KE',sht:'Shio Tengah',shd:'Shio Depan',jl:'Jalur KE',jlt:'Jalur Tengah',jld:'Jalur Depan'};
-const shbGet=()=>{try{const a=JSON.parse(localStorage.getItem(SHB_KEY)||'[]');return Array.isArray(a)?a:[];}catch(e){return [];}};
+const shbGet=()=>{try{const a=JSON.parse(localStorage.getItem(SHB_KEY)||'[]');return Array.isArray(a)?a.filter(x=>x&&VARS[x.vk]):[];}catch(e){return [];}};
 const shbSet=a=>{try{localStorage.setItem(SHB_KEY,JSON.stringify(a));}catch(e){}};
 const shF=(x,mod)=>mod===12?String(x).padStart(2,'0'):String(x);
 const shEsc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1091,7 +1089,7 @@ wbSendVis();setInterval(wbSendVis,1500);
   const rows=Object.keys(VARS).map(k=>`<tr><td style="padding:2px 8px 2px 0"><b>${String(VARS[k].lab).toUpperCase()}</b></td><td style="padding:2px 8px 2px 0">${VARS[k].name}</td><td>${RH_PRED.has(k)?'prediksi (main)':'lemah (dibuang)'}</td></tr>`).join('');
   d.innerHTML=`<summary style="cursor:pointer;color:var(--ac)">📖 Catatan label</summary><div style="font-size:12.5px;margin-top:6px;line-height:1.5">
 <b>Posisi</b>: KE = belakang (2 digit belakang) · CK = tengah (2 digit tengah) · AC = depan (2 digit depan).<br>
-<b>Jenis</b>: AI = angka ikut · S = shio · JR = jalur shio (1: 1,4,7,10 · 2: 2,5,8,11 · 3: 3,6,9,12) · J = jumlah · SL = selisih (0–5, melingkar) · JL = jarak lemah (rentang angka, mis. 20-49) · CB = colok bebas · AS/CP/KP/EK = as/kop/kepala/ekor.<br>
+<b>Jenis</b>: AI = angka ikut · S = shio · JR = jalur shio (1: 1,4,7,10 · 2: 2,5,8,11 · 3: 3,6,9,12) · J = jumlah · SL = selisih (0–5, melingkar) · JL = jarak lemah: rentang angka jadi yang dibuang (mis. 20-40), diatur di halaman Rekap · CB = colok bebas · AS/CP/KP/EK = as/kop/kepala/ekor.<br>
 <b>Di hasil</b>: label = kena · label + zonk = meleset · ?? = baris target (belum keluar) · patah = jumlah meleset yang diizinkan · "Lemah …" = angka/rentang yang dibuang.</div>
 <table style="font-size:12.5px;margin-top:6px;border-collapse:collapse">${rows}</table>`;
   const o=$('rhOut');if(o&&o.parentNode)o.parentNode.insertBefore(d,o);
