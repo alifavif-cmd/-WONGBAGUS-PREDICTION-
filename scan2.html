@@ -1482,8 +1482,8 @@ function buildFullText(item){
   const histRows=item.trekRows.filter(r=>r.hit!==null);
   histRows.forEach(r=>{
     const pred=r.pred&&r.pred.length?r.pred.join(''):'??';
-    const lbl=r.hit?mLabel:'✗';
-    lines.push(r.result+' : '+pred+'    '+lbl);
+    const lbl=r.hit?'':'    ✗';
+    lines.push(r.result+' : '+pred+lbl);
   });
   const lastRow=item.trekRows[item.trekRows.length-1];
   lines.push((lastRow?lastRow.result:'')+' : '+predStr+'    ?');
@@ -1598,7 +1598,7 @@ function gabungAll(){
     if(row.isNext){
       lines.push(row.result+' : '+predsStr+' ?');
     } else {
-      lines.push(row.result+' : '+predsStr+'  '+(row.allHit?rowLabel:'✗'));
+      lines.push(row.result+' : '+predsStr+(row.allHit?'':'  ✗'));
     }
   });
 
@@ -2021,7 +2021,7 @@ function bankCopy(i){
   const histRows=(item.trekRows||[]).filter(r=>r.hit!==null);
   histRows.forEach(r=>{
     const p=r.pred&&r.pred.length?r.pred.join(''):'??';
-    lines.push(r.result+' : '+p+'    '+(r.hit?mLabel:'✗'));
+    lines.push(r.result+' : '+p+(r.hit?'':'    ✗'));
   });
   const last=item.trekRows?item.trekRows[item.trekRows.length-1]:null;
   if(last)lines.push(last.result+' : '+pred+'    ?');
@@ -2256,7 +2256,7 @@ function gabungBank(itemsIn){
   const rowsDisplay=[...rows].reverse();
   rowsDisplay.forEach(row=>{
     const predsStr=row.preds.join(' vs ');
-    lines.push(row.result+' : '+predsStr+(row.isNext?' ?':'  '+(row.allHit?rowLabel:'✗')));
+    lines.push(row.result+' : '+predsStr+(row.isNext?' ?':(row.allHit?'':'  ✗')));
   });
   const nextRow=rows[0];
   lines.push('');
@@ -3269,8 +3269,8 @@ function buildTrekLines(mktKey, item, skipHeader){
   const histRows=(item.trekRows||[]).filter(r=>r.hit!==null);
   histRows.forEach(r=>{
     const pred=r.pred&&r.pred.length?r.pred.join(''):(r.predStr||'??');
-    const lbl=r.hit?'✅ '+mLabel:'❌';
-    lines.push(`\`${r.result}\` : *${pred}*  ${lbl}`);
+    const lbl=r.hit?'':'  ❌';
+    lines.push(`\`${r.result}\` : *${pred}*${lbl}`);
   });
   const lastRow=item.trekRows&&item.trekRows[item.trekRows.length-1];
   lines.push(`\`${lastRow?lastRow.result:''}\` : *${predStr}*  ❓`);

@@ -957,7 +957,7 @@ function App() {
             const last = i === r.trekRows.length - 1;
             if (last)
                 return `${row.result} : ${row.predStr} ?`;
-            return `${row.result} : ${row.predStr} ${row.hit ? short : '✗'}`;
+            return `${row.result} : ${row.predStr}${row.hit ? '' : ' ✗'}`;
         }).join('\n');
         const predStr = r.curPred ? r.curPred.join('') : '??';
         return `📍 ${flag(mktId || mkt)} ${info.name}\n🔑 Code : ${r.key}\n📅 Rumus : ${head} ${(r.nDigit || 2)} Digit\n\n${rows}\n\n${head} : ${predStr}\n${'='.repeat(14)}\n${r.streak} putaran | patah 0x`;
@@ -1115,7 +1115,7 @@ function App() {
             const last = i === (item.trekRows.length - 1);
             if (last)
                 return `${row.result} : ${row.predStr} ?`;
-            return `${row.result} : ${row.predStr} ${row.hit ? short : '✗'}`;
+            return `${row.result} : ${row.predStr}${row.hit ? '' : ' ✗'}`;
         }).join('\n');
         const predStr = item.curPred ? item.curPred.join('') : '??';
         const patahCount = (item.trekRows || []).filter(row => row.hit === false).length;
@@ -1163,7 +1163,7 @@ function App() {
                 const rows = (item.trekRows || []).map((row, i) => {
                     const last = i === (item.trekRows.length - 1);
                     if (last) return `${row.result} : ${row.predStr} ?`;
-                    return `${row.result} : ${row.predStr} ${short}`;
+                    return `${row.result} : ${row.predStr}`;
                 }).join('\n');
                 const predStr = item.curPred ? item.curPred.join('') : '??';
                 const patahCount = (item.trekRows || []).filter(row => row.hit === false).length;
@@ -1712,7 +1712,7 @@ function App() {
                             g.codes.forEach((c, i) => lines.push(`Code ${i + 1} : ${c}`));
                             lines.push('');
                             const rowLabel = g.labels ? [...new Set(g.labels)].join('/').toUpperCase() : 'AI';
-                            g.rows.forEach(row => lines.push(`${row.result} : ${row.preds.join(' vs ')} ${row.isNext ? '?' : rowLabel}`));
+                            g.rows.forEach(row => lines.push(`${row.result} : ${row.preds.join(' vs ')}${row.isNext ? ' ?' : (row.anyHit ? '' : ' ✗')}`));
                             lines.push('');
                             lines.push(`${rowLabel} : ${lastRow ? lastRow.preds.join(' vs ') : '-'}`);
                             lines.push('='.repeat(15));

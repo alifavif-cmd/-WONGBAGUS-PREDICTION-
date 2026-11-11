@@ -1236,8 +1236,8 @@ function buildTrekText(r){
     '─────────────────────',
   ];
   (r.trekRows||[]).forEach(row=>{
-    const status=row.hit===null?'??':row.hit?ml:'✗';
-    lines.push(`${row.result} : ${row.predStr}   ${status}`);
+    const status=row.hit===null?'??':row.hit?'':'✗';
+    lines.push(`${row.result} : ${row.predStr}   ${status}`.trimEnd());
   });
   const allDigits=[0,1,2,3,4,5,6,7,8,9];
   const predDigits=r.curPred||[];
@@ -1642,7 +1642,7 @@ function openGabung(items){
     const footerLabel=uniqueLabels.length===1?uniqueLabels[0]:(uniqueLabels.join(' vs '));
     gabungData.rows.forEach(row=>{
       if(row.isNext)lines.push(`${row.result} : ${row.preds.join(' vs ')} ?`);
-      else lines.push(`${row.result} : ${row.preds.join(' vs ')} ${row.any?hitLabel:'✗'}`);
+      else lines.push(`${row.result} : ${row.preds.join(' vs ')}${row.any?'':' ✗'}`);
     });
     const nextRow=gabungData.rows[gabungData.rows.length-1];
     lines.push('',`${footerLabel} : ${nextRow?.preds.join(' vs ')||'??'}`,`===============`,`${gabungData.minL} putaran | patah ${gabungData.totalPatah}x`);

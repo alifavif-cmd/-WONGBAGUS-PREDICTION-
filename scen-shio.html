@@ -476,7 +476,7 @@ function rhResultText(){
     const S=setOf(base,row.v,mod);
     if(row.last){out.push(`${row.res} : ${RJ(V,S,fmt,sep)}   ??`);return;}
     const h=row.marks.some(([x])=>S.includes(x));hits.push(h);
-    out.push(`${row.res} : ${RJ(V,S,fmt,sep)}   ${h?lb:'✗'}`);
+    out.push(`${row.res} : ${RJ(V,S,fmt,sep)}${h?'':'   ✗'}`);
   });
   let streak=0;for(let i=hits.length-1;i>=0&&hits[i];i--)streak++;
   const patah=hits.filter(h=>!h).length;
@@ -746,7 +746,7 @@ function rhGabText(box){
     const sets=items.map(it=>{const row=it.rows[r],S=setOf(it.f.base,row.v,mod);return {t:RJ(V,S,fmt,sep),hit:!last&&row.marks.some(([x])=>S.includes(x))};});
     const hit=sets.some(x=>x.hit);
     if(!last)hits.push(hit);
-    lines.push(`${items[0].rows[r].res} : ${sets.map(x=>x.t).join(' vs ')} ${last?'?':(hit?lb0:'✗')}`);
+    lines.push(`${items[0].rows[r].res} : ${sets.map(x=>x.t).join(' vs ')} ${last?'?':(hit?'':'✗')}`.trimEnd());
   }
   let patah=0,streak=0,cur=0;
   hits.forEach(h=>{if(h)cur=0;else{patah++;cur++;streak=Math.max(streak,cur);}});
@@ -922,7 +922,7 @@ function shbGabText(ids){
       return {t:S.map(v=>shF(v,V.mod)).join(V.mod===12?',':''),hit:!last&&row.marks.some(([m])=>S.includes(m))};});
     const hit=sets.every(z=>z.hit);          // gabungan HIT hanya bila SEMUA rumus hit (sama seperti bank lain)
     if(!last)hits.push(hit);
-    lines.push(`${R[0][r].res} : ${sets.map(z=>z.t).join(' vs ')} ${last?'?':(hit?lbAll:'✗')}`);
+    lines.push(`${R[0][r].res} : ${sets.map(z=>z.t).join(' vs ')} ${last?'?':(hit?'':'✗')}`.trimEnd());
   }
   let patah=0,streak=0,cur=0;hits.forEach(h=>{if(h)cur=0;else{patah++;cur++;streak=Math.max(streak,cur);}});
   const w=mk0.trim().split(/\s+/)[0].toLowerCase(),flag=RH_FLAG[w]?RH_FLAG[w]+' ':'';

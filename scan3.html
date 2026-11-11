@@ -2130,7 +2130,7 @@ function copyTrekFromModal(){
     if(row.isNext){
       lines.push(`${String(row.period).padStart(4,'0')} : ${row.pred} ??`);
     }else{
-      lines.push(`${String(row.period).padStart(4,'0')} : ${row.pred} ${row.hit?mLabel:'✗'}`);
+      lines.push(`${String(row.period).padStart(4,'0')} : ${row.pred}${row.hit?'':' ✗'}`);
     }
   }
   lines.push(``);
@@ -2577,7 +2577,7 @@ function copyMnTrek(){
     if(row.hit===null){
       lines.push(`${String(row.period).padStart(4,'0')} : ${row.predStr} ??`);
     }else{
-      lines.push(`${String(row.period).padStart(4,'0')} : ${row.predStr} ${row.hit?mLabel:'✗'}`);
+      lines.push(`${String(row.period).padStart(4,'0')} : ${row.predStr}${row.hit?'':' ✗'}`);
     }
   }
   lines.push(``);
@@ -3021,7 +3021,7 @@ function bankBuildTrekFull(item,includeHeader){
 
   const copyLines=rowsDisplay.map(row=>{
     if(row.isNext)return `${String(row.r).padStart(4,'0')} : ${row.pred} ?`;
-    return `${String(row.r).padStart(4,'0')} : ${row.pred} ${rowLabel}`;
+    return `${String(row.r).padStart(4,'0')} : ${row.pred}${row.hit?'':' ✗'}`;
   });
 
   const headerLine=includeHeader?`${pasaranName}\n`:'';
@@ -3351,7 +3351,7 @@ function bankShowTrek(item){
 
   const copyLines=rowsDisplay.map(row=>{
     if(row.isNext)return `${String(row.r).padStart(4,'0')} : ${row.pred} ?`;
-    return `${String(row.r).padStart(4,'0')} : ${row.pred} ${rowLabel}`;
+    return `${String(row.r).padStart(4,'0')} : ${row.pred}${row.hit?'':' ✗'}`;
   });
   const copyText=
     `${pasaranName}\n`+
@@ -3565,7 +3565,7 @@ function bankShowGabunganTrek(items){
     const rStr=String(row.r).padStart(4,'0');
     const predsStr=row.preds.join(' vs ');
     if(row.isNext)return `${rStr} : ${predsStr} ?`;
-    return `${rStr} : ${predsStr} ${rowLabelText}`;
+    return `${rStr} : ${predsStr}${row.anyHit?'':' ✗'}`;
   });
   window._lastGabunganCopyText=
     codesText+'\n'+
