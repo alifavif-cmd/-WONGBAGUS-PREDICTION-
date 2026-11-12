@@ -1053,7 +1053,24 @@ function render(){
   let tp = [];
   a.addEventListener("click", e => { const n = Date.now(); tp = tp.filter(x => n - x < 1500); tp.push(n); if (tp.length >= 5) { tp = []; w.classList.toggle("show"); e.preventDefault(); } });
 })();
-onAuthStateChanged(auth, u => { user = u; window.WB_IS_ADMIN = !!isAdmin(); renderWho(); render(); });
+/* kiriman dari halaman Rumus Harian yang dibuka sendiri (tanpa bingkai): diantrikan di localStorage, dikirim di sini setelah admin login */
+async function kirimAntri(){
+  let q=null;try{q=JSON.parse(localStorage.getItem("wb_kirim_antri")||"null");}catch(e){}
+  if(!q||!Array.isArray(q.items)||!q.items.length){return;}
+  if(Date.now()-(q.ts||0)>30*60*1000){try{localStorage.removeItem("wb_kirim_antri");}catch(e){}return;}
+  if(!isAdmin()){notifAntri("🔒 "+q.items.length+" kiriman menunggu — login admin di Blog dulu");return;}
+  try{localStorage.removeItem("wb_kirim_antri");}catch(e){}
+  notifAntri("Mengirim "+q.items.length+" postingan…");
+  const m=await window.WBBlog.send(q.items);
+  notifAntri(m,6000);
+}
+function notifAntri(t,ms){
+  let el=document.getElementById("antriNote");
+  if(!el){el=document.createElement("div");el.id="antriNote";el.setAttribute("style","position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:99999;padding:12px 14px;border-radius:12px;background:#10132a;color:#ffc933;border:1.5px solid #ffc933;font:700 14px system-ui,sans-serif;text-align:center");document.body.appendChild(el);}
+  el.textContent=t;el.style.display="";clearTimeout(el._t);if(ms)el._t=setTimeout(()=>{el.style.display="none";},ms);
+}
+window.addEventListener("storage",e=>{if(e.key==="wb_kirim_antri"&&e.newValue)kirimAntri();});
+onAuthStateChanged(auth, u => { user = u; window.WB_IS_ADMIN = !!isAdmin(); renderWho(); render(); kirimAntri(); });
 window.addEventListener("hashchange", render);
 renderWho();
 render();

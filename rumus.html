@@ -172,6 +172,7 @@ h2{color:#fff}
   <div class="cm" style="font-size:12px;color:#777;margin-top:4px">Hanya rumus aktif yang dikirim. Satu postingan Gabung Trek untuk tiap pasaran, hari, dan jenis rumus.</div></div>
   <textarea id="shGabBox" readonly rows="14" style="display:none;width:100%;margin-top:6px;font-family:monospace;font-size:13px"></textarea>
   <button id="shGabCopy" class="pri" style="display:none;width:100%;margin:6px 0">Salin gabungan</button>
+  <button id="shGabBlog" class="pri" style="display:none;width:100%;margin:6px 0">📤 Kirim gabungan ke Blog</button>
   
   <div id="shRekap"></div>
   <div id="shList"></div>
@@ -1235,7 +1236,20 @@ function shbGabText(ids,extra){
     if(t.id==='shGab'){
       const r=shbGabText(shbGet().filter(it=>shSel.has(it.id)).map(it=>it.id));
       if(r.err){t.textContent=r.err;setTimeout(()=>shbRender(),1800);return;}
-      $('shGabBox').value=r.txt;$('shGabBox').style.display='';$('shGabCopy').style.display='';return;
+      $('shGabBox').value=r.txt;$('shGabBox').style.display='';$('shGabCopy').style.display='';$('shGabBlog').style.display='';return;
+    }
+    if(t.id==='shGabBlog'){
+      const lab='📤 Kirim gabungan ke Blog',msg=m=>{t.textContent=m;setTimeout(()=>t.textContent=lab,3500);};
+      if(!rkIsAdmin()){msg('🔒 Hanya admin');return;}
+      const sel=shbGet().filter(it=>shSel.has(it.id)),r=shbGabText(sel.map(it=>it.id));
+      if(r.err||!sel.length){msg(r.err||'Centang dulu minimal 1 rumus');return;}
+      const txt=shBlogText(r.txt),mk=sel[0].mkt,vks=[...new Set(sel.map(it=>it.vk))];
+      const lb=vks.map(v=>WBR_MAP[v]||SH_NAME[v]||v).join(' + ');
+      let T=txt;if(vks.length>1&&!/Rumus\s*[:：]/i.test(T)){const L=T.split('\n'),i=L.findIndex(l=>/WONGBAGUS PREDICTION/i.test(l));if(i>=0){L.splice(Math.min(i+2,L.length),0,'📝 Rumus : '+lb);T=L.join('\n');}}
+      let h=0;for(let i=0;i<T.length;i++)h=(h*31+T.charCodeAt(i))|0;
+      t.textContent='Mengirim…';
+      try{const m=await wbKirim([{id:'gb|'+mk+'|'+(h>>>0).toString(36),judul:mk+' · '+lb,isi:T}]);msg(m||'Terkirim ✓');}catch(_){msg('Gagal kirim');}
+      return;
     }
     if(t.id==='shGabCopy'){
       const ta=$('shGabBox'),txt=ta.value;let ok=false;
@@ -1316,7 +1330,8 @@ function shGroupHtml(g,rowFn){
   return `<div style="margin-top:12px;border:1px solid #f5b800;border-radius:10px;padding:0 8px 4px">`
    +`<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:8px 0">`
    +`<a href="#" data-shgrp="${k}" style="flex:1 1 140px;text-decoration:none;color:inherit"><b>📍 ${shEsc(g.mkt)}</b> <span style="color:#777;font-size:12.5px">· ${g.items.length} rumus · ${alive} aktif</span> <span>${closed?'▼':'▲'}</span></a>`
-   +`<button data-shgpick="${k}" style="padding:4px 10px">Pilih aktif</button></div>`
+   +`<button data-shgpick="${k}" style="padding:4px 10px">Pilih aktif</button>`
+   +((typeof rkIsAdmin==='function'&&rkIsAdmin())?`<button data-shgsend="${k}" style="padding:4px 10px;background:#ffc933;color:#10132a;font-weight:700">📤 Kirim</button>`:'')+`</div>`
    +(closed?'':trkGrouped(g.items,rowFn))+`</div>`;
 }
 const shHash=s=>{let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))|0;return (h>>>0).toString(36);};
@@ -1358,6 +1373,8 @@ async function shCopyText(txt,btn,label,ta){
     const t=e.target,q=s=>t.closest&&t.closest(s);
     let a=q('[data-shgrp]');
     if(a){e.preventDefault();const k=shDec(a.dataset.shgrp);if(shGrpClosed.has(k))shGrpClosed.delete(k);else shGrpClosed.add(k);shbRender();return;}
+    a=q('[data-shgsend]');
+    if(a){e.preventDefault();shSendMarket(shDec(a.dataset.shgsend),a);return;}
     a=q('[data-shgpick]');
     if(a){const k=shDec(a.dataset.shgpick);shbGet().forEach(it=>{if(it.mkt!==k)return;const x=shEval(it);if(x&&x.alive)shSel.add(it.id);});shGrpClosed.delete(k);shbRender();return;}  });
 })();
@@ -2074,13 +2091,11 @@ $('toBlog').onclick=async()=>{
   if(!rkIsAdmin()){msg('🔒 Hanya admin');return;}
   const nums=toks($('out').value,N);if(!nums.length){msg('Belum ada hasil');return;}
   const mk=$('pasaran').value.trim();if(!mk){msg('Isi pasaran dulu');$('pasaran').focus();return;}
-  let W=null;try{W=window.parent&&window.parent!==window?window.parent.WBBlog:null;}catch(_){}
-  if(!W||!W.send){msg('Buka lewat Blog untuk kirim');return;}
   let h=0;const sig=[$('ids').value,$('jml').value,$('sls').value,$('shio').value,$('out').value,$('dasar').value,$('lnoff').value,N].join('|');
   for(let i=0;i<sig.length;i++)h=(h*31+sig.charCodeAt(i))|0;
   const RL=rkLabel||('Rekap '+N+'D'),code='RK'+(rkLabel?rkLabel.slice(6):N+'D')+'-'+(h>>>0).toString(36),ln=last?last.lines:0;
   const isi=`⭐ WONGBAGUS PREDICTION — ${RL.toUpperCase()}\n📍 ${mk}\n📝 Rumus : ${RL}\n\n Code : ${code}\n${nums.join('*')}\n\n${ln} putaran`;
-  try{const m=await W.send([{id:'rk|'+code,judul:mk+' · '+RL,isi}],'Rekap',false);msg(m||'Terkirim ✓');}catch(_){msg('Gagal kirim');}
+  try{const m=await wbKirim([{id:'rk|'+code,judul:mk+' · '+RL,isi}]);msg(m||'Terkirim ✓');}catch(_){msg('Gagal kirim');}
 };
 bkFill();
 /* ===== kirim Bank Harian ke Blog: per pasaran atau semua pasaran (admin) ===== */
@@ -2091,22 +2106,41 @@ function shSendFill(){
   sel.innerHTML='<option value="*">Semua pasaran</option>'+mks.map(m=>`<option value="${shEsc(m)}">${shEsc(m)}</option>`).join('');
   if([...sel.options].some(o=>o.value===cur))sel.value=cur;
 }
-G('shSendBtn').onclick=async()=>{
-  const btn=G('shSendBtn'),lab='📤 Kirim Bank ke Blog',msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=lab,3200);};
-  if(!rkIsAdmin()){msg('🔒 Hanya admin');return;}
+/* alamat Blog (untuk kirim bila halaman ini dibuka sendiri, tidak lewat bingkai Blog) */
+const BLOG_URL='blog.html';
+/* kirim ke Blog: lewat bingkai Blog bila ada; kalau tidak, antrikan lalu buka Blog — Blog yang mengirimkannya (admin harus login di Blog) */
+async function wbKirim(posts){
   let W=null;try{W=window.parent&&window.parent!==window?window.parent.WBBlog:null;}catch(_){}
-  if(!W||!W.send){msg('Buka lewat Blog untuk kirim');return;}
-  const want=G('shSendMk').value;
+  if(W&&W.send){return await W.send(posts,'Rekap',false);}
+  try{localStorage.setItem('wb_kirim_antri',JSON.stringify({ts:Date.now(),items:posts}));}catch(_){return 'Gagal: penyimpanan browser diblokir';}
+  let w=null;try{w=window.open(BLOG_URL+'#kirim','_blank');}catch(_){}
+  if(!w){try{location.href=BLOG_URL+'#kirim';}catch(_){}}
+  return 'Membuka Blog… dikirim otomatis di sana ('+posts.length+' postingan)';
+}
+/* samakan teks dengan yang dibaca Blog: baris "Code : ..." tunggal (Blog tidak mengenali "Code 1 :" / "Code 2 :") */
+function shBlogText(t){
+  const L=String(t).split('\n'),out=[],codes=[];let at=-1;
+  L.forEach(l=>{const m=l.match(/^\s*Code\s*\d*\s*[:：]\s*(\S.*)$/i);
+    if(m){codes.push(m[1].trim().replace(/\s+/g,'_'));if(at<0){at=out.length;out.push('');}}else out.push(l);});
+  if(at>=0)out[at]=' Code : '+codes.join('+');
+  return out.join('\n');
+}
+/* kirim Bank Harian ke Blog untuk satu pasaran (want = nama pasaran) atau semua ('*') */
+async function shSendMarket(want,btn){
+  const lab=btn.textContent,msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=lab,3500);};
+  if(!rkIsAdmin()){msg('🔒 Hanya admin');return;}
   const act=shbSummary().list.filter(x=>x.e&&x.e.alive&&(want==='*'||x.it.mkt===want));
   if(!act.length){msg('Tidak ada rumus aktif');return;}
   const grp=new Map();act.forEach(x=>{const k=[x.it.mkt,x.it.day||0,x.it.vk].join('|');if(!grp.has(k))grp.set(k,[]);grp.get(k).push(x.it.id);});
   const posts=[];let skip=0;
   grp.forEach((ids,k)=>{const r=shbGabText(ids);if(r.err||!r.txt){skip++;return;}
-    const [mk,day,vk]=k.split('|');let h=0;for(let i=0;i<r.txt.length;i++)h=(h*31+r.txt.charCodeAt(i))|0;
-    posts.push({id:'bk|'+mk+'|'+day+'|'+vk+'|'+(h>>>0).toString(36),judul:mk+' · '+(WBR_MAP[vk]||SH_NAME[vk]||vk),isi:r.txt});});
+    const txt=shBlogText(r.txt),[mk,day,vk]=k.split('|');let h=0;for(let i=0;i<txt.length;i++)h=(h*31+txt.charCodeAt(i))|0;
+    posts.push({id:'bk|'+mk+'|'+day+'|'+vk+'|'+(h>>>0).toString(36),judul:mk+' · '+(WBR_MAP[vk]||SH_NAME[vk]||vk),isi:txt});});
   if(!posts.length){msg('Data kurang untuk dikirim');return;}
-  try{const m=await W.send(posts,'Rekap',false);msg((m||'Terkirim ✓ '+posts.length+' postingan')+(skip?' · '+skip+' dilewati':''));}catch(_){msg('Gagal kirim');}
-};
+  btn.textContent='Mengirim…';
+  try{const m=await wbKirim(posts);msg((m||'Terkirim ✓ '+posts.length+' postingan')+(skip?' · '+skip+' dilewati':''));}catch(_){msg('Gagal kirim');}
+}
+G('shSendBtn').onclick=()=>shSendMarket(G('shSendMk').value,G('shSendBtn'));
 /* ===== admin (hanya untuk Kirim ke Blog) ===== */
 function rkIsAdmin(){
   const chk=ls=>{try{for(let i=0;i<ls.length;i++){const k=ls.key(i);if(k&&k.indexOf('wb_logged_member__')===0){const o=JSON.parse(ls.getItem(k)||'null');if(o&&(o.isAdmin===true||o.id==='ADMIN'))return true;}}}catch(e){}return false;};
@@ -2114,7 +2148,7 @@ function rkIsAdmin(){
   try{if(window.parent&&window.parent!==window){if(window.parent.WB_IS_ADMIN===true||chk(window.parent.localStorage))return true;}}catch(e){}
   return false;
 }
-function admOpen(){$('admSend').style.display='';const sb=G('shAdmSend');if(sb){sb.style.display='';shSendFill();}}
+function admOpen(){$('admSend').style.display='';const sb=G('shAdmSend');if(sb){sb.style.display='';shSendFill();}try{shbRender();}catch(e){}}
 function admCheck(){if(rkIsAdmin()){admOpen();return true;}return false;}
 if(!admCheck()){const iv=setInterval(()=>{if(admCheck())clearInterval(iv);},2000);}
 
@@ -2176,7 +2210,7 @@ bkFill();autoRun(false);bkSumRefresh();
     var b=document.createElement('button'); b.type='button'; b.textContent='✕ Tutup'; bar.appendChild(b);
     ta.parentNode.insertBefore(bar,ta);
     function sync(){ bar.style.display=(ta.style.display==='none')?'none':''; }
-    b.onclick=function(){ ta.style.display='none'; var c=copyId&&$(copyId); if(c) c.style.display='none'; sync(); };
+    b.onclick=function(){ ta.style.display='none'; var c=copyId&&$(copyId); if(c) c.style.display='none'; var gb=(copyId==='shGabCopy')&&$('shGabBlog'); if(gb) gb.style.display='none'; sync(); };
     sync(); new MutationObserver(sync).observe(ta,{attributes:true,attributeFilter:['style']});
   }
   [['rhCopyBox',''],['shGabBox','shGabCopy'],['shCopyBox','']].forEach(function(p){ taBar($(p[0]),p[1]); });
