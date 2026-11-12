@@ -1243,12 +1243,15 @@ function shbGabText(ids,extra){
       if(!rkIsAdmin()){msg('🔒 Hanya admin');return;}
       const sel=shbGet().filter(it=>shSel.has(it.id)),r=shbGabText(sel.map(it=>it.id));
       if(r.err||!sel.length){msg(r.err||'Centang dulu minimal 1 rumus');return;}
-      const txt=shBlogText(r.txt),mk=sel[0].mkt,vks=[...new Set(sel.map(it=>it.vk))];
+      const mk=sel[0].mkt,vks=[...new Set(sel.map(it=>it.vk))];
       const lb=vks.map(v=>WBR_MAP[v]||SH_NAME[v]||v).join(' + ');
-      let T=txt;if(vks.length>1&&!/Rumus\s*[:：]/i.test(T)){const L=T.split('\n'),i=L.findIndex(l=>/WONGBAGUS PREDICTION/i.test(l));if(i>=0){L.splice(Math.min(i+2,L.length),0,'📝 Rumus : '+lb);T=L.join('\n');}}
-      let h=0;for(let i=0;i<T.length;i++)h=(h*31+T.charCodeAt(i))|0;
+      const c=shChunk(sel.map(it=>it.id));if(!c.parts.length){msg('Data kurang untuk dikirim');return;}
+      const posts=c.parts.map((p,i)=>{let T=p.txt;
+        if(vks.length>1&&!/Rumus\s*[:：]/i.test(T)){const L=T.split('\n'),k=L.findIndex(l=>/WONGBAGUS PREDICTION/i.test(l));if(k>=0){L.splice(Math.min(k+2,L.length),0,'📝 Rumus : '+lb);T=L.join('\n');}}
+        let h=0;for(let j=0;j<T.length;j++)h=(h*31+T.charCodeAt(j))|0;
+        return {id:'gb|'+mk+'|'+(h>>>0).toString(36),judul:(mk+' · '+lb+(c.parts.length>1?' ('+(i+1)+'/'+c.parts.length+')':'')).slice(0,120),isi:T};});
       t.textContent='Mengirim…';
-      try{const m=await wbKirim([{id:'gb|'+mk+'|'+(h>>>0).toString(36),judul:mk+' · '+lb,isi:T}]);msg(m||'Terkirim ✓');}catch(_){msg('Gagal kirim');}
+      try{const m=await wbKirim(posts);msg((m||'Terkirim ✓')+(c.parts.length>1?' · dipecah '+c.parts.length+' postingan':''));}catch(_){msg('Gagal kirim');}
       return;
     }
     if(t.id==='shGabCopy'){
@@ -2125,6 +2128,20 @@ function shBlogText(t){
   if(at>=0)out[at]=' Code : '+codes.join('+');
   return out.join('\n');
 }
+/* pecah rumus jadi beberapa gabungan yang masing-masing muat batas isi blog (5000 huruf) */
+const SH_MAXLEN=4800;
+function shChunk(ids){
+  const out=[];let cur=[],txt='',skip=0;const ok=x=>x&&!x.err&&x.txt;
+  for(const id of ids){
+    const x=shbGabText(cur.concat(id)),t=ok(x)?shBlogText(x.txt):'';
+    if(t&&t.length<=SH_MAXLEN){cur.push(id);txt=t;continue;}
+    if(cur.length){out.push({ids:cur,txt});cur=[];txt='';}
+    const y=shbGabText([id]);
+    if(ok(y)){cur=[id];txt=shBlogText(y.txt);}else skip++;
+  }
+  if(cur.length)out.push({ids:cur,txt});
+  return {parts:out,skip};
+}
 /* kirim Bank Harian ke Blog untuk satu pasaran (want = nama pasaran) atau semua ('*') */
 async function shSendMarket(want,btn){
   const lab=btn.textContent,msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=lab,3500);};
@@ -2133,9 +2150,9 @@ async function shSendMarket(want,btn){
   if(!act.length){msg('Tidak ada rumus aktif');return;}
   const grp=new Map();act.forEach(x=>{const k=[x.it.mkt,x.it.day||0,x.it.vk].join('|');if(!grp.has(k))grp.set(k,[]);grp.get(k).push(x.it.id);});
   const posts=[];let skip=0;
-  grp.forEach((ids,k)=>{const r=shbGabText(ids);if(r.err||!r.txt){skip++;return;}
-    const txt=shBlogText(r.txt),[mk,day,vk]=k.split('|');let h=0;for(let i=0;i<txt.length;i++)h=(h*31+txt.charCodeAt(i))|0;
-    posts.push({id:'bk|'+mk+'|'+day+'|'+vk+'|'+(h>>>0).toString(36),judul:mk+' · '+(WBR_MAP[vk]||SH_NAME[vk]||vk),isi:txt});});
+  grp.forEach((ids,k)=>{const c=shChunk(ids);skip+=c.skip;const [mk,day,vk]=k.split('|'),n=c.parts.length;
+    c.parts.forEach((p,i)=>{const txt=p.txt;let h=0;for(let j=0;j<txt.length;j++)h=(h*31+txt.charCodeAt(j))|0;
+      posts.push({id:'bk|'+mk+'|'+day+'|'+vk+'|'+(h>>>0).toString(36),judul:(mk+' · '+(WBR_MAP[vk]||SH_NAME[vk]||vk)+(n>1?' ('+(i+1)+'/'+n+')':'')).slice(0,120),isi:txt});});});
   if(!posts.length){msg('Data kurang untuk dikirim');return;}
   btn.textContent='Mengirim…';
   try{const m=await wbKirim(posts);msg((m||'Terkirim ✓ '+posts.length+' postingan')+(skip?' · '+skip+' dilewati':''));}catch(_){msg('Gagal kirim');}

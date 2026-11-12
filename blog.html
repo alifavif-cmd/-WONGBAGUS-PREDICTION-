@@ -305,18 +305,19 @@ window.WB_CFG_SAVE = async (key, cfg) => {
 /* dipakai alat (Rumus Harian / Scen Shio / Scan Multi) untuk kirim trek langsung ke blog tanpa salin-tempel; masuk kelompok pasaran dari judul */
 window.WBBlog = { send: async (items) => {
   if (!isAdmin()) return "🔒 Hanya admin — login di Blog dulu";
-  let baru = 0, lewat = 0;
+  let baru = 0, lewat = 0, panjang = 0;
   try {
     const daftar = await postsHariIni();
     for (const it of items) {
-      const judul = String(it.judul || "").trim() || "Tanpa judul";
+      const judul = (String(it.judul || "").trim() || "Tanpa judul").slice(0, 120);   /* aturan Firestore: judul maks 120 */
       const sr = saringBaru(judul, String(it.isi || "").trim(), daftar);
       if (sr.lewat && !sr.isi) { lewat++; continue; }
+      if (sr.isi.length > 5000) { panjang++; continue; }                                 /* aturan Firestore: isi maks 5000 → ditolak permission-denied */
       const ref = await addDoc(collection(db, "posts"), { judul, isi: sr.isi, uid: user.uid, nama: user.displayName || "Anonim", createdAt: serverTimestamp() });
       daftar.push({ id: ref.id, judul, isi: sr.isi }); baru++;
     }
-  } catch (e) { return "Gagal kirim: " + (e.code || e.message); }
-  return "Terkirim " + baru + " ✓" + (lewat ? " · " + lewat + " sudah ada" : "");
+  } catch (e) { return "Gagal kirim: " + (e.code || e.message) + (/permission/i.test(e.code || "") ? " (cek login admin & panjang isi maks 5000 huruf)" : ""); }
+  return "Terkirim " + baru + " ✓" + (lewat ? " · " + lewat + " sudah ada" : "") + (panjang ? " · " + panjang + " terlalu panjang (>5000 huruf), kurangi rumus" : "");
 } };
 
 /* baris "Label: isi" ditampilkan rapi; baris biasa tetap teks */
@@ -927,7 +928,7 @@ async function postsHariIni(){
 }
 function render(){
   const keep = ["cn", "ci", "cs", "ce"].map(i => [i, $(i) ? $(i).value : ""]);
-  const id = decodeURIComponent(location.hash.slice(1));
+  let id = decodeURIComponent(location.hash.slice(1)); if (id === "kirim") id = "";   /* #kirim = penanda antrian kiriman dari Rumus, bukan id postingan */
   const main = $("app");
   if (loadErr) { main.innerHTML = `<p class="err">${esc(loadErr)}</p>`; return; }
   if (!loaded) { main.innerHTML = `<p class="empty">Memuat…</p>`; return; }
