@@ -167,12 +167,13 @@ h2{color:#fff}
   <div class="cm" style="font-size:12.5px;color:#777;margin-bottom:6px">Rumus yang disimpan di sini dihitung ulang dari result terbaru. Rumus patah (zonk &gt; batas patah) tidak ikut rekap. Simpan ke bank lewat tombol 💾 Simpan; hasil salin membawa link.</div>
   <div class="row"><button id="shSave" class="pri">💾 Simpan rumus di atas</button><button id="shRefresh">↻ Hitung ulang</button><button id="shDelPatah">Hapus patah</button><button id="shDelAll">Kosongkan</button></div>
   <div class="row"><button id="shGab" class="pri">Gabung (0 dipilih)</button><button id="shPickAll">Pilih semua aktif</button></div>
-  <div id="shAdmSend" style="display:none;margin-top:8px"><div class="rkr"><b style="flex:0 0 auto">Kirim ke Blog</b><select id="shSendMk"><option value="*">Semua pasaran</option></select></div>
+  <div id="shAdmSend" style="display:none;margin-top:8px"><div class="rkr"><b style="flex:0 0 auto">Kirim ke Blog</b><select id="shSendMk"><option value="*">Semua pasaran</option></select><select id="shSendMode"><option value="gab">🔀 Mode: Gabungan</option><option value="biasa">📄 Mode: Biasa (per rumus)</option></select></div>
   <div class="rkrow"><button class="pri" id="shSendBtn">📤 Kirim Bank ke Blog</button></div>
   <div class="cm" style="font-size:12px;color:#777;margin-top:4px">Hanya rumus aktif yang dikirim. Satu postingan Gabung Trek untuk tiap pasaran, hari, dan jenis rumus.</div></div>
   <textarea id="shGabBox" readonly rows="14" style="display:none;width:100%;margin-top:6px;font-family:monospace;font-size:13px"></textarea>
   <button id="shGabCopy" class="pri" style="display:none;width:100%;margin:6px 0">Salin gabungan</button>
-  <button id="shGabBlog" class="pri" style="display:none;width:100%;margin:6px 0">📤 Kirim gabungan ke Blog</button>
+  <button id="shGabBlog" class="pri" style="display:none;width:100%;margin:6px 0">🔀 Kirim gabungan ke Blog</button>
+  <button id="shBiasaBlog" class="pri" style="display:none;width:100%;margin:6px 0">📄 Kirim biasa ke Blog (per rumus)</button>
   
   <div id="shRekap"></div>
   <div id="shList"></div>
@@ -1236,7 +1237,7 @@ function shbGabText(ids,extra){
     if(t.id==='shGab'){
       const r=shbGabText(shbGet().filter(it=>shSel.has(it.id)).map(it=>it.id));
       if(r.err){t.textContent=r.err;setTimeout(()=>shbRender(),1800);return;}
-      $('shGabBox').value=r.txt;$('shGabBox').style.display='';$('shGabCopy').style.display='';$('shGabBlog').style.display='';return;
+      $('shGabBox').value=r.txt;$('shGabBox').style.display='';$('shGabCopy').style.display='';$('shGabBlog').style.display='';$('shBiasaBlog').style.display='';return;
     }
     if(t.id==='shGabBlog'){
       const lab='📤 Kirim gabungan ke Blog',msg=m=>{t.textContent=m;setTimeout(()=>t.textContent=lab,3500);};
@@ -1252,6 +1253,15 @@ function shbGabText(ids,extra){
         return {id:'gb|'+mk+'|'+(h>>>0).toString(36),judul:(mk+' · '+lb+(c.parts.length>1?' ('+(i+1)+'/'+c.parts.length+')':'')).slice(0,120),isi:T};});
       t.textContent='Mengirim…';
       try{const m=await wbKirim(posts);msg((m||'Terkirim ✓')+(c.parts.length>1?' · dipecah '+c.parts.length+' postingan':''));}catch(_){msg('Gagal kirim');}
+      return;
+    }
+    if(t.id==='shBiasaBlog'){
+      if(!rkIsAdmin()){msg('🔒 Hanya admin');return;}
+      const ids=shbGet().filter(it=>shSel.has(it.id)).map(it=>it.id);
+      if(!ids.length){msg('Centang dulu minimal 1 rumus');return;}
+      const P=shBiasaPosts(ids);if(!P.posts.length){msg('Data kurang untuk dikirim');return;}
+      t.textContent='Mengirim…';
+      try{const m=await wbKirim(P.posts);msg((m||'Terkirim ✓ '+P.posts.length+' postingan')+(P.skip?' · '+P.skip+' dilewati':''));}catch(_){msg('Gagal kirim');}
       return;
     }
     if(t.id==='shGabCopy'){
@@ -2142,12 +2152,22 @@ function shChunk(ids){
   if(cur.length)out.push({ids:cur,txt});
   return {parts:out,skip};
 }
+/* mode BIASA: satu rumus = satu postingan (seperti kirim trek di Prediksi) */
+function shSingleText(id){const x=shbGabText([id]);if(!x||x.err||!x.txt)return null;return shBlogText(x.txt).replace('⭐ WONGBAGUS PREDICTION — GABUNG TREK','⭐ WONGBAGUS PREDICTION');}
+function shBiasaPosts(ids){const all=shbGet(),posts=[];let skip=0;
+  ids.forEach(id=>{const it=all.find(x=>x.id===id),t=it&&shSingleText(id);if(!t){skip++;return;}
+    let h=0;for(let j=0;j<t.length;j++)h=(h*31+t.charCodeAt(j))|0;
+    posts.push({id:'bs|'+it.mkt+'|'+(it.day||0)+'|'+it.vk+'|'+(h>>>0).toString(36),judul:(it.mkt+' · '+(WBR_MAP[it.vk]||SH_NAME[it.vk]||it.vk)).slice(0,120),isi:t});});
+  return {posts,skip};}
 /* kirim Bank Harian ke Blog untuk satu pasaran (want = nama pasaran) atau semua ('*') */
 async function shSendMarket(want,btn){
   const lab=btn.textContent,msg=t=>{btn.textContent=t;setTimeout(()=>btn.textContent=lab,3500);};
   if(!rkIsAdmin()){msg('🔒 Hanya admin');return;}
   const act=shbSummary().list.filter(x=>x.e&&x.e.alive&&(want==='*'||x.it.mkt===want));
   if(!act.length){msg('Tidak ada rumus aktif');return;}
+  const mdEl=document.getElementById('shSendMode');
+  if(mdEl&&mdEl.value==='biasa'){const P=shBiasaPosts(act.map(x=>x.it.id));if(!P.posts.length){msg('Data kurang untuk dikirim');return;}btn.textContent='Mengirim…';
+    try{const m=await wbKirim(P.posts);msg((m||'Terkirim ✓ '+P.posts.length+' postingan')+(P.skip?' · '+P.skip+' dilewati':''));}catch(_){msg('Gagal kirim');}return;}
   const grp=new Map();act.forEach(x=>{const k=[x.it.mkt,x.it.day||0,x.it.vk].join('|');if(!grp.has(k))grp.set(k,[]);grp.get(k).push(x.it.id);});
   const posts=[];let skip=0;
   grp.forEach((ids,k)=>{const c=shChunk(ids);skip+=c.skip;const [mk,day,vk]=k.split('|'),n=c.parts.length;
